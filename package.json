@@ -1,0 +1,26 @@
+{
+    "name": "comp30022-it-project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wdemichele/COMP30022-IT-Project.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/wdemichele/COMP30022-IT-Project/issues"
+    },
+    "homepage": "https://github.com/wdemichele/COMP30022-IT-Project#readme",
+    "dependencies": {
+        "body-parser": "^1.20.0",
+        "express": "^4.18.1",
+        "express-handlebars": "^6.0.6",
+        "mongodb": "^4.8.1",
+        "mongoose": "^6.5.0"
+    }
+}
