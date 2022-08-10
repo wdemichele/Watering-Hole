@@ -1,5 +1,21 @@
+html,
+body {
+    font-family: var(--font-family);
+}
+
+.theme-default {
+    --color-primary: #393D42;
+    --color-secondary: #56677a;
+    --color-tertiary: #919DAD;
+    --color-accent: #b15144;
+    --color-white: #fafafa;
+    --color-black: #000000;
+    --font-family: 'Montserrat', sans-serif;
+    --background-image: none;
+}
+
 header {
-    background: #002E66;
+    background: #393D42;
     font-family: 'Montserrat', sans-serif;
     font-weight: 300;
 }
@@ -70,4 +86,8 @@ nav a:hover {
 
 .filter-white {
     filter: brightness(0) saturate(100%) invert(100%) sepia(5%) saturate(758%) hue-rotate(294deg) brightness(117%) contrast(100%);
+}
+
+#map {
+    height: 100%;
 }
