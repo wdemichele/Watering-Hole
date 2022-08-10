@@ -1,0 +1,73 @@
+header {
+    background: #002E66;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+
+header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.nav-logo {
+    float: left;
+}
+
+.nav-icon {
+    height: 50px;
+    width: 50px;
+}
+
+.nav-icon:hover {
+    height: 55px;
+    width: 55px;
+    color: #D3D3D3;
+}
+
+.nav-message {
+    color: #EEE;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+    float: left;
+    padding: 16px;
+}
+
+nav {
+    float: left;
+}
+
+.nav-right {
+    float: right;
+    padding: 10px;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 40px;
+    position: relative;
+}
+
+nav a {
+    color: #EEE;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+    float: left;
+    padding: 16px 30px;
+}
+
+nav a:hover {
+    color: var(--font-color)
+}
+
+.filter-white {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(5%) saturate(758%) hue-rotate(294deg) brightness(117%) contrast(100%);
+}

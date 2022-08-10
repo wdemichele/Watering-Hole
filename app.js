@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
-const router = require('/routes');
+const router = require('./routes');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
+
+const DB_URI = "mongodb+srv://the-leftovers:OEIiTEbBpuJCluKH@personal-items-register.ll54ewt.mongodb.net/?retryWrites=true&w=majority";
 
 // Set up app
 const app = express()
@@ -26,14 +28,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(router);
 
 app.listen(app.get('port'), () => { console.log('App is listening on port ' + app.get('port')) });
 
 // DB connection
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to DB');
     })
