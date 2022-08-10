@@ -4,6 +4,7 @@ const router = require('./routes');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
+const axios = require("axios");
 
 const DB_URI = "mongodb+srv://the-leftovers:OEIiTEbBpuJCluKH@personal-items-register.ll54ewt.mongodb.net/?retryWrites=true&w=majority";
 
@@ -18,7 +19,7 @@ app.engine('hbs', exphbs.engine({
 }));
 
 // helpers
-var hbs = exphbs.create({});
+const hbs = exphbs.create({});
 
 app.set('view engine', 'hbs');
 

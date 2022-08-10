@@ -4,7 +4,7 @@ const apiRouter = require('./apiRouter');
 router.use('/api', apiRouter);
 
 
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
 
     res.render('api-testing/api-testing.hbs', { layout: 'user-layout', title: 'API Testing' });
 });
