@@ -14,6 +14,47 @@ body {
     --background-image: none;
 }
 
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid black;
+    padding: 10px;
+}
+
+.body-primary {
+    color: #fafafa;
+    background-color: #393D42;
+}
+
+.body-primary a:link {
+    color: #b15144;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.body-primary a:visited {
+    color: #b15144;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.body-primary a:hover {
+    color: #56677a;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.body-primary a:active {
+    color: #56677a;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+img {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 header {
     background: #393D42;
     font-family: 'Montserrat', sans-serif;
