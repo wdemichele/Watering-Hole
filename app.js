@@ -39,11 +39,11 @@ app.use(router);
 
 app.listen(app.get('port'), () => { console.log('App is listening on port ' + app.get('port')) });
 
-// DB connection
-mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log('Connected to DB');
-    })
-    .catch((err) => {
-        console.log(err);
-    });
+// // DB connection
+// mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+//     .then(() => {
+//         console.log('Connected to DB');
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     });
