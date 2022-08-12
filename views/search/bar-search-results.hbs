@@ -1,0 +1,16 @@
+<div class="databox primary">
+<h1>Bar Search Results</h1>
+<h1>Text Search: "{{search}}"</h1>
+    <div class="flex-box databox secondary">
+    {{#each places}}
+        <div style="width: 700px; padding: 20px" class="tertiary">
+            <a href="/search/bar{{this.place_id}}"><h1>{{this.name}}</h1>
+            <img src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+            <h2>{{this.formatted_address}}</h2>
+            <a href="{{this.website}}"><h3>{{this.website}}</h3></a>
+            <h3>Price Level: {{this.price_level}} Google Review: {{this.rating}}</h3>
+            <h3>Open Now: {{this.opening_hours.open_now}}</h3></a>
+        </div>
+    {{/each}}
+    </div>
+</div>

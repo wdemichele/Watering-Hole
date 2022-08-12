@@ -13,6 +13,7 @@ let barSchema = new schema({
 // user
 let userSchema = new schema({
     username: { type: String, require: true },
+    name: { type: String },
     password: { type: String },
     favourites: [barSchema],
     bucketlist: [{ type: String }],

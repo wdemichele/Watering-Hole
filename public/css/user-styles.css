@@ -1,6 +1,6 @@
 html,
 body {
-    font-family: var(--font-family);
+    font-family: 'Montserrat', sans-serif;
 }
 
 .theme-default {
@@ -131,4 +131,60 @@ nav a:hover {
 
 #map {
     height: 100%;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.light-blue-databox {
+    box-sizing: border-box;
+    flex: 1 0 250px;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #919DAD;
+    border-color: #333;
+    border-style: solid;
+}
+
+.databox {
+    box-sizing: border-box;
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid #000;
+    border-radius: 5px;
+    border-color: #333;
+    border-style: solid;
+}
+
+.primary {
+    background-color: #393D42;
+    color: #fafafa;
+}
+
+.secondary {
+    background-color: #56677a;
+    color: #fafafa;
+}
+
+.tertiary {
+    background-color: #919DAD;
+    color: #000000;
+}
+
+.accent {
+    background-color: #b15144;
+}
+
+.white {
+    background-color: #fafafa;
+    color: #000000;
+}
+
+.black {
+    background-color: #000000;
+    color: #fafafa;
 }
