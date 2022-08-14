@@ -4,6 +4,8 @@ const router = express.Router();
 const bodyParser = require("body-parser");
 const axios = require('axios');
 const schemas = require('../models/userSchema');
+const { Db } = require('mongodb');
+const isset = require('isset-php')
 
 
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -23,6 +25,11 @@ router.get('/', async(_req, res) => {
 router.get('/bar-search', async(_req, res) => {
 
     res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search' });
+});
+
+router.get('/map-search', async(_req, res) => {
+
+    res.render('search/map-search.hbs', { layout: 'user-layout', title: 'Map Search' });
 });
 
 router.post('/bar-search', async(req, res) => {
@@ -96,7 +103,7 @@ router.get('/bar:id', async(req, res) => {
     // Union Electric: ChIJ7_FCh8lC1moRPc7-4Iwg5WE
     let config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cplace_id%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
         headers: {}
     };
 
@@ -113,20 +120,31 @@ router.get('/bar:id', async(req, res) => {
 router.post('/bar-favourite:bar_id', async(req, res) => {
 
     let username = "jane-smith";
-    let users = schemas.user;
-    let user = await users.findOne({ username: username }).lean().exec();
+    let user = schemas.user;
+    if ((typeof phone === 'undefined')) {
+        phone = "7878787878";
+    }
+    if (typeof req.body.favourite_button !== 'undefined') {
+        let updatedUser = await user.findOneAndUpdate({ username: username }, {
+            $push: {
+                favourites: {
+                    id: req.params.bar_id,
+                    name: req.body.bar_name
+                }
+            }
+        });
+    } else if (typeof req.body.bucketlist_button !== 'undefined') {
+        let updatedUser = await user.findOneAndUpdate({ username: username }, {
+            $push: {
+                bucketlist: {
+                    id: req.params.bar_id,
+                    name: req.body.bar_name
+                }
+            }
+        });
+    }
 
-    // now format the incoming entry
-    let newEntry = ({
-        id: req.params.bar_id,
-        name: req.body.bar_name
-    });
-
-    // add data to end of patients' entries array
-    user.favourites.push(newEntry);
-    const updated = await user.save();
-
-    res.redirect('/bar:' + req.params.bar_id);
+    res.redirect('search/bar' + req.params.bar_id);
 
 })
 

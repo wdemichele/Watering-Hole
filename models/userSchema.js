@@ -10,15 +10,20 @@ let barSchema = new schema({
     id: { type: String },
 })
 
+let eventSchema = new schema({
+    name: { type: String },
+    id: { type: String },
+})
+
 // user
 let userSchema = new schema({
     username: { type: String, require: true },
     name: { type: String },
     password: { type: String },
     favourites: [barSchema],
-    bucketlist: [{ type: String }],
-    recent_bars: [{ type: String }],
-    recent_events: [{ type: String }],
+    bucketlist: [barSchema],
+    recent_bars: [barSchema],
+    recent_events: [eventSchema],
     friends: [{ type: String }]
 })
 

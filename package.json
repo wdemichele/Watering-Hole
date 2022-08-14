@@ -24,6 +24,7 @@
         "env": "^0.0.2",
         "express": "^4.18.1",
         "express-handlebars": "^6.0.6",
+        "isset-php": "^1.0.7",
         "mongodb": "^4.8.1",
         "mongoose": "^6.5.2",
         "mongoose-double": "^0.0.1",
