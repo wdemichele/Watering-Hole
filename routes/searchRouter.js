@@ -17,9 +17,23 @@ router.get('/bar-search', async(_req, res) => {
     res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search' });
 });
 
-router.get('/map-search', async(_req, res) => {
+router.get('/hotel-search', async(_req, res) => {
+    res.render('search/hotel-search.hbs', { layout: 'google-layout', title: 'Hotel Search' });
+});
 
-    res.render('search/map-search.hbs', { layout: 'user-layout', title: 'Map Search' });
+router.get('/map-search', (_req, res) => {
+
+    res.render('search/map-search.hbs', { layout: 'user-layout', title: 'Map Search', query: "bars%20near%20Chapel%20Street%2C%20South%20Yarra%20VIC%2C%20Australia" });
+});
+
+router.post('/map-search', async(_req, res) => {
+
+    res.render('search/map-search.hbs', { layout: 'user-layout', title: 'Map Search', query: "bars%20near%20Chapel%20Street%2C%20South%20Yarra%20VIC%2C%20Australia" });
+});
+
+router.get('/map', async(_req, res) => {
+
+    res.render('search/map.hbs', { layout: 'user-layout', title: 'Map' });
 });
 
 router.post('/bar-search', async(req, res) => {
@@ -38,7 +52,7 @@ router.post('/bar-search', async(req, res) => {
     axios(config)
         .then(function(response) {
             console.log(response.data.results)
-            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name });
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name });
 
         })
         .catch(function(error) {
@@ -73,7 +87,7 @@ router.post('/area-search', async(req, res) => {
             axios(config)
                 .then(function(response) {
                     console.log(response.data.results);
-                    res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name });
+                    res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name, query: "bars%20near" + input });
 
                 })
                 .catch(function(error) {
