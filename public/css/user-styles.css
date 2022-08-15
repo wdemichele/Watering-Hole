@@ -21,35 +21,6 @@ body {
     padding: 10px;
 }
 
-.body-primary {
-    color: #fafafa;
-    background-color: #393D42;
-}
-
-.body-primary a:link {
-    color: #b15144;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-.body-primary a:visited {
-    color: #b15144;
-    background-color: transparent;
-    text-decoration: none;
-}
-
-.body-primary a:hover {
-    color: #56677a;
-    background-color: transparent;
-    text-decoration: underline;
-}
-
-.body-primary a:active {
-    color: #56677a;
-    background-color: transparent;
-    text-decoration: underline;
-}
-
 img {
     margin-left: auto;
     margin-right: auto;
@@ -152,12 +123,37 @@ nav a:hover {
 
 .databox {
     box-sizing: border-box;
+    flex: 1 0 250px;
     margin: 1rem;
-    padding: 1rem;
+    padding: 10px 10px;
     border: 1px solid #000;
     border-radius: 5px;
     border-color: #333;
     border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+input {
+    width: 100%;
+    padding: 10px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 20px;
+    padding-right: 20px;
+    border-radius: 8px;
+    border-width: 0.5px;
+}
+
+input:focus {
+    background-color: #E9E9E9;
 }
 
 .primary {
@@ -187,4 +183,77 @@ nav a:hover {
 .black {
     background-color: #000000;
     color: #fafafa;
+}
+
+.left {
+    float: left;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.right {
+    float: right;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 52px;
+    color: var(--color-primary);
+    display: block;
+    text-align: center;
+    font-family: var(--font-family);
+    margin-bottom: 0%;
+}
+
+h2 {
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--color-primary);
+    font-family: var(--font-family);
+    display: block;
+}
+
+h3 {
+    font-size: larger;
+}
+
+p {
+    font-weight: 200;
+    font-size: 20px;
+    display: block;
+}
+
+button {
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 250px;
+    min-height: 44px;
+    min-width: 10px;
+    outline: none;
+    overflow: hidden;
+    padding: 9px 20px 8px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+}
+
+button:hover,
+button:focus {
+    opacity: .75;
 }

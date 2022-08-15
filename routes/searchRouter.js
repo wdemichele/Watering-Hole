@@ -12,16 +12,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(bodyParser.json());
 
-router.get('/', async(_req, res) => {
-
-    let username = "jane-smith";
-    let users = schemas.user;
-    let user = await users.findOne({ username: username }).lean().exec();
-    console.log(user);
-
-    res.render('user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user });
-});
-
 router.get('/bar-search', async(_req, res) => {
 
     res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search' });
@@ -40,14 +30,15 @@ router.post('/bar-search', async(req, res) => {
 
     let config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + input + '&inputtype=textquery&fields=formatted_address%2Cplace_id%2Cname%2Crating%2Copening_hours%2Cgeometry%2cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+        // url: 'https://maps.googleapis.com/maps/api/place/textSearch/json?query=' + input + '&fields=formatted_address%2Cplace_id%2Cname%2Crating%2Copening_hours%2Cgeometry%2cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+        url: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + input + '&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
         headers: {}
     };
 
     axios(config)
         .then(function(response) {
-            // console.log(response.data.candidates);
-            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.candidates, search: req.body.bar_name });
+            console.log(response.data.results)
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name });
 
         })
         .catch(function(error) {
@@ -97,8 +88,15 @@ router.post('/area-search', async(req, res) => {
 });
 
 router.get('/bar:id', async(req, res) => {
+    let username = "jane-smith";
+    let users = schemas.user;
+    let favourited = await users.findOne({ $exists: { $and: [{ username: username }, { "favourites.id": req.params.id }] } }).lean().exec();
+    console.log(favourited)
+    let bucketlisted = await users.findOne({ $exists: { $and: [{ username: username }, { "bucketlist.id": req.params.id }] } }).lean().exec();
+    console.log("BUCKETLISTED:" + bucketlisted);
 
-    let bar_id = req.params.id;
+    let bar_id = req.params.id
+
     // Revs: ChIJ41lATiVo1moRzmbzZaaIcPE
     // Union Electric: ChIJ7_FCh8lC1moRPc7-4Iwg5WE
     let config = {
@@ -109,8 +107,7 @@ router.get('/bar:id', async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            // console.log(JSON.stringify(response.data.result));
-            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result });
+            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited });
         })
         .catch(function(error) {
             console.log(error);
@@ -121,15 +118,14 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
 
     let username = "jane-smith";
     let user = schemas.user;
-    if ((typeof phone === 'undefined')) {
-        phone = "7878787878";
-    }
+
     if (typeof req.body.favourite_button !== 'undefined') {
         let updatedUser = await user.findOneAndUpdate({ username: username }, {
             $push: {
                 favourites: {
                     id: req.params.bar_id,
-                    name: req.body.bar_name
+                    name: req.body.bar_name,
+                    address: req.body.bar_address
                 }
             }
         });
@@ -138,7 +134,8 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
             $push: {
                 bucketlist: {
                     id: req.params.bar_id,
-                    name: req.body.bar_name
+                    name: req.body.bar_name,
+                    address: req.body.bar_address
                 }
             }
         });
@@ -147,5 +144,19 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
     res.redirect('search/bar' + req.params.bar_id);
 
 })
+
+router.get('/favourites-search', async(_req, res) => {
+
+    res.render('search/favourites-search.hbs', { layout: 'user-layout', title: 'Bar Favourites Search' });
+});
+
+
+router.post('/favourites-search', async(req, res) => {
+    let username = "jane-smith";
+    let users = schemas.user;
+    let user = await users.findOne({ username: username }).lean().exec();
+
+    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: user.favourites });
+});
 
 module.exports = router;

@@ -8,6 +8,7 @@ const SchemaTypes = mongoose.Schema.Types;
 let barSchema = new schema({
     name: { type: String },
     id: { type: String },
+    address: { type: String }
 })
 
 let eventSchema = new schema({

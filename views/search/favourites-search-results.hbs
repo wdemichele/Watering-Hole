@@ -1,0 +1,9 @@
+<h1>Favourites Search Results</h1>
+<div class="databox primary">
+    {{#each favourites}}
+        <div class="databox tertiary">
+            <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2>
+            <h3>{{this.address}}</h3></a>
+        </div>
+    {{/each}}
+</div>
