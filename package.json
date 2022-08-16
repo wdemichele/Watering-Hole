@@ -18,6 +18,7 @@
     },
     "homepage": "https://github.com/wdemichele/COMP30022-IT-Project#readme",
     "dependencies": {
+        "ajax": "^0.0.4",
         "axios": "^0.27.2",
         "body-parser": "^1.20.0",
         "dotenv": "^16.0.1",
@@ -28,6 +29,7 @@
         "mongodb": "^4.8.1",
         "mongoose": "^6.5.2",
         "mongoose-double": "^0.0.1",
-        "react": "^18.2.0"
+        "react": "^18.2.0",
+        "xhr2": "^0.2.1"
     }
 }

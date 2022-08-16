@@ -295,6 +295,26 @@ img {
     padding: 2px 16px;
 }
 
+a {
+    color: inherit;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
 
 /* path {
     outline: 3px solid black;
