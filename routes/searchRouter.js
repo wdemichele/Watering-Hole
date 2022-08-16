@@ -97,22 +97,23 @@ router.post('/area-search', async(req, res) => {
         .catch(function(error) {
             console.log(error);
         });
-
-
 });
 
 router.get('/bar:id', async(req, res) => {
     let username = "jane-smith";
     let users = schemas.user;
-    let favourited = await users.findOne({ $exists: { $and: [{ username: username }, { "favourites.id": req.params.id }] } }).lean().exec();
-    console.log(favourited)
-    let bucketlisted = await users.findOne({ $exists: { $and: [{ username: username }, { "bucketlist.id": req.params.id }] } }).lean().exec();
-    console.log("BUCKETLISTED:" + bucketlisted);
+    let favourited = await users.count({
+        username: username,
+        bucketlist: { $elemMatch: { id: req.params.id } }
+    }).lean().exec();
 
-    let bar_id = req.params.id
+    let bucketlisted = await users.count({
+        username: username,
+        bucketlist: { $elemMatch: { id: req.params.id } }
+    }).lean().exec();
 
-    // Revs: ChIJ41lATiVo1moRzmbzZaaIcPE
-    // Union Electric: ChIJ7_FCh8lC1moRPc7-4Iwg5WE
+    let bar_id = req.params.id;
+
     let config = {
         method: 'get',
         url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cplace_id%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
@@ -121,7 +122,7 @@ router.get('/bar:id', async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited });
+            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted > 0, favourited: favourited > 0 });
         })
         .catch(function(error) {
             console.log(error);
@@ -143,6 +144,10 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
                 }
             }
         });
+    } else if (typeof req.body.bucketlist_remove !== 'undefined') {
+        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "bucketlist.id": req.params.bar_id } });
+    } else if (typeof req.body.favourites_remove !== 'undefined') {
+        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "favourites.id": req.params.bar_id } });
     } else if (typeof req.body.bucketlist_button !== 'undefined') {
         let updatedUser = await user.findOneAndUpdate({ username: username }, {
             $push: {
@@ -154,8 +159,7 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
             }
         });
     }
-
-    res.redirect('search/bar' + req.params.bar_id);
+    res.redirect('bar' + req.params.bar_id);
 
 })
 
@@ -163,7 +167,6 @@ router.get('/favourites-search', async(_req, res) => {
 
     res.render('search/favourites-search.hbs', { layout: 'user-layout', title: 'Bar Favourites Search' });
 });
-
 
 router.post('/favourites-search', async(req, res) => {
     let username = "jane-smith";
