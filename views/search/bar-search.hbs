@@ -1,17 +1,17 @@
 <div class="databox secondary">
 <h1>Bar Search</h1>
 <form action="/search/bar-search" method="post">
-    <h2>Search by Name</h2>
+    <h2>Query Search</h2>
     <label for="bar_name">Enter your Bar Search text </label>
-    <input id="bar_name" name="bar_name"><br>
+    <input id="bar_name" name="bar_name" placeholder="e.g. Cocktail bar in Melbourne"><br>
     <button class="primary" type="submit">Search</button><br><br><br><br>
 </form>
 <form action="/search/area-search" method="post">
-    <h2>Search by location</h2>
+    <h2>Nearby Search</h2>
     <label for="area_name">Enter the area to search </label>
-    <input id="area_name" name="area_name" placeholder="Fitzroy Victoria"><br>
-    <label for="area_radius">Enter the radius of the search</label>
-    <input id="area_radius" name="area_radius" placeholder="2000m"><br>
+    <input id="area_name" name="area_name" placeholder="e.g. Fitzroy Victoria"><br>
+    <label for="area_radius">Enter the radius of the search (metres)</label>
+    <input id="area_radius" name="area_radius" placeholder="e.g 2000"><br>
     <button class="primary" type="submit">Search</button>
 </form>
 

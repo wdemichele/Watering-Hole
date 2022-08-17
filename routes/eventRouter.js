@@ -34,7 +34,7 @@ router.get('/venue:venue_id', async(req, res) => {
 
     params.append("status", "live");
     params.append("token", "S2LOLLZODMIJKKZCEJRP");
-
+    //need to limit is_series
     let config = {
         method: 'get',
         url: 'https://www.eventbriteapi.com/v3/venues/' + req.params.venue_id + '/events/',

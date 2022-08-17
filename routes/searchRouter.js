@@ -51,8 +51,30 @@ router.post('/bar-search', async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            console.log(response.data.results)
-            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name });
+            console.log(response.data)
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token });
+
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+});
+
+router.post('/more-bars', async(req, res) => {
+
+    let page_token = req.body.page_token;
+    let input = req.body.bar_name;
+
+    let config = {
+        method: 'get',
+        url: "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=" + page_token + "&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw",
+        headers: {}
+    };
+
+    axios(config)
+        .then(function(response) {
+            console.log(response.data.next_page_token)
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token });
 
         })
         .catch(function(error) {

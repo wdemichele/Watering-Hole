@@ -17,7 +17,6 @@ body {
 .center {
     margin: auto;
     width: 50%;
-    border: 3px solid black;
     padding: 10px;
 }
 
@@ -107,6 +106,8 @@ nav a:hover {
 .flex-container {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 .light-blue-databox {
@@ -138,6 +139,15 @@ nav a:hover {
 .flex-container {
     display: flex;
     flex-wrap: wrap;
+}
+
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+
+@media (max-width: 800px) {
+    .flex-container {
+        flex-direction: column;
+    }
 }
 
 input {
@@ -314,8 +324,3 @@ a:hover {
 a:active {
     text-decoration: underline;
 }
-
-
-/* path {
-    outline: 3px solid black;
-} */
