@@ -25,6 +25,19 @@ hbs.handlebars.registerHelper("array_length", function(array) {
     return array.length;
 });
 
+hbs.handlebars.registerHelper("contains", function(array, num) {
+    if (!array) {
+        false;
+    }
+    for (let i = 0; i < array.length; i++) {
+        if (array[0].id == num) {
+            console.log("here");
+            return true;
+        }
+    }
+    return false;
+});
+
 app.set('view engine', 'hbs');
 
 app.set('port', process.env.PORT || 3000);

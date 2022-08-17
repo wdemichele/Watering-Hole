@@ -1,4 +1,5 @@
-<div class="databox secondary">
+<div class="databox secondary flex-container">
+  <div class="databox primary">
   <h1 id="bar_name" name="bar_name">{{place_data.name}}</h1>
   <img src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
   {{!-- <img src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.1.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
@@ -41,6 +42,9 @@
       <td>{{place_data.opening_hours.periods.0.close.time}}</td>
     </tr>
   </table><br><br>
+  </div>
+  <iframe class="center" width="1200" height="900" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{place_data.formatted_address}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw"></iframe>
+  </div>
   <form action="bar-favourite{{place_data.place_id}}" method="post">
     <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
     <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
@@ -55,5 +59,6 @@
     <button class="primary right" type="submit" id="favourite_button" name="favourite_button">Add To Favourites</button>
     {{/if}}
   </form>
-</div>
+  
+
 
