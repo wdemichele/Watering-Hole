@@ -1,24 +1,16 @@
 <div class="databox secondary">
 
 <div class="databox primary">
-        <h2>Friend Activity</h2>
-        <div class="chip white">
-            <img src="\assets\avatars\avatar.svg" alt="Person">
-            John Doe
-        </div><br><br>
-        <div class="chip white">
-            <img src="\assets\avatars\avatar1.svg" alt="Person">
-            Jane Smith
-        </div><br><br>
-        <div class="chip white">
-            <img src="\assets\avatars\avatar2.svg" alt="Person">
-            John Nash
-        </div><br><br>
-        <div class="chip white">
-            <img src="\assets\avatars\avatar3.svg" alt="Person">
-            Alan Turing
-        </div><br><br>
-    </div>
+    {{#each user.recent_activity}}
+    
+        <div class="databox tertiary">
+            <h2>{{../user.name}} {{this.type}} <a href="/search/bar{{this.id}}">{{this.name}}</h2>
+            <p>{{this.address}}</p></a>
+            <p>{{this.time}}</p>
+        </div>
+    {{/each}}
+
+</div>
 
 <a href="/user"><button class="primary">My Profile</button></a>
 </div>

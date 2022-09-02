@@ -8,9 +8,44 @@ const { Db } = require('mongodb');
 const isset = require('isset-php')
 
 
+
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(bodyParser.json());
+
+router.get("/busy-times", async(_req, res) => {
+
+    axios.post(`https://besttime.app/api/v1/venues/search`, null, {
+            params: {
+                "api_key_private": "pri_1738fd68355c4c1699aa74cb7287900c",
+                "q": "bars in Chapel Street Melbourne",
+                "num": "20",
+                "fast": false
+            }
+        })
+        .then(function(response) {
+            console.log(response.data);
+
+            let retrieve = axios.get(`https://besttime.app/api/v1/venues/progress`, {
+                    params: {
+                        'job_id': response.data.job_id,
+                        'collection_id': response.data.collection_id,
+                        'format': 'raw'
+                    }
+                })
+                .then(function(response) {
+                    console.log(response.data);
+
+                    res.render('search/busy-search.hbs', { layout: 'user-layout', title: 'Bar Search' })
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        })
+        .catch(function(error) {
+            // console.log(error);
+        });
+});
 
 router.get('/bar-search', async(_req, res) => {
 
@@ -19,6 +54,10 @@ router.get('/bar-search', async(_req, res) => {
 
 router.get('/hotel-search', async(_req, res) => {
     res.render('search/hotel-search.hbs', { layout: 'google-layout', title: 'Hotel Search' });
+});
+
+router.get('/add-tags', async(_req, res) => {
+    res.render('search/tags.hbs', { layout: 'user-layout', title: 'Add Tags' });
 });
 
 router.get('/map-search', (_req, res) => {
@@ -64,6 +103,7 @@ router.post('/bar-search', async(req, res) => {
 
     axios(config)
         .then(function(response) {
+            console.log(response.data)
             res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token, bucketlist: bucketlist[0].bucketlist, favourites: favourites[0].favourites });
 
         })
@@ -129,7 +169,7 @@ router.post('/area-search', async(req, res) => {
 
     let config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + input + '&inputtype=textquery&fields=%2Cgeometry&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+        url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + input + '&inputtype=textquery&fields=geometry&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
         headers: {}
     };
 
@@ -137,12 +177,12 @@ router.post('/area-search', async(req, res) => {
         .then(function(response) {
             config = {
                 method: 'get',
-                url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + response.data.candidates[0].geometry.location.lat + '%2C' + response.data.candidates[0].geometry.location.lng + '&radius=' + req.body.area_radius + '&type=bar&keyword=' + req.body.area_keyword + '&fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+                url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + response.data.candidates[0].geometry.location.lat + '%2C' + response.data.candidates[0].geometry.location.lng + '&radius=' + req.body.area_radius + '&type=bar&fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
                 headers: {}
             };
             axios(config)
                 .then(function(response) {
-                    res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name, query: "bars%20near" + input, bucketlist: bucketlist[0].bucketlist, favourites: favourites[0].favourites });
+                    res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name, query: "bars%20near" + input, page_token: response.data.next_page_token, bucketlist: bucketlist[0].bucketlist, favourites: favourites[0].favourites });
 
                 })
                 .catch(function(error) {
@@ -196,6 +236,12 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
                     id: req.params.bar_id,
                     name: req.body.bar_name,
                     address: req.body.bar_address
+                },
+                recent_activity: {
+                    id: req.params.bar_id,
+                    name: req.body.bar_name,
+                    address: req.body.bar_address,
+                    type: "favourited"
                 }
             }
         });
@@ -210,6 +256,12 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
                     id: req.params.bar_id,
                     name: req.body.bar_name,
                     address: req.body.bar_address
+                },
+                recent_activity: {
+                    id: req.params.bar_id,
+                    name: req.body.bar_name,
+                    address: req.body.bar_address,
+                    type: "bucketlisted"
                 }
             }
         });
