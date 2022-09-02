@@ -13,9 +13,12 @@ router.get('/', (_req, res) => {
     res.render('home.hbs', { layout: 'user-layout', title: 'User Results' });
 });
 
-router.get('/friends', (_req, res) => {
+router.get('/friends', async(req, res) => {
+    let username = "jane-smith";
+    let users = schemas.user;
+    let user = await users.findOne({ username: username }).lean().exec();
 
-    res.render('friend-activity.hbs', { layout: 'user-layout', title: 'Friend Activity' });
+    res.render('friend-activity.hbs', { layout: 'user-layout', title: 'Friend Activity', user: user });
 });
 
 router.get('/about-us', (_req, res) => {
