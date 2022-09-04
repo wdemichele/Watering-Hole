@@ -1,0 +1,27 @@
+<div class="databox secondary">
+    <div class="databox primary">
+        <h3>Search Tags</h3>
+        
+        <div class="databox tertiary">
+            <table>
+            <tr>
+                <th><button>Global</button></th>
+                <th><button>My Tags</button></th>
+                <th><button>New Tags</button></th>
+            </tr>
+        </table>
+        {{#each user.tags}}
+            <h2>{{this.tag}}</h2>
+        {{/each}}
+        </div>
+        <div class="databox tertiary">
+            <form action="/tags" method="post">
+                <h3>Add Search Tags</h3>
+                <input id="tag_name" name="tag_name">
+                <button class="secondary left" type="button">Edit Tags</button>
+                <button class="primary right" type="submit">Add Tags</button>
+                <br><br>
+            </form>
+        </div>
+    </div>
+</div>
