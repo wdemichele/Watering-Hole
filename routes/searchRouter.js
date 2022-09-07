@@ -6,8 +6,8 @@ const axios = require('axios');
 const schemas = require('../models/userSchema');
 const { Db } = require('mongodb');
 const isset = require('isset-php')
-
-
+const { default: mongoose } = require('mongoose');
+const mongodb = require('mongodb');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
@@ -229,32 +229,33 @@ router.get('/bar:id', async(req, res) => {
         });
 });
 
-router.get('/bar:id/tags', async(req, res) => {
+router.post('/bar:id/tags', async(req, res) => {
     let username = "jane-smith";
     let users = schemas.user;
 
+    let bar_id = req.params.id;
+
+    let array = []
     let user = await users.findOne({
         username: username
     }).lean().exec();
 
-    let bar_id = req.params.id;
-    let tag = "rooftop";
-
-    let updatedUser = await user.findOneAndUpdate({ username: username }, {
-        tags: {
-            tag: tag,
-            bars: {
-                $push: {
-                    id: req.params.bar_id,
-                    name: req.body.bar_name,
-                    address: req.body.bar_address
-                }
-            }
-        }
+    let newEntry = ({
+        id: bar_id,
+        name: req.body.bar_name,
+        address: req.body.bar_address
     });
 
+    for (let tag of user.tags) {
+        if (req.body[tag.tag]) {
+            let current_tag = await users.findOneAndUpdate({
+                username: username,
+                tags: { $elemMatch: { tag: tag.tag } }
+            }, { $addToSet: { "tags.$.bars": newEntry } }).lean().exec();
+        }
+    }
 
-    res.render('search/bar' + bar_id);
+    res.redirect('/search/bar' + bar_id);
 
 });
 
@@ -326,8 +327,13 @@ router.post('/bar-visit:bar_id', async(req, res) => {
 })
 
 router.get('/favourites-search', async(_req, res) => {
+    let username = "jane-smith";
+    let users = schemas.user;
 
-    res.render('search/favourites-search.hbs', { layout: 'user-layout', title: 'Bar Favourites Search' });
+    let user = await users.findOne({
+        username: username
+    }).lean().exec();
+    res.render('search/favourites-search.hbs', { layout: 'user-layout', title: 'Bar Favourites Search', user: user });
 });
 
 router.post('/favourites-search', async(req, res) => {
@@ -335,7 +341,21 @@ router.post('/favourites-search', async(req, res) => {
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
-    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: user.favourites });
+    let favourites = []
+    let tagged = false
+    for (let tag of user.tags) {
+        if (req.body[tag.tag]) {
+            tagged = true;
+            console.log(tag.bars);
+            favourites = favourites.concat(tag.bars);
+        }
+    }
+
+    if (tagged == false) {
+        favourites = user.favourites
+    }
+
+    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favourites });
 });
 
 module.exports = router;

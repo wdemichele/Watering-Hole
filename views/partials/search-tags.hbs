@@ -1,0 +1,13 @@
+<div class="databox secondary">
+    <h2>Search Tags</h2>
+
+    {{#each user.tags}}
+        <div class="databox tertiary left">
+            <h2>{{this.tag}}</h2>
+            <input type="checkbox" id="{{this.tag}}" name="{{this.tag}}" value="{{this.tag}}">
+        </div>
+    {{/each}}
+
+    <br><br>
+        
+</div>
