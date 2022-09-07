@@ -1,0 +1,15 @@
+<div class="databox secondary">
+    <h2>Add My Tags</h2>
+
+    {{#each tags}}
+        <div class="databox tertiary left">
+            <h2>{{this.tag}}</h2>
+            <input type="checkbox" id="{{this.tag}}" name="{{this.tag}}" value="{{this.tag}}">
+        </div>
+    {{/each}}
+
+    <br><br>
+    
+    <button class="primary right" type="submit" id="tags_button" name="tags_button">Add Tags</button>
+        
+</div>

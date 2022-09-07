@@ -6,8 +6,8 @@ const axios = require('axios');
 const schemas = require('../models/userSchema');
 const { Db } = require('mongodb');
 const isset = require('isset-php')
-
-
+const { default: mongoose } = require('mongoose');
+const mongodb = require('mongodb');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
@@ -197,6 +197,11 @@ router.post('/area-search', async(req, res) => {
 router.get('/bar:id', async(req, res) => {
     let username = "jane-smith";
     let users = schemas.user;
+
+    let user = await users.findOne({
+        username: username
+    }).lean().exec();
+
     let favourited = await users.find({
         username: username,
         bucketlist: { $elemMatch: { id: req.params.id } }
@@ -217,11 +222,41 @@ router.get('/bar:id', async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited });
+            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, tags: user.tags });
         })
         .catch(function(error) {
             console.log(error);
         });
+});
+
+router.post('/bar:id/tags', async(req, res) => {
+    let username = "jane-smith";
+    let users = schemas.user;
+
+    let bar_id = req.params.id;
+
+    let array = []
+    let user = await users.findOne({
+        username: username
+    }).lean().exec();
+
+    let newEntry = ({
+        id: bar_id,
+        name: req.body.bar_name,
+        address: req.body.bar_address
+    });
+
+    for (let tag of user.tags) {
+        if (req.body[tag.tag]) {
+            let current_tag = await users.findOneAndUpdate({
+                username: username,
+                tags: { $elemMatch: { tag: tag.tag } }
+            }, { $addToSet: { "tags.$.bars": newEntry } }).lean().exec();
+        }
+    }
+
+    res.redirect('/search/bar' + bar_id);
+
 });
 
 router.post('/bar-favourite:bar_id', async(req, res) => {
@@ -270,9 +305,35 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
 
 })
 
-router.get('/favourites-search', async(_req, res) => {
+router.post('/bar-visit:bar_id', async(req, res) => {
 
-    res.render('search/favourites-search.hbs', { layout: 'user-layout', title: 'Bar Favourites Search' });
+    let username = "jane-smith";
+    let user = schemas.user;
+
+
+    let updatedUser = await user.findOneAndUpdate({ username: username }, {
+        $push: {
+            recent_activity: {
+                id: req.params.bar_id,
+                name: req.body.bar_name,
+                address: req.body.bar_address,
+                type: "visited"
+            }
+        }
+    });
+
+    res.redirect('bar' + req.params.bar_id);
+
+})
+
+router.get('/favourites-search', async(_req, res) => {
+    let username = "jane-smith";
+    let users = schemas.user;
+
+    let user = await users.findOne({
+        username: username
+    }).lean().exec();
+    res.render('search/favourites-search.hbs', { layout: 'user-layout', title: 'Bar Favourites Search', user: user });
 });
 
 router.post('/favourites-search', async(req, res) => {
@@ -280,7 +341,21 @@ router.post('/favourites-search', async(req, res) => {
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
-    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: user.favourites });
+    let favourites = []
+    let tagged = false
+    for (let tag of user.tags) {
+        if (req.body[tag.tag]) {
+            tagged = true;
+            console.log(tag.bars);
+            favourites = favourites.concat(tag.bars);
+        }
+    }
+
+    if (tagged == false) {
+        favourites = user.favourites
+    }
+
+    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favourites });
 });
 
 module.exports = router;

@@ -8,16 +8,11 @@ const SchemaTypes = mongoose.Schema.Types;
 // defaut date
 let today = new Date();
 
-// user
+// bar
 let barSchema = new schema({
     name: { type: String },
     id: { type: String },
     address: { type: String }
-})
-
-let eventSchema = new schema({
-    name: { type: String },
-    id: { type: String },
 })
 
 let activitySchema = new schema({
@@ -28,6 +23,11 @@ let activitySchema = new schema({
     type: { type: String }
 })
 
+let tag = new schema({
+    tag: { type: String },
+    bars: [barSchema]
+})
+
 // user
 let userSchema = new schema({
     username: { type: String, require: true },
@@ -36,13 +36,12 @@ let userSchema = new schema({
     favourites: [barSchema],
     bucketlist: [barSchema],
     recent_bars: [barSchema],
-    recent_events: [eventSchema],
     friends: [{ type: String }],
-    recent_activity: [activitySchema]
+    recent_activity: [activitySchema],
+    tags: [tag]
 })
 
 let user = mongoose.model('user', userSchema, 'user');
-
 
 let mySchemas = { 'user': user };
 module.exports = mySchemas;

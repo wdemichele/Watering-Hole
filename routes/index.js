@@ -53,4 +53,21 @@ router.get('/user', async(_req, res) => {
 
 });
 
+router.get('/tags', async(req, res) => {
+    let username = "jane-smith";
+    let users = schemas.user;
+    let user = await users.findOne({ username: username }).lean().exec();
+    res.render('tags.hbs', { layout: 'user-layout', title: 'My Tags', user: user });
+});
+
+router.post('/tags', async(req, res) => {
+    let username = "jane-smith";
+    let users = schemas.user;
+    let user = await users.findOneAndUpdate({ username: username }, {
+        $push: { tags: { tag: req.body.tag_name, bars: [] } }
+    }).lean().exec();
+
+    res.redirect('/tags');
+});
+
 module.exports = router;

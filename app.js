@@ -21,13 +21,24 @@ app.engine('hbs', exphbs.engine({
 // helpers
 const hbs = exphbs.create({});
 
+hbs.handlebars.registerHelper('reverseArray', (array) => array.reverse());
+
 hbs.handlebars.registerHelper("array_length", function(array) {
     return array.length;
 });
 
+// limit an array to a maximum of elements (from the start)
+hbs.handlebars.registerHelper('limit', function(arr, limit) {
+    if (limit > arr.length) {
+        limit = arr.length;
+    }
+    if (!Array.isArray(arr)) { return []; }
+    return arr.slice(0, limit);
+});
+
 hbs.handlebars.registerHelper("contains", function(array, num) {
     if (!array) {
-        false;
+        return false;
     }
     for (let i = 0; i < array.length; i++) {
         if (array[0].id == num) {
