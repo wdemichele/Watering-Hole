@@ -17,12 +17,52 @@
                 </div>
             {{/each}}
         </div>
-        <h2>Recent Events:</h2>
-        <div class="flex-container secondary">
-            <div class="databox tertiary">
-                <h1>Coming Soon</h1>
-            </div>
+            <div class="databox primary">
+        <h3>Search Tags</h3>
+        
+        <div class="databox tertiary">
+            <table>
+            <tr>
+                <th><button onclick="isGlobal(true)">Global</button></th>
+                <th><button onclick="isGlobal(false)">My Tags</button></th>
+            </tr>
+        </table>
+        <div id="global" name="global" class="flex-container" style="display: block;">
+            <div class="databox primary card"><h2>Karaoke</h2></div>
+            <div class="databox primary card"><h2>Nightlife</h2></div>
+            <div class="databox primary card"><h2>Irish Pub</h2></div>
         </div>
-        <a href="/tags"><button class="primary right">My Tags</button></a>
+        <div id="user" name="user" class="flex-container" style="display: none;">
+        {{#each user.tags}}
+            <div class="databox primary card"><h2>{{this.tag}}</h2></div>
+        {{/each}}
+        </div>
+        </div>
+        <div class="databox tertiary">
+            <form action="/tags" method="post">
+                <h3>Add Search Tags</h3>
+                <input id="tag_name" name="tag_name">
+                <button class="secondary left" type="button">Edit Tags</button>
+                <button class="primary right" type="submit">Add Tags</button>
+                <br><br>
+            </form>
+        </div>
+    </div>
     </div>
 </div>
+
+<script>
+    function isGlobal(bool){
+        var global = document.getElementById("global");
+        var user = document.getElementById("user");
+        if (bool == true) {
+            global.style.display = "block";
+            user.style.display = "none";
+        } else {
+            user.style.display = "block";
+            global.style.display = "none";
+        }
+    }
+
+    
+</script>
