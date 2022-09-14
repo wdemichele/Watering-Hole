@@ -8,7 +8,7 @@ const schemas = require('../models/userSchema');
 router.use('/search', searchRouter);
 router.use('/event', eventRouter);
 
-router.get('/', (_req, res) => {
+router.get('/home', (_req, res) => {
 
     res.render('home.hbs', { layout: 'user-layout', title: 'User Results' });
 });
@@ -38,7 +38,7 @@ router.get('/settings', async(_req, res) => {
     res.render('settings.hbs', { layout: 'user-layout', title: 'User Settings', user: user });
 });
 
-router.get('/login', (_req, res) => {
+router.get('/', (_req, res) => {
 
     res.render('login.hbs', { layout: 'guest-layout', title: 'User Login' });
 });
