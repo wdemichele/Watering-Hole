@@ -37,6 +37,7 @@
         "mongoose": "^6.5.4",
         "mongoose-double": "^0.0.1",
         "node-fetch": "^3.2.10",
+        "query-string": "^7.1.1",
         "react": "^18.2.0",
         "xhr2": "^0.2.1"
     }
