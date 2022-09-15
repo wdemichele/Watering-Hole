@@ -1,6 +1,5 @@
 const { Int32, Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
-require('mongoose-double')(mongoose);
 const schema = mongoose.Schema;
 const SchemaTypes = mongoose.Schema.Types;
 

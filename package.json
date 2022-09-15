@@ -18,27 +18,13 @@
     },
     "homepage": "https://github.com/wdemichele/COMP30022-IT-Project#readme",
     "dependencies": {
-        "ajax": "^0.0.4",
         "axios": "^0.27.2",
         "body-parser": "^1.20.0",
-        "chosen": "^0.0.2",
-        "chosen-js": "^1.8.7",
         "dotenv": "^16.0.1",
-        "env": "^0.0.2",
         "express": "^4.18.1",
         "express-handlebars": "^6.0.6",
-        "fetch": "^1.1.0",
-        "heroku": "^7.3.0",
-        "isset-php": "^1.0.7",
-        "jquery": "npm:jQuery@^1.7.4",
-        "jQuery": "^1.7.4",
-        "jsdom": "^20.0.0",
         "mongodb": "^4.8.1",
-        "mongoose": "^6.5.4",
-        "mongoose-double": "^0.0.1",
-        "node-fetch": "^3.2.10",
-        "query-string": "^7.1.1",
-        "react": "^18.2.0",
-        "xhr2": "^0.2.1"
+        "mongoose": "^6.6.0",
+        "react": "^18.2.0"
     }
 }
