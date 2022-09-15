@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const router = require('./routes');
@@ -5,6 +6,10 @@ const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 const axios = require("axios");
+const passport = require("passport")
+const facebookStrategy = require('passport-facebook').Strategy
+const session = require('express-session')
+
 
 const DB_URI = "mongodb+srv://the-leftovers:OEIiTEbBpuJCluKH@personal-items-register.ll54ewt.mongodb.net/bar-collection?retryWrites=true&w=majority";
 
@@ -58,6 +63,47 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, '/public')));
+
+app.use(session({
+    resave: false,
+    saveUninitialized: true,
+    secret: "thisismysupersecretkey"
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
+// make our facebook strategy
+
+passport.use(new facebookStrategy({
+
+        clientID: "575053360778510",
+        clientSecret: "fb6cb29812b497f09a02ca0826328b5d",
+        callbackURL: "https://my-watering-hole.herokuapp.com/facebook/callback",
+        profileFields: ['id', 'displayName', 'name', 'gender', 'picture.type(large)', 'email']
+    },
+    function(token, refreshToken, profile, done) {
+        console.log(profile);
+        return done(null, profile)
+    }))
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+
+app.get("facebook/callback", passport.authenticate('facebook', {
+    successRedirect: '/home',
+    failureRedirect: '/'
+}))
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(id, done) {
+
+    return done(null, id)
+})
 
 app.use(router);
 
