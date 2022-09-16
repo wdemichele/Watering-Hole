@@ -9,8 +9,28 @@ const passport = require('passport');
 router.use('/search', searchRouter);
 router.use('/event', eventRouter);
 
-router.get('/home', isLoggedIn, (req, res) => {
+router.get('/home', isLoggedIn, async(req, res) => {
     console.log(req.user);
+    let username = req.user.id;
+    let users = schemas.user;
+    let user = await users.findOne({ username: username }).lean().exec();
+    if (!user) {
+        // now new user
+        var newUser = new users({
+            username: username,
+            pic: { type: String },
+            name: req.user.displayName,
+            password: { type: String },
+            favourites: [barSchema],
+            bucketlist: [barSchema],
+            recent_bars: [barSchema],
+            friends: [{ type: String }],
+            recent_activity: [activitySchema],
+            tags: [tag]
+        });
+
+        newUserSaved = await newUser.save();
+    }
     res.render('home.hbs', { layout: 'user-layout', title: 'User Results', user: req.user });
 });
 
@@ -83,7 +103,7 @@ router.get('/error', isLoggedIn, function(req, res) {
 });
 
 router.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['public_profile', 'email']
+    scope: ['public_profile', 'email', 'picture.type(large)']
 }));
 
 router.get('/auth/facebook/callback',

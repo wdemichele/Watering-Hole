@@ -30,6 +30,7 @@ let tag = new schema({
 // user
 let userSchema = new schema({
     username: { type: String, require: true },
+    pic: { type: String },
     name: { type: String },
     password: { type: String },
     favourites: [barSchema],
