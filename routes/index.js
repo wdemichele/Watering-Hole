@@ -9,9 +9,8 @@ const passport = require('passport');
 router.use('/search', searchRouter);
 router.use('/event', eventRouter);
 
-
 router.get('/home', isLoggedIn, (req, res) => {
-
+    console.log(req.user);
     res.render('home.hbs', { layout: 'user-layout', title: 'User Results', user: req.user });
 });
 
