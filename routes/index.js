@@ -9,6 +9,8 @@ const passport = require('passport');
 router.use('/search', searchRouter);
 router.use('/event', eventRouter);
 
+const USERNAME = "1824809674539254"
+
 router.get('/home', isLoggedIn, async(req, res) => {
     console.log(req.user);
     let username = req.user.id;
@@ -16,7 +18,7 @@ router.get('/home', isLoggedIn, async(req, res) => {
     let user = await users.findOne({ username: username }).lean().exec();
     if (!user) {
         // now new user
-        var newUser = new users({
+        let newUser = new users({
             username: username,
             pic: { type: String },
             name: req.user.displayName,
@@ -35,7 +37,7 @@ router.get('/home', isLoggedIn, async(req, res) => {
 });
 
 router.get('/friends', async(req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
@@ -53,7 +55,7 @@ router.get('/manual', (_req, res) => {
 });
 
 router.get('/settings', async(_req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
     res.render('settings.hbs', { layout: 'user-layout', title: 'User Settings', user: user });
@@ -66,7 +68,7 @@ router.get('/', (_req, res) => {
 
 router.get('/user', async(_req, res) => {
 
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
@@ -75,14 +77,14 @@ router.get('/user', async(_req, res) => {
 });
 
 router.get('/tags', async(req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
     res.render('tags.hbs', { layout: 'user-layout', title: 'My Tags', user: user });
 });
 
 router.post('/tags', async(req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let user = await users.findOneAndUpdate({ username: username }, {
         $push: { tags: { tag: req.body.tag_name, bars: [] } }
@@ -91,7 +93,7 @@ router.post('/tags', async(req, res) => {
     res.redirect('/tags');
 });
 
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
+router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location', 'user_friends', 'public_profile'] }));
 
 router.get("/facebook/callback", passport.authenticate('facebook', {
     successRedirect: '/home',

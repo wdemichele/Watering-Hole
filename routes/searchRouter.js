@@ -8,6 +8,8 @@ const { Db } = require('mongodb');
 const { default: mongoose } = require('mongoose');
 const mongodb = require('mongodb');
 
+const USERNAME = "1824809674539254"
+
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(bodyParser.json());
@@ -79,7 +81,7 @@ router.post('/bar-search', async(req, res) => {
     let input = req.body.bar_name;
     input = input.replace(/ /gi, "%20")
 
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let bucketlist = await users.find({
         username: username
@@ -116,7 +118,7 @@ router.post('/more-bars', async(req, res) => {
     let page_token = req.body.page_token;
     let input = req.body.bar_name;
 
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let bucketlist = await users.find({
         username: username
@@ -152,7 +154,7 @@ router.post('/area-search', async(req, res) => {
 
     input = input.replace(/ /gi, "%20")
 
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let bucketlist = await users.find({
         username: username
@@ -194,7 +196,7 @@ router.post('/area-search', async(req, res) => {
 });
 
 router.get('/bar:id', async(req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
 
     let user = await users.findOne({
@@ -229,7 +231,7 @@ router.get('/bar:id', async(req, res) => {
 });
 
 router.post('/bar:id/tags', async(req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
 
     let bar_id = req.params.id;
@@ -260,7 +262,7 @@ router.post('/bar:id/tags', async(req, res) => {
 
 router.post('/bar-favourite:bar_id', async(req, res) => {
 
-    let username = "jane-smith";
+    let username = USERNAME;
     let user = schemas.user;
 
     if (typeof req.body.favourite_button !== 'undefined') {
@@ -306,7 +308,7 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
 
 router.post('/bar-visit:bar_id', async(req, res) => {
 
-    let username = "jane-smith";
+    let username = USERNAME;
     let user = schemas.user;
 
 
@@ -326,7 +328,7 @@ router.post('/bar-visit:bar_id', async(req, res) => {
 })
 
 router.get('/favourites-search', async(_req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
 
     let user = await users.findOne({
@@ -336,7 +338,7 @@ router.get('/favourites-search', async(_req, res) => {
 });
 
 router.post('/favourites-search', async(req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
