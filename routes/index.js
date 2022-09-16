@@ -93,7 +93,7 @@ router.post('/tags', async(req, res) => {
     res.redirect('/tags');
 });
 
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location', 'user_friends', 'public_profile'] }));
+router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
 router.get("/facebook/callback", passport.authenticate('facebook', {
     successRedirect: '/home',
