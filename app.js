@@ -9,7 +9,6 @@ const axios = require("axios");
 const session = require('express-session')
 const passport = require("passport")
 const FacebookStrategy = require('passport-facebook').Strategy;
-const cookieParser = require('cookie-parser')
 const config = require('./src/config')
 
 const DB_URI = "mongodb+srv://the-leftovers:OEIiTEbBpuJCluKH@personal-items-register.ll54ewt.mongodb.net/bar-collection?retryWrites=true&w=majority";
@@ -70,9 +69,9 @@ app.use(session({
     saveUninitialized: true,
     secret: "thisismysupersecretkey"
 }))
+
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cookieParser());
 
 passport.serializeUser(function(user, done) {
     done(null, user);
