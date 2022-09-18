@@ -346,3 +346,9 @@ table {
 .settings-button {
     background-color: #56677a;
 }
+
+.friend-text {
+    color: #b15144;
+    font-size: larger;
+    font-weight: bolder;
+}
