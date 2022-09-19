@@ -4,13 +4,13 @@ body {
 }
 
 .theme-default {
-    --color-primary: #393D42;
-    --color-secondary: #56677a;
-    --color-tertiary: #919DAD;
+    --color-primary: #0E897D;
+    --color-secondary: #355371;
+    --color-tertiary: #4C899F;
     --color-accent: #b15144;
     --color-white: #fafafa;
     --color-black: #000000;
-    --font-family: 'Montserrat', sans-serif;
+    --font-family: 'Lexend', sans-serif;
     --background-image: none;
 }
 
@@ -161,18 +161,18 @@ input:focus {
 }
 
 .primary {
-    background-color: #393D42;
+    background-color: #0E897D;
     color: #fafafa;
 }
 
 .secondary {
-    background-color: #56677a;
+    background-color: #355371;
     color: #fafafa;
 }
 
 .tertiary {
-    background-color: #919DAD;
-    color: #000000;
+    background-color: #4C899F;
+    color: white;
 }
 
 .accent {
@@ -235,22 +235,20 @@ p {
 }
 
 button {
-    border-radius: 4px;
+    border-radius: 20px;
     border-style: none;
-    box-sizing: border-box;
     cursor: pointer;
-    display: inline-block;
-    font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 700;
+    font-family: "Lexend", Arial, sans-serif;
+    font-size: 25px;
+    font-weight: 400;
     line-height: 1.5;
-    margin: 0;
+    margin: 10px;
     max-width: 250px;
     min-height: 44px;
     min-width: 10px;
+    padding: 10px 0 10px 0;
     outline: none;
     overflow: hidden;
-    padding: 9px 20px 8px;
     position: relative;
     text-align: center;
     text-transform: none;
@@ -351,4 +349,43 @@ table {
     color: #b15144;
     font-size: larger;
     font-weight: bolder;
+}
+
+.login {
+    background-color: #EAD5BF;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    width: 50%; 
+}
+
+.login-text-field {
+    color: black;
+    text-align: center;
+    margin: 7% 10% 10% 10%;
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.login-title {
+    color: black;
+    font-weight: 400;
+}
+
+.input-field {
+    width: 100%;
+    height: 100%;
+    padding: 10px 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+.login-btn {
+    margin-top: 8%;
+    margin-bottom: 0;
 }
