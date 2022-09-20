@@ -14,7 +14,11 @@
                 <h3>{{bar.formatted_address}}</h3> 
                 <a href="{{bar.website}}"><h3>{{bar.website}}</h3></a>
                 <h3>Price Level: {{bar.price_level}} Google Review: {{bar.rating}}</h3>
-                <h3>Open Now: {{bar.opening_hours.open_now}}</h3></a>
+                {{#if bar.opening_hours.open_now}}
+                    <h3 id="open">Open Now</h3></a>
+                {{else}}
+                    <h3 id="closed">Closed</h3></a>
+                {{/if}}
                 <iframe name="votar" style="display:none;"></iframe>
 
                 <form action="bar-favourite{{bar.place_id}}" method="post" target="votar">
@@ -44,3 +48,18 @@
     </form>
     {{/if}}
 </div>
+
+<script>
+    function open_now(bool){
+        console.log(bool)
+        var open = document.getElementById("open");
+        var closed = document.getElementById("closed");
+        if (bool == true) {
+            open.style.display = "block";
+            closed.style.display = "none";
+        } else {
+            closed.style.display = "block";
+            open.style.display = "none";
+        }
+    }
+</script>
