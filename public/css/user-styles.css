@@ -3,11 +3,12 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.theme-default {
+:root {
     --color-primary: #0E897D;
     --color-secondary: #355371;
     --color-tertiary: #4C899F;
     --color-accent: #b15144;
+    --color-quat: #EAD5BF;
     --color-white: #fafafa;
     --color-black: #000000;
     --font-family: 'Lexend', sans-serif;
@@ -21,9 +22,13 @@ body {
 }
 
 header {
-    background: #393D42;
-    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    background: var(--color-primary);
+    font-family: 'Lexend', sans-serif;
     font-weight: 300;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 5%;
 }
 
 header::after {
@@ -56,6 +61,24 @@ header::after {
     padding: 16px;
 }
 
+.contact-btn {
+    margin-left: auto;
+}
+
+.contact-btn button {
+    background-color: var(--color-secondary);
+    color: #fafafa;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    display: inline-block;
+    padding: 0 20px;
+}
+
 nav {
     float: left;
 }
@@ -73,17 +96,15 @@ nav ul {
 
 nav li {
     display: inline-block;
-    margin-left: 40px;
     position: relative;
 }
 
 nav a {
     color: #EEE;
     text-decoration: none;
-    text-transform: uppercase;
-    font-size: 16px;
+    font-size: 25px;
     float: left;
-    padding: 16px 30px;
+    padding: 16px 20px;
 }
 
 nav a:hover {
@@ -360,7 +381,7 @@ table {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5%;
-    width: 50%; 
+    width: 40%; 
 }
 
 .login-text-field {
@@ -388,4 +409,29 @@ table {
 .login-btn {
     margin-top: 8%;
     margin-bottom: 0;
+    width: 41%;
+}
+
+.settings-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.settings-left {
+    flex: 1;
+    margin: 10% 0 0 10%;
+}
+
+.settings-right {
+    flex: 2;
+    margin: 5% 10% 0 10%;
+    background-color: var(--color-quat);
+    text-align: center;
+    
+}
+
+.settings-field {
+    padding: 1rem 5rem 1rem 5rem;
 }
