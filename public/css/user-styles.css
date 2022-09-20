@@ -47,9 +47,11 @@ header::after {
 }
 
 .nav-icon:hover {
+    /*
     height: 55px;
-    width: 55px;
-    color: #D3D3D3;
+    width: 55px; */
+    background-color: rgb(148, 146, 146, 0.75);
+    border-radius: 10px;
 }
 
 .nav-message {
@@ -221,7 +223,7 @@ input:focus {
 }
 
 .right {
-    float: right;
+    margin-left: auto;
 }
 
 h1 {
