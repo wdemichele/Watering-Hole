@@ -1,0 +1,12 @@
+<div class="flex-container databox secondary">
+    <div>
+        <img style="width: 300px; height: auto;" src="\assets\nav\abstract-user-flat-4.svg">
+        <h1>{{user.name}}</h1>
+        <h2>@{{user.username}}</h1>
+
+        <h1>Friends: {{array_length user.friends}}</h1>
+        {{#each user.friends}}
+            <h2>{{this}}</h2>
+        {{/each}}
+    </div>
+</div>
