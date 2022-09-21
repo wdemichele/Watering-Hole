@@ -53,6 +53,36 @@ router.get('/user', async(_req, res) => {
 
 });
 
+router.get('/friend:id', async(req, res) => {
+
+    let username = req.params.id;
+    let users = schemas.user;
+    let user = await users.findOne({ username: username }).lean().exec();
+
+    res.render('friend-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+
+});
+
+router.get('/user:id/friends', async(req, res) => {
+
+    let username = req.params.id;
+    let users = schemas.user;
+    let user = await users.findOne({ username: username }).lean().exec();
+
+    res.render('user-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+
+});
+
+router.get('/add-friends', async(req, res) => {
+
+    let username = "jane-smith";
+    let users = schemas.user;
+    let user = await users.findOne({ username: username }).lean().exec();
+
+    res.render('add-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+
+});
+
 router.get('/tags', async(req, res) => {
     let username = "jane-smith";
     let users = schemas.user;
