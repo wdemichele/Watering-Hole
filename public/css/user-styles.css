@@ -414,6 +414,15 @@ table {
     width: 41%;
 }
 
+.forgot-pass {
+    float: left;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 2%;
+    text-decoration: underline;
+    color: rgb(240, 96, 96);
+}
+
 .settings-container {
     display: flex;
     flex-wrap: wrap;
@@ -436,4 +445,77 @@ table {
 
 .settings-field {
     padding: 1rem 5rem 1rem 5rem;
+}
+
+.grid-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 1rem;
+    background-color: var(--color-primary);
+    margin: 2rem;
+}
+
+.box-1 {
+    grid-row: 1/3;
+    margin: 3rem;
+    margin-top: 5rem;
+}
+
+.box-1 h1 {
+    color: white;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.box-1 h2 {
+    color: rgb(217, 209, 209, 0.6);
+    text-align: center;
+    font-size: 33px;
+    font-weight: 600;
+}
+
+.box-1 h3 {
+    color: rgb(217, 209, 209);
+    text-align: center;
+    font-size: 80px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.box-2 {
+    margin-top: 2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    display: grid;
+}
+
+.box-2-label h1{
+    color: white;
+}
+
+.sub-box-2 {
+    background-color: white;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: #000;
+    width: 200px;
+    height: 200px
+    
+}
+
+.box-3 {
+    margin: 1rem;
+    grid-column: 1/3;
+}
+
+.box-3 th {
+    margin-top: 8%;
+    margin-bottom: 0;
+    width: 50%;
+    background-color: #0E897D;
+}
+
+.profile-btn {
+    background-color: var(--color-secondary);
+    color: white;
 }
