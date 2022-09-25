@@ -4,7 +4,7 @@
     {{#each (limit (reverseArray user.recent_activity) 20)}}
     
         <div class="databox tertiary">
-            <h2><a href="/friend{{../user.username}}">{{../user.name}}</a> {{this.type}} <a href="/search/bar{{this.id}}">{{this.name}}</h2>
+            <h2><a href="user{{user.id}}/friend{{../user.username}}">{{../user.name}}</a> {{this.type}} <a href="/search/bar{{this.id}}">{{this.name}}</h2>
             <p>{{this.address}}</p></a>
             <p>{{this.time}}</p>
         </div>

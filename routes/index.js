@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const searchRouter = require('./searchRouter');
-const eventRouter = require('./eventRouter');
+const userRouter = require('./userRouter');
 const bodyParser = require("body-parser");
 const axios = require('axios');
 const schemas = require('../models/userSchema');
 router.use('/search', searchRouter);
-router.use('/event', eventRouter);
+router.use('/user:id', userRouter);
+router.use('/user', userRouter);
 
 router.get('/home', (_req, res) => {
 
@@ -43,35 +44,6 @@ router.get('/', (_req, res) => {
     res.render('login.hbs', { layout: 'guest-layout', title: 'User Login' });
 });
 
-router.get('/user', async(_req, res) => {
-
-    let username = "jane-smith";
-    let users = schemas.user;
-    let user = await users.findOne({ username: username }).lean().exec();
-
-    res.render('user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user });
-
-});
-
-router.get('/friend:id', async(req, res) => {
-
-    let username = req.params.id;
-    let users = schemas.user;
-    let user = await users.findOne({ username: username }).lean().exec();
-
-    res.render('friend-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user });
-
-});
-
-router.get('/user:id/friends', async(req, res) => {
-
-    let username = req.params.id;
-    let users = schemas.user;
-    let user = await users.findOne({ username: username }).lean().exec();
-
-    res.render('user-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
-
-});
 
 router.get('/add-friends', async(req, res) => {
 
