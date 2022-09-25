@@ -64,7 +64,7 @@ router.post('/tags', async(req, res) => {
     let username = "jane-smith";
     let users = schemas.user;
     let user = await users.findOneAndUpdate({ username: username }, {
-        $push: { tags: { tag: req.body.tag_name, bars: [] } }
+        $push: { tags: { tag: req.body.tag_name } }
     }).lean().exec();
 
     res.redirect('/tags');

@@ -51,27 +51,8 @@ router.get('/bar-search', async(_req, res) => {
     res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search' });
 });
 
-router.get('/hotel-search', async(_req, res) => {
-    res.render('search/hotel-search.hbs', { layout: 'google-layout', title: 'Hotel Search' });
-});
-
 router.get('/add-tags', async(_req, res) => {
     res.render('search/tags.hbs', { layout: 'user-layout', title: 'Add Tags' });
-});
-
-router.get('/map-search', (_req, res) => {
-
-    res.render('search/map-search.hbs', { layout: 'user-layout', title: 'Map Search', query: "bars%20near%20Chapel%20Street%2C%20South%20Yarra%20VIC%2C%20Australia" });
-});
-
-router.post('/map-search', async(_req, res) => {
-
-    res.render('search/map-search.hbs', { layout: 'user-layout', title: 'Map Search', query: "bars%20near%20Chapel%20Street%2C%20South%20Yarra%20VIC%2C%20Australia" });
-});
-
-router.get('/map', async(_req, res) => {
-
-    res.render('search/map.hbs', { layout: 'user-layout', title: 'Map' });
 });
 
 router.post('/bar-search', async(req, res) => {

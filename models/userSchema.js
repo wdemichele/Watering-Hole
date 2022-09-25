@@ -11,20 +11,10 @@ let today = new Date();
 let barSchema = new schema({
     name: { type: String },
     id: { type: String },
-    address: { type: String }
-})
-
-let activitySchema = new schema({
-    name: { type: String },
-    id: { type: String },
     address: { type: String },
-    time: { type: Date, default: today },
-    type: { type: String }
-})
-
-let tag = new schema({
-    tag: { type: String },
-    bars: [barSchema]
+    price: { type: String },
+    location: { type: String },
+    time: { type: String }
 })
 
 // user
@@ -32,15 +22,19 @@ let userSchema = new schema({
     username: { type: String, require: true },
     name: { type: String },
     password: { type: String },
-    favourites: [barSchema],
-    bucketlist: [barSchema],
-    recent_bars: [barSchema],
+    bars: [{
+        bar: { type: String },
+        favourite: { type: Boolean },
+        bucketlist: { type: Boolean },
+        tags: [{ type: String }]
+    }],
+    visited: [{ type: String }],
     friends: [{ type: String }],
-    recent_activity: [activitySchema],
-    tags: [tag]
+    tags: [{ type: String }]
 })
 
 let user = mongoose.model('user', userSchema, 'user');
+let bar = mongoose.model('bar', barSchema, 'bar');
 
-let mySchemas = { 'user': user };
+let mySchemas = { 'user': user, 'bar': bar };
 module.exports = mySchemas;
