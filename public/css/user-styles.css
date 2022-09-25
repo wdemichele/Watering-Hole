@@ -342,3 +342,41 @@ td {
 table {
     margin: auto;
 }
+
+.profile-item1 {
+    grid-area: profile-pic;
+}
+
+.profile-item2 {
+    grid-area: recently-visited;
+}
+
+.profile-item3 {
+    grid-area: stats;
+}
+
+.profile-item4 {
+    grid-area: tags;
+}
+
+.profile-grid-container {
+    display: grid;
+    grid-template-areas: 'profile-pic recently-visited' 'stats  tags';
+    gap: 10px;
+    background-color: #0e897d;
+    padding: 10px;
+    color: #fafafa;
+}
+
+.grid-container>div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+.square {
+    object-fit: cover;
+    width: 230px;
+    height: 230px;
+}

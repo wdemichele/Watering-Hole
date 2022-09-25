@@ -1,28 +1,41 @@
-<div class="flex-container databox secondary">
+<div class="flex-container databox tertiary" style="color=white;">
     <div>
         <img style="width: 300px; height: auto;" src="\assets\nav\abstract-user-flat-4.svg">
         <h1>{{user.name}}</h1>
         <h2>@{{user.username}}</h1>
-
-        <h1>Friends</h1>
-        <a href="/user{{user.username}}/friends"><h1>{{array_length user.friends}}</h1></a>
+        <div class="flex-container" >
+            <div>
+                <h2>Friends</h2>
+                <a href="/user{{user.username}}/friends"><h1>{{array_length user.friends}}</h1></a>
+            </div>
+            <div>
+                <h2>Favourites</h2>
+                <a href="/user{{user.username}}/friends"><h1>{{array_length user.friends}}</h1></a>
+            </div>
+            <div>
+                <h2>Bucketlist</h2>
+                <a href="/user{{user.username}}/friends"><h1>{{array_length user.friends}}</h1></a>
+            </div>
+        </div>
     </div>
-
+        
     <div>
         <h2>Recently Visited:</h2>
-        <div class="flex-container databox secondary">
+        <div class="flex-container" style="gap 20px;">
             {{#each user.recent_bars}}
-                <div class="databox tertiary">
+                <div class="databox primary">
+                    <img class="square" src="/assets/bar.jpeg">
                     <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
                 </div>
             {{/each}}
         </div>
-        <h2>Recent Events:</h2>
-        <div class="flex-container secondary">
-            <div class="databox tertiary">
-                <h1>Coming Soon</h1>
-            </div>
+    <div>
+    <div class="databox primary">
+        <h1>My Tags</h1>
+        <div class="flex-container">
+            {{#each user.tags}}
+                <h2>{{this.tag}}</h2>
+            {{/each}}
         </div>
-        <a href="/tags"><button class="primary right">My Tags</button></a>
     </div>
 </div>
