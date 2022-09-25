@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const searchRouter = require('./searchRouter');
-const eventRouter = require('./eventRouter');
 const bodyParser = require("body-parser");
 const axios = require('axios');
-const schemas = require('../models/userSchema');
+const userSchema = require('../models/userSchema');
+
 router.use('/search', searchRouter);
-router.use('/event', eventRouter);
 
 router.get('/home', (_req, res) => {
 
@@ -15,7 +14,7 @@ router.get('/home', (_req, res) => {
 
 router.get('/friends', async(req, res) => {
     let username = "jane-smith";
-    let users = schemas.user;
+    let users = userSchema.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
     res.render('friend-activity.hbs', { layout: 'user-layout', title: 'Friend Activity', user: user });
@@ -33,7 +32,7 @@ router.get('/manual', (_req, res) => {
 
 router.get('/settings', async(_req, res) => {
     let username = "jane-smith";
-    let users = schemas.user;
+    let users = userSchema.user;
     let user = await users.findOne({ username: username }).lean().exec();
     res.render('settings.hbs', { layout: 'user-layout', title: 'User Settings', user: user });
 });
@@ -46,7 +45,7 @@ router.get('/', (_req, res) => {
 router.get('/user', async(_req, res) => {
 
     let username = "jane-smith";
-    let users = schemas.user;
+    let users = userSchema.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
     res.render('user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user });
@@ -55,14 +54,14 @@ router.get('/user', async(_req, res) => {
 
 router.get('/tags', async(req, res) => {
     let username = "jane-smith";
-    let users = schemas.user;
+    let users = userSchema.user;
     let user = await users.findOne({ username: username }).lean().exec();
     res.render('tags.hbs', { layout: 'user-layout', title: 'My Tags', user: user });
 });
 
 router.post('/tags', async(req, res) => {
     let username = "jane-smith";
-    let users = schemas.user;
+    let users = userSchema.user;
     let user = await users.findOneAndUpdate({ username: username }, {
         $push: { tags: { tag: req.body.tag_name } }
     }).lean().exec();

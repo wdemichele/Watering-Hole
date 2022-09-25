@@ -8,51 +8,15 @@ const { Db } = require('mongodb');
 const { default: mongoose } = require('mongoose');
 const mongodb = require('mongodb');
 
+const USERNAME = "joe-smith"
+
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(bodyParser.json());
 
-router.get("/busy-times", async(_req, res) => {
-
-    axios.post(`https://besttime.app/api/v1/venues/search`, null, {
-            params: {
-                "api_key_private": "pri_1738fd68355c4c1699aa74cb7287900c",
-                "q": "bars in Chapel Street Melbourne",
-                "num": "20",
-                "fast": false
-            }
-        })
-        .then(function(response) {
-            console.log(response.data);
-
-            let retrieve = axios.get(`https://besttime.app/api/v1/venues/progress`, {
-                    params: {
-                        'job_id': response.data.job_id,
-                        'collection_id': response.data.collection_id,
-                        'format': 'raw'
-                    }
-                })
-                .then(function(response) {
-                    console.log(response.data);
-
-                    res.render('search/busy-search.hbs', { layout: 'user-layout', title: 'Bar Search' })
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        })
-        .catch(function(error) {
-            // console.log(error);
-        });
-});
-
 router.get('/bar-search', async(_req, res) => {
 
     res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search' });
-});
-
-router.get('/add-tags', async(_req, res) => {
-    res.render('search/tags.hbs', { layout: 'user-layout', title: 'Add Tags' });
 });
 
 router.post('/bar-search', async(req, res) => {
@@ -60,7 +24,7 @@ router.post('/bar-search', async(req, res) => {
     let input = req.body.bar_name;
     input = input.replace(/ /gi, "%20")
 
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let bucketlist = await users.find({
         username: username
@@ -97,7 +61,7 @@ router.post('/more-bars', async(req, res) => {
     let page_token = req.body.page_token;
     let input = req.body.bar_name;
 
-    let username = "jane-smith";
+    let username = { type: String };
     let users = schemas.user;
     let bucketlist = await users.find({
         username: username
@@ -133,7 +97,7 @@ router.post('/area-search', async(req, res) => {
 
     input = input.replace(/ /gi, "%20")
 
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let bucketlist = await users.find({
         username: username
@@ -157,7 +121,7 @@ router.post('/area-search', async(req, res) => {
         .then(function(response) {
             config = {
                 method: 'get',
-                url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + response.data.candidates[0].geometry.location.lat + '%2C' + response.data.candidates[0].geometry.location.lng + '&radius=' + req.body.area_radius + '&type=bar&fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+                url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + response.data.candidates[0].geometry.location.lat + '%2C' + response.data.candidates[0].geometry.location.lng + '&radius=' + req.body.area_radius + '&type=bar&fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
                 headers: {}
             };
             axios(config)
@@ -175,34 +139,51 @@ router.post('/area-search', async(req, res) => {
 });
 
 router.get('/bar:id', async(req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
-
+    console.log(req.params.id)
     let user = await users.findOne({
         username: username
     }).lean().exec();
 
-    let favourited = await users.find({
+    let favourited = await users.findOne({
         username: username,
-        bucketlist: { $elemMatch: { id: req.params.id } }
+        bars: { $elemmatch: { bar: req.params.id, favourite: true } }
     }).lean().exec();
+    console.log(favourited)
 
-    let bucketlisted = await users.find({
+    let bucketlisted = await users.findOne({
         username: username,
-        bucketlist: { $elemMatch: { id: req.params.id } }
+        bars: { $elemmatch: { bar: req.params.id, bucketlist: true } }
     }).lean().exec();
+    console.log(bucketlisted)
+
+    let fav = false
+    if (favourited.length > 0) {
+        fav = true
+    }
+
+    let buck = false
+    if (bucketlisted.length > 0) {
+        buck = true
+    }
+
 
     let bar_id = req.params.id;
 
     let config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cplace_id%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cplace_id%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
         headers: {}
     };
 
     axios(config)
         .then(function(response) {
-            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, tags: user.tags });
+            // console.log(response.data)
+            // console.log(response.data.result.opening_hours)
+            // console.log(response.data.result.opening_hours.periods)
+            // console.log(response.data.result.geometry.location)
+            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: buck, favourited: fav, tags: user.tags });
         })
         .catch(function(error) {
             console.log(error);
@@ -210,7 +191,7 @@ router.get('/bar:id', async(req, res) => {
 });
 
 router.post('/bar:id/tags', async(req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
 
     let bar_id = req.params.id;
@@ -241,7 +222,7 @@ router.post('/bar:id/tags', async(req, res) => {
 
 router.post('/bar-favourite:bar_id', async(req, res) => {
 
-    let username = "jane-smith";
+    let username = USERNAME;
     let user = schemas.user;
 
     if (typeof req.body.favourite_button !== 'undefined') {
@@ -250,7 +231,11 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
                 favourites: {
                     id: req.params.bar_id,
                     name: req.body.bar_name,
-                    address: req.body.bar_address
+                    address: req.body.bar_address,
+                    price_level: req.body.bar_price_level,
+                    rating: req.body.bar_rating
+                        // hours: req.body.bar_hours,
+                        // location: req.body.bar_location
                 },
                 recent_activity: {
                     id: req.params.bar_id,
@@ -270,7 +255,11 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
                 bucketlist: {
                     id: req.params.bar_id,
                     name: req.body.bar_name,
-                    address: req.body.bar_address
+                    address: req.body.bar_address,
+                    price_level: req.body.bar_price_level,
+                    rating: req.body.bar_rating
+                        // hours: req.body.bar_hours,
+                        // location: req.body.bar_location
                 },
                 recent_activity: {
                     id: req.params.bar_id,
@@ -287,7 +276,7 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
 
 router.post('/bar-visit:bar_id', async(req, res) => {
 
-    let username = "jane-smith";
+    let username = USERNAME;
     let user = schemas.user;
 
 
@@ -307,7 +296,7 @@ router.post('/bar-visit:bar_id', async(req, res) => {
 })
 
 router.get('/favourites-search', async(_req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
 
     let user = await users.findOne({
@@ -317,9 +306,12 @@ router.get('/favourites-search', async(_req, res) => {
 });
 
 router.post('/favourites-search', async(req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
+
+    let e = document.getElementById("price_range");
+    let value = e.value;
 
     let favourites = []
     let tagged = false
