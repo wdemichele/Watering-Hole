@@ -221,6 +221,7 @@ router.get('/bar:id', async(req, res) => {
 
     axios(config)
         .then(function(response) {
+            console.log(response.data.result.opening_hours.periods)
             res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, tags: user.tags });
         })
         .catch(function(error) {
