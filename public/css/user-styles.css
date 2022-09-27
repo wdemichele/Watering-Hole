@@ -914,7 +914,7 @@ table {
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.map_search .search_box{
+.map_search .search_boxs{
     width: 385px;
 }
 .map_set  img,.map_set_price  img,.map_open  img,.may_favourites  img{
@@ -1059,8 +1059,9 @@ table {
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.search_search .search_box{
+.search_search .searchs_box{
     width: 1075px;
+   
 }
 .search_set  img,.search_set_price  img,.search_open  img,.search_favourites  img{
     width: 50px;
