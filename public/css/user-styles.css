@@ -1001,7 +1001,7 @@ table {
    margin-left: 200px;
 }
 
-/* search */
+search
 .search_box{
     display: flex;
     width: 100%;
@@ -1020,17 +1020,32 @@ table {
   
    
 }
-/* .search_left{
-    margin-right: 20px;
-    width: 30%;
+.search_left{
+   margin-left: 50px;
+    width: 70%;
     padding-top: 40px;
     text-align: center;
-} */
-.search_left .search_search,.search_set,.search_set_price,.search_open,.search_favourites{
-    width: 500px;
+}
+.search_search{
+    width: 1200px;
     height: 60px;
     border-radius: 25px;
     background-color: rgb(76,137,159);
+    line-height: 60px;
+    color: white;
+    font-size: 30px;
+    margin-top: 20px;
+    font-weight: 700;
+    display: flex;
+
+
+}
+
+.search_left .search_set,.search_set_price,.search_open,.search_favourites{
+    width: 500px;
+    height: 60px;
+    border-radius: 25px;
+    background-color: rgb(53,83,113);
     line-height: 60px;
     color: white;
     font-size: 30px;
@@ -1045,7 +1060,7 @@ table {
     margin-bottom: 5px;
 }
 .search_search .search_box{
-    width: 385px;
+    width: 1075px;
 }
 .search_set  img,.search_set_price  img,.search_open  img,.search_favourites  img{
     width: 50px;
@@ -1057,6 +1072,13 @@ table {
     width: 430px;
      
 }
+.search_sets{
+    display: flex;
+    margin-bottom: 20px;
+}
+.search_set{
+    margin-right: 200px;
+}
 .search_left .search_set_price{
     background-color: rgb(53,83,113);
 
@@ -1067,12 +1089,14 @@ table {
     
 }
 .search_left .search_open{
-    background-color:rgb(76,137,159)
+    margin: 0 410px 20px;
+
     
 }
 
 .search_left .search_favourites{
-    background-color:rgb(76,137,159)
+    margin: 0 410px 20px;
+
 }
 .search_left  .search_search_tags{
     width: 470px;
