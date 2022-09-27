@@ -1000,3 +1000,123 @@ table {
 .two{
    margin-left: 200px;
 }
+
+/* search */
+.search_box{
+    display: flex;
+    width: 100%;
+ 
+   }
+.search_left{
+    
+  width: 70%;
+  height: 800px;
+  
+}
+
+.search_left h1{
+
+   margin-bottom: 50px;
+  
+   
+}
+/* .search_left{
+    margin-right: 20px;
+    width: 30%;
+    padding-top: 40px;
+    text-align: center;
+} */
+.search_left .search_search,.search_set,.search_set_price,.search_open,.search_favourites{
+    width: 500px;
+    height: 60px;
+    border-radius: 25px;
+    background-color: rgb(76,137,159);
+    line-height: 60px;
+    color: white;
+    font-size: 30px;
+    margin-top: 20px;
+    font-weight: 700;
+    display: flex;
+
+}
+.search_search img{
+    width: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.search_search .search_box{
+    width: 385px;
+}
+.search_set  img,.search_set_price  img,.search_open  img,.search_favourites  img{
+    width: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.search_set  .text_set,.search_set_price  .text_set,.search_open .text_set,.search_favourites .text_set{
+
+    width: 430px;
+     
+}
+.search_left .search_set_price{
+    background-color: rgb(53,83,113);
+
+}
+.search_left .search_set{
+    background-color: rgb(53,83,113);
+
+    
+}
+.search_left .search_open{
+    background-color:rgb(76,137,159)
+    
+}
+
+.search_left .search_favourites{
+    background-color:rgb(76,137,159)
+}
+.search_left  .search_search_tags{
+    width: 470px;
+    height: 220px;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #0e897d;
+    margin-top: 20px;
+    text-align: left;
+    padding-left: 30px;
+    color: whitesmoke;
+    
+}
+.search_search_tags .search_tags{
+    font-weight: 700;
+    font-size: 30px;
+    margin-top: 10px;
+ 
+}
+.search_search_tags .tag_box{
+    display: flex;
+   
+}
+.tag_box div,.roof{
+    margin-top: 30px;
+    width: 33%;
+    font-size: 20px;
+    font-weight: 500;
+    
+}
+.search_search_tags .white_box{
+    display: flex;
+    margin-top: 20px;
+    font-weight: 700;
+    
+}
+.white_box div{
+    height: 40px;
+    width: 120px;
+    border-radius: 30px;
+    background-color: white;
+  
+
+}
+.two{
+   margin-left: 200px;
+}
