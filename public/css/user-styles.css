@@ -875,6 +875,7 @@ table {
  
    }
 .map_left{
+    
   width: 70%;
   height: 800px;
   
@@ -890,6 +891,7 @@ table {
    
 }
 .map_right{
+    margin-right: 20px;
     width: 30%;
     padding-top: 40px;
     text-align: center;
