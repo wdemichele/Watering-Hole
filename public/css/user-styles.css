@@ -1001,7 +1001,7 @@ table {
    margin-left: 200px;
 }
 
-search
+
 .search_box{
     display: flex;
     width: 100%;
@@ -1099,8 +1099,9 @@ search
 
 }
 .search_left  .search_search_tags{
-    width: 470px;
-    height: 220px;
+    margin-left: 365px;
+    width: 600px;
+   
     border-radius: 20px;
     padding: 10px;
     background-color: #0e897d;
@@ -1120,11 +1121,19 @@ search
     display: flex;
    
 }
-.tag_box div,.roof{
+.search_search_tags .tag_box div{
+    background-color: whitesmoke;
+    height: 40px;
+    width: 130px;
     margin-top: 30px;
-    width: 33%;
+    margin-right: 13px;
     font-size: 20px;
-    font-weight: 500;
+
+    color: #000;
+    line-height: 40px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 30px;
     
 }
 .search_search_tags .white_box{
@@ -1133,14 +1142,48 @@ search
     font-weight: 700;
     
 }
-.white_box div{
+.search_search_tags  .white_box div{
     height: 40px;
-    width: 120px;
+    width: 130px;
     border-radius: 30px;
-    background-color: white;
-  
+    font-size: 20px;
+    color: #000;
+    line-height: 40px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 30px;
+  margin-bottom: 10px;
 
 }
-.two{
-   margin-left: 200px;
+.search_search_tags  .white_box .one{
+   background-color: rgb(234,213,191);
+}
+.search_search_tags  .white_box .two{
+   margin-left: 330px;
+   background-color: rgb(76,137,159);
+}
+.button_box{
+    display: flex;
+}
+.button_box div{
+
+    width: 200px;
+   height: 60px;
+    border-radius: 20px;
+    line-height: 60px;
+    font-size: 26px;
+    background-color: #0e897d;
+    margin-top: 30px;
+    text-align: center;
+   font-weight: 700;
+    color: whitesmoke;
+}
+.searchs_button{
+    margin-left: 800px;
+}
+.search_right{
+    width: 30%;
+    margin-top: 80px;
+    
+    background-color:rgb(234,213,191);
 }
