@@ -25,6 +25,10 @@ router.get('/about-us', (_req, res) => {
 
     res.render('about-page.hbs', { layout: 'guest-layout', title: 'About Us' });
 });
+router.get('/maps', (_req, res) => {
+
+    res.render('map-page.hbs', { layout: 'guest-layout', title: 'map' });
+});
 
 router.get('/manual', (_req, res) => {
 
