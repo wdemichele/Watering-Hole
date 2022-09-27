@@ -345,4 +345,57 @@ table {
 
 
    /* map style */
+   
+   .map_box{
+    display: flex;
+    width: 100%;
+ 
+   }
+.map_left{
+  width: 70%;
+
+}
+.map_left img{
+    height: 80%;
+}
+.map_left h1{
+   color:#f19b90 ;
+   margin-left:-460px ;
+   margin-bottom: 50px;
   
+   
+}
+.map_right{
+   
+    width: 30%;
+    padding-top: 40px;
+    text-align: center;
+}
+.map_right .map_search,.map_set,.map_set_price,.map_open,.may_favourites{
+    width: 500px;
+    height: 60px;
+    border-radius: 25px;
+    background-color: rgb(76,137,159);
+    line-height: 60px;
+    color: white;
+    font-size: 30px;
+    margin-top: 20px;
+    font-weight: 700;
+
+}
+.map_right .map_set_price{
+    background-color: rgb(53,83,113);
+
+}
+.map_right .map_set{
+    background-color: rgb(53,83,113);
+
+    
+}
+.map_right .map_open{
+    background-color:rgb(76,137,159)
+    
+}
+.map_right .may_favourites{
+    background-color:rgb(76,137,159)
+}
