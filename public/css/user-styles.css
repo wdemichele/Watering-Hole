@@ -884,18 +884,17 @@ table {
 }
 .map_left h1{
    color:#f19b90 ;
-   margin-left:-460px ;
+   margin-left:-500px ;
    margin-bottom: 50px;
   
    
 }
 .map_right{
-   
     width: 30%;
     padding-top: 40px;
     text-align: center;
 }
-.map_right .search_button,.map_search,.map_set,.map_set_price,.map_open,.may_favourites{
+.map_right .map_search,.map_set,.map_set_price,.map_open,.may_favourites{
     width: 500px;
     height: 60px;
     border-radius: 25px;
@@ -905,7 +904,26 @@ table {
     font-size: 30px;
     margin-top: 20px;
     font-weight: 700;
+    display: flex;
 
+}
+.map_search img{
+    width: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.map_search .search_box{
+    width: 385px;
+}
+.map_set  img,.map_set_price  img,.map_open  img,.may_favourites  img{
+    width: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.map_set  .text_set,.map_set_price  .text_set,.map_open .text_set,.may_favourites .text_set{
+
+    width: 430px;
+     
 }
 .map_right .map_set_price{
     background-color: rgb(53,83,113);
@@ -921,7 +939,15 @@ table {
     
 }
 .search_button{
-    background-color: rgb(53,83,113)!important ;
+    background-color: rgb(53,83,113);
+    width: 500px;
+    height: 60px;
+    border-radius: 25px;
+    line-height: 60px;
+    color: white;
+    font-size: 30px;
+    margin-top: 20px;
+    font-weight: 700;
 }
 .map_right .may_favourites{
     background-color:rgb(76,137,159)
@@ -958,6 +984,7 @@ table {
 .map_search_tags .white_box{
     display: flex;
     margin-top: 20px;
+    font-weight: 700;
     
 }
 .white_box div{
@@ -965,7 +992,6 @@ table {
     width: 120px;
     border-radius: 30px;
     background-color: white;
-
   
 
 }
