@@ -353,10 +353,11 @@ table {
    }
 .map_left{
   width: 70%;
+  height: 100%;
 
 }
 .map_left img{
-    height: 80%;
+    height: 100%;
 }
 .map_left h1{
    color:#f19b90 ;
@@ -371,7 +372,7 @@ table {
     padding-top: 40px;
     text-align: center;
 }
-.map_right .map_search,.map_set,.map_set_price,.map_open,.may_favourites{
+.map_right .search_button,.map_search,.map_set,.map_set_price,.map_open,.may_favourites{
     width: 500px;
     height: 60px;
     border-radius: 25px;
@@ -396,6 +397,54 @@ table {
     background-color:rgb(76,137,159)
     
 }
+.search_button{
+    background-color: rgb(53,83,113);
+}
 .map_right .may_favourites{
     background-color:rgb(76,137,159)
+}
+.map_right .map_search_tags{
+    width: 470px;
+    height: 220px;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #0e897d;
+    margin-top: 20px;
+    text-align: left;
+    padding-left: 30px;
+    color: whitesmoke;
+    
+}
+.map_search_tags .search_tags{
+    font-weight: 700;
+    font-size: 30px;
+    margin-top: 10px;
+ 
+}
+.map_search_tags .tag_box{
+    display: flex;
+   
+}
+.tag_box div,.roof{
+    margin-top: 30px;
+    width: 33%;
+    font-size: 20px;
+    font-weight: 500;
+    
+}
+.map_search_tags .white_box{
+    display: flex;
+    margin-top: 20px;
+    
+}
+.white_box div{
+    height: 40px;
+    width: 100px;
+    border-radius: 30px;
+    background-color: white;
+  
+
+}
+.two{
+   margin-left: 200px;
 }
