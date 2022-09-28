@@ -229,7 +229,6 @@ input:focus {
 h1 {
     font-weight: 600;
     font-size: 52px;
-    color: var(--color-primary);
     display: block;
     text-align: center;
     font-family: var(--font-family);

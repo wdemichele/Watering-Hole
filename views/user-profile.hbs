@@ -1,84 +1,69 @@
-<div class="grid-wrapper">
-    <div class="box-1">
-        <div>
-            <img style="width: 200px; height: auto;" src="\assets\nav\abstract-user-flat-4.svg">
-            <h1>{{user.name}}</h1>
-            <h2>@{{user.username}}</h2>
+<div>
+    <img style="width: 200px; height: auto;" src="\assets\nav\abstract-user-flat-4.svg">
+    <h1>{{user.name}}</h1>
+    <h2>@{{user.username}}</h2>
 
-        <h1>Friends</h1>
-        <a href="/user{{user.username}}/friends"><h1>{{array_length user.friends}}</h1></a>
-    </div>
-
-    <div>
-        <h2>Recently Visited:</h2>
-        <div class="flex-container databox secondary">
-            {{#each user.recent_bars}}
-                <div class="databox tertiary">
-                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
-                </div>
-            {{/each}}
-        </div>
-    </div>
-    <div class="box-2-label">    
-        <h1>Recently Visited</h1>
-    </div>
-    <div class="box-2">
+    <h1>Friends</h1>
+    <a href="/user{{user.username}}/friends"><h1>{{array_length user.friends}}</h1></a>
+</div>
+<div>
+    <h2>Recently Visited:</h2>
+    <div class="flex-container databox secondary">
         {{#each user.recent_bars}}
-            <div class="sub-box-2">
+            <div class="databox tertiary">
                 <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
             </div>
         {{/each}}
     </div>
-    <div class="box-3">
-         <div class="databox primary">
-            <h3>Search Tags</h3>
-            
-            <div class="databox tertiary">
-                <table>
-                    <tr>
-                        <th><button class="profile-btn" onclick="isGlobal(true)">Global</button></th>
-                        <th><button class="profile-btn" onclick="isGlobal(false)">My Tags</button></th>
-                    </tr>
-                </table>
-            <div id="global" name="global" class="" style="display: block;">
-                <div class="search_search_tags">
-                <div class="search_tags">Seach Tags</div>
-                <div class="tag_box">
-                        <div>Karaoke</div>
-                        <div>Nightlife</div>
-                        <div>Irish Pub</div>
-                </div>
-                </div>
-            </div>
-            <div id="user" name="user" class="flex-container" style="display: none;">
-
+</div>
+<div class="databox primary">
+    <h3>Search Tags</h3>
+    
+    <div class="databox tertiary">
+        <table>
+            <tr>
+                <th><button class="profile-btn" onclick="isGlobal(true)">Global</button></th>
+                <th><button class="profile-btn" onclick="isGlobal(false)">My Tags</button></th>
+            </tr>
+        </table>
+        <div id="global" name="global" class="" style="display: block;">
             <div class="search_search_tags">
-                <div class="search_tags">Seach Tags</div>
+                <h2>Search Tags</h2>
                 <div class="tag_box">
-                    {{#each user.tags}}
-                        <div>{{this.tag}}</div>
-                    {{/each}}
+                    <div>Karaoke</div>
+                    <div>Nightlife</div>
+                    <div>Irish Pub</div>
                 </div>
-              
-                <div class="white_box">
-                    <div class="one"><button class="secondary">Edit Tags</button></div>
-                    
-                    <div class="two"><button onclick="addTag()" class="primary right">Add Tags+</button></div>
-                </div>
-            </div>
-            
-            </div>
-            </div>
-            <div id="addTag" style="display: none;" class="databox tertiary">
-                <form action="/tags" method="post">
-                    <h3>Add Search Tags</h3>
-                    <input id="tag_name" name="tag_name">
-                    <button class="secondary left" type="button">Edit Tags</button>
-                    <button class="primary right" type="submit">Add Tags</button>
-                    <br><br>
-                </form>
             </div>
         </div>
+    <div id="user" name="user" class="flex-container" style="display: none;">
+
+    <div class="search_search_tags">
+        <div class="search_tags">Seach Tags</div>
+        <div class="tag_box">
+            {{#each user.tags}}
+                <div>{{this.tag}}</div>
+            {{/each}}
+        </div>
+        
+        <div class="white_box">
+            <div class="one"><button class="secondary">Edit Tags</button></div>
+            
+            <div class="two"><button onclick="addTag(true)" class="primary right">Add Tags+</button></div>
+        </div>
+    </div>
+    
+    </div>
+    </div>
+    <div id="addTag" style="display: none;" class="databox tertiary">
+        <form action="/tags" method="post">
+            <img class="right" style="height: 50px; width: auto; cursor: pointer;" src="assets/cross.png" onclick="addTag(false)">
+            <h3>Add Search Tags</h3>
+            <input id="tag_name" name="tag_name">
+            <button class="secondary left" type="button">Edit Tags</button>
+            <button class="primary right" type="submit">Add Tags</button>
+            <br><br>
+        </form>
     </div>
 </div>
 
@@ -95,8 +80,12 @@
         }
     }
 
-    function addTag(){
+    function addTag(bool){
         var global = document.getElementById("addTag");
-        global.style.display = "block";
+        if (bool) {
+            global.style.display = "block";
+        } else {
+            global.style.display = "none";
+        }
     }
 </script>
