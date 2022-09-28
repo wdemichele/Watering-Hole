@@ -1,17 +1,35 @@
-<div class="databox secondary">
-    <img style="width: 300px; height: auto;" src="\assets\nav\abstract-user-flat-4.svg">
-    <fieldset>
-        <legend>General</legend>
-        <label for="username">Username</label><br>
-        <input id="username" name="username" value="{{user.username}}" disabled><br>
-        <label for="password">Password</label><br>
-        <input id="password" name="password" value="**************" disabled><br>
-    </fieldset>
-    <fieldset>
-        <legend>Social</legend>
-    </fieldset>
-    <fieldset>
-        <legend>Accessibility</legend>
-    </fieldset>
+<div class="settings-container">
+    <span class="settings-left">
+        <img style="width: 300px;" src="\assets\nav\abstract-user-flat-4.svg">
+    </span>
+    <span class="settings-right">
+        <fieldset class="settings-fieldset">
+            <legend>General</legend>
+            <div class="settings-field">
+                <label for="name">Name</label>
+                <input id="name" name="name" value="{{user.name}}" disabled>
+                <label for="username">Username</label>
+                <input id="username" name="username" value="{{user.username}}" disabled>
+                <label type="email" for="email">Email</label>
+                <input id="email" name="email" value="[user email]" disabled>
+                <label for="password">Password</label>
+                <input id="password" name="password" value="**************" disabled>
+            </div>
+        </fieldset>
+        <fieldset class="settings-fieldset">
+            <div class="settings-field">
+                <label for="bio">Bio</label>
+                <input id="bio" name="bio" value="[Add bio]" disabled>
 
+                {{!<h2>Friend Tracking:</h2>
+                <button class="settings-button">Red Button</button> }}
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Accessibility</legend>
+        </fieldset>
+    </span>
 </div>
+
+
+
