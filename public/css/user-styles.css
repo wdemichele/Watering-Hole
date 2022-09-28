@@ -383,7 +383,7 @@ table {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 5%;
-    width: 40%; 
+    width: 40%;
 }
 
 .login-text-field {
@@ -427,7 +427,6 @@ table {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
 }
 
 .settings-left {
@@ -440,7 +439,6 @@ table {
     margin: 5% 10% 0 10%;
     background-color: var(--color-quat);
     text-align: center;
-    
 }
 
 .settings-field {
@@ -489,7 +487,7 @@ table {
     display: grid;
 }
 
-.box-2-label h1{
+.box-2-label h1 {
     color: white;
 }
 
@@ -500,7 +498,6 @@ table {
     border-color: #000;
     width: 200px;
     height: 200px
-    
 }
 
 .box-3 {
@@ -520,7 +517,9 @@ table {
     color: white;
 }
 
+
 /* map css */
+
 html,
 body {
     font-family: 'Montserrat', sans-serif;
@@ -867,81 +866,92 @@ table {
 }
 
 
-   /* map style */
-   
-   .map_box{
+/* map style */
+
+.map_box {
     display: flex;
     width: 100%;
- 
-   }
-.map_left{
-    
-  width: 70%;
-  height: 800px;
-  
 }
-.map_left img{
+
+.map_left {
+    width: 70%;
+    height: 800px;
+}
+
+.map_left img {
     height: 630px;
 }
-.map_left h1{
-   color:#f19b90 ;
-   margin-left:-500px ;
-   margin-bottom: 50px;
-  
-   
+
+.map_left h1 {
+    color: #f19b90;
+    margin-left: -500px;
+    margin-bottom: 50px;
 }
-.map_right{
+
+.map_right {
     margin-right: 20px;
     width: 30%;
     padding-top: 40px;
     text-align: center;
 }
-.map_right .map_search,.map_set,.map_set_price,.map_open,.may_favourites{
+
+.map_right .map_search,
+.map_set,
+.map_set_price,
+.map_open,
+.may_favourites {
     width: 500px;
     height: 60px;
     border-radius: 25px;
-    background-color: rgb(76,137,159);
+    background-color: rgb(76, 137, 159);
     line-height: 60px;
     color: white;
     font-size: 30px;
     margin-top: 20px;
     font-weight: 700;
     display: flex;
-
 }
-.map_search img{
+
+.map_search img {
     width: 50px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.map_search .search_boxs{
+
+.map_search .search_boxs {
     width: 385px;
 }
-.map_set  img,.map_set_price  img,.map_open  img,.may_favourites  img{
+
+.map_set img,
+.map_set_price img,
+.map_open img,
+.may_favourites img {
     width: 50px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.map_set  .text_set,.map_set_price  .text_set,.map_open .text_set,.may_favourites .text_set{
 
+.map_set .text_set,
+.map_set_price .text_set,
+.map_open .text_set,
+.may_favourites .text_set {
     width: 430px;
-     
 }
-.map_right .map_set_price{
-    background-color: rgb(53,83,113);
 
+.map_right .map_set_price {
+    background-color: rgb(53, 83, 113);
 }
-.map_right .map_set{
-    background-color: rgb(53,83,113);
 
-    
+.map_right .map_set {
+    background-color: rgb(53, 83, 113);
 }
-.map_right .map_open{
-    background-color:rgb(76,137,159)
-    
+
+.map_right .map_open {
+    background-color: rgb(76, 137, 159)
 }
-.search_button{
-    background-color: rgb(53,83,113);
+
+.search_button {
+    background-color: rgb(53, 83, 113);
     width: 500px;
     height: 60px;
     border-radius: 25px;
@@ -951,10 +961,12 @@ table {
     margin-top: 20px;
     font-weight: 700;
 }
-.map_right .may_favourites{
-    background-color:rgb(76,137,159)
+
+.map_right .may_favourites {
+    background-color: rgb(76, 137, 159)
 }
-.map_right .map_search_tags{
+
+.map_right .map_search_tags {
     width: 470px;
     height: 220px;
     border-radius: 20px;
@@ -964,145 +976,147 @@ table {
     text-align: left;
     padding-left: 30px;
     color: whitesmoke;
-    
 }
-.map_search_tags .search_tags{
+
+.map_search_tags .search_tags {
     font-weight: 700;
     font-size: 30px;
     margin-top: 10px;
- 
 }
-.map_search_tags .tag_box{
+
+.map_search_tags .tag_box {
     display: flex;
-   
 }
-.tag_box div,.roof{
+
+.tag_box div,
+.roof {
     margin-top: 30px;
     width: 33%;
     font-size: 20px;
     font-weight: 500;
-    
 }
-.map_search_tags .white_box{
+
+.map_search_tags .white_box {
     display: flex;
     margin-top: 20px;
     font-weight: 700;
-    
 }
-.white_box div{
+
+.white_box div {
     height: 40px;
     width: 120px;
     border-radius: 30px;
     background-color: white;
-  
-
-}
-.two{
-   margin-left: 200px;
 }
 
+.two {
+    margin-left: 200px;
+}
 
-.search_box{
+.search_box {
     display: flex;
     width: 100%;
- 
-   }
-.search_left{
-    
-  width: 70%;
-  height: 800px;
-  
 }
 
-.search_left h1{
-
-   margin-bottom: 50px;
-  
-   
+.search_left {
+    width: 70%;
+    height: 800px;
 }
-.search_left{
-   margin-left: 50px;
+
+.search_left h1 {
+    margin-bottom: 50px;
+}
+
+.search_left {
+    margin-left: 50px;
     width: 70%;
     padding-top: 40px;
     text-align: center;
 }
-.search_search{
+
+.search_search {
     width: 1200px;
     height: 60px;
     border-radius: 25px;
-    background-color: rgb(76,137,159);
+    background-color: rgb(76, 137, 159);
     line-height: 60px;
     color: white;
     font-size: 30px;
     margin-top: 20px;
     font-weight: 700;
     display: flex;
-
-
 }
 
-.search_left .search_set,.search_set_price,.search_open,.search_favourites{
+.search_left .search_set,
+.search_set_price,
+.search_open,
+.search_favourites {
     width: 500px;
     height: 60px;
     border-radius: 25px;
-    background-color: rgb(53,83,113);
+    background-color: rgb(53, 83, 113);
     line-height: 60px;
     color: white;
     font-size: 30px;
     margin-top: 20px;
     font-weight: 700;
     display: flex;
-
 }
-.search_search img{
+
+.search_search img {
     width: 50px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.search_search .searchs_box{
+
+.search_search .searchs_box {
     width: 1075px;
-   
 }
-.search_set  img,.search_set_price  img,.search_open  img,.search_favourites  img{
+
+.search_set img,
+.search_set_price img,
+.search_open img,
+.search_favourites img {
     width: 50px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.search_set  .text_set,.search_set_price  .text_set,.search_open .text_set,.search_favourites .text_set{
 
+.search_set .text_set,
+.search_set_price .text_set,
+.search_open .text_set,
+.search_favourites .text_set {
     width: 430px;
-     
 }
-.search_sets{
+
+.search_sets {
     display: flex;
     margin-bottom: 20px;
 }
-.search_set{
+
+.search_set {
     margin-right: 200px;
 }
-.search_left .search_set_price{
-    background-color: rgb(53,83,113);
 
+.search_left .search_set_price {
+    background-color: rgb(53, 83, 113);
 }
-.search_left .search_set{
-    background-color: rgb(53,83,113);
 
-    
+.search_left .search_set {
+    background-color: rgb(53, 83, 113);
 }
-.search_left .search_open{
+
+.search_left .search_open {
     margin: 0 410px 20px;
-
-    
 }
 
-.search_left .search_favourites{
+.search_left .search_favourites {
     margin: 0 410px 20px;
-
 }
-.search_left  .search_search_tags{
+
+.search_left .search_search_tags {
     margin-left: 365px;
     width: 600px;
-   
     border-radius: 20px;
     padding: 10px;
     background-color: #0e897d;
@@ -1110,40 +1124,39 @@ table {
     text-align: left;
     padding-left: 30px;
     color: whitesmoke;
-    
 }
-.search_search_tags .search_tags{
+
+.search_search_tags .search_tags {
     font-weight: 700;
     font-size: 30px;
     margin-top: 10px;
- 
 }
-.search_search_tags .tag_box{
+
+.search_search_tags .tag_box {
     display: flex;
-   
 }
-.search_search_tags .tag_box div{
+
+.search_search_tags .tag_box div {
     background-color: whitesmoke;
     height: 40px;
     width: 130px;
     margin-top: 30px;
     margin-right: 13px;
     font-size: 20px;
-
     color: #000;
     line-height: 40px;
     text-align: center;
     font-weight: 600;
     border-radius: 30px;
-    
 }
-.search_search_tags .white_box{
+
+.search_search_tags .white_box {
     display: flex;
     margin-top: 20px;
     font-weight: 700;
-    
 }
-.search_search_tags  .white_box div{
+
+.search_search_tags .white_box div {
     height: 40px;
     width: 130px;
     border-radius: 30px;
@@ -1153,71 +1166,80 @@ table {
     text-align: center;
     font-weight: 600;
     border-radius: 30px;
-  margin-bottom: 10px;
+    margin-bottom: 10px;
+}
 
+.search_search_tags .white_box .one {
+    background-color: rgb(234, 213, 191);
 }
-.search_search_tags  .white_box .one{
-   background-color: rgb(234,213,191);
+
+.search_search_tags .white_box .two {
+    margin-left: 330px;
+    background-color: rgb(76, 137, 159);
 }
-.search_search_tags  .white_box .two{
-   margin-left: 330px;
-   background-color: rgb(76,137,159);
-}
-.button_box{
+
+.button_box {
     display: flex;
 }
-.button_box div{
 
+.button_box div {
     width: 200px;
-   height: 60px;
+    height: 60px;
     border-radius: 20px;
     line-height: 60px;
     font-size: 26px;
     background-color: #0e897d;
     margin-top: 30px;
     text-align: center;
-   font-weight: 700;
+    font-weight: 700;
     color: whitesmoke;
 }
-.searchs_button{
+
+.searchs_button {
     margin-left: 800px;
 }
-.search_right{
+
+.search_right {
     margin-right: 20px;
     width: 30%;
     margin-top: 80px;
-    background-color:rgb(234,213,191);
+    background-color: rgb(234, 213, 191);
 }
-.search_right .h1{
+
+.search_right .h1 {
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
     font-size: 45px;
     font-weight: 700;
 }
+
 .message_box {
     display: flex;
-    margin: 0 auto  17px auto;
+    margin: 0 auto 17px auto;
     width: 450px;
-   
 }
-.message_box .message_image img{
+
+.message_box .message_image img {
     width: 120px;
     height: 120px;
 }
-.message_box  .message_text{
+
+.message_box .message_text {
     margin-top: 10px;
     width: 300px;
     margin-left: 20px;
-
 }
-.message_text .message_name{
+
+.message_text .message_name {
     font-size: 20px;
 }
-.message_text .message_time{
+
+.message_text .message_time {
     font-size: 14px;
     font-size: 400;
 }
-.message_text .message_i{
+
+.message_text .message_i {
     font-size: 8px;
 }

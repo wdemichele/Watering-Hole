@@ -75,7 +75,7 @@ router.post('/tags', async(req, res) => {
         $push: { tags: { tag: req.body.tag_name, bars: [] } }
     }).lean().exec();
 
-    res.redirect('/tags');
+    res.redirect('/user');
 });
 
 module.exports = router;

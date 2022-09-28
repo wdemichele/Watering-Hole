@@ -31,17 +31,35 @@
                     </tr>
                 </table>
             <div id="global" name="global" class="" style="display: block;">
-                <div class="databox primary card"><h2 style="color: white;">Karaoke</h2></div>
-                <div class="databox primary card"><h2 style="color: white;">Nightlife</h2></div>
-                <div class="databox primary card"><h2 style="color: white;">Irish Pub</h2></div>
+                <div class="search_search_tags">
+                <div class="search_tags">Seach Tags</div>
+                <div class="tag_box">
+                        <div>Karaoke</div>
+                        <div>Nightlife</div>
+                        <div>Irish Pub</div>
+                </div>
+                </div>
             </div>
             <div id="user" name="user" class="flex-container" style="display: none;">
-            {{#each user.tags}}
-                <div class="databox primary card"><h2 style="color: white;">{{this.tag}}</h2></div>
-            {{/each}}
+
+            <div class="search_search_tags">
+                <div class="search_tags">Seach Tags</div>
+                <div class="tag_box">
+                    {{#each user.tags}}
+                        <div>{{this.tag}}</div>
+                    {{/each}}
+                </div>
+              
+                <div class="white_box">
+                    <div class="one"><button class="secondary">Edit Tags</button></div>
+                    
+                    <div class="two"><button onclick="addTag()" class="primary right">Add Tags+</button></div>
+                </div>
+            </div>
+            
             </div>
             </div>
-            <div class="databox tertiary">
+            <div id="addTag" style="display: none;" class="databox tertiary">
                 <form action="/tags" method="post">
                     <h3>Add Search Tags</h3>
                     <input id="tag_name" name="tag_name">
@@ -65,5 +83,10 @@
             user.style.display = "block";
             global.style.display = "none";
         }
+    }
+
+    function addTag(){
+        var global = document.getElementById("addTag");
+        global.style.display = "block";
     }
 </script>
