@@ -1,43 +1,5 @@
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0&appId=575053360778510&autoLogAppEvents=1" nonce="5GGLWKbn"></script>
-<img src="/assets/logo.jpg" class="center">
-<div style="width: 1500px;" class="databox secondary">
-
-
-<h1>LOGIN</h1><br><br><br>
-<label for="username">Username</label>
-<input id="username" name="username"><br><br><br><br>
-<label for="password">Password</label><br>
-<input id="password" name="password"><br><br><br><br><br><br>
-<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
-<br><br>
-<button class="tertiary" type="reset">Cancel</button>
-<a href="/home"><button class="primary right">Login</button></a><br><br>
-</div>
-
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '575053360778510',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v14.0'
-    });
-      
-    FB.AppEvents.logPageView();   
-      
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
 <img style="width: 40%;" src="/assets/logo.jpg" class="center">
-<div class="login secondary">
+<div class="login accent">
     <h1 class="login-title">Login</h1>
     <div class="login-text-field">
         <label for="username">Username</label>
@@ -46,6 +8,6 @@
         <input class="input-field" id="password" name="password">
         <a class="forgot-pass" href="#"><label for="password">Forgot Password?</label></a><br><br>
         <button class="tertiary login-btn" type="reset">Cancel</button>
-        <a href="/"><button class="secondary login-btn">Login</button></a>
+        <a href="/home"><button class="primary login-btn">Login</button></a>
     </div>
 </div>

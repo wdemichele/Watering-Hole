@@ -1,18 +1,60 @@
 <div class="databox secondary">
 <h1>Bar Search</h1>
-<form action="/search/bar-search" method="post">
-    <h2>Query Search</h2>
-    <label for="bar_name">Enter your Bar Search text </label><br>
-    <input id="bar_name" name="bar_name" placeholder="e.g. Cocktail bar in Melbourne"><br>
-    <button class="primary" type="submit">Search</button><br><br><br><br>
-</form>
-<form action="/search/area-search" method="post">
-    <h2>Nearby Search</h2>
-    <label for="area_name">Enter the area to search </label><br>
-    <input id="area_name" name="area_name" placeholder="e.g. Fitzroy Victoria"><br>
-    <label for="area_radius">Enter the radius of the search (metres)</label><br>
-    <input id="area_radius" name="area_radius" placeholder="e.g 2000"><br>
-    <button class="primary" type="submit">Search</button>
-</form>
-
+<table>
+    <tr>
+        <th><button id="query-btn" class="primary" onclick="isQuery(true)">Query</button></th>
+        <th><button id="area-btn" class="tertiary" onclick="isQuery(false)">Area</button></th>
+    </tr>
+</table>
+<div id="query">
+    <form action="/search/bar-search" method="post">
+        <h2>Query Search</h2>
+        <label for="bar_name">Enter your Bar Search text </label><br>
+        <input id="bar_name" name="bar_name" placeholder="e.g. Cocktail bar in Melbourne"><br>
+        <button class="primary right" type="submit">Search</button><br><br><br><br>
+    </form>
 </div>
+<div id="area" style="display: none;">
+    <form action="/search/area-search" method="post">
+        <h2>Nearby Search</h2>
+        <label for="area_name">Enter the area to search </label><br>
+        <input id="area_name" name="area_name" placeholder="e.g. Fitzroy Victoria"><br>
+        <label for="area_radius">Enter the radius of the search (metres)</label><br>
+        <input id="area_radius" name="area_radius" placeholder="e.g 2000"><br>
+        <button class="primary right" type="submit">Search</button>
+    </form>
+</div>
+</div>
+<script>
+    function isQuery(bool){
+        var query = document.getElementById("query");
+        var area = document.getElementById("area");
+        var query_btn = document.getElementById("query-btn");
+        var area_btn = document.getElementById("area-btn");
+        if (bool == true) {
+            query.style.display = "block";
+            query_btn.classList.add('primary');
+            if ( query_btn.classList.contains('tertiary') ){
+                query_btn.classList.remove('tertiary');
+            }
+
+            area.style.display = "none";
+            area_btn.classList.add('tertiary');
+            if ( area_btn.classList.contains('primary') ){
+                area_btn.classList.remove('primary');
+            }
+        } else {
+            area.style.display = "block";
+            area_btn.classList.add('primary');
+            if ( area_btn.classList.contains('tertiary') ){
+                area_btn.classList.remove('tertiary');
+            }
+
+            query.style.display = "none";
+            query_btn.classList.add('tertiary');
+            if ( query_btn.classList.contains('primary') ){
+                query_btn.classList.remove('primary');
+            }
+        }
+    }
+</script>
