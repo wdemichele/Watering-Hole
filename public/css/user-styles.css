@@ -1284,6 +1284,11 @@ table {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    /* width: 100%; */
+    /* height: 230px; */
+}
+
+.home-bar {
     width: 100%;
     height: 230px;
 }
@@ -1308,4 +1313,55 @@ table {
     height: 13px;
     width: 13px;
     padding: 0
+}
+
+input[type=text] {
+    width: 800px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+
+.friend-container {
+    border: 2px solid #ccc;
+    background-color: #eee;
+    color: #000;
+    border-radius: 5px;
+    padding: 16px;
+    margin: 16px 0
+}
+
+.friend-container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.friend-container img {
+    float: left;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+@media (max-width: 500px) {
+    .friend-container {
+        text-align: center;
+    }
+    .friend-container img {
+        margin: auto;
+        float: none;
+        display: block;
+    }
 }

@@ -1,6 +1,6 @@
 <div class="center" style="width: 90%;">
 <div class="w3-bar w3-black">
-    <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'query')">Query Search</button>
+    <button class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'query')">Query Search</button>
     <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'area')">Area Search</button>
   </div>
 <div id="query" class="w3-container w3-border city secondary">
@@ -18,7 +18,7 @@
         <input id="area_name" name="area_name" placeholder="e.g. Fitzroy Victoria"><br>
         <label for="area_radius">Enter the radius of the search (metres)</label><br>
         <input id="area_radius" name="area_radius" placeholder="e.g 2000"><br>
-        <button class="primary right" type="submit">Search</button>
+        <button class="primary right" type="submit">Search</button><br><br><br><br>
     </form>
 </div>
 </div>
@@ -62,9 +62,9 @@
         }
         tablinks = document.getElementsByClassName("tablink");
         for (i = 0; i < x.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            tablinks[i].className = tablinks[i].className.replace(" w3-teal", "");
         }
         document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " w3-red";
+        evt.currentTarget.className += " w3-teal";
         }
 </script>
