@@ -24,20 +24,6 @@ router.post('/bar-search', async(req, res) => {
     let input = req.body.bar_name;
     input = input.replace(/ /gi, "%20")
 
-    let username = USERNAME;
-    let users = schemas.user;
-    let bucketlist = await users.find({
-        username: username
-    }, {
-        bucketlist: { id: 1 }
-    }).lean().exec();
-
-    let favourites = await users.find({
-        username: username
-    }, {
-        favourites: { id: 1 }
-    }).lean().exec();
-
     let config = {
         method: 'get',
         // url: 'https://maps.googleapis.com/maps/api/place/textSearch/json?query=' + input + '&fields=formatted_address%2Cplace_id%2Cname%2Crating%2Copening_hours%2Cgeometry%2cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
@@ -48,7 +34,7 @@ router.post('/bar-search', async(req, res) => {
     axios(config)
         .then(function(response) {
             console.log(response.data)
-            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token, bucketlist: bucketlist[0].bucketlist, favourites: favourites[0].favourites });
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token });
 
         })
         .catch(function(error) {
@@ -59,21 +45,6 @@ router.post('/bar-search', async(req, res) => {
 router.post('/more-bars', async(req, res) => {
 
     let page_token = req.body.page_token;
-    let input = req.body.bar_name;
-
-    let username = { type: String };
-    let users = schemas.user;
-    let bucketlist = await users.find({
-        username: username
-    }, {
-        bucketlist: { id: 1 }
-    }).lean().exec();
-
-    let favourites = await users.find({
-        username: username
-    }, {
-        favourites: { id: 1 }
-    }).lean().exec();
 
     let config = {
         method: 'get',
@@ -83,7 +54,7 @@ router.post('/more-bars', async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token, bucketlist: bucketlist[0].bucketlist, favourites: favourites[0].favourites });
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token });
 
         })
         .catch(function(error) {
@@ -96,20 +67,6 @@ router.post('/area-search', async(req, res) => {
     let input = req.body.area_name;
 
     input = input.replace(/ /gi, "%20")
-
-    let username = USERNAME;
-    let users = schemas.user;
-    let bucketlist = await users.find({
-        username: username
-    }, {
-        bucketlist: { id: 1 }
-    }).lean().exec();
-
-    let favourites = await users.find({
-        username: username
-    }, {
-        favourites: { id: 1 }
-    }).lean().exec();
 
     let config = {
         method: 'get',
@@ -126,7 +83,7 @@ router.post('/area-search', async(req, res) => {
             };
             axios(config)
                 .then(function(response) {
-                    res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name, query: "bars%20near" + input, page_token: response.data.next_page_token, bucketlist: bucketlist[0].bucketlist, favourites: favourites[0].favourites });
+                    res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name, query: "bars%20near" + input, page_token: response.data.next_page_token });
 
                 })
                 .catch(function(error) {
@@ -141,33 +98,9 @@ router.post('/area-search', async(req, res) => {
 router.get('/bar:id', async(req, res) => {
     let username = USERNAME;
     let users = schemas.user;
-    console.log(req.params.id)
     let user = await users.findOne({
         username: username
     }).lean().exec();
-
-    let favourited = await users.findOne({
-        username: username,
-        bars: { $elemmatch: { bar: req.params.id, favourite: true } }
-    }).lean().exec();
-    console.log(favourited)
-
-    let bucketlisted = await users.findOne({
-        username: username,
-        bars: { $elemmatch: { bar: req.params.id, bucketlist: true } }
-    }).lean().exec();
-    console.log(bucketlisted)
-
-    let fav = false
-    if (favourited.length > 0) {
-        fav = true
-    }
-
-    let buck = false
-    if (bucketlisted.length > 0) {
-        buck = true
-    }
-
 
     let bar_id = req.params.id;
 
@@ -183,7 +116,7 @@ router.get('/bar:id', async(req, res) => {
             // console.log(response.data.result.opening_hours)
             // console.log(response.data.result.opening_hours.periods)
             // console.log(response.data.result.geometry.location)
-            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: buck, favourited: fav, tags: user.tags });
+            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: false, favourited: false, tags: user.tags });
         })
         .catch(function(error) {
             console.log(error);
@@ -191,53 +124,69 @@ router.get('/bar:id', async(req, res) => {
 });
 
 router.post('/bar:id/tags', async(req, res) => {
+    let bars = schemas.bar
+    let bar = await bars.findOne({ id: req.params.bar_id })
+
+    if (!bar) {
+        let newBar = new bars({
+            name: req.body.bar_name,
+            id: req.params.bar_id,
+            address: req.body.bar_address,
+            price_level: req.body.bar_price,
+            rating: req.body.bar_rating
+                // hours: req.body.bar_hours,
+                // location: req.body.bar_location
+        })
+        let newBarSaved = await newBar.save();
+    }
+
     let username = USERNAME;
     let users = schemas.user;
-
-    let bar_id = req.params.id;
 
     let array = []
     let user = await users.findOne({
         username: username
     }).lean().exec();
 
-    let newEntry = ({
-        id: bar_id,
-        name: req.body.bar_name,
-        address: req.body.bar_address
-    });
-
     for (let tag of user.tags) {
-        if (req.body[tag.tag]) {
+        if (req.body[tag]) {
             let current_tag = await users.findOneAndUpdate({
                 username: username,
-                tags: { $elemMatch: { tag: tag.tag } }
-            }, { $addToSet: { "tags.$.bars": newEntry } }).lean().exec();
+                bars: { $elemMatch: { id: req.params.id } }
+            }, { $addToSet: { "bars.$.tags": tag } }).lean().exec();
         }
     }
 
-    res.redirect('/search/bar' + bar_id);
-
+    res.redirect('/search/bar' + req.params.id);
 });
 
 router.post('/bar-favourite:bar_id', async(req, res) => {
 
-    let username = USERNAME;
-    let user = schemas.user;
+    let bars = schemas.bar
+    let bar = await bars.findOne({ id: req.params.bar_id })
 
+    if (!bar) {
+        let newBar = new bars({
+            name: req.body.bar_name,
+            id: req.params.bar_id,
+            address: req.body.bar_address,
+            price_level: req.body.bar_price,
+            rating: req.body.bar_rating
+                // hours: req.body.bar_hours,
+                // location: req.body.bar_location
+        })
+        let newBarSaved = await newBar.save();
+    }
+
+    let username = USERNAME;
+    let users = schemas.user;
+
+    let fav = undefined;
     if (typeof req.body.favourite_button !== 'undefined') {
-        let updatedUser = await user.findOneAndUpdate({ username: username }, {
+        fav = true
+        let updatedUser = await users.findOneAndUpdate({ username: username }, {
             $push: {
-                favourites: {
-                    id: req.params.bar_id,
-                    name: req.body.bar_name,
-                    address: req.body.bar_address,
-                    price_level: req.body.bar_price_level,
-                    rating: req.body.bar_rating
-                        // hours: req.body.bar_hours,
-                        // location: req.body.bar_location
-                },
-                recent_activity: {
+                activity: {
                     id: req.params.bar_id,
                     name: req.body.bar_name,
                     address: req.body.bar_address,
@@ -245,23 +194,17 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
                 }
             }
         });
-    } else if (typeof req.body.bucketlist_remove !== 'undefined') {
-        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "bucketlist.id": req.params.bar_id } });
-    } else if (typeof req.body.favourites_remove !== 'undefined') {
-        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "favourites.id": req.params.bar_id } });
-    } else if (typeof req.body.bucketlist_button !== 'undefined') {
-        let updatedUser = await user.findOneAndUpdate({ username: username }, {
+    } else if (typeof req.body.favourite_remove !== 'undefined') {
+        fav = false
+        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "favourited" } });
+    }
+
+    let buck = undefined;
+    if (typeof req.body.bucketlist_button !== 'undefined') {
+        buck = true
+        let updatedUser = await users.findOneAndUpdate({ username: username }, {
             $push: {
-                bucketlist: {
-                    id: req.params.bar_id,
-                    name: req.body.bar_name,
-                    address: req.body.bar_address,
-                    price_level: req.body.bar_price_level,
-                    rating: req.body.bar_rating
-                        // hours: req.body.bar_hours,
-                        // location: req.body.bar_location
-                },
-                recent_activity: {
+                activity: {
                     id: req.params.bar_id,
                     name: req.body.bar_name,
                     address: req.body.bar_address,
@@ -269,7 +212,53 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
                 }
             }
         });
+    } else if (typeof req.body.bucketlist_remove !== 'undefined') {
+        buck = false
+        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "bucketlisted" } });
     }
+
+
+    let user = await users.findOne({ username: username });
+
+    let barEntry = undefined;
+    let index = 0;
+    for (let bar of user.bars) {
+        if (bar.id == req.params.bar_id) {
+            barEntry = bar
+            break;
+        }
+        index += 1;
+    }
+
+    // create a new bar entry
+    if (!barEntry) {
+        if (typeof fav !== 'undefined') {
+            barEntry = {
+                id: req.params.bar_id,
+                favourite: fav,
+                bucketlist: false,
+            }
+        } else if (typeof buck !== 'undefined') {
+            barEntry = {
+                id: req.params.bar_id,
+                favourite: fav,
+                bucketlist: true,
+            }
+        }
+        user.bars.push(barEntry)
+        let updated = await user.save();
+    }
+
+    // edit existing bar entry
+    else {
+        if (typeof fav !== 'undefined') {
+            user.bars[index].favourite = fav;
+        } else if (typeof buck !== 'undefined') {
+            user.bars[index].bucketlist = fav;
+        }
+        let updated = await user.save();
+    }
+
     res.redirect('bar' + req.params.bar_id);
 
 })
@@ -282,7 +271,7 @@ router.post('/bar-visit:bar_id', async(req, res) => {
 
     let updatedUser = await user.findOneAndUpdate({ username: username }, {
         $push: {
-            recent_activity: {
+            activity: {
                 id: req.params.bar_id,
                 name: req.body.bar_name,
                 address: req.body.bar_address,
@@ -310,24 +299,45 @@ router.post('/favourites-search', async(req, res) => {
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
-    let e = document.getElementById("price_range");
-    let value = e.value;
-
+    let tags = []
     let favourites = []
-    let tagged = false
     for (let tag of user.tags) {
-        if (req.body[tag.tag]) {
-            tagged = true;
-            console.log(tag.bars);
-            favourites = favourites.concat(tag.bars);
+        if (req.body[tag]) {
+            tags.push(tag);
         }
     }
+    console.log(tags)
 
-    if (tagged == false) {
+    if (!tags.length) {
         favourites = user.favourites
+    } else {
+        for (let bar of user.bars) {
+            let contains = bar.tags.some(element => {
+                return tags.indexOf(element) !== -1;
+            });
+            if (contains) {
+                favourites.push(bar.id)
+            }
+        }
     }
+    console.log(favourites)
 
-    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favourites });
+    let bars = schemas.bar;
+    let favs = await bars.find({ id: { $in: favourites } }).lean().exec();
+    console.log(favs)
+
+    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs });
 });
+
+function getIntersection(a, b) {
+    const set1 = new Set(a);
+    const set2 = new Set(b);
+
+    const intersection = [...set1].filter(
+        element => set2.has(element)
+    );
+
+    return intersection;
+}
 
 module.exports = router;

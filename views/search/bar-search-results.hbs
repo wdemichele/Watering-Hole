@@ -15,29 +15,7 @@
                 <a href="{{bar.website}}"><h3>{{bar.website}}</h3></a>
                 <h3>Price Level: {{bar.price_level}} Google Review: {{bar.rating}}</h3>
                 <h3>Open Now: {{bar.opening_hours.open_now}}</h3></a>
-                <iframe name="votar" style="display:none;"></iframe>
-
-                <form action="bar-favourite{{bar.place_id}}" method="post" target="votar">
-                    <input type="hidden" id="bar_name" name="bar_name" value="{{bar.name}}">
-                    <input type="hidden" id="bar_address" name="bar_address" value="{{bar.formatted_address}}">
-                    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{bar.price_level}}">
-                    <input type="hidden" id="bar_rating" name="bar_rating" value="{{bar.rating}}">
-                    <input type="hidden" id="bar_hours" name="bar_hours" value="{{bar.opening_hours.periods}}">
-                    <input type="hidden" id="bar_location" name="bar_location" value="{{bar.geometry.location}}">
-
-
-                    <input type="hidden" id="favourite_type" name="favourite_type" value="search">
-                    {{#if (contains ../bucketlist bar.place_id)}}
-                        <button class="secondary" type="submit" id="bucketlist_remove" name="bucketlist_remove">Remove From Bucketlist</button>
-                    {{else}}
-                        <button class="secondary" type="submit" id="bucketlist_button" name="bucketlist_button">Add To Bucketlist</button>
-                    {{/if}}
-                    {{#if (contains ../favourites bar.place_id)}}
-                        <button class="primary right" type="submit" id="favourite_remove" name="favourite_remove">Remove From Favourites</button>
-                    {{else}}
-                        <button class="primary right" type="submit" id="favourite_button" name="favourite_button">Add To Favourites</button>
-                    {{/if}}
-                </form> 
+                {{!-- <iframe name="votar" style="display:none;"></iframe> --}}
             </div>              
         </div>
     {{/each}}

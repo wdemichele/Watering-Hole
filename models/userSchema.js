@@ -29,12 +29,11 @@ let barSchema = new schema({
 })
 
 let activitySchema = new schema({
-    name: { type: String },
     id: { type: String },
+    type: { type: String }, // ENUM{"favourited, bucketlisted, visited"}
+    name: { type: String },
     address: { type: String },
-    price: { type: String },
-    location: { type: String },
-    time: { type: String }
+    time: { type: Date, default: today }
 })
 
 // user
@@ -43,12 +42,12 @@ let userSchema = new schema({
     name: { type: String },
     password: { type: String },
     bars: [{
-        bar: { type: String },
+        id: { type: String },
         favourite: { type: Boolean },
         bucketlist: { type: Boolean },
         tags: [{ type: String }]
     }],
-    visited: [{ type: String }],
+    activity: [activitySchema],
     friends: [{ type: String }],
     tags: [{ type: String }]
 })

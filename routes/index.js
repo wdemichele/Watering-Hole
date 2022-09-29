@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 const axios = require('axios');
 const userSchema = require('../models/userSchema');
 
+const USERNAME = "joe-smith"
+
 router.use('/search', searchRouter);
 
 router.get('/home', (_req, res) => {
@@ -13,7 +15,7 @@ router.get('/home', (_req, res) => {
 });
 
 router.get('/friends', async(req, res) => {
-    let username = "jane-smith";
+    let username = USERNAME;
     let users = userSchema.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
