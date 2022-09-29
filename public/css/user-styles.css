@@ -1295,6 +1295,7 @@ table {
     object-fit: cover;
     border-radius: 5%;
     background-position: center;
+    cursor: pointer;
 }
 
 .w3-left,

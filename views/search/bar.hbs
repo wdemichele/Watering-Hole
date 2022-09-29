@@ -3,11 +3,11 @@
   <h1 id="bar_name" name="bar_name">{{place_data.name}}</h1>
 
 <div class="w3-content w3-display-container" style="max-width:800px">
-  <img class="mySlides center" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.1.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.2.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.3.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.4.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.1.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.2.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.3.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.4.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
   <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
     <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
     <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
@@ -17,6 +17,16 @@
     <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
     <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
   </div>
+
+  
+  <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+  <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+  <div class="w3-modal-content w3-animate-zoom">
+    <img id="img01" style="width:100%">
+  </div>
+</div>
+
+
 </div>
   <h2>{{place_data.formatted_address}}</h2>
   <h2>{{place_data.formatted_phone_number}}</h2>
@@ -122,7 +132,14 @@
       }
       x[slideIndex-1].style.display = "block";  
       dots[slideIndex-1].className += " w3-white";
-    }v
+    }
+
+
+    function onClick(element) {
+    document.getElementById("img01").src = element.src;
+    document.getElementById("modal01").style.display = "block";
+    }
+
 </script>
   
 
