@@ -9,10 +9,12 @@
 <div>
     <h2>Recently Visited:</h2>
     <div class="flex-container databox secondary">
-        {{#each user.recent_bars}}
-            <div class="databox tertiary">
-                <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
-            </div>
+        {{#each user.activity as |activity|}}
+            {{#ifcond activity.type "==" "visited"}}
+                <div class="databox tertiary">
+                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
+                </div>
+            {{/ifcond}}
         {{/each}}
     </div>
 </div>
@@ -51,7 +53,6 @@
             
             <div class="two"><button onclick="addTag(true)" class="primary right">Add Tags+</button></div>
         </div>
-    </div>
     
     </div>
     </div>

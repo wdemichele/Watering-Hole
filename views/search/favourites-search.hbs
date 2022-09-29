@@ -1,7 +1,6 @@
 <div class="databox secondary">
 <h1>Find Me A Favourite!</h1>
-    <form action="favourites-search" method="post">
-    
+<form action="favourites-search" method="post">
     <fieldset>
         <legend>Area Settings</legend>
         <label for="area_search">Area</label>
@@ -11,12 +10,14 @@
     </fieldset>
     <fieldset>
     <legend>Bar Settings</legend>
-    <select name="price_range" id="price_range" placeholder="$-$$$" multiple>
-        <option value="$">$</option>
-        <option value="$$">$$</option>
-        <option value="$$$">$$$</option>
-        <option value="$$$$">$$$$</option>
-    </select>
+    <select name="price_range" id="price_range" placeholder="$-$$$">
+        <option name="1" value="1">$</option>
+        <option name="2" value="2">$$</option>
+        <option name="3" value="3">$$$</option>
+        <option name="4" value="4">$$$$</option>
+    </select><br>
+    <label for="below">Include below prices</label><br>
+    <input name="below" style="float: left; width: auto" type="checkbox">
     {{> search-tags}}
     </fieldset>
     <button class="tertiary" type="reset">Cancel</button>

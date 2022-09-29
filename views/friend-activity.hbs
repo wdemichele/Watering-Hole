@@ -1,6 +1,6 @@
 <div class="databox secondary">
 <div class="databox primary">
-    {{#each (limit (reverseArray user.recent_activity) 20)}}
+    {{#each (limit (reverseArray user.activity) 20)}}
     
         <div class="databox tertiary">
             <h2><a href="/friend{{../user.username}}">{{../user.name}}</a> {{this.type}} <a href="/search/bar{{this.id}}">{{this.name}}</h2>
