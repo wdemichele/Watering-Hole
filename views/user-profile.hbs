@@ -10,11 +10,11 @@
     <h2>Recently Visited:</h2>
     <div class="flex-container databox secondary">
         {{#each user.activity as |activity|}}
-            {{#ifcond activity.type "==" "visited"}}
+            {{#ifCond activity.type "==" "visited"}}
                 <div class="databox tertiary">
                     <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
                 </div>
-            {{/ifcond}}
+            {{/ifCond}}
         {{/each}}
     </div>
 </div>
@@ -44,7 +44,7 @@
         <div class="search_tags">Seach Tags</div>
         <div class="tag_box">
             {{#each user.tags}}
-                <div>{{this.tag}}</div>
+                <div>{{this}}</div>
             {{/each}}
         </div>
         

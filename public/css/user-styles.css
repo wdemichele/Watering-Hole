@@ -47,9 +47,6 @@ header::after {
 }
 
 .nav-icon:hover {
-    /*
-    height: 55px;
-    width: 55px; */
     background-color: rgb(148, 146, 146, 0.75);
     border-radius: 10px;
 }
@@ -543,12 +540,6 @@ header::after {
     width: 50px;
 }
 
-.nav-icon:hover {
-    height: 55px;
-    width: 55px;
-    color: #D3D3D3;
-}
-
 .nav-message {
     color: #EEE;
     text-decoration: none;
@@ -716,6 +707,13 @@ button:focus {
     border-radius: 25px;
     background-color: #f1f1f1;
     color: #000000;
+    cursor: pointer;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 .chip img {
@@ -1350,6 +1348,6 @@ input[type=text]:focus {
 }
 
 .tagged {
-    background-color: #000;
+    background-color: #0E897D;
     color: #fafafa;
 }

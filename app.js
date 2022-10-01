@@ -42,7 +42,6 @@ hbs.handlebars.registerHelper("contains", function(array, num) {
     }
     for (let i = 0; i < array.length; i++) {
         if (array[0].id == num) {
-            console.log("here");
             return true;
         }
     }

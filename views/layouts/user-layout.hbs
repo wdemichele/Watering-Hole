@@ -39,15 +39,15 @@
   border: none;
   outline: none;
   color: white;
-  padding: 14px 16px;
   background-color: inherit;
   font-family: inherit;
   margin: 0;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+.navbar .dropdown:hover .dropbtn, .dropbtn:focus {
   background-color: red;
 }
+
 
 .dropdown-content {
   display: none;
@@ -84,7 +84,6 @@
                 <li><a href="/home"><img src="/assets/nav/home.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
                 <li><a href="/search/bar-search"><img src="/assets/nav/map-marker.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
                 <li><a href="/friends"><img src="/assets/nav/users.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
-                {{!-- <a href="/event"><img src="/assets/nav/ticket.svg" alt="nav-icon" class="nav-icon filter-white"></a> --}}
                 <li><a href="/search/favourites-search"><img src="/assets/nav/search-heart.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
             </ul>
         
@@ -92,7 +91,7 @@
         <div class="nav-links right">
             <ul>
                 <div class="dropdown">
-                    <img onclick="myFunction()" src="\assets\nav\abstract-user-flat-4.svg" alt="nav-icon" class="nav-icon dropbtn">
+                    <img style="height: 50px; width: 50px;" onclick="myFunction()" src="\assets\nav\abstract-user-flat-4.svg" alt="nav-icon" class=" nav-icon dropbtn">
                     <div class="dropdown-content" id="myDropdown">
                         <li><a href="/user">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
