@@ -2,9 +2,9 @@
     <h2>Add My Tags</h2>
 
     {{#each tags}}
-        <div class="databox tertiary left">
-            <h2>{{this}}</h2>
-            <input type="checkbox" id="{{this}}" name="{{this}}" value="{{this}}">
+        <div class="chip">
+            <span style="padding: 0; margin: 0;">{{this}}</span>
+            <input style="padding: 0; margin: 0;" type="checkbox" id="{{this}}" name="{{this}}" value="{{this}}">
         </div>
     {{/each}}
 
