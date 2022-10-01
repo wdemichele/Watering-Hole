@@ -1,17 +1,53 @@
-<div class="databox secondary">
-<div class="databox primary">
-    {{#each (limit (reverseArray user.activity) 20)}}
-    
-        <div class="databox tertiary">
-            <h2><a href="/friend{{../user.username}}">{{../user.name}}</a> {{this.type}} <a href="/search/bar{{this.id}}">{{this.name}}</h2>
-            <p>{{this.address}}</p></a>
-            <p>{{this.time}}</p>
+<div class="flex-container">
+    <div style="width: 75%;">
+        <div class="databox primary">
+            <div class="scroll">
+                {{#each (limit (reverseArray user.activity) 20)}}
+                
+                    <div class="databox tertiary">
+                        <h2><a href="/friend{{../user.username}}">{{../user.name}}</a> {{this.type}} <a href="/search/bar{{this.id}}">{{this.name}}</h2>
+                        <p>{{this.address}}</p></a>
+                        <p>{{this.time}}</p>
+                    </div>
+                {{/each}}
+            </div>
         </div>
-    {{/each}}
+    </div>
 
-</div>
+    <div class="databox primary">
+            <h2>Friend Requests</h2>
+            <div class="friend-container">
+                <a href="/user"><img src="/assets/avatars/avatar.svg" alt="Avatar" style="width:120px">
+                <h2>Chris Fox</h2></a>
+                <button class="primary">Accept</button>
+                <button class="tertiary">Decline</button>
+                </a>
+            </div>
 
-<a href="/user"><button class="primary">My Profile</button></a>
-<a href="/add-friends"><button class="primary right">Add Friends</button></a>
+            <div class="friend-container">
+                <a href="/user"><img src="/assets/avatars/avatar1.svg" alt="Avatar" style="width:120px">
+                <h2>Jane Doe</h2></a>
+                <button class="primary">Accept</button>
+                <button class="tertiary">Decline</button>
+                </a>
+            </div>
 
-</div>
+            <div class="friend-container">
+                <a href="/user"><img src="/assets/avatars/avatar2.svg" alt="Avatar" style="width:120px">
+                <h2>John Nash</h2></a>
+                <button class="primary">Accept</button>
+                <button class="tertiary">Decline</button>
+                </a>
+            </div>
+
+            <div class="friend-container">
+                <a href="/user"><img src="/assets/avatars/avatar3.svg" alt="Avatar" style="width:120px">
+                <h2>Louis C. Carol</h2></a>
+                <button class="primary">Accept</button>
+                <button class="tertiary">Decline</button>
+                </a>
+            </div>
+            <a href="/add-friends"><button class="secondary center">Add Friends +</button></a>
+        </div>
+
+

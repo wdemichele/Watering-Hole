@@ -3,7 +3,7 @@ const router = express.Router();
 const searchRouter = require('./searchRouter');
 const bodyParser = require("body-parser");
 const axios = require('axios');
-const userSchema = require('../models/userSchema');
+const schemas = require('../models/userSchema');
 
 const USERNAME = "joe-smith"
 
@@ -16,7 +16,7 @@ router.get('/home', (_req, res) => {
 
 router.get('/friends', async(req, res) => {
     let username = USERNAME;
-    let users = userSchema.user;
+    let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
     res.render('friend-activity.hbs', { layout: 'user-layout', title: 'Friend Activity', user: user });
@@ -38,7 +38,7 @@ router.get('/manual', (_req, res) => {
 
 router.get('/settings', async(_req, res) => {
     let username = USERNAME;
-    let users = userSchema.user;
+    let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
     res.render('settings.hbs', { layout: 'user-layout', title: 'User Settings', user: user });
 });
@@ -51,7 +51,7 @@ router.get('/', (_req, res) => {
 router.get('/user', async(_req, res) => {
 
     let username = USERNAME;
-    let users = userSchema.user;
+    let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
     res.render('user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user });
@@ -90,14 +90,14 @@ router.get('/add-friends', async(req, res) => {
 
 router.get('/tags', async(req, res) => {
     let username = USERNAME;
-    let users = userSchema.user;
+    let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
     res.render('tags.hbs', { layout: 'user-layout', title: 'My Tags', user: user });
 });
 
 router.post('/tags', async(req, res) => {
     let username = USERNAME;
-    let users = userSchema.user;
+    let users = schemas.user;
     let user = await users.findOneAndUpdate({ username: username }, {
         $push: { tags: req.body.tag_name }
     }).lean().exec();
