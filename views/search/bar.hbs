@@ -140,6 +140,15 @@
     document.getElementById("modal01").style.display = "block";
     }
 
+    function checked(element) {
+      element.classList.toggle("tagged");
+      var checkbox = element.querySelector("input");
+
+      checkbox.checked = !checkbox.checked;
+      
+      console.log(checkbox);
+    }
+
 </script>
   
 
