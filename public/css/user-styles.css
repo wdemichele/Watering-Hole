@@ -1348,3 +1348,8 @@ input[type=text]:focus {
         display: block;
     }
 }
+
+.tagged {
+    background-color: #000;
+    color: #fafafa;
+}
