@@ -1,46 +1,34 @@
-const { Int32, Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const SchemaTypes = mongoose.Schema.Types;
-
+// var passportLocalMongoose = require('passport-local-mongoose');
 
 // defaut date
 let today = new Date();
 
-// bar
-let barSchema = new schema({
-    name: { type: String },
-    id: { type: String },
-    address: { type: String }
-})
-
 let activitySchema = new schema({
-    name: { type: String },
     id: { type: String },
+    type: { type: String }, // ENUM{"favourited, bucketlisted, visited"}
+    name: { type: String },
     address: { type: String },
-    time: { type: Date, default: today },
-    type: { type: String }
-})
-
-let tag = new schema({
-    tag: { type: String },
-    bars: [barSchema]
+    time: { type: Date, default: today }
 })
 
 // user
 let userSchema = new schema({
-    username: { type: String, require: true },
+    username: { type: String, require: true, unique: true },
+    password: { type: String, require: true },
+    pic: { type: String },
     name: { type: String },
-    password: { type: String },
-    favourites: [barSchema],
-    bucketlist: [barSchema],
-    recent_bars: [barSchema],
+    bars: [{
+        id: { type: String },
+        favourite: { type: Boolean },
+        bucketlist: { type: Boolean },
+        tags: [{ type: String }]
+    }],
+    activity: [activitySchema],
     friends: [{ type: String }],
-    recent_activity: [activitySchema],
-    tags: [tag]
+    tags: [{ type: String }]
 })
 
-let user = mongoose.model('user', userSchema, 'user');
-
-let mySchemas = { 'user': user };
-module.exports = mySchemas;
+module.exports = mongoose.model('user', userSchema, 'user');
