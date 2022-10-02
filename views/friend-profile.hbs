@@ -1,0 +1,22 @@
+<div class="flex-container databox secondary">
+    <div>
+        <img style="width: 300px; height: auto;" src="\assets\nav\abstract-user-flat-4.svg">
+        <h1>{{user.name}}</h1>
+        <h2>@{{user.username}}</h1>
+
+        <h1>Friends</h1>
+        <a href="/user{{user.username}}/friends"><h1>{{array_length user.friends}}</h1></a>
+    </div>
+
+    <div>
+        <h2>Recently Visited:</h2>
+        <div class="flex-container databox secondary">
+            {{#each user.recent_bars}}
+                <div class="databox tertiary">
+                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
+                </div>
+            {{/each}}
+        </div>
+        <a href="/tags"><button class="primary right">My Tags</button></a>
+    </div>
+</div>

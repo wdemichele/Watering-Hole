@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const searchRouter = require('./searchRouter');
-const eventRouter = require('./eventRouter');
 const bodyParser = require("body-parser");
 const axios = require('axios');
 const schemas = require('../models/userSchema');
 const passport = require('passport');
-router.use('/search', searchRouter);
-router.use('/event', eventRouter);
 
-const USERNAME = "1824809674539254"
+const USERNAME = "joe-smith"
+
+router.use('/search', searchRouter);
 
 router.get('/home', isLoggedIn, async(req, res) => {
     console.log(req.user);
@@ -48,6 +47,10 @@ router.get('/about-us', (_req, res) => {
 
     res.render('about-page.hbs', { layout: 'guest-layout', title: 'About Us' });
 });
+router.get('/maps', (_req, res) => {
+
+    res.render('map-page.hbs', { layout: 'guest-layout', title: 'map' });
+});
 
 router.get('/manual', (_req, res) => {
 
@@ -76,6 +79,36 @@ router.get('/user', async(_req, res) => {
 
 });
 
+router.get('/friend:id', async(req, res) => {
+
+    let username = req.params.id;
+    let users = schemas.user;
+    let user = await users.findOne({ username: username }).lean().exec();
+
+    res.render('friend-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+
+});
+
+router.get('/user:id/friends', async(req, res) => {
+
+    let username = req.params.id;
+    let users = schemas.user;
+    let user = await users.findOne({ username: username }).lean().exec();
+
+    res.render('user-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+
+});
+
+router.get('/add-friends', async(req, res) => {
+
+    let username = USERNAME;
+    let users = schemas.user;
+    let user = await users.findOne({ username: username }).lean().exec();
+
+    res.render('add-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+
+});
+
 router.get('/tags', async(req, res) => {
     let username = USERNAME;
     let users = schemas.user;
@@ -87,10 +120,10 @@ router.post('/tags', async(req, res) => {
     let username = USERNAME;
     let users = schemas.user;
     let user = await users.findOneAndUpdate({ username: username }, {
-        $push: { tags: { tag: req.body.tag_name, bars: [] } }
+        $push: { tags: req.body.tag_name }
     }).lean().exec();
 
-    res.redirect('/tags');
+    res.redirect('/user');
 });
 
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));

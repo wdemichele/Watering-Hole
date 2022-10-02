@@ -1,9 +1,33 @@
 <div class="databox secondary flex-container">
   <div class="databox primary">
   <h1 id="bar_name" name="bar_name">{{place_data.name}}</h1>
-  <img src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  {{!-- <img src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.1.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.2.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw"> --}}
+
+<div class="w3-content w3-display-container" style="max-width:800px">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.1.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.2.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.3.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.4.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+    <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+    <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
+    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
+  </div>
+
+  
+  <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+  <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+  <div class="w3-modal-content w3-animate-zoom">
+    <img id="img01" style="width:100%">
+  </div>
+</div>
+
+
+</div>
   <h2>{{place_data.formatted_address}}</h2>
   <h2>{{place_data.formatted_phone_number}}</h2>
   <a href="{{place_data.website}}"><h3>{{place_data.website}}</h3></a>
@@ -45,11 +69,19 @@
   <form action="bar{{place_data.place_id}}/tags" method="post">
     <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
     <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
+    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{place_data.price_level}}">
+    <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
+    <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
+    <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}">
     {{> bar-tags}}
   </form>
   <form action="bar-visit{{place_data.place_id}}" method="post">
     <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
     <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
+    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{bar.price_level}}">
+    <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
+    <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours}}">
+    <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry}}">
     <button class="tertiary right" type="submit" id="visited_button" name="visited_button">Visited</button>
   </form>
   </div>
@@ -58,6 +90,11 @@
   <form action="bar-favourite{{place_data.place_id}}" method="post">
     <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
     <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
+    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{place_data.price_level}}">
+    <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
+    {{!-- <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
+    <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}"> --}}
+
     {{#if bucketlisted}}
     <button class="tertiary" type="submit" id="bucketlist_remove" name="bucketlist_remove">Remove From Bucketlist</button>
     {{else}}
@@ -69,6 +106,50 @@
     <button class="primary right" type="submit" id="favourite_button" name="favourite_button">Add To Favourites</button>
     {{/if}}
   </form>
+<script>
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+      showDivs(slideIndex += n);
+    }
+
+    function currentDiv(n) {
+      showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+      if (n > x.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = x.length}
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";  
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" w3-white", "");
+      }
+      x[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " w3-white";
+    }
+
+
+    function onClick(element) {
+    document.getElementById("img01").src = element.src;
+    document.getElementById("modal01").style.display = "block";
+    }
+
+    function checked(element) {
+      element.classList.toggle("tagged");
+      var checkbox = element.querySelector("input");
+
+      checkbox.checked = !checkbox.checked;
+      
+      console.log(checkbox);
+    }
+
+</script>
   
 
 

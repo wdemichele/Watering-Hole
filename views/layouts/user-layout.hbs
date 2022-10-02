@@ -2,29 +2,124 @@
 <html>
 <head>
 <title>{{{title}}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/x-icon" href="/assets/wateringhole.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
 <link href="/css/user-styles.css" rel="stylesheet" type="text/css">
 
+
 <meta name="description" content={{{title}}}>
+<style>
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar .dropdown:hover .dropbtn, .dropbtn:focus {
+  background-color: red;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+</style>
 </head>
 <body>
     <header>
         <nav>
-            <a href="/"><img src="/assets/nav/home.svg" alt="nav-icon" class="nav-icon filter-white"></a>
-            <a href="/search/bar-search"><img src="/assets/nav/map-marker.svg" alt="nav-icon" class="nav-icon filter-white"></a>
-            <a href="/friends"><img src="/assets/nav/users.svg" alt="nav-icon" class="nav-icon filter-white"></a>
-            {{!-- <a href="/event"><img src="/assets/nav/ticket.svg" alt="nav-icon" class="nav-icon filter-white"></a> --}}
-            <a href="/search/favourites-search"><img src="/assets/nav/search-heart.svg" alt="nav-icon" class="nav-icon filter-white"></a>
-            <a href="/user"><img src="\assets\nav\abstract-user-flat-4.svg" alt="nav-icon" class="nav-icon"></a>
-            <div class="right">
-                <a href="/settings"><img src="/assets/nav/settings.svg" alt="nav-icon" class="nav-icon filter-white"></a>
-                <a href="/logout"><img src="/assets/nav/power.svg" alt="nav-icon" class="nav-icon filter-white"></a>
-            </div>
+            
+            <ul class="nav-links">
+                <li><a href="/home"><img src="/assets/nav/home.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
+                <li><a href="/search/bar-search"><img src="/assets/nav/map-marker.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
+                <li><a href="/friends"><img src="/assets/nav/users.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
+                <li><a href="/search/favourites-search"><img src="/assets/nav/search-heart.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
+            </ul>
+        
         </nav>
+        <div class="nav-links right">
+            <ul>
+                <div class="dropdown">
+                    <img style="height: 50px; width: 50px;" onclick="myFunction()" src="\assets\nav\abstract-user-flat-4.svg" alt="nav-icon" class=" nav-icon dropbtn">
+                    <div class="dropdown-content" id="myDropdown">
+                        <li><a href="/user">Profile</a></li>
+                        <li><a href="/settings">Settings</a></li>
+                        <li><a href="/">Logout</a></li>
+                    </div>
+                    </div> 
+            </div> 
+
+            </ul>
+        </div>       
     </header>
     {{{body}}}
+<script>
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+    }
 
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+    if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+        if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+        }
+    }
+    }
+</script>
 </body>
 </html>
