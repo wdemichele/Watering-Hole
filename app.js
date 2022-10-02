@@ -38,6 +38,9 @@ const hbs = exphbs.create({});
 hbs.handlebars.registerHelper('reverseArray', (array) => array.reverse());
 
 hbs.handlebars.registerHelper("array_length", function(array) {
+    if (!array) {
+        return 0;
+    }
     return array.length;
 });
 

@@ -37,7 +37,10 @@ router.get('/friends', isLoggedIn, async(req, res) => {
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('friend-activity.hbs', { layout: 'user-layout', title: 'Friend Activity', user: user });
+    let activity = await User.find({ username: user.friends }, { activity: 1, name: 1, username: 1, '_id': false }).lean().exec();
+    console.log(activity);
+
+    res.render('friend-activity.hbs', { layout: 'user-layout', title: 'Friend Activity', user: user, activity: activity });
 });
 
 router.get('/about-us', (req, res) => {
@@ -85,18 +88,10 @@ router.get('/user:id/friends', isLoggedIn, async(req, res) => {
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('user-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
 
 });
 
-router.get('/add-friends', isLoggedIn, async(req, res) => {
-
-    let username = req.user.username;
-    let user = await User.findOne({ username: username }).lean().exec();
-
-    res.render('add-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
-
-});
 
 router.get('/tags', isLoggedIn, async(req, res) => {
     let username = req.user.username;

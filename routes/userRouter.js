@@ -27,9 +27,6 @@ router.get('/create', async(req, res) => {
 
 router.post('/create', async(req, res) => {
 
-    // bcrypt.hash(req.body.password, saltRounds, async(err, hash) => {
-
-    // now new user
     let newUser = new User({
         name: req.body.name,
         username: req.body.username,
@@ -37,10 +34,7 @@ router.post('/create', async(req, res) => {
     });
 
     let newUserSaved = await newUser.save();
-
     let user = await User.findOne({ username: req.body.username }).lean().exec();
-    // });
-
 
     res.render('login.hbs', { layout: 'user-layout', title: 'User Login', user: user });
 
@@ -55,12 +49,44 @@ router.get('/', isLoggedIn, async(req, res) => {
 
 });
 
-router.get('/:id', isLoggedIn, async(req, res) => {
+router.get('/uid:id', isLoggedIn, async(req, res) => {
 
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('user-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+});
+
+router.get('/add-friends', isLoggedIn, async(req, res) => {
+    console.log("here")
+
+    let username = req.user.username;
+    let user = await User.findOne({ username: username }).lean().exec();
+
+    res.render('user/add-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+
+});
+
+router.post('/add-friend', isLoggedIn, async(req, res) => {
+    let response;
+
+    let username = req.body.friend;
+    if (!username) {
+        username = "-1";
+    }
+    let friend = await User.findOne({ username: username }).lean().exec();
+
+    if (friend) {
+        let username = req.user.username;
+        let user = await User.findOneAndUpdate({ username: username }, {
+            $push: { friends: req.body.friend }
+        }).lean().exec();
+        response = "User Added to Friend List"
+    } else {
+        response = "User not found!"
+    }
+
+    res.render('user/add-friends.hbs', { layout: 'user-layout', title: 'User Results', response: response });
 
 });
 

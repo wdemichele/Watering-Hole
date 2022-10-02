@@ -2,7 +2,7 @@
     <div style="width: 75%;">
         <div class="databox primary">
             <div class="scroll">
-                {{#each (limit (reverseArray user.activity) 20)}}
+                {{#each (limit (reverseArray activity) 20)}}
                 
                     <div class="databox tertiary">
                         <h2><a href="/friend{{../user.username}}">{{../user.name}}</a> {{this.type}} <a href="/search/bar{{this.id}}">{{this.name}}</h2>
@@ -47,7 +47,7 @@
                 <button class="tertiary">Decline</button>
                 </a>
             </div>
-            <a href="/add-friends"><button class="secondary center">Add Friends +</button></a>
+            <a href="user/add-friends"><button class="secondary center">Add Friends +</button></a>
         </div>
 
 
