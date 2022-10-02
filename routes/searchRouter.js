@@ -8,18 +8,16 @@ const { Db } = require('mongodb');
 const { default: mongoose } = require('mongoose');
 const mongodb = require('mongodb');
 
-const USERNAME = "joe-smith"
-
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(bodyParser.json());
 
-router.get('/bar-search', async(_req, res) => {
+router.get('/bar-search', isLoggedIn, async(_req, res) => {
 
     res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search' });
 });
 
-router.post('/bar-search', async(req, res) => {
+router.post('/bar-search', isLoggedIn, async(req, res) => {
 
     let input = req.body.bar_name;
     input = input.replace(/ /gi, "%20")
@@ -42,7 +40,7 @@ router.post('/bar-search', async(req, res) => {
         });
 });
 
-router.post('/more-bars', async(req, res) => {
+router.post('/more-bars', isLoggedIn, async(req, res) => {
 
     let page_token = req.body.page_token;
 
@@ -62,7 +60,7 @@ router.post('/more-bars', async(req, res) => {
         });
 });
 
-router.post('/area-search', async(req, res) => {
+router.post('/area-search', isLoggedIn, async(req, res) => {
 
     let input = req.body.area_name;
 
@@ -95,8 +93,8 @@ router.post('/area-search', async(req, res) => {
         });
 });
 
-router.get('/bar:id', async(req, res) => {
-    let username = USERNAME;
+router.get('/bar:id', isLoggedIn, async(req, res) => {
+    let username = req.user.externalId;
     let users = schemas.user;
     let user = await users.findOne({
         username: username
@@ -123,7 +121,7 @@ router.get('/bar:id', async(req, res) => {
         });
 });
 
-router.post('/bar:id/tags', async(req, res) => {
+router.post('/bar:id/tags', isLoggedIn, async(req, res) => {
     let bars = schemas.bar
     let bar = await bars.findOne({ id: req.params.bar_id })
 
@@ -140,7 +138,7 @@ router.post('/bar:id/tags', async(req, res) => {
         let newBarSaved = await newBar.save();
     }
 
-    let username = USERNAME;
+    let username = req.user.externalId;
     let users = schemas.user;
 
     let array = []
@@ -160,7 +158,7 @@ router.post('/bar:id/tags', async(req, res) => {
     res.redirect('/search/bar' + req.params.id);
 });
 
-router.post('/bar-favourite:bar_id', async(req, res) => {
+router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
 
     let bars = schemas.bar
     let bar = await bars.findOne({ id: req.params.bar_id })
@@ -178,7 +176,7 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
         let newBarSaved = await newBar.save();
     }
 
-    let username = USERNAME;
+    let username = req.user.externalId;
     let users = schemas.user;
 
     let fav = undefined;
@@ -263,9 +261,9 @@ router.post('/bar-favourite:bar_id', async(req, res) => {
 
 })
 
-router.post('/bar-visit:bar_id', async(req, res) => {
+router.post('/bar-visit:bar_id', isLoggedIn, async(req, res) => {
 
-    let username = USERNAME;
+    let username = req.user.externalId;
     let user = schemas.user;
 
 
@@ -284,8 +282,8 @@ router.post('/bar-visit:bar_id', async(req, res) => {
 
 })
 
-router.get('/favourites-search', async(_req, res) => {
-    let username = USERNAME;
+router.get('/favourites-search', isLoggedIn, async(req, res) => {
+    let username = req.user.externalId;
     let users = schemas.user;
 
     let user = await users.findOne({
@@ -294,8 +292,8 @@ router.get('/favourites-search', async(_req, res) => {
     res.render('search/favourites-search.hbs', { layout: 'user-layout', title: 'Bar Favourites Search', user: user });
 });
 
-router.post('/favourites-search', async(req, res) => {
-    let username = USERNAME;
+router.post('/favourites-search', isLoggedIn, async(req, res) => {
+    let username = req.user.externalId;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
@@ -339,5 +337,12 @@ function getIntersection(a, b) {
 
     return intersection;
 }
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.redirect('/');
+}
+
 
 module.exports = router;

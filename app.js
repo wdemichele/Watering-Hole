@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const router = require('./routes');
@@ -10,6 +9,13 @@ const session = require('express-session')
 const passport = require("passport")
 const FacebookStrategy = require('passport-facebook').Strategy;
 const config = require('./src/config')
+const schemas = require('./models/userSchema');
+
+require('dotenv/config');
+
+const moment = require('moment');
+const { stringify } = require('query-string');
+const cookieParser = require('cookie-parser'); // for showing login error messages
 
 const DB_URI = "mongodb+srv://the-leftovers:OEIiTEbBpuJCluKH@personal-items-register.ll54ewt.mongodb.net/bar-collection?retryWrites=true&w=majority";
 
@@ -119,6 +125,58 @@ passport.use(new FacebookStrategy({
 }, function(accessToken, refreshToken, profile, done) {
     return done(null, profile);
 }));
+
+app.use(cookieParser('secret'));
+
+// express session middleware
+app.use(
+    session({
+        // The secret used to sign session cookies (ADD ENV VAR)
+        secret: process.env.SESSION_SECRET || '4325d67fgih8o',
+        name: 'sid', // The cookie name 
+        saveUninitialized: false,
+        resave: false,
+        proxy: process.env.NODE_ENV === 'production', //  to work on Heroku
+        cookie: {
+            sameSite: 'strict',
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 1000 * 60 * 60 // sessions expire after 5 minutes
+        },
+    })
+)
+
+
+// passport
+const LocalStrategy = require('passport-local');
+const bcrypt = require('bcryptjs');
+const { doesNotMatch } = require('assert');
+const flash = require('express-flash');
+
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+let User = schemas.user;
+
+let strategy = new LocalStrategy((username, password, cb) => {
+    // first, check if there is a user in the db with this username
+    User.findOne({ username: username }, {}, {}, (err, user) => {
+        if (err) { return cb(null, false) }
+        if (!user) { return cb(null, false, { message: 'Incorrect login credentials.' }) }
+        const hash = user.password;
+
+        bcrypt.compare(password, hash, function(err, response) {
+            if (response === true) {
+                return cb(null, user);
+            } else {
+                return cb(null, false, { message: 'Incorrect login credentials.' })
+            }
+        });
+    });
+})
+
+passport.use(strategy);
 
 app.use(router);
 

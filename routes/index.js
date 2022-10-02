@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const searchRouter = require('./searchRouter');
+const userRouter = require('./userRouter');
 const bodyParser = require("body-parser");
 const axios = require('axios');
 const schemas = require('../models/userSchema');
 const passport = require('passport');
-
-const USERNAME = "joe-smith"
+const bcrypt = require('bcrypt');
 
 router.use('/search', searchRouter);
+router.use('/user', userRouter);
 
 router.get('/home', isLoggedIn, async(req, res) => {
     console.log(req.user);
@@ -35,8 +36,8 @@ router.get('/home', isLoggedIn, async(req, res) => {
     res.render('home.hbs', { layout: 'user-layout', title: 'User Results', user: req.user });
 });
 
-router.get('/friends', async(req, res) => {
-    let username = USERNAME;
+router.get('/friends', isLoggedIn, async(req, res) => {
+    let username = req.user.externalId;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
@@ -57,8 +58,8 @@ router.get('/manual', (_req, res) => {
     res.render('user-manual.hbs', { layout: 'guest-layout', title: 'User Manual' });
 });
 
-router.get('/settings', async(_req, res) => {
-    let username = USERNAME;
+router.get('/settings', isLoggedIn, async(_req, res) => {
+    let username = req.user.externalId;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
     res.render('settings.hbs', { layout: 'user-layout', title: 'User Settings', user: user });
@@ -69,9 +70,27 @@ router.get('/', (_req, res) => {
     res.render('login.hbs', { layout: 'guest-layout', title: 'User Login' });
 });
 
-router.get('/user', async(_req, res) => {
+// USER LOGIN
+router.get('/login', async(req, res) => {
 
-    let username = USERNAME;
+    res.render('home.hbs', {
+        flash: req.flash('error'),
+        layout: 'user-layout',
+        title: 'Home'
+    });
+});
+
+router.post('/login',
+    passport.authenticate('local', {
+        successRedirect: '/login',
+        failureRedirect: '/',
+        failureFlash: true
+    })
+);
+
+router.get('/user', isLoggedIn, async(_req, res) => {
+
+    let username = req.user.externalId;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
@@ -79,7 +98,7 @@ router.get('/user', async(_req, res) => {
 
 });
 
-router.get('/friend:id', async(req, res) => {
+router.get('/friend:id', isLoggedIn, async(req, res) => {
 
     let username = req.params.id;
     let users = schemas.user;
@@ -89,7 +108,7 @@ router.get('/friend:id', async(req, res) => {
 
 });
 
-router.get('/user:id/friends', async(req, res) => {
+router.get('/user:id/friends', isLoggedIn, async(req, res) => {
 
     let username = req.params.id;
     let users = schemas.user;
@@ -99,9 +118,9 @@ router.get('/user:id/friends', async(req, res) => {
 
 });
 
-router.get('/add-friends', async(req, res) => {
+router.get('/add-friends', isLoggedIn, async(req, res) => {
 
-    let username = USERNAME;
+    let username = req.user.externalId;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
 
@@ -109,15 +128,15 @@ router.get('/add-friends', async(req, res) => {
 
 });
 
-router.get('/tags', async(req, res) => {
-    let username = USERNAME;
+router.get('/tags', isLoggedIn, async(req, res) => {
+    let username = req.user.externalId;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
     res.render('tags.hbs', { layout: 'user-layout', title: 'My Tags', user: user });
 });
 
-router.post('/tags', async(req, res) => {
-    let username = USERNAME;
+router.post('/tags', isLoggedIn, async(req, res) => {
+    let username = req.user.externalId;
     let users = schemas.user;
     let user = await users.findOneAndUpdate({ username: username }, {
         $push: { tags: req.body.tag_name }
@@ -147,8 +166,9 @@ router.get('/auth/facebook/callback',
         failureRedirect: '/error'
     }));
 
-router.get('/logout', function(req, res) {
+router.get('/logout', isLoggedIn, function(req, res) {
     req.logout();
+    req.session.destroy();
     res.redirect('/');
 });
 
