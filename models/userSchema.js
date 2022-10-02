@@ -1,32 +1,10 @@
-const { Int32, Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const SchemaTypes = mongoose.Schema.Types;
-
+// var passportLocalMongoose = require('passport-local-mongoose');
 
 // defaut date
 let today = new Date();
-
-let location = new schema({
-    lat: { type: String },
-    long: { type: String }
-})
-
-let open_hours = new schema({
-    close: { day: { type: Number }, time: { type: String } },
-    open: { day: { type: Number }, time: { type: String } }
-})
-
-// bar
-let barSchema = new schema({
-    name: { type: String },
-    id: { type: String },
-    address: { type: String },
-    price_level: { type: Number },
-    rating: { type: Number },
-    hours: [open_hours],
-    location: location
-})
 
 let activitySchema = new schema({
     id: { type: String },
@@ -38,10 +16,10 @@ let activitySchema = new schema({
 
 // user
 let userSchema = new schema({
-    username: { type: String, require: true },
+    username: { type: String, require: true, unique: true },
+    password: { type: String, require: true },
     pic: { type: String },
     name: { type: String },
-    password: { type: String },
     bars: [{
         id: { type: String },
         favourite: { type: Boolean },
@@ -53,8 +31,4 @@ let userSchema = new schema({
     tags: [{ type: String }]
 })
 
-let user = mongoose.model('user', userSchema, 'user');
-let bar = mongoose.model('bar', barSchema, 'bar');
-
-let mySchemas = { 'user': user, 'bar': bar };
-module.exports = mySchemas;
+module.exports = mongoose.model('user', userSchema, 'user');

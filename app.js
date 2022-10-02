@@ -3,19 +3,22 @@ const path = require('path');
 const router = require('./routes');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
+const req = require('express/lib/request');
+const res = require('express/lib/response');
 const bodyParser = require("body-parser");
 const axios = require("axios");
-const session = require('express-session')
-const passport = require("passport")
-const FacebookStrategy = require('passport-facebook').Strategy;
-const config = require('./src/config')
-const schemas = require('./models/userSchema');
 
-require('dotenv/config');
+const config = require('./src/config')
+const User = require('./models/userSchema');
+const Bar = require('./models/barSchema');
 
 const moment = require('moment');
-const { stringify } = require('query-string');
+const { stringify } = require('querystring');
+
 const cookieParser = require('cookie-parser'); // for showing login error messages
+const session = require('express-session');
+
+require('dotenv/config');
 
 const DB_URI = "mongodb+srv://the-leftovers:OEIiTEbBpuJCluKH@personal-items-register.ll54ewt.mongodb.net/bar-collection?retryWrites=true&w=majority";
 
@@ -96,37 +99,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, '/public')));
-
-app.use(session({
-    resave: false,
-    saveUninitialized: true,
-    secret: "thisismysupersecretkey"
-}))
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-    done(null, user);
-});
-
-passport.deserializeUser(function(id, done) {
-
-    return done(null, id)
-})
-
-// make our facebook strategy
-
-// passport.use(new FacebookStrategy({
-//     clientID: config.facebookAuth.clientID,
-//     clientSecret: config.facebookAuth.clientSecret,
-//     callbackURL: config.facebookAuth.callbackURL
-// }, function(accessToken, refreshToken, profile, done) {
-//     return done(null, profile);
-// }));
-
 app.use(cookieParser('secret'));
+
+app.use(express.static(path.join(__dirname, '/public')));
 
 // express session middleware
 app.use(
@@ -146,8 +121,8 @@ app.use(
     })
 )
 
-
 // passport
+const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcryptjs');
 const { doesNotMatch } = require('assert');
@@ -157,7 +132,13 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-let User = schemas.user;
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
 
 let strategy = new LocalStrategy((username, password, cb) => {
     // first, check if there is a user in the db with this username
@@ -165,19 +146,13 @@ let strategy = new LocalStrategy((username, password, cb) => {
         if (err) { return cb(null, false) }
         if (!user) { return cb(null, false, { message: 'Incorrect login credentials.' }) }
         // const hash = user.password;
-        if (password == user.password) {
+        console.log(user.password);
+        console.log(password);
+        if (user.password == password) {
             return cb(null, user);
         } else {
             return cb(null, false, { message: 'Incorrect login credentials.' })
         }
-
-        // bcrypt.compare(password, hash, function(err, response) {
-        //     if (response === true) {
-        //         return cb(null, user);
-        //     } else {
-        //         return cb(null, false, { message: 'Incorrect login credentials.' })
-        //     }
-        // });
     });
 })
 

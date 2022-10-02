@@ -1,4 +1,3 @@
-const { Int32, Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const SchemaTypes = mongoose.Schema.Types;
@@ -20,11 +19,8 @@ let barSchema = new schema({
     address: { type: String },
     price_level: { type: Number },
     rating: { type: Number },
-    hours: [{ type: String }],
-    location: { type: String }
+    hours: [open_hours],
+    location: location
 })
 
-let bar = mongoose.model('bar', barSchema, 'bar');
-
-let mySchemas = { 'bar': bar };
-module.exports = mySchemas;
+module.exports = mongoose.model('bar', barSchema, 'bar');

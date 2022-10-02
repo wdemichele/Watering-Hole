@@ -1,7 +1,7 @@
 <div class="databox secondary">
     <h2>Add My Tags</h2>
 
-    {{#each tags}}
+    {{#each user.tags}}
         <div name="chip" class="chip" onclick="checked(this)">
             {{this}}
             <input style="display: none;" type="checkbox" id="{{this}}" name="{{this}}" value="{{this}}">

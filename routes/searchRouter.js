@@ -3,14 +3,25 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require("body-parser");
 const axios = require('axios');
-const schemas = require('../models/userSchema');
+const User = require('../models/userSchema');
+const Bar = require('../models/barSchema');
 const { Db } = require('mongodb');
 const { default: mongoose } = require('mongoose');
 const mongodb = require('mongodb');
+const passport = require('passport');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(bodyParser.json());
+
+const isLoggedIn = (req, res, next) => {
+    // If user is not authenticated via Passport, redirect to login page
+    if (!req.isAuthenticated()) {
+        return res.redirect('/')
+    }
+    // Otherwise, proceed to next middleware function
+    return next()
+}
 
 router.get('/bar-search', isLoggedIn, async(req, res) => {
 
@@ -94,9 +105,8 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
 });
 
 router.get('/bar:id', isLoggedIn, async(req, res) => {
-    let username = req.user.externalId;
-    let users = schemas.user;
-    let user = await users.findOne({
+    let username = req.user.username;
+    let user = await User.findOne({
         username: username
     }).lean().exec();
 
@@ -114,7 +124,7 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
             // console.log(response.data.result.opening_hours)
             // console.log(response.data.result.opening_hours.periods)
             // console.log(response.data.result.geometry.location)
-            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: false, favourited: false, tags: user.tags });
+            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: false, favourited: false, user: user });
         })
         .catch(function(error) {
             console.log(error);
@@ -122,11 +132,10 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
 });
 
 router.post('/bar:id/tags', isLoggedIn, async(req, res) => {
-    let bars = schemas.bar
-    let bar = await bars.findOne({ id: req.params.bar_id })
+    let bar = await Bar.findOne({ id: req.params.bar_id })
 
     if (!bar) {
-        let newBar = new bars({
+        let newBar = new Bar({
             name: req.body.bar_name,
             id: req.params.bar_id,
             address: req.body.bar_address,
@@ -138,20 +147,20 @@ router.post('/bar:id/tags', isLoggedIn, async(req, res) => {
         let newBarSaved = await newBar.save();
     }
 
-    let username = req.user.externalId;
-    let users = schemas.user;
+    let username = req.user.username;
 
     let array = []
-    let user = await users.findOne({
+    let user = await User.findOne({
         username: username
     }).lean().exec();
-
-    for (let tag of user.tags) {
-        if (req.body[tag]) {
-            let current_tag = await users.findOneAndUpdate({
-                username: username,
-                bars: { $elemMatch: { id: req.params.id } }
-            }, { $addToSet: { "bars.$.tags": tag } }).lean().exec();
+    if (user.tags) {
+        for (let tag of user.tags) {
+            if (req.body[tag]) {
+                let current_tag = await User.findOneAndUpdate({
+                    username: username,
+                    bars: { $elemMatch: { id: req.params.id } }
+                }, { $addToSet: { "bars.$.tags": tag } }).lean().exec();
+            }
         }
     }
 
@@ -160,11 +169,10 @@ router.post('/bar:id/tags', isLoggedIn, async(req, res) => {
 
 router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
 
-    let bars = schemas.bar
-    let bar = await bars.findOne({ id: req.params.bar_id })
+    let bar = await Bar.findOne({ id: req.params.bar_id })
 
     if (!bar) {
-        let newBar = new bars({
+        let newBar = new Bar({
             name: req.body.bar_name,
             id: req.params.bar_id,
             address: req.body.bar_address,
@@ -176,13 +184,12 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
         let newBarSaved = await newBar.save();
     }
 
-    let username = req.user.externalId;
-    let users = schemas.user;
+    let username = req.user.username;
 
     let fav = undefined;
     if (typeof req.body.favourite_button !== 'undefined') {
         fav = true
-        let updatedUser = await users.findOneAndUpdate({ username: username }, {
+        let updatedUser = await User.findOneAndUpdate({ username: username }, {
             $push: {
                 activity: {
                     id: req.params.bar_id,
@@ -200,7 +207,7 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
     let buck = undefined;
     if (typeof req.body.bucketlist_button !== 'undefined') {
         buck = true
-        let updatedUser = await users.findOneAndUpdate({ username: username }, {
+        let updatedUser = await User.findOneAndUpdate({ username: username }, {
             $push: {
                 activity: {
                     id: req.params.bar_id,
@@ -215,17 +222,19 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
         let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "bucketlisted" } });
     }
 
-
-    let user = await users.findOne({ username: username });
-
+    console.log(username);
+    let user = await User.findOne({ username: username });
+    console.log(user);
     let barEntry = undefined;
     let index = 0;
-    for (let bar of user.bars) {
-        if (bar.id == req.params.bar_id) {
-            barEntry = bar
-            break;
+    if (user.bars) {
+        for (let bar of user.bars) {
+            if (bar.id == req.params.bar_id) {
+                barEntry = bar
+                break;
+            }
+            index += 1;
         }
-        index += 1;
     }
 
     // create a new bar entry
@@ -263,11 +272,8 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
 
 router.post('/bar-visit:bar_id', isLoggedIn, async(req, res) => {
 
-    let username = req.user.externalId;
-    let user = schemas.user;
-
-
-    let updatedUser = await user.findOneAndUpdate({ username: username }, {
+    let username = req.user.username;
+    let updatedUser = await User.findOneAndUpdate({ username: username }, {
         $push: {
             activity: {
                 id: req.params.bar_id,
@@ -283,45 +289,44 @@ router.post('/bar-visit:bar_id', isLoggedIn, async(req, res) => {
 })
 
 router.get('/favourites-search', isLoggedIn, async(req, res) => {
-    let username = req.user.externalId;
-    let users = schemas.user;
+    let username = req.user.username;
 
-    let user = await users.findOne({
+    let user = await User.findOne({
         username: username
     }).lean().exec();
     res.render('search/favourites-search.hbs', { layout: 'user-layout', title: 'Bar Favourites Search', user: user });
 });
 
 router.post('/favourites-search', isLoggedIn, async(req, res) => {
-    let username = req.user.externalId;
-    let users = schemas.user;
-    let user = await users.findOne({ username: username }).lean().exec();
+    let username = req.user.username;
+    let user = await User.findOne({ username: username }).lean().exec();
 
     let tags = []
     let favourites = []
-    for (let tag of user.tags) {
-        if (req.body[tag]) {
-            tags.push(tag);
-        }
-    }
-    console.log(tags)
-
-    if (!tags.length) {
-        favourites = user.favourites
-    } else {
-        for (let bar of user.bars) {
-            let contains = bar.tags.some(element => {
-                return tags.indexOf(element) !== -1;
-            });
-            if (contains) {
-                favourites.push(bar.id)
+    if (user.tags) {
+        for (let tag of user.tags) {
+            if (req.body[tag]) {
+                tags.push(tag);
             }
         }
     }
-    console.log(favourites)
+    console.log(tags)
+    if (user.bars) {
+        if (!tags.length) {
+            favourites = user.bars
+        } else {
+            for (let bar of user.bars) {
+                let contains = bar.tags.some(element => {
+                    return tags.indexOf(element) !== -1;
+                });
+                if (contains) {
+                    favourites.push(bar.id)
+                }
+            }
+        }
+    }
 
-    let bars = schemas.bar;
-    let favs = await bars.find({ id: { $in: favourites } }).lean().exec();
+    let favs = await Bar.find({ id: { $in: favourites } }).lean().exec();
     console.log(favs)
 
     res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs });
@@ -338,11 +343,7 @@ function getIntersection(a, b) {
     return intersection;
 }
 
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated())
-        return next();
-    res.redirect('/');
-}
+
 
 
 module.exports = router;
