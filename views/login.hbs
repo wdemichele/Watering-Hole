@@ -2,6 +2,7 @@
 <div class="login accent">
     <h1 class="login-title">Login</h1>
     <div class="login-text-field">
+      <form action="/login" method="post">
         <label for="username">Username</label>
         <input class="input-field" id="username" name="username">
         <label for="password">Password</label>
@@ -9,7 +10,8 @@
         <a class="forgot-pass" href="#"><label for="password">Forgot Password?</label></a>
         <a href="user/create" class="forgot-pass right" href="/user/create"><p>New User</p></a><br><br>
         <button class="tertiary login-btn" type="reset">Cancel</button>
-        <a href="/login"><button class="primary login-btn">Login</button></a>
+        <button class="primary login-btn">Login</button></a>
+      </form>
     </div>
 </div>
 OR

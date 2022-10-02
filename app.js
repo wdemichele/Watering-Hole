@@ -118,13 +118,13 @@ passport.deserializeUser(function(id, done) {
 
 // make our facebook strategy
 
-passport.use(new FacebookStrategy({
-    clientID: config.facebookAuth.clientID,
-    clientSecret: config.facebookAuth.clientSecret,
-    callbackURL: config.facebookAuth.callbackURL
-}, function(accessToken, refreshToken, profile, done) {
-    return done(null, profile);
-}));
+// passport.use(new FacebookStrategy({
+//     clientID: config.facebookAuth.clientID,
+//     clientSecret: config.facebookAuth.clientSecret,
+//     callbackURL: config.facebookAuth.callbackURL
+// }, function(accessToken, refreshToken, profile, done) {
+//     return done(null, profile);
+// }));
 
 app.use(cookieParser('secret'));
 
@@ -164,15 +164,20 @@ let strategy = new LocalStrategy((username, password, cb) => {
     User.findOne({ username: username }, {}, {}, (err, user) => {
         if (err) { return cb(null, false) }
         if (!user) { return cb(null, false, { message: 'Incorrect login credentials.' }) }
-        const hash = user.password;
+        // const hash = user.password;
+        if (password == user.password) {
+            return cb(null, user);
+        } else {
+            return cb(null, false, { message: 'Incorrect login credentials.' })
+        }
 
-        bcrypt.compare(password, hash, function(err, response) {
-            if (response === true) {
-                return cb(null, user);
-            } else {
-                return cb(null, false, { message: 'Incorrect login credentials.' })
-            }
-        });
+        // bcrypt.compare(password, hash, function(err, response) {
+        //     if (response === true) {
+        //         return cb(null, user);
+        //     } else {
+        //         return cb(null, false, { message: 'Incorrect login credentials.' })
+        //     }
+        // });
     });
 })
 

@@ -12,7 +12,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(bodyParser.json());
 
-router.get('/bar-search', isLoggedIn, async(_req, res) => {
+router.get('/bar-search', isLoggedIn, async(req, res) => {
 
     res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search' });
 });

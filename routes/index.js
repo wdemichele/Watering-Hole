@@ -58,7 +58,7 @@ router.get('/manual', (_req, res) => {
     res.render('user-manual.hbs', { layout: 'guest-layout', title: 'User Manual' });
 });
 
-router.get('/settings', isLoggedIn, async(_req, res) => {
+router.get('/settings', isLoggedIn, async(req, res) => {
     let username = req.user.externalId;
     let users = schemas.user;
     let user = await users.findOne({ username: username }).lean().exec();
@@ -88,7 +88,7 @@ router.post('/login',
     })
 );
 
-router.get('/user', isLoggedIn, async(_req, res) => {
+router.get('/user', isLoggedIn, async(req, res) => {
 
     let username = req.user.externalId;
     let users = schemas.user;
