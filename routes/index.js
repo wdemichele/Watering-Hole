@@ -33,7 +33,7 @@ router.get('/home', isLoggedIn, async(req, res) => {
     res.render('home.hbs', { layout: 'user-layout', title: 'User Results', user: user });
 });
 
-router.get('/friends', isLoggedIn, async(req, res) => {
+router.get('/social', isLoggedIn, async(req, res) => {
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
 
@@ -45,16 +45,12 @@ router.get('/friends', isLoggedIn, async(req, res) => {
 
 router.get('/about-us', (req, res) => {
 
-    res.render('about-page.hbs', { layout: 'guest-layout', title: 'About Us' });
-});
-router.get('/maps', (req, res) => {
-
-    res.render('map-page.hbs', { layout: 'guest-layout', title: 'map' });
+    res.render('guest/about-page.hbs', { layout: 'guest-layout', title: 'About Us' });
 });
 
 router.get('/manual', (req, res) => {
 
-    res.render('user-manual.hbs', { layout: 'guest-layout', title: 'User Manual' });
+    res.render('guest/user-manual.hbs', { layout: 'guest-layout', title: 'User Manual' });
 });
 
 router.get('/settings', isLoggedIn, async(req, res) => {
@@ -65,7 +61,7 @@ router.get('/settings', isLoggedIn, async(req, res) => {
 
 router.get('/', (req, res) => {
 
-    res.render('login.hbs', { layout: 'guest-layout', title: 'User Login', flash: req.flash('error') });
+    res.render('guest/login.hbs', { layout: 'guest-layout', title: 'User Login', flash: req.flash('error') });
 });
 
 router.post('/login', passport.authenticate('local', {
@@ -73,31 +69,6 @@ router.post('/login', passport.authenticate('local', {
     failureRedirect: '/',
     failureFlash: true
 }));
-
-router.get('/friend:id', isLoggedIn, async(req, res) => {
-
-    let username = req.params.id;
-    let user = await User.findOne({ username: username }).lean().exec();
-
-    res.render('friend-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user });
-
-});
-
-router.get('/user:id/friends', isLoggedIn, async(req, res) => {
-
-    let username = req.params.id;
-    let user = await User.findOne({ username: username }).lean().exec();
-
-    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
-
-});
-
-
-router.get('/tags', isLoggedIn, async(req, res) => {
-    let username = req.user.username;
-    let user = await User.findOne({ username: username }).lean().exec();
-    res.render('tags.hbs', { layout: 'user-layout', title: 'My Tags', user: user });
-});
 
 router.post('/tags', isLoggedIn, async(req, res) => {
     let username = req.user.username;

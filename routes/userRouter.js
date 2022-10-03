@@ -36,7 +36,7 @@ router.post('/create', async(req, res) => {
     let newUserSaved = await newUser.save();
     let user = await User.findOne({ username: req.body.username }).lean().exec();
 
-    res.render('login.hbs', { layout: 'user-layout', title: 'User Login', user: user });
+    res.render('guest/login.hbs', { layout: 'user-layout', title: 'User Login', user: user, flash: ["Account created, please login."] });
 
 });
 
@@ -75,10 +75,10 @@ router.post('/add-friend', isLoggedIn, async(req, res) => {
         username = "-1";
     }
     let friend = await User.findOne({ username: username }).lean().exec();
-
+    let user;
     if (friend) {
         let username = req.user.username;
-        let user = await User.findOneAndUpdate({ username: username }, {
+        user = await User.findOneAndUpdate({ username: username }, {
             $push: { friends: req.body.friend }
         }).lean().exec();
         response = "User Added to Friend List"
@@ -86,7 +86,7 @@ router.post('/add-friend', isLoggedIn, async(req, res) => {
         response = "User not found!"
     }
 
-    res.render('user/add-friends.hbs', { layout: 'user-layout', title: 'User Results', response: response });
+    res.render('user/add-friends.hbs', { layout: 'user-layout', title: 'User Results', response: response, user: user });
 
 });
 

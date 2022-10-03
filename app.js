@@ -35,22 +35,25 @@ app.engine('hbs', exphbs.engine({
 // helpers
 const hbs = exphbs.create({});
 
-hbs.handlebars.registerHelper('reverseArray', (array) => array.reverse());
+hbs.handlebars.registerHelper('reverseArray', function(array) {
+    console.log(array)
+    if (!Array.isArray(array)) { return };
+    return array.reverse();
+});
 
 hbs.handlebars.registerHelper("array_length", function(array) {
-    if (!array) {
-        return 0;
-    }
+    if (!Array.isArray(array)) { return 0 };
     return array.length;
 });
 
 // limit an array to a maximum of elements (from the start)
-hbs.handlebars.registerHelper('limit', function(arr, limit) {
-    if (limit > arr.length) {
-        limit = arr.length;
+hbs.handlebars.registerHelper('limit', function(array, limit) {
+    if (!Array.isArray(array)) { return };
+    if (limit > array.length) {
+        limit = array.length;
     }
-    if (!Array.isArray(arr)) { return []; }
-    return arr.slice(0, limit);
+    if (!Array.isArray(array)) { return []; }
+    return array.slice(0, limit);
 });
 
 hbs.handlebars.registerHelper("contains", function(array, num) {
