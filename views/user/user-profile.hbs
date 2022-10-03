@@ -34,8 +34,8 @@
 
     <div class="search_search_tags">
         <div class="tag_box">
-            {{#each user.tags}}
-                <div>{{this}}</div>
+            {{#each user.tags as |tag|}}
+                <a href="/user/uid{{../user.username}}/tags{{tag}}"><div>{{tag}}</div></a>
             {{/each}}
         </div>
     

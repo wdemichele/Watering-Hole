@@ -56,12 +56,15 @@ hbs.handlebars.registerHelper('limit', function(array, limit) {
     return array.slice(0, limit);
 });
 
-hbs.handlebars.registerHelper("contains", function(array, num) {
-    if (!array) {
+hbs.handlebars.registerHelper("contains", function(array, value) {
+    console.log(array)
+    console.log(value)
+    if (!Array.isArray(array)) {
         return false;
     }
-    for (let i = 0; i < array.length; i++) {
-        if (array[0].id == num) {
+
+    for (const element of array) {
+        if (element == value) {
             return true;
         }
     }

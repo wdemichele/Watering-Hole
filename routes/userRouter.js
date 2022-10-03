@@ -75,6 +75,16 @@ router.get('/uid:id/favourites', isLoggedIn, async(req, res) => {
     res.render('user/user-favourites.hbs', { layout: 'user-layout', title: 'User Favourites', user: user });
 });
 
+router.get('/uid:id/tags:tag', isLoggedIn, async(req, res) => {
+
+    let username = req.params.id;
+    let user = await User.findOne({ username: username }).lean().exec();
+
+    console.log(req.params.tag)
+
+    res.render('user/user-tag.hbs', { layout: 'user-layout', title: 'My Tags', user: user, selected: req.params.tag });
+});
+
 router.get('/add-friends', isLoggedIn, async(req, res) => {
     console.log("here")
 
