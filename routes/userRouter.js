@@ -45,16 +45,34 @@ router.get('/', isLoggedIn, async(req, res) => {
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: true });
 
 });
 
 router.get('/uid:id', isLoggedIn, async(req, res) => {
+    let mine = false;
+    let username = req.params.id;
+    if (username == req.user.username) {
+        mine = true
+    }
+    let user = await User.findOne({ username: username }).lean().exec();
+
+    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: mine });
+});
+
+router.get('/uid:id/friends', isLoggedIn, async(req, res) => {
+    let username = req.params.id;
+    let user = await User.findOne({ username: username }).lean().exec();
+
+    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Friends', user: user });
+});
+
+router.get('/uid:id/favourites', isLoggedIn, async(req, res) => {
 
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+    res.render('user/user-favourites.hbs', { layout: 'user-layout', title: 'User Favourites', user: user });
 });
 
 router.get('/add-friends', isLoggedIn, async(req, res) => {

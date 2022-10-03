@@ -6,7 +6,7 @@
 
         <h1>Friends: {{array_length user.friends}}</h1>
         {{#each user.friends}}
-            <h2>{{this}}</h2>
+            <a href="/user/uid{{this}}"><h2>{{this}}</h2></a>
         {{/each}}
     </div>
 </div>
