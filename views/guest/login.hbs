@@ -1,0 +1,29 @@
+<img style="width: 40%;" src="/assets/logo.jpg" class="center">
+<div class="login accent">
+    {{#each flash}}
+        <div style="text-align: center">
+            <div class="body-text">
+                <p style=" color: #955a60">{{this}}</p>
+            </div>
+        </div>
+        {{/each}}
+    <h1 class="login-title">Login</h1>
+    <div class="login-text-field">
+      <form action="/login" method="post">
+        <label for="username">Username</label>
+        <input type="username" class="input-field" id="username" name="username">
+        <label for="password">Password</label>
+        <input type="password" class="input-field" id="password" name="password">
+        <a class="forgot-pass" href="#"><label for="password">Forgot Password?</label></a>
+        <a href="user/create" class="forgot-pass right" href="/user/create"><p>New User</p></a><br><br>
+        <button class="tertiary login-btn" type="reset">Cancel</button>
+        <button class="primary login-btn">Login</button></a>
+      </form>
+    </div>
+</div>
+OR
+<div class="card-action">
+  <a href="/auth/facebook" class="waves-effect waves-light btn social facebook">
+    <i class="fa fa-facebook"></i> Sign in with facebook
+  </a>
+</div>

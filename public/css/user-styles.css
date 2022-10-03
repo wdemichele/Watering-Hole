@@ -1391,3 +1391,9 @@ input[type=text]:focus {
 .scroll::-webkit-scrollbar-thumb:hover {
     background: #6286B2;
 }
+
+.backbutton-icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 20px;
+}
