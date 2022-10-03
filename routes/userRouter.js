@@ -1,13 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const searchRouter = require('./searchRouter');
 const bodyParser = require("body-parser");
 const axios = require('axios');
 const User = require('../models/userSchema');
 const Bar = require('../models/barSchema');
-var passport = require('passport');
-const bcrypt = require('bcryptjs');
-const saltRounds = 10;
 
 router.use(bodyParser.json());
 

@@ -7,10 +7,8 @@ const axios = require('axios');
 const User = require('../models/userSchema');
 const Bar = require('../models/barSchema');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
 
 const res = require('express/lib/response');
-const saltRounds = 10;
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use('/search', searchRouter);
