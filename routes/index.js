@@ -7,7 +7,7 @@ const axios = require('axios');
 const User = require('../models/userSchema');
 const Bar = require('../models/barSchema');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const res = require('express/lib/response');
 const saltRounds = 10;
@@ -51,6 +51,10 @@ router.get('/about-us', (req, res) => {
 router.get('/manual', (req, res) => {
 
     res.render('guest/user-manual.hbs', { layout: 'guest-layout', title: 'User Manual' });
+});
+
+router.get('/contact', (req, res) => {
+    res.render('guest/contact-us.hbs', { layout: 'guest-layout', title: 'Contact' });
 });
 
 router.get('/settings', isLoggedIn, async(req, res) => {
