@@ -388,14 +388,19 @@ table {
 .login-btn {
     margin-top: 8%;
     margin-bottom: 0;
-    width: 41%;
+    width: 35%;
 }
 
+.btn-margin-right {
+    margin-right: 15%;
+}
+
+
+
 .forgot-pass {
-    float: left;
+    text-align: center;
     font-size: 20px;
     cursor: pointer;
-    margin-left: 2%;
     text-decoration: underline;
     color: rgb(240, 96, 96);
 }
@@ -668,7 +673,7 @@ input:focus {
 }
 
 button {
-    border-radius: 4px;
+    border-radius: 10px;
     border-style: none;
     box-sizing: border-box;
     cursor: pointer;
@@ -1396,4 +1401,53 @@ input[type=text]:focus {
     height: 30px;
     width: 30px;
     margin-right: 20px;
+}
+
+.contact-container {
+    background-color: var(--color-quat);
+    width: 35%;
+    padding: 2% 10% 2% 10%;
+    margin-left: auto;
+    margin-right: auto;
+    flex: 1;
+}
+
+.contact-input {
+    width: 100%;
+    border-radius: 25px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: left;
+    padding: 12px 20px;
+    padding-left: 5%;
+}
+
+.contact-question {
+    width: 100%;
+    height: 150px;
+    border-radius: 25px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: left;
+    padding: 12px 20px;
+    padding-left: 5%;
+}
+
+.contact-us-button {
+    border-radius: 25px;
+    background-color: var(--color-tertiary);
+    color: white;
+    margin: 0 20% 0 20%;
+
+}
+
+.contact-page-container {
+    display: flex;
+    margin: 3%;
+}
+
+.contact-info-container {
+    flex: 1;
+    background-color: var(--color-tertiary);
+    color: white;
 }
