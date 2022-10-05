@@ -162,6 +162,23 @@ nav a:hover {
     .flex-container {
         flex-direction: column;
     }
+    .login {
+        width: 90%;
+    }
+}
+
+/* Mobile Phone Width */
+@media (max-width: 576px) {
+    .login {
+        width: 90%;
+    }
+}
+
+/* Tablet Width */
+@media (max-width: 768px) {
+    .login {
+        width: 90%;
+    }
 }
 
 input {
