@@ -1,25 +1,46 @@
 <div class="databox secondary">
-<h1>Find Me A Favourite!</h1>
+    <h1>My Favourites</h1>
     <form action="favourites-search" method="post">
-    
-    <fieldset>
-        <legend>Area Settings</legend>
-        <label for="area_search">Area</label>
-        <input id="area_search" name="area_search">
-        <label for="radius_search">Radius</label>
-        <input id="radius_search" name="radius_search">
-    </fieldset>
-    <fieldset>
-    <legend>Bar Settings</legend>
-    <select name="price_range" id="price_range" placeholder="$-$$$" multiple>
-        <option value="$">$</option>
-        <option value="$$">$$</option>
-        <option value="$$$">$$$</option>
-        <option value="$$$$">$$$$</option>
-    </select>
-    {{> search-tags}}
-    </fieldset>
-    <button class="tertiary" type="reset">Cancel</button>
-    <button class="primary right" type="submit">Search</button><br><br>
-</form>
+        <fieldset>
+            <legend>Area Settings</legend>
+            <label for="area_search">Area</label><br>
+            <input id="area_search" name="area_search"><br>
+            <label for="radius_search">Radius</label><br>
+            <input id="radius_search" name="radius_search">
+        </fieldset>
+        <fieldset>
+            <legend>Bar Settings</legend>
+            <select name="price_range" id="price_range" placeholder="$-$$$">
+        <option name="1" value="1">$</option>
+        <option name="2" value="2">$$</option>
+        <option name="3" value="3">$$$</option>
+        <option name="4" value="4">$$$$</option>
+    </select><br>
+            <label for="below">Include below prices</label><br>
+            <input name="below" style="float: left; width: auto" type="checkbox">
+        </fieldset>
+        <fieldset>
+            <legend>Search Tags</legend>
+            {{#each user.tags}}
+            <div name="chip" class="chip" onclick="checked(this)">
+                {{this}}
+                <input style="display: none;" type="checkbox" id="{{this}}" name="{{this}}" value="{{this}}">
+            </div>
+            {{/each}}
+        </fieldset><br>
+
+        <button class="tertiary" type="reset">Cancel</button>
+        <button class="primary right" type="submit">Search</button><br><br>
+    </form>
 </div>
+
+<script>
+    function checked(element) {
+        element.classList.toggle("tagged");
+        var checkbox = element.querySelector("input");
+
+        checkbox.checked = !checkbox.checked;
+
+        console.log(checkbox);
+    }
+</script>

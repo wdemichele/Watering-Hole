@@ -1,0 +1,43 @@
+<div class="center" style="width: 90%;">
+<div class="w3-bar w3-black">
+    {{#each user.tags as |tag|}}
+        {{#ifCond tag "==" ../selected}}
+            <button class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'{{tag}}')">{{tag}}</button>
+        {{/ifCond}}
+        {{#ifCond tag "!=" ../selected}}
+            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'{{tag}}')">{{tag}}</button>
+        {{/ifCond}}
+    {{/each}}
+  </div>
+{{#each user.tags as |tag|}}
+    {{#ifCond tag "==" ../selected}}
+    <div id="{{tag}}" class="w3-container w3-border city secondary">
+    {{/ifCond}}
+    {{#ifCond tag "!=" ../selected}}
+    <div id="{{tag}}" class="w3-container w3-border city secondary" style="display:none;">
+    {{/ifCond}}
+
+        <h1>{{tag}}</h1>
+        {{#each user.bars as |bar|}}
+                <div class="databox tertiary">
+                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
+                </div>
+        {{/each}}
+    </div>
+{{/each}}
+
+<script>
+    function openCity(evt, cityName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-teal", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " w3-teal";
+        }
+</script>

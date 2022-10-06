@@ -1,0 +1,41 @@
+<div class="center" style="width: 90%;">
+<div class="w3-bar w3-black">
+    <button class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'favourite')">Favourites</button>
+    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'bucketlist')">Bucketlist</button>
+  </div>
+<div id="favourite" class="w3-container w3-border city secondary">
+    <h1>Favourites</h1>
+        {{#each user.bars as |bar|}}
+            {{#ifCond bar.type "==" "favourited"}}
+                <div class="databox tertiary">
+                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
+                </div>
+            {{/ifCond}}
+        {{/each}}
+</div>
+<div id="bucketlist" class="w3-container w3-border city secondary" style="display: none;">
+    <h1>Bucketlist</h1>
+        {{#each user.bars as |bar|}}
+            {{#ifCond bar.type "==" "bucketlisted"}}
+                <div class="databox tertiary">
+                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
+                </div>
+            {{/ifCond}}
+        {{/each}}
+</div>
+
+<script>
+    function openCity(evt, cityName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-teal", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " w3-teal";
+        }
+</script>

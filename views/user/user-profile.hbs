@@ -1,0 +1,55 @@
+<div>
+    <img style="width: 200px; height: auto;" src="\assets\nav\abstract-user-flat-4.svg">
+    <h1>{{user.name}}</h1>
+    <h2>@{{user.username}}</h2>
+    <div class="flex-container">
+        <div>
+            <h1>Friends</h1>
+            <a href="/user/uid{{user.username}}/friends"><h1>{{array_length user.friends}}</h1></a>
+        </div>
+        <div>
+            <h1>Favourites</h1>
+            <a href="/user/uid{{user.username}}/favourites"><h1>{{array_length user.friends}}</h1></a>
+        </div>
+    </div>
+
+</div>
+<div>
+    <h2>Recently Visited:</h2>
+    <div class="flex-container databox secondary">
+        {{#each user.activity as |activity|}}
+            {{#ifCond activity.type "==" "visited"}}
+                <div class="databox tertiary">
+                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
+                </div>
+            {{/ifCond}}
+        {{/each}}
+    </div>
+</div>
+<div class="databox primary">
+    <h3>Search Tags</h3>
+    
+    <div class="databox tertiary">
+    <div id="user" name="user" class="flex-container">
+
+    <div class="search_search_tags">
+        <div class="tag_box">
+            {{#each user.tags as |tag|}}
+                <a href="/user/uid{{../user.username}}/tags{{tag}}"><div>{{tag}}</div></a>
+            {{/each}}
+        </div>
+    
+    </div>
+    </div>
+    </div>
+    {{#if mine}}
+    <div id="addTag" class="databox tertiary">
+        <form action="/tags" method="post">
+            <h3>Add Search Tag</h3>
+            <input id="tag_name" name="tag_name">
+            <button class="primary right" type="submit">Add Tag</button>
+            <br><br>
+        </form>
+    </div>
+    {{/if}}
+</div>
