@@ -1,35 +1,77 @@
-<div class="settings-container">
-    <span class="settings-left">
-        <img style="width: 300px;" src="\assets\nav\abstract-user-flat-4.svg">
-    </span>
-    <span class="settings-right">
-        <fieldset class="settings-fieldset">
-            <legend>General</legend>
-            <div class="settings-field">
-                <label for="name">Name</label>
-                <input id="name" name="name" value="{{user.name}}" disabled>
-                <label for="username">Username</label>
-                <input id="username" name="username" value="{{user.username}}" disabled>
-                <label type="email" for="email">Email</label>
-                <input id="email" name="email" value="[user email]" disabled>
-                <label for="password">Password</label>
-                <input id="password" name="password" value="**************" disabled>
-            </div>
-        </fieldset>
-        <fieldset class="settings-fieldset">
-            <div class="settings-field">
-                <label for="bio">Bio</label>
-                <input id="bio" name="bio" value="[Add bio]" disabled>
+<br><br><br>
 
-                {{!<h2>Friend Tracking:</h2>
-                <button class="settings-button">Red Button</button> }}
-            </div>
-        </fieldset>
-        <fieldset>
-            <legend>Accessibility</legend>
-        </fieldset>
-    </span>
+<div style="float:none;margin-left:auto;margin-right:auto;width:50%;">
+ 
+
+<section >
+<div style="padding-left:2rem;padding-right:2rem;">
+    <div style="margin-bottom:2rem;margin-top:2rem">
+<form >
+<div style="float:left;padding-left:0.5rem;padding-right:0.5rem;position:relative;width:37.5%;text-align:center;margin-top:1rem;">
+    
+<img style="width: 170px;" src="\assets\avatars\avatar.svg">
+
+    <p style="padding:1rem;">
+        <button style="width: 50%; border-radius:20px;" href="#">
+        Upload</button>        
+    </p>
+
+</div>
+
+<div style="width: 62.5%;float:left;padding-left:0.5rem;padding-right:0.5rem;position:relative">
+    <div style="margin-bottom:1rem">
+    <label for="Name">Name</label>
+    <input style="border-radius:20px;" title="Name" value="{{user.name}}" id="name" />
+    </div>
+
+    <div style="margin-bottom:1rem">
+    <label for="username">Username</label>
+    <input style="border-radius:20px;" title="username" value="{{user.username}}" id="username" />
+    </div>
+
+    <div style="margin-bottom:1rem">
+    <label for="bio">Bio</label>
+    <input style="border-radius:20px;" title="Bio" value="" id="bio" />
+    </div>
+</div>
+
+<div style="float:left;padding-left:0.5rem;padding-right:0.5rem;width:100%">
+    
+    <div style="margin-bottom:1rem">
+        <label for="user_password">New password</label>
+        <input style="border-radius:20px;" placeholder="New password" title="New password" type="password" id="user_password" />
+    </div>
+
+    
+    <div style="margin-bottom:1rem">
+        <label for="user_password_confirmation">Re-enter password</label>
+        <input style="border-radius:20px;" autocomplete="off" id="user_password_confirmation" placeholder="Re-enter password" type="password" />
+    </div>
+
+
+
+
+    <div style="margin-bottom:1rem">
+        <hr style="background-color: black;">
+        
+        <div style="width:100%;padding-bottom:1rem">
+        <input style="border-radius:20px;" placeholder="Enter your current password to save changes" title="Current Password" type="password" id="user_current_password" />
+        </div>
+
+        <div>
+            <button style="float:right;background-color:#EAD5BF;padding:1rem 2rem 1rem 2rem;border-radius:20px;">
+               Save </button>
+        </div>
+
+    </div>
+
+</div>
+</form>
 </div>
 
 
 
+</div>
+</section>
+
+</div>
