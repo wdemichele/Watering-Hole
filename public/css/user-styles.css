@@ -213,6 +213,11 @@ input:focus {
     color: white;
 }
 
+.quaternary {
+    background-color: var(--color-quat);
+    color: black;
+}
+
 .accent {
     background-color: #EAD5BF;
 }
