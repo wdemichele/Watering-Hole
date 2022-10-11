@@ -1491,3 +1491,12 @@ hr {
     border-radius: 2px;
 }
 
+.flex-container-2{
+    display: flex;
+    justify-content: space-between;
+}
+
+.bar-btn {
+    width: fit-content;
+    flex: 1;
+}
