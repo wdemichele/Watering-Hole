@@ -339,6 +339,7 @@ td {
 
 table {
     margin: auto;
+    width: 85%;
 }
 
 .settings-button {
@@ -1421,10 +1422,10 @@ input[type=text]:focus {
 .databoxx {
     box-sizing: border-box;
     flex-wrap: nowrap;
-    margin: 0.5rem;
+    margin: 1rem;
     padding: 10px 10px;
     border: 0px solid #000;
-    border-radius: 5px;
+    border-radius: 10px;
     border-color: #333;
     border-style: solid;
     white-space: normal;
@@ -1454,3 +1455,4 @@ input[type=text]:focus {
     background-color: #fafafa;
     color: #ffeafc;
 }
+
