@@ -1397,3 +1397,60 @@ input[type=text]:focus {
     width: 30px;
     margin-right: 20px;
 }
+
+.flex-containerx {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex;
+    border: 0px solid #000;
+    
+}
+
+.flex-containery {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex;
+    border: 0px solid #000;
+    
+}
+
+.databoxx {
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    margin: 0.5rem;
+    padding: 10px 10px;
+    border: 0px solid #000;
+    border-radius: 5px;
+    border-color: #333;
+    border-style: solid;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.centerx {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+    
+
+.flex-item-1{
+    min-height: 200px;
+}
+
+.flex-item-2{
+    min-height: 200px;
+}
+
+.flex-item-3{
+    min-height: 200px;
+}
+
+.whitex {
+    background-color: #fafafa;
+    color: #ffeafc;
+}
