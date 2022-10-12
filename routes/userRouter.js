@@ -40,6 +40,25 @@ router.post('/create', async(req, res) => {
 
 });
 
+router.post('/update:id', async(req, res) => {
+    let username = req.params.id;
+    let user = await User.findOne({ username: username }).lean().exec();
+    let name = req.body.name
+    let bio = req.body.bio
+    if (!name){
+        if (user.name) {
+            name = user.name;
+        }
+    }
+    if (!bio){
+        if (user.bio) {
+            bio = user.bio;
+        }
+    }
+    let user_updated = await User.findOneAndUpdate({username: req.params.id},{name: name, bio: bio})
+    res.redirect('/settings');
+})
+
 router.get('/', isLoggedIn, async(req, res) => {
 
     let username = req.user.username;

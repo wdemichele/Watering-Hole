@@ -6,7 +6,7 @@
 <section>
 <div style="padding-left:2rem;padding-right:2rem;">
     <div style="margin-bottom:2rem;margin-top:2rem">
-<form>
+<form action="user/update{{user.username}}" method="post">
 <div style="float:left;padding-left:0.5rem;padding-right:0.5rem;position:relative;width:37.5%;text-align:center;margin-top:1rem;">
     
     <img style="width: 170px;" src="\assets\avatars\avatar.svg">
@@ -21,17 +21,17 @@
 <div style="width: 62.5%;float:left;padding-left:0.5rem;padding-right:0.5rem;position:relative">
     <div style="margin-bottom:1rem">
     <label for="Name">Name</label>
-    <input style="border-radius:20px;" title="Name" value="{{user.name}}" id="name" />
+    <input style="border-radius:20px;" title="Name" name="name" value="{{user.name}}" id="name" />
     </div>
 
     <div style="margin-bottom:1rem">
     <label for="username">Username</label>
-    <input style="border-radius:20px;" title="username" value="{{user.username}}" id="username" />
+    <input style="border-radius:20px;" title="username" name="username" value="{{user.username}}" id="username" />
     </div>
 
     <div style="margin-bottom:1rem">
     <label for="bio">Bio</label>
-    <input style="border-radius:20px;" title="Bio" value="" id="bio" />
+    <input style="border-radius:20px;" title="Bio" name="bio" value="{{user.bio}}" id="bio" />
     </div>
 </div>
 

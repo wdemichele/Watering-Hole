@@ -28,7 +28,8 @@ let userSchema = new schema({
     }],
     activity: [activitySchema],
     friends: [{ type: String, unique: true }],
-    tags: [{ type: String, unique: true }]
+    tags: [{ type: String, unique: true }],
+    bio: {type: String}
 })
 
 module.exports = mongoose.model('user', userSchema, 'user');

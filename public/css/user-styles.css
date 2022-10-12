@@ -23,7 +23,7 @@ body {
 
 header {
     display: flex;
-    background: var(--color-primary);
+    background-color: var(--color-primary);
     font-family: 'Lexend', sans-serif;
     font-weight: 300;
     justify-content: flex-start;
@@ -545,12 +545,6 @@ body {
     margin: auto;
     width: 50%;
     padding: 10px;
-}
-
-header {
-    background: #393D42;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
 }
 
 header::after {
