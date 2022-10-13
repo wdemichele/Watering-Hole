@@ -11,7 +11,7 @@ body {
     --color-quat: #EAD5BF;
     --color-white: #fafafa;
     --color-black: #000000;
-    --font-family: 'Lexend', sans-serif;
+    --font-family: "Franklin" Gothic Medium;
     --background-image: none;
 }
 
@@ -339,7 +339,7 @@ td {
 
 table {
     margin: auto;
-    width: 85%;
+    width: 90%;
 }
 
 .settings-button {
@@ -1277,7 +1277,7 @@ table {
 
 .mySlides {
     display: none;
-    width: 500px;
+    width: 80%;
     height: 500px;
     object-fit: cover;
     border-radius: 5%;
@@ -1454,5 +1454,20 @@ input[type=text]:focus {
 .whitex {
     background-color: #fafafa;
     color: #ffeafc;
+}
+
+.quatx{
+    background-color:#EAD5BF;
+    color: white;
+}
+
+.quaty{
+    background-color:#ff9c33;
+    color: white;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
 }
 
