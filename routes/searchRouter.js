@@ -42,7 +42,7 @@ router.post('/bar-search', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            console.log(response.data)
+            // console.log(response.data)
             res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token });
 
         })
@@ -75,7 +75,9 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
 
     let input = req.body.area_name;
 
-    input = input.replace(/ /gi, "%20")
+    input = input.replace(/ /gi, "%20");
+    input = input.replace(/,/g, '');
+    // console.log(input)
 
     let config = {
         method: 'get',
@@ -92,6 +94,7 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
             };
             axios(config)
                 .then(function(response) {
+                    // console.log(response.data.results)
                     res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name, query: "bars%20near" + input, page_token: response.data.next_page_token });
 
                 })
@@ -111,6 +114,23 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
     }).lean().exec();
 
     let bar_id = req.params.id;
+    favourited = false
+    bucketlisted = false
+    tags = []
+
+    for (let bar of user.bars) {
+        if (bar.id == bar_id) {
+            if (bar.favourite) {
+                favourited = bar.favourite;
+            }
+            if (bar.bucketlist) {
+                bucketlisted = bar.bucketlist;
+            }
+            if (bar.tags) {
+                tags = bar.tags;
+            }
+        }
+    }
 
     let config = {
         method: 'get',
@@ -120,12 +140,12 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            console.log(response.data)
-            console.log(response.data.result.opening_hours)
-            console.log(response.data.result.opening_hours.periods)
-            console.log(response.data.result.geometry.location)
-            console.log(response.data.result.reviews)
-            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: false, favourited: false, user: user });
+            // console.log(response.data)
+            // console.log(response.data.result.opening_hours)
+            // console.log(response.data.result.opening_hours.periods)
+            // console.log(response.data.result.geometry.location)
+            // console.log(response.data.result.reviews)
+            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, user: user, tags: tags });
         })
         .catch(function(error) {
             console.log(error);
@@ -223,9 +243,8 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
         let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "bucketlisted" } });
     }
 
-    console.log(username);
     let user = await User.findOne({ username: username });
-    console.log(user);
+
     let barEntry = undefined;
     let index = 0;
     if (user.bars) {
@@ -311,12 +330,10 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
             }
         }
     }
-    console.log(tags)
     if (user.bars) {
         if (!tags.length) {
             for (let bar of user.bars) {
                 favourites.push(bar.id);
-                console.log(bar.id)
             }
         } else {
             for (let bar of user.bars) {
@@ -329,10 +346,8 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
             }
         }
     }
-    console.log(favourites)
 
     let favs = await Bar.find({ id: { $in: favourites } }).lean().exec();
-    console.log(favs)
 
     res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs });
 });

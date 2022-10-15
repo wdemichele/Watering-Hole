@@ -36,7 +36,6 @@ app.engine('hbs', exphbs.engine({
 const hbs = exphbs.create({});
 
 hbs.handlebars.registerHelper('reverseArray', function(array) {
-    console.log(array)
     if (!Array.isArray(array)) { return };
     return array.reverse();
 });
@@ -57,8 +56,6 @@ hbs.handlebars.registerHelper('limit', function(array, limit) {
 });
 
 hbs.handlebars.registerHelper("contains", function(array, value) {
-    console.log(array)
-    console.log(value)
     if (!Array.isArray(array)) {
         return false;
     }
@@ -155,8 +152,6 @@ let strategy = new LocalStrategy((username, password, cb) => {
         if (err) { return cb(null, false) }
         if (!user) { return cb(null, false, { message: 'Incorrect login credentials.' }) }
         // const hash = user.password;
-        console.log(user.password);
-        console.log(password);
         if (user.password == password) {
             return cb(null, user);
         } else {

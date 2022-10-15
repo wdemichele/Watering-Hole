@@ -131,13 +131,11 @@ router.get('/uid:id/tags:tag', isLoggedIn, async(req, res) => {
     for (let tag in tags) {
         tags[tag] = await Bar.find({ id: { $in: tags[tag] } }).lean().exec();
     }
-    console.log(tags)
 
     res.render('user/user-tag.hbs', { layout: 'user-layout', title: 'My Tags', user: user, selected: req.params.tag, tags: tags });
 });
 
 router.get('/add-friends', isLoggedIn, async(req, res) => {
-    console.log("here")
 
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
