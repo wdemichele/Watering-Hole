@@ -151,12 +151,15 @@ let strategy = new LocalStrategy((username, password, cb) => {
     User.findOne({ username: username }, {}, {}, (err, user) => {
         if (err) { return cb(null, false) }
         if (!user) { return cb(null, false, { message: 'Incorrect login credentials.' }) }
-        // const hash = user.password;
-        if (user.password == password) {
-            return cb(null, user);
-        } else {
-            return cb(null, false, { message: 'Incorrect login credentials.' })
-        }
+        const hash = user.password;
+
+        bcrypt.compare(password, hash, function(err, response) {
+            if (response === true) {
+                return cb(null, user);
+            } else {
+                return cb(null, false, { message: 'Incorrect login credentials.' })
+            }
+        });
     });
 })
 

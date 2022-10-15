@@ -26,18 +26,18 @@ router.get('/create', async(req, res) => {
 });
 
 router.post('/create', async(req, res) => {
+    bcrypt.hash(req.body.password, saltRounds, async(err, hash) => {
 
-    let newUser = new User({
-        name: req.body.name,
-        username: req.body.username,
-        password: req.body.password
+        let newUser = new User({
+            name: req.body.name,
+            username: req.body.username,
+            password: hash
+        });
+
+        let newUserSaved = await newUser.save();
+
+        res.render('guest/login.hbs', { layout: 'user-layout', title: 'User Login', flash: ["Account created, please login."] });
     });
-
-    let newUserSaved = await newUser.save();
-    let user = await User.findOne({ username: req.body.username }).lean().exec();
-
-    res.render('guest/login.hbs', { layout: 'user-layout', title: 'User Login', user: user, flash: ["Account created, please login."] });
-
 });
 
 router.post('/update:id', async(req, res) => {
