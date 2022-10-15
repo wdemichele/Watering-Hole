@@ -1,27 +1,28 @@
-<div class="center" style="width: 90%;">
+<img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">
+<div class="center" style="width: 80%;">
 <div class="w3-bar w3-black">
-    {{#each user.tags as |tag|}}
-        {{#ifCond tag "==" ../selected}}
-            <button class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'{{tag}}')">{{tag}}</button>
+    {{#each tags as |tag|}}
+        {{#ifCond @key "==" ../selected}}
+            <button class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'{{@key}}')">{{@key}}</button>
         {{/ifCond}}
-        {{#ifCond tag "!=" ../selected}}
-            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'{{tag}}')">{{tag}}</button>
+        {{#ifCond @key "!=" ../selected}}
+            <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'{{@key}}')">{{@key}}</button>
         {{/ifCond}}
     {{/each}}
   </div>
-{{#each user.tags as |tag|}}
-    {{#ifCond tag "==" ../selected}}
-    <div id="{{tag}}" class="w3-container w3-border city secondary">
+{{#each tags as |tag|}}
+    {{#ifCond @key "==" ../selected}}
+    <div id="{{@key}}" class="w3-container w3-border city secondary">
     {{/ifCond}}
-    {{#ifCond tag "!=" ../selected}}
-    <div id="{{tag}}" class="w3-container w3-border city secondary" style="display:none;">
+    {{#ifCond @key "!=" ../selected}}
+    <div id="{{@key}}" class="w3-container w3-border city secondary" style="display:none;">
     {{/ifCond}}
 
-        <h1>{{tag}}</h1>
-        {{#each user.bars as |bar|}}
-                <div class="databox tertiary">
-                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
-                </div>
+    <h1>{{@key}}</h1>
+        {{#each tag}}
+        <div class="databox tertiary">
+            <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
+        </div>
         {{/each}}
     </div>
 {{/each}}
