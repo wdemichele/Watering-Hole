@@ -45,17 +45,17 @@ router.post('/update:id', async(req, res) => {
     let user = await User.findOne({ username: username }).lean().exec();
     let name = req.body.name
     let bio = req.body.bio
-    if (!name){
+    if (!name) {
         if (user.name) {
             name = user.name;
         }
     }
-    if (!bio){
+    if (!bio) {
         if (user.bio) {
             bio = user.bio;
         }
     }
-    let user_updated = await User.findOneAndUpdate({username: req.params.id},{name: name, bio: bio})
+    let user_updated = await User.findOneAndUpdate({ username: req.params.id }, { name: name, bio: bio })
     res.redirect('/settings');
 })
 
@@ -91,7 +91,22 @@ router.get('/uid:id/favourites', isLoggedIn, async(req, res) => {
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('user/user-favourites.hbs', { layout: 'user-layout', title: 'User Favourites', user: user });
+    let favourites = [];
+    let bucketlist = [];
+
+    for (let bar of user.bars) {
+        if (bar.favourite) {
+            favourites.push(bar.id);
+        }
+        if (bar.bucketlist) {
+            bucketlist.push(bar.id);
+        }
+    }
+
+    let favs = await Bar.find({ id: { $in: favourites } }).lean().exec();
+    let buck = await Bar.find({ id: { $in: bucketlist } }).lean().exec();
+
+    res.render('user/user-favourites.hbs', { layout: 'user-layout', title: 'User Favourites', user: user, favourites: favs, bucketlist: buck });
 });
 
 router.get('/uid:id/tags:tag', isLoggedIn, async(req, res) => {
@@ -99,9 +114,26 @@ router.get('/uid:id/tags:tag', isLoggedIn, async(req, res) => {
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    console.log(req.params.tag)
+    let tags = {};
+    for (let tag of user.tags) {
+        tags[tag] = [];
+    }
 
-    res.render('user/user-tag.hbs', { layout: 'user-layout', title: 'My Tags', user: user, selected: req.params.tag });
+    for (let bar of user.bars) {
+        for (let tag of bar.tags) {
+            if (!tags[tag]) {
+                tags[tag] = []
+            }
+            tags[tag].push(bar.id)
+        }
+    }
+
+    for (let tag in tags) {
+        tags[tag] = await Bar.find({ id: { $in: tags[tag] } }).lean().exec();
+    }
+    console.log(tags)
+
+    res.render('user/user-tag.hbs', { layout: 'user-layout', title: 'My Tags', user: user, selected: req.params.tag, tags: tags });
 });
 
 router.get('/add-friends', isLoggedIn, async(req, res) => {

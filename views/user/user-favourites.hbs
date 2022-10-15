@@ -5,22 +5,18 @@
   </div>
 <div id="favourite" class="w3-container w3-border city secondary">
     <h1>Favourites</h1>
-        {{#each user.bars as |bar|}}
-            {{#ifCond bar.type "==" "favourited"}}
-                <div class="databox tertiary">
-                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
-                </div>
-            {{/ifCond}}
+        {{#each favourites as |bar|}}
+            <div class="databox tertiary">
+                <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
+            </div>
         {{/each}}
 </div>
 <div id="bucketlist" class="w3-container w3-border city secondary" style="display: none;">
     <h1>Bucketlist</h1>
-        {{#each user.bars as |bar|}}
-            {{#ifCond bar.type "==" "bucketlisted"}}
-                <div class="databox tertiary">
-                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
-                </div>
-            {{/ifCond}}
+        {{#each bucketlist as |bar|}}
+            <div class="databox tertiary">
+                <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
+            </div>
         {{/each}}
 </div>
 
