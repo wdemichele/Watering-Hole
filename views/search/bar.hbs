@@ -33,9 +33,37 @@
       <h2 style="font-size:25px;">{{place_data.formatted_address}}</h2>
       <h2 style="font-size:25px;">{{place_data.formatted_phone_number}}</h2>
       <a href="{{place_data.website}}"><h3>{{place_data.website}}</h3></a>
-      <h3>Price Level: {{place_data.price_level}} Google Review: {{place_data.rating}}</h3>
-      <h3>{{place_data.types}}</h3>
-      <h3>Open Now: {{place_data.opening_hours.open_now}}</h3>
+      <h3>{{#if place_data.price_level}}Price Level: {{place_data.price_level}} {{/if}}
+        Google Review: {{place_data.rating}}
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <button id="myBtn-review" type="button">{{place_data.user_ratings_total}} Reviews</button>
+      </h3>
+
+      <div id="myModal-review" class="modal-review">
+        <!-- Modal content -->
+        <div class="modal-content-review">
+          <span class="close-review">&times;</span>
+          {{#each place_data.reviews}}
+          <div class="databox tertiary">
+            <h2>{{this.author_name}} </h2>
+            <h4 style="float: left;">Rating: {{this.rating}}</h4>
+            <h4 style="float: right;"><em>about {{this.relative_time_description}}</em></h4>
+            <div style="clear: both;"></div>
+            <p style="word-wrap: break-word; width: fit-content; block-size: fit-content;">{{this.text}}</p>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      {{#if place_data.opening_hours.open_now}}
+        <h3>Open Now</h3>
+      {{else}}
+        <h3>Closed</h3>
+      {{/if}}
     </div>
 
     <form action="bar-visit{{place_data.place_id}}" method="post">
@@ -169,6 +197,32 @@
       checkbox.checked = !checkbox.checked;
       
       console.log(checkbox);
+    }
+
+    // Get the modal
+    var modal_review = document.getElementById("myModal-review");
+
+    // Get the button that opens the modal
+    var btn_review = document.getElementById("myBtn-review");
+
+    // Get the <span> element that closes the modal
+    var span_review = document.getElementsByClassName("close-review")[0];
+
+    // When the user clicks the button, open the modal 
+    btn_review.onclick = function() {
+      modal_review.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span_review.onclick = function() {
+      modal_review.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal_review) {
+        modal_review.style.display = "none";
+      }
     }
 
 </script>

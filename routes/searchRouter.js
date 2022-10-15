@@ -114,16 +114,17 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
 
     let config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cplace_id%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cuser_ratings_total%2Cplace_id%2Cformatted_phone_number%2Cadr_address%2Creviews%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
         headers: {}
     };
 
     axios(config)
         .then(function(response) {
-            // console.log(response.data)
-            // console.log(response.data.result.opening_hours)
-            // console.log(response.data.result.opening_hours.periods)
-            // console.log(response.data.result.geometry.location)
+            console.log(response.data)
+            console.log(response.data.result.opening_hours)
+            console.log(response.data.result.opening_hours.periods)
+            console.log(response.data.result.geometry.location)
+            console.log(response.data.result.reviews)
             res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: false, favourited: false, user: user });
         })
         .catch(function(error) {
