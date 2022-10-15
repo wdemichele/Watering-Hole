@@ -313,7 +313,10 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
     console.log(tags)
     if (user.bars) {
         if (!tags.length) {
-            favourites = user.bars
+            for (let bar of user.bars) {
+                favourites.push(bar.id);
+                console.log(bar.id)
+            }
         } else {
             for (let bar of user.bars) {
                 let contains = bar.tags.some(element => {
@@ -325,6 +328,7 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
             }
         }
     }
+    console.log(favourites)
 
     let favs = await Bar.find({ id: { $in: favourites } }).lean().exec();
     console.log(favs)
