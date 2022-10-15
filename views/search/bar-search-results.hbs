@@ -1,3 +1,4 @@
+<img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">>
 <div class="databox secondary">
     <h1>Bar Search Results</h1>
     <h1>Text Search: "{{search}}"</h1>
@@ -8,7 +9,11 @@
     {{#each places as |bar|}}
         <div style="padding: 20px; flex: 1 0 30%; margin:10px" class="card databox tertiary">
             <a href="/search/bar{{bar.place_id}}">
-            <img style="width: 600px height:auto;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+            {{#if bar.photos.0.photo_reference}}
+            <img style="width: 600px; height:auto; maxwidth:600px; maxheight=400px;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+            {{else}}
+            <img style="width: 600px; height: auto" src="/assets/wateringhole.png">
+            {{/if}}
             <div class="container">
                 <h2><b>{{bar.name}}</b></h2>
                 <h3>{{bar.formatted_address}}</h3> 

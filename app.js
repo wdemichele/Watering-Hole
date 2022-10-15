@@ -36,7 +36,6 @@ app.engine('hbs', exphbs.engine({
 const hbs = exphbs.create({});
 
 hbs.handlebars.registerHelper('reverseArray', function(array) {
-    console.log(array)
     if (!Array.isArray(array)) { return };
     return array.reverse();
 });
@@ -56,12 +55,13 @@ hbs.handlebars.registerHelper('limit', function(array, limit) {
     return array.slice(0, limit);
 });
 
-hbs.handlebars.registerHelper("contains", function(array, num) {
-    if (!array) {
+hbs.handlebars.registerHelper("contains", function(array, value) {
+    if (!Array.isArray(array)) {
         return false;
     }
-    for (let i = 0; i < array.length; i++) {
-        if (array[0].id == num) {
+
+    for (const element of array) {
+        if (element == value) {
             return true;
         }
     }
@@ -151,14 +151,15 @@ let strategy = new LocalStrategy((username, password, cb) => {
     User.findOne({ username: username }, {}, {}, (err, user) => {
         if (err) { return cb(null, false) }
         if (!user) { return cb(null, false, { message: 'Incorrect login credentials.' }) }
-        // const hash = user.password;
-        console.log(user.password);
-        console.log(password);
-        if (user.password == password) {
-            return cb(null, user);
-        } else {
-            return cb(null, false, { message: 'Incorrect login credentials.' })
-        }
+        const hash = user.password;
+
+        bcrypt.compare(password, hash, function(err, response) {
+            if (response === true) {
+                return cb(null, user);
+            } else {
+                return cb(null, false, { message: 'Incorrect login credentials.' })
+            }
+        });
     });
 })
 

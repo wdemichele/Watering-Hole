@@ -1,36 +1,41 @@
-<div class="databox secondary">
+<div class="databox secondary" style="border-radius:25px;width:60%;padding:0 8% 0 8%">
     <h1>My Favourites</h1>
     <form action="favourites-search" method="post">
-        <fieldset>
-            <legend>Area Settings</legend>
+        <fieldset style="border-radius:25px;padding:2% 10% 3% 10%;">
+            <legend>Search an Area</legend>
             <label for="area_search">Area</label><br>
             <input id="area_search" name="area_search"><br>
-            <label for="radius_search">Radius</label><br>
-            <input id="radius_search" name="radius_search">
         </fieldset>
-        <fieldset>
-            <legend>Bar Settings</legend>
-            <select name="price_range" id="price_range" placeholder="$-$$$">
-        <option name="1" value="1">$</option>
-        <option name="2" value="2">$$</option>
-        <option name="3" value="3">$$$</option>
-        <option name="4" value="4">$$$$</option>
-    </select><br>
-            <label for="below">Include below prices</label><br>
-            <input name="below" style="float: left; width: auto" type="checkbox">
-        </fieldset>
-        <fieldset>
-            <legend>Search Tags</legend>
-            {{#each user.tags}}
-            <div name="chip" class="chip" onclick="checked(this)">
-                {{this}}
-                <input style="display: none;" type="checkbox" id="{{this}}" name="{{this}}" value="{{this}}">
-            </div>
-            {{/each}}
-        </fieldset><br>
+        <div style="display: flex;">
 
-        <button class="tertiary" type="reset">Cancel</button>
-        <button class="primary right" type="submit">Search</button><br><br>
+            
+            <fieldset style="width:48%;flex:2;border-radius:25px;padding:0 10% 0 10%;">
+                <legend>Bar Settings</legend>
+                <select name="price_range" id="price_range" placeholder="$-$$$">
+                    <option name="1" value="1">$</option>
+                    <option name="2" value="2">$$</option>
+                    <option name="3" value="3">$$$</option>
+                    <option name="4" value="4">$$$$</option>
+                </select><br>
+                <label for="below">Include below prices</label><br>
+                <input name="below" style="float: left; width: auto" type="checkbox">
+            </fieldset>
+
+            <fieldset style="width:48%;flex:3;border-radius:25px;">
+                <legend>Search Tags</legend>
+                {{#each user.tags}}
+                <div name="chip" class="chip" onclick="checked(this)">
+                    {{this}}
+                    <input style="display: none;" type="checkbox" id="{{this}}" name="{{this}}" value="{{this}}">
+                </div>
+                {{/each}}
+            </fieldset>
+        </div>
+        <div style="margin-top: 2rem;">
+            <button class="tertiary" type="reset">Cancel</button>
+            <button class="primary right" type="submit">Search</button><br><br>
+        </div>
+        
     </form>
 </div>
 
@@ -38,6 +43,7 @@
     function checked(element) {
         element.classList.toggle("tagged");
         var checkbox = element.querySelector("input");
+        console.log(checkbox)
 
         checkbox.checked = !checkbox.checked;
 

@@ -22,19 +22,38 @@ router.get('/create', async(req, res) => {
 });
 
 router.post('/create', async(req, res) => {
+    bcrypt.hash(req.body.password, saltRounds, async(err, hash) => {
 
-    let newUser = new User({
-        name: req.body.name,
-        username: req.body.username,
-        password: req.body.password
+        let newUser = new User({
+            name: req.body.name,
+            username: req.body.username,
+            password: hash
+        });
+
+        let newUserSaved = await newUser.save();
+
+        res.render('guest/login.hbs', { layout: 'user-layout', title: 'User Login', flash: ["Account created, please login."] });
     });
-
-    let newUserSaved = await newUser.save();
-    let user = await User.findOne({ username: req.body.username }).lean().exec();
-
-    res.render('guest/login.hbs', { layout: 'user-layout', title: 'User Login', user: user, flash: ["Account created, please login."] });
-
 });
+
+router.post('/update:id', async(req, res) => {
+    let username = req.params.id;
+    let user = await User.findOne({ username: username }).lean().exec();
+    let name = req.body.name
+    let bio = req.body.bio
+    if (!name) {
+        if (user.name) {
+            name = user.name;
+        }
+    }
+    if (!bio) {
+        if (user.bio) {
+            bio = user.bio;
+        }
+    }
+    let user_updated = await User.findOneAndUpdate({ username: req.params.id }, { name: name, bio: bio })
+    res.redirect('/settings');
+})
 
 router.get('/', isLoggedIn, async(req, res) => {
 
@@ -68,11 +87,51 @@ router.get('/uid:id/favourites', isLoggedIn, async(req, res) => {
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('user/user-favourites.hbs', { layout: 'user-layout', title: 'User Favourites', user: user });
+    let favourites = [];
+    let bucketlist = [];
+
+    for (let bar of user.bars) {
+        if (bar.favourite) {
+            favourites.push(bar.id);
+        }
+        if (bar.bucketlist) {
+            bucketlist.push(bar.id);
+        }
+    }
+
+    let favs = await Bar.find({ id: { $in: favourites } }).lean().exec();
+    let buck = await Bar.find({ id: { $in: bucketlist } }).lean().exec();
+
+    res.render('user/user-favourites.hbs', { layout: 'user-layout', title: 'User Favourites', user: user, favourites: favs, bucketlist: buck });
+});
+
+router.get('/uid:id/tags:tag', isLoggedIn, async(req, res) => {
+
+    let username = req.params.id;
+    let user = await User.findOne({ username: username }).lean().exec();
+
+    let tags = {};
+    for (let tag of user.tags) {
+        tags[tag] = [];
+    }
+
+    for (let bar of user.bars) {
+        for (let tag of bar.tags) {
+            if (!tags[tag]) {
+                tags[tag] = []
+            }
+            tags[tag].push(bar.id)
+        }
+    }
+
+    for (let tag in tags) {
+        tags[tag] = await Bar.find({ id: { $in: tags[tag] } }).lean().exec();
+    }
+
+    res.render('user/user-tag.hbs', { layout: 'user-layout', title: 'My Tags', user: user, selected: req.params.tag, tags: tags });
 });
 
 router.get('/add-friends', isLoggedIn, async(req, res) => {
-    console.log("here")
 
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();

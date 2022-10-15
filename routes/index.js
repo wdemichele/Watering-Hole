@@ -7,6 +7,7 @@ const axios = require('axios');
 const User = require('../models/userSchema');
 const Bar = require('../models/barSchema');
 const passport = require('passport');
+const bcrypt = require('bcryptjs');
 
 const res = require('express/lib/response');
 
@@ -36,7 +37,6 @@ router.get('/social', isLoggedIn, async(req, res) => {
     let user = await User.findOne({ username: username }).lean().exec();
 
     let activity = await User.find({ username: user.friends }, { activity: 1, name: 1, username: 1, '_id': false }).lean().exec();
-    console.log(activity);
 
     res.render('friend-activity.hbs', { layout: 'user-layout', title: 'Friend Activity', user: user, activity: activity });
 });
@@ -51,6 +51,10 @@ router.get('/manual', (req, res) => {
     res.render('guest/user-manual.hbs', { layout: 'guest-layout', title: 'User Manual' });
 });
 
+router.get('/contact', (req, res) => {
+    res.render('guest/contact-us.hbs', { layout: 'guest-layout', title: 'Contact' });
+});
+
 router.get('/settings', isLoggedIn, async(req, res) => {
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
@@ -62,11 +66,13 @@ router.get('/', (req, res) => {
     res.render('guest/login.hbs', { layout: 'guest-layout', title: 'User Login', flash: req.flash('error') });
 });
 
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/home',
-    failureRedirect: '/',
-    failureFlash: true
-}));
+router.post('/login',
+    passport.authenticate('local', {
+        successRedirect: '/home',
+        failureRedirect: '/',
+        failureFlash: true
+    })
+);
 
 router.post('/tags', isLoggedIn, async(req, res) => {
     let username = req.user.username;
@@ -77,26 +83,9 @@ router.post('/tags', isLoggedIn, async(req, res) => {
     res.redirect('/user');
 });
 
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
-
-router.get("/facebook/callback", passport.authenticate('facebook', {
-    successRedirect: '/home',
-    failureRedirect: '/'
-}))
-
 router.get('/error', isLoggedIn, function(req, res) {
-    res.render('pages/error.hbs');
+    res.render('error.hbs');
 });
-
-router.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['public_profile', 'email', 'picture.type(large)']
-}));
-
-router.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: '/home',
-        failureRedirect: '/error'
-    }));
 
 router.get('/logout', (req, res, next) => {
     if (req.session) {

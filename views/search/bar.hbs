@@ -1,111 +1,161 @@
-<div class="databox secondary flex-container">
-  <div class="databox primary">
-  <h1 id="bar_name" name="bar_name">{{place_data.name}}</h1>
+<img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">
+<div class="databox secondary flex-container" style="border-radius:25px;">
 
-<div class="w3-content w3-display-container" style="max-width:800px">
-  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.1.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.2.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.3.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.4.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
-    <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
-    <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
-    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
-    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
-    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
-    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
-    <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
-  </div>
+  <div class=" ">
 
+<div style="display: flex;">
   
-  <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
-  <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
-  <div class="w3-modal-content w3-animate-zoom">
-    <img id="img01" style="width:100%">
+  <div style="flex: 1;">
+    <h1 id="bar_name" name="bar_name">{{place_data.name}}</h1>
+    <div class="w3-content w3-display-container" style="max-width:800px">
+      <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+      <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.1.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+      <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.2.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+      <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.3.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+      <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.4.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+      <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+        <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+        <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(4)"></span>
+        <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
+      </div>
+      <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
+        <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
+        <div class="w3-modal-content w3-animate-zoom">
+          <img id="img01" style="width:100%">
+        </div>
+      </div>
+    </div>
+    <div style="padding-bottom:3rem;">
+      <h2 style="font-size:25px;">{{place_data.formatted_address}}</h2>
+      <h2 style="font-size:25px;">{{place_data.formatted_phone_number}}</h2>
+      <a href="{{place_data.website}}"><h3>{{place_data.website}}</h3></a>
+      <h3>{{#if place_data.price_level}}Price Level: {{place_data.price_level}} {{/if}}
+        Google Review: {{place_data.rating}}
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <button id="myBtn-review" type="button">{{place_data.user_ratings_total}} Reviews</button>
+      </h3>
+
+      <div id="myModal-review" class="modal-review">
+        <!-- Modal content -->
+        <div class="modal-content-review">
+          <span class="close-review">&times;</span>
+          {{#each place_data.reviews}}
+          <div class="databox tertiary">
+            <h2>{{this.author_name}} </h2>
+            <h4 style="float: left;">Rating: {{this.rating}}</h4>
+            <h4 style="float: right;"><em>about {{this.relative_time_description}}</em></h4>
+            <div style="clear: both;"></div>
+            <p style="word-wrap: break-word; width: fit-content; block-size: fit-content;">{{this.text}}</p>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+
+      {{#if place_data.opening_hours.open_now}}
+        <h3>Open Now</h3>
+      {{else}}
+        <h3>Closed</h3>
+      {{/if}}
+    </div>
+
+    <form action="bar-visit{{place_data.place_id}}" method="post">
+      <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
+      <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
+      <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{bar.price_level}}">
+      <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
+      <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours}}">
+      <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry}}">
+    </form>
+    <form action="bar-favourite{{place_data.place_id}}" method="post">
+      <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
+      <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
+      <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{place_data.price_level}}">
+      <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
+      {{!-- <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
+      <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}"> --}}
+
+      <div class="flex-container-2">
+        {{#if bucketlisted}}
+        <button class="tertiary bar-btn" type="submit" id="bucketlist_remove" name="bucketlist_remove">Remove From Bucketlist</button>
+        {{else}}
+        <button class="tertiary bar-btn" type="submit" id="bucketlist_button" name="bucketlist_button">Add To Bucketlist</button>
+        {{/if}}
+        <button class="quaternary bar-btn" type="submit" id="visited_button" name="visited_button">Visited</button>
+        {{#if favourited}}
+        <button class="primary bar-btn" type="submit" id="favourite_remove" name="favourite_remove">Remove From Favourites</button>
+        {{else}}
+        <button class="primary bar-btn" type="submit" id="favourite_button" name="favourite_button">Add To Favourites</button>
+        {{/if}}
+      </div>
+    </form>
+  </div>
+
+  <div style="flex: 1;">
+    <iframe class="center" height="400" width="600" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{place_data.formatted_address}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw"></iframe>
+    <br>
+    <div class="primary" style="padding:0.5rem 1rem 0.5rem 1rem;border-radius:25px;margin-left:2rem;margin-right:2rem;">
+      <table>
+        <h2>Open Hours</h2>
+        <tr>
+          <th></th>
+          <th>Monday</th>
+          <th>Tueday</th>
+          <th>Wednesday</th>
+          <th>Thursday</th>
+          <th>Friday</th>
+          <th>Saturday</th>
+          <th>Sunday</th>
+        </tr>
+        <tr>
+          <th>Open</th>
+          <td>{{place_data.opening_hours.periods.0.open.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.open.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.open.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.open.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.open.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.open.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.open.time}}</td>
+        </tr>
+        <tr>
+          <th>Close</th>
+          <td>{{place_data.opening_hours.periods.0.close.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.close.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.close.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.close.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.close.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.close.time}}</td>
+          <td>{{place_data.opening_hours.periods.0.close.time}}</td>
+        </tr>
+      </table><br><br>
+    </div>
+
+
+    <form action="bar{{place_data.place_id}}/tags" method="post">
+      <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
+      <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
+      <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{place_data.price_level}}">
+      <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
+      <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
+      <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}">
+      {{> bar-tags}}
+    </form>
+    <br><br><br>
   </div>
 </div>
 
-
-</div>
-  <h2>{{place_data.formatted_address}}</h2>
-  <h2>{{place_data.formatted_phone_number}}</h2>
-  <a href="{{place_data.website}}"><h3>{{place_data.website}}</h3></a>
-  <h3>Price Level: {{place_data.price_level}} Google Review: {{place_data.rating}}</h3>
-  <h3>{{place_data.types}}</h3>
-  <h3>Open Now: {{place_data.opening_hours.open_now}}</h3>
-  <table>
-    <tr>
-      <th></th>
-      <th>Monday</th>
-      <th>Tueday</th>
-      <th>Wednesday</th>
-      <th>Thursday</th>
-      <th>Friday</th>
-      <th>Saturday</th>
-      <th>Sunday</th>
-    </tr>
-    <tr>
-      <th>Open</th>
-      <td>{{place_data.opening_hours.periods.0.open.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.open.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.open.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.open.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.open.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.open.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.open.time}}</td>
-    </tr>
-    <tr>
-      <th>Close</th>
-      <td>{{place_data.opening_hours.periods.0.close.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.close.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.close.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.close.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.close.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.close.time}}</td>
-      <td>{{place_data.opening_hours.periods.0.close.time}}</td>
-    </tr>
-  </table><br><br>
-  <form action="bar{{place_data.place_id}}/tags" method="post">
-    <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
-    <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
-    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{place_data.price_level}}">
-    <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
-    <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
-    <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}">
-    {{> bar-tags}}
-  </form>
-  <form action="bar-visit{{place_data.place_id}}" method="post">
-    <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
-    <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
-    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{bar.price_level}}">
-    <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
-    <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours}}">
-    <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry}}">
-    <button class="tertiary right" type="submit" id="visited_button" name="visited_button">Visited</button>
-  </form>
   </div>
-  <iframe class="center" width="1200" height="900" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{place_data.formatted_address}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw"></iframe>
-  </div>
-  <form action="bar-favourite{{place_data.place_id}}" method="post">
-    <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
-    <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
-    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{place_data.price_level}}">
-    <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
-    {{!-- <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
-    <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}"> --}}
 
-    {{#if bucketlisted}}
-    <button class="tertiary" type="submit" id="bucketlist_remove" name="bucketlist_remove">Remove From Bucketlist</button>
-    {{else}}
-    <button class="tertiary" type="submit" id="bucketlist_button" name="bucketlist_button">Add To Bucketlist</button>
-    {{/if}}
-    {{#if favourited}}
-    <button class="primary right" type="submit" id="favourite_remove" name="favourite_remove">Remove From Favourites</button>
-    {{else}}
-    <button class="primary right" type="submit" id="favourite_button" name="favourite_button">Add To Favourites</button>
-    {{/if}}
-  </form>
+  </div>
+
+
 <script>
     var slideIndex = 1;
     showDivs(slideIndex);
@@ -147,6 +197,32 @@
       checkbox.checked = !checkbox.checked;
       
       console.log(checkbox);
+    }
+
+    // Get the modal
+    var modal_review = document.getElementById("myModal-review");
+
+    // Get the button that opens the modal
+    var btn_review = document.getElementById("myBtn-review");
+
+    // Get the <span> element that closes the modal
+    var span_review = document.getElementsByClassName("close-review")[0];
+
+    // When the user clicks the button, open the modal 
+    btn_review.onclick = function() {
+      modal_review.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span_review.onclick = function() {
+      modal_review.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal_review) {
+        modal_review.style.display = "none";
+      }
     }
 
 </script>
