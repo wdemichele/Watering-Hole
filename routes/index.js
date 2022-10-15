@@ -68,6 +68,11 @@ router.get('/', (req, res) => {
     res.render('guest/login.hbs', { layout: 'guest-layout', title: 'User Login', flash: req.flash('error') });
 });
 
+router.get('/auto', (req, res) => {
+
+    res.render('search.hbs', { layout: 'guest-layout', title: 'Autocomplete' });
+});
+
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/home',
     failureRedirect: '/',

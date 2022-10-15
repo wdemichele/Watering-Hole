@@ -15,9 +15,8 @@
     <form action="/search/area-search" method="post">
         <h2>Area Search</h2>
         <label for="area_name">Enter the area to search </label><br>
-        <input id="area_name" name="area_name" placeholder="e.g. Fitzroy Victoria"><br>
-        <label for="area_radius">Enter the radius of the search (metres)</label><br>
-        <input id="area_radius" name="area_radius" placeholder="e.g 2000"><br>
+        <input id="area_name" name="area_name" placeholder="e.g. Fitzroy Victoria">
+        <input id="area_radius" name="area_radius" placeholder="e.g 2000" type="hidden"><br>
         <button class="primary right" type="submit">Search</button><br><br><br><br>
     </form>
 </div>
@@ -66,5 +65,19 @@
         }
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " w3-teal";
-        }
+    }
+    function initialize() {
+        var input = document.getElementById('area_name');
+        new google.maps.places.Autocomplete(input);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<body>
+
+  
+
+</body>
+<script>
+    
 </script>
