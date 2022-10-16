@@ -140,9 +140,9 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            // console.log(response.data)
-            // console.log(response.data.result.opening_hours)
-            // console.log(response.data.result.opening_hours.periods)
+            console.log(response.data.result)
+                // console.log(response.data.result.opening_hours)
+                // console.log(response.data.result.opening_hours.periods)
             console.log(response.data.result.geometry.location)
                 // console.log(response.data.result.geometry)
                 // console.log(response.data.result.reviews)
@@ -161,7 +161,7 @@ router.post('/bar:id/tags', isLoggedIn, async(req, res) => {
             name: req.body.bar_name,
             id: req.params.bar_id,
             address: req.body.bar_address,
-            price_level: req.body.bar_price,
+            price_level: req.body.bar_price_level,
             rating: req.body.bar_rating,
             // hours: req.body.bar_hours,
             location: {
@@ -201,7 +201,7 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
             name: req.body.bar_name,
             id: req.params.bar_id,
             address: req.body.bar_address,
-            price_level: req.body.bar_price,
+            price_level: req.body.bar_price_level,
             rating: req.body.bar_rating,
             // hours: req.body.bar_hours,
             location: {
@@ -356,7 +356,21 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
 
     let favs = await Bar.find({ id: { $in: favourites } }).lean().exec();
 
-    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs });
+    let tourStopsFav = [];
+
+    for (let fav of favs) {
+        tourStopsFav.push({
+            "position": {
+                "lat": fav.location.lat,
+                "lng": fav.location.long
+            },
+            "title": "<a href='/search/bar" + fav.id + "'><h3>" + fav.name + "</h3>" + "<em>" + fav.address + "<em></a>"
+        })
+    }
+
+    let stringTourStopsFav = JSON.stringify(tourStopsFav);
+
+    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs, stringTourStopsFav: stringTourStopsFav });
 });
 
 function getIntersection(a, b) {

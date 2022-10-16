@@ -1,6 +1,9 @@
 html,
 body {
     font-family: 'Montserrat', sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 :root {
@@ -1018,6 +1021,13 @@ table {
     margin-left: 200px;
 }
 
+.sets_choose .sets_box,
+.price_choose .price_box {
+    background-color: #b15144;
+    border-bottom: 2px solid white;
+    border-radius: 0px;
+}
+
 .search_box {
     display: flex;
     width: 100%;
@@ -1560,19 +1570,8 @@ hr {
  */
 
 #map {
-    height: 100%;
-}
-
-
-/* 
-   * Optional: Makes the sample page fill the window. 
-   */
-
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    height: 80%;
+    width: 60%;
 }
 
 [class$=api-load-alpha-banner] {

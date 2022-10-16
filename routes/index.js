@@ -94,9 +94,10 @@ router.get('/map', async(req, res) => {
                 "lat": fav.location.lat,
                 "lng": fav.location.long
             },
-            "title": fav.name
+            "title": "<a href='/search/bar" + fav.id + "'><h3>" + fav.name + "</h3>" + "<em>" + fav.address + "<em></a>"
         })
     }
+
     console.log(tourStopsFav)
     let stringTourStopsFav = JSON.stringify(tourStopsFav);
     console.log(stringTourStopsFav)

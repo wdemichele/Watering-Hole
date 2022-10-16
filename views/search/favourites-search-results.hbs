@@ -1,4 +1,8 @@
 <img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">>
+    
+    <textarea style="display: none;" id ="tourstops">{{stringTourStopsFav}}</textarea>
+        <div id="map"></div>
+
 <h1>Favourites Search Results</h1>
 <div class="databox primary">
     {{#each favourites}}
@@ -8,3 +12,76 @@
         </div>
     {{/each}}
 </div>
+
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw&callback=initMap&libraries=marker&v=beta"
+      defer
+    ></script>
+
+
+<script type="text/javascript">
+
+
+function initMap() {
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 13,
+        center: { lat: -37.8136, lng: 144.9631 },
+        mapId: "4504f8b37365c3d0",
+    });
+    const iconBase =
+    "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
+    const icons = {
+        parking: {
+        icon: iconBase + "parking_lot_maps.png",
+        },
+        library: {
+        icon: iconBase + "library_maps.png",
+        },
+        info: {
+        icon: iconBase + "info-i_maps.png",
+        },
+    };
+    // Set LatLng and title text for the markers. The first marker (Boynton Pass)
+    // receives the initial focus when tab is pressed. Use arrow keys to
+    // move between markers; press tab again to cycle through the map controls.
+    console.log(document.getElementById("tourstops").value);
+    let jsonTourStopsFav = JSON.parse(document.getElementById("tourstops").value);
+    console.log(jsonTourStopsFav);
+    for (let location of jsonTourStopsFav) {
+        location.position.lat = parseFloat(location.position.lat);
+        location.position.lng = parseFloat(location.position.lng);
+    }
+    const tourStops = jsonTourStopsFav
+    // Create an info window to share between markers.
+    const infoWindow = new google.maps.InfoWindow();
+
+    // Create the markers.
+    tourStops.forEach(({ position, title }, i) => {
+        const pinView = new google.maps.marker.PinView();
+        const marker = new google.maps.marker.AdvancedMarkerView({
+        position,
+        map,
+        {{!-- content: pinView.element, --}}
+        title: `${title}`,
+        
+        });
+
+        // Add a click listener for each marker, and set up the info window.
+        marker.addListener("click", ({ domEvent, latLng }) => {
+        const { target } = domEvent;
+
+        infoWindow.close();
+        infoWindow.setContent(marker.title);
+        infoWindow.open(marker.map, marker);
+        });
+    });
+    }
+
+    window.initMap = initMap;
+</script>
