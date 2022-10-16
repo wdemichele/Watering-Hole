@@ -1017,46 +1017,7 @@ table {
 .two {
     margin-left: 200px;
 }
-/* new change 10.11 */
-.sets_choose,.price_choose{
-    color: #000;
-    margin-top: 2px;
-    width: 230px;
-    margin-left: 200px;
-    display: none;
-}
 
-.sets_choose .sets_box,.price_choose .price_box{
-    background-color: #b15144;
-     border-bottom: 2px solid white;
-     border-radius: 0px;
-}
-
-/* open now and noly */
-.only_choosed,.open_choosed{
-    display: none;
-}
-/* search-page  sss*/
-/* new change 10.11 */
-.sets_choose,.price_choose{
-    color: #000;
-    margin-top: 2px;
-    width: 230px;
-    margin-left: 200px;
-    display: none;
-}
-
-.sets_choose .sets_box,.price_choose .price_box{
-    background-color: #b15144;
-     border-bottom: 2px solid white;
-     border-radius: 0px;
-}
-
-/* open now and noly */
-.only_choosed,.open_choosed{
-    display: none;
-}
-/* search-page  sss*/
 .search_box {
     display: flex;
     width: 100%;
