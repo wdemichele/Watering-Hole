@@ -1,6 +1,9 @@
 html,
 body {
     font-family: 'Montserrat', sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 :root {
@@ -1018,6 +1021,13 @@ table {
     margin-left: 200px;
 }
 
+.sets_choose .sets_box,
+.price_choose .price_box {
+    background-color: #b15144;
+    border-bottom: 2px solid white;
+    border-radius: 0px;
+}
+
 .search_box {
     display: flex;
     width: 100%;
@@ -1551,4 +1561,19 @@ hr {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+/* 
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
+ */
+
+#map {
+    height: 80%;
+    width: 60%;
+}
+
+[class$=api-load-alpha-banner] {
+    display: none;
 }

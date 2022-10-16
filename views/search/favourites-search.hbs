@@ -3,8 +3,8 @@
     <form action="favourites-search" method="post">
         <fieldset style="border-radius:25px;padding:2% 10% 3% 10%;">
             <legend>Search an Area</legend>
-            <label for="area_search">Area</label><br>
-            <input id="area_search" name="area_search"><br>
+            <label for="area_name">Area</label><br>
+            <input id="area_name" name="area_name"><br>
         </fieldset>
         <div style="display: flex;">
 
@@ -49,4 +49,11 @@
 
         console.log(checkbox);
     }
+
+    function initialize() {
+        var input = document.getElementById('area_name');
+        new google.maps.places.Autocomplete(input);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
 </script>
