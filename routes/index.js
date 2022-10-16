@@ -67,6 +67,42 @@ router.get('/', (req, res) => {
     res.render('guest/login.hbs', { layout: 'guest-layout', title: 'User Login', flash: req.flash('error') });
 });
 
+router.get('/map', async(req, res) => {
+    let username = "maps";
+    let user = await User.findOne({ username: username }).lean().exec();
+
+    let favourites = [];
+    let bucketlist = [];
+
+    for (let bar of user.bars) {
+        if (bar.favourite) {
+            favourites.push(bar.id);
+        }
+        if (bar.bucketlist) {
+            bucketlist.push(bar.id);
+        }
+    }
+
+    let favs = await Bar.find({ id: { $in: favourites } }).lean().exec();
+    let buck = await Bar.find({ id: { $in: bucketlist } }).lean().exec();
+
+    let tourStopsFav = [];
+
+    for (let fav of favs) {
+        tourStopsFav.push({
+            "position": {
+                "lat": fav.location.lat,
+                "lng": fav.location.long
+            },
+            "title": fav.name
+        })
+    }
+    console.log(tourStopsFav)
+    let stringTourStopsFav = JSON.stringify(tourStopsFav);
+    console.log(stringTourStopsFav)
+    res.render('map.hbs', { layout: 'guest-layout', title: 'Map', stringTourStopsFav: stringTourStopsFav });
+});
+
 router.post('/login',
     passport.authenticate('local', {
         successRedirect: '/home',

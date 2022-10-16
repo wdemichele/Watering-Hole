@@ -143,8 +143,9 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
             // console.log(response.data)
             // console.log(response.data.result.opening_hours)
             // console.log(response.data.result.opening_hours.periods)
-            // console.log(response.data.result.geometry.location)
-            // console.log(response.data.result.reviews)
+            console.log(response.data.result.geometry.location)
+                // console.log(response.data.result.geometry)
+                // console.log(response.data.result.reviews)
             res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, user: user, tags: tags });
         })
         .catch(function(error) {
@@ -161,9 +162,12 @@ router.post('/bar:id/tags', isLoggedIn, async(req, res) => {
             id: req.params.bar_id,
             address: req.body.bar_address,
             price_level: req.body.bar_price,
-            rating: req.body.bar_rating
-                // hours: req.body.bar_hours,
-                // location: req.body.bar_location
+            rating: req.body.bar_rating,
+            // hours: req.body.bar_hours,
+            location: {
+                "lat": req.body.bar_lat,
+                "long": req.body.bar_long
+            }
         })
         let newBarSaved = await newBar.save();
     }
@@ -198,9 +202,12 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
             id: req.params.bar_id,
             address: req.body.bar_address,
             price_level: req.body.bar_price,
-            rating: req.body.bar_rating
-                // hours: req.body.bar_hours,
-                // location: req.body.bar_location
+            rating: req.body.bar_rating,
+            // hours: req.body.bar_hours,
+            location: {
+                "lat": req.body.bar_lat,
+                "long": req.body.bar_long
+            }
         })
         let newBarSaved = await newBar.save();
     }
