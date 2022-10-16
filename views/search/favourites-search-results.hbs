@@ -1,6 +1,9 @@
 <img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">>
     
     <textarea style="display: none;" id ="tourstops">{{stringTourStopsFav}}</textarea>
+    <input type="hidden" id="lat" value="{{lat}}">
+    <input type="hidden" id="long" value="{{long}}">
+    <input type="hidden" id="zoom" value="{{zoom}}">
         <div id="map"></div>
 
 <h1>Favourites Search Results</h1>
@@ -29,30 +32,17 @@
 
 
 function initMap() {
+    let lat = parseFloat(document.getElementById("lat").value)
+    let long = parseFloat(document.getElementById("long").value)
+    let zoom = parseFloat(document.getElementById("zoom").value)
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 13,
-        center: { lat: -37.8136, lng: 144.9631 },
+        zoom: zoom,
+        center: { lat: lat, lng: long },
         mapId: "4504f8b37365c3d0",
     });
-    const iconBase =
-    "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
-    const icons = {
-        parking: {
-        icon: iconBase + "parking_lot_maps.png",
-        },
-        library: {
-        icon: iconBase + "library_maps.png",
-        },
-        info: {
-        icon: iconBase + "info-i_maps.png",
-        },
-    };
-    // Set LatLng and title text for the markers. The first marker (Boynton Pass)
-    // receives the initial focus when tab is pressed. Use arrow keys to
-    // move between markers; press tab again to cycle through the map controls.
-    console.log(document.getElementById("tourstops").value);
+
     let jsonTourStopsFav = JSON.parse(document.getElementById("tourstops").value);
-    console.log(jsonTourStopsFav);
+
     for (let location of jsonTourStopsFav) {
         location.position.lat = parseFloat(location.position.lat);
         location.position.lng = parseFloat(location.position.lng);
