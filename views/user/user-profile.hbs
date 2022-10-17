@@ -1,7 +1,10 @@
 {{#unless mine}}
 <img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">
 {{/unless}}
+  <div class="databoxx white">
+    <div class="databoxx whitex flex-containerx">
 <div>
+      <div class="databoxx primary">
     <img style="width: 200px; height: auto;" src="\assets\nav\abstract-user-flat-4.svg">
     <h1>{{user.name}}</h1>
     <h2>@{{user.username}}</h2>
@@ -18,6 +21,7 @@
 
 </div>
 <div>
+    <div class="databoxx primary">
     <h2>Recently Visited:</h2>
     <div class="flex-container databox secondary">
         {{#each user.activity as |activity|}}
@@ -28,6 +32,8 @@
             {{/ifCond}}
         {{/each}}
     </div>
+</div>
+</div>
 </div>
 <div class="databox primary">
     <h3>Search Tags</h3>
@@ -55,4 +61,6 @@
         </form>
     </div>
     {{/if}}
+</div>
+</div>
 </div>

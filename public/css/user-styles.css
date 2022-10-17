@@ -14,7 +14,7 @@ body {
     --color-quat: #EAD5BF;
     --color-white: #fafafa;
     --color-black: #000000;
-    --font-family: 'Lexend', sans-serif;
+    --font-family: "Franklin" Gothic Medium;
     --background-image: none;
 }
 
@@ -368,6 +368,7 @@ td {
 
 table {
     margin: auto;
+    width: 90%;
 }
 
 .settings-button {
@@ -1309,7 +1310,7 @@ table {
 
 .mySlides {
     display: none;
-    width: 500px;
+    width: 80%;
     height: 500px;
     object-fit: cover;
     border-radius: 5%;
@@ -1577,3 +1578,75 @@ hr {
 [class$=api-load-alpha-banner] {
     display: none;
 }
+.flex-containerx {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex;
+    border: 0px solid #000;
+    
+}
+
+.flex-containery {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex;
+    border: 0px solid #000;
+    
+}
+
+.databoxx {
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    margin: 1rem;
+    padding: 10px 10px;
+    border: 0px solid #000;
+    border-radius: 10px;
+    border-color: #333;
+    border-style: solid;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.centerx {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+    
+
+.flex-item-1{
+    min-height: 200px;
+}
+
+.flex-item-2{
+    min-height: 200px;
+}
+
+.flex-item-3{
+    min-height: 200px;
+}
+
+.whitex {
+    background-color: #fafafa;
+    color: #ffeafc;
+}
+
+.quatx{
+    background-color:#EAD5BF;
+    color: white;
+}
+
+.quaty{
+    background-color:#ff9c33;
+    color: white;
+}
+
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
