@@ -87,6 +87,8 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
+            console.log(response.data)
+            console.log(response.data.candidates[0])
             config = {
                 method: 'get',
                 url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + response.data.candidates[0].geometry.location.lat + '%2C' + response.data.candidates[0].geometry.location.lng + '&radius=' + req.body.area_radius + '&type=bar&fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
@@ -140,10 +142,11 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            // console.log(response.data)
+            // console.log(response.data.result)
             // console.log(response.data.result.opening_hours)
             // console.log(response.data.result.opening_hours.periods)
             // console.log(response.data.result.geometry.location)
+            // console.log(response.data.result.geometry)
             // console.log(response.data.result.reviews)
             res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, user: user, tags: tags });
         })
@@ -160,10 +163,13 @@ router.post('/bar:id/tags', isLoggedIn, async(req, res) => {
             name: req.body.bar_name,
             id: req.params.bar_id,
             address: req.body.bar_address,
-            price_level: req.body.bar_price,
-            rating: req.body.bar_rating
-                // hours: req.body.bar_hours,
-                // location: req.body.bar_location
+            price_level: req.body.bar_price_level,
+            rating: req.body.bar_rating,
+            // hours: req.body.bar_hours,
+            location: {
+                "lat": req.body.bar_lat,
+                "long": req.body.bar_long
+            }
         })
         let newBarSaved = await newBar.save();
     }
@@ -197,10 +203,13 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
             name: req.body.bar_name,
             id: req.params.bar_id,
             address: req.body.bar_address,
-            price_level: req.body.bar_price,
-            rating: req.body.bar_rating
-                // hours: req.body.bar_hours,
-                // location: req.body.bar_location
+            price_level: req.body.bar_price_level,
+            rating: req.body.bar_rating,
+            // hours: req.body.bar_hours,
+            location: {
+                "lat": req.body.bar_lat,
+                "long": req.body.bar_long
+            }
         })
         let newBarSaved = await newBar.save();
     }
@@ -320,6 +329,33 @@ router.get('/favourites-search', isLoggedIn, async(req, res) => {
 router.post('/favourites-search', isLoggedIn, async(req, res) => {
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
+    // default area is Melbourne
+    let lat = -37.8136;
+    let long = 144.9631;
+    let zoom = 14
+    if (req.body.area_name != null) {
+        let input = req.body.area_name;
+
+        input = input.replace(/ /gi, "%20");
+        input = input.replace(/,/g, '');
+        console.log(input)
+
+        let config = {
+            method: 'get',
+            url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + input + '&inputtype=textquery&fields=geometry&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+            headers: {}
+        };
+
+        await axios(config)
+            .then(function(response) {
+                lat = response.data.candidates[0].geometry.location.lat;
+                long = response.data.candidates[0].geometry.location.lng;
+                zoom = 15.5;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
 
     let tags = []
     let favourites = []
@@ -349,7 +385,21 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
 
     let favs = await Bar.find({ id: { $in: favourites } }).lean().exec();
 
-    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs });
+    let tourStopsFav = [];
+
+    for (let fav of favs) {
+        tourStopsFav.push({
+            "position": {
+                "lat": fav.location.lat,
+                "lng": fav.location.long
+            },
+            "title": "<a href='/search/bar" + fav.id + "'><h3>" + fav.name + "</h3>" + "<em>" + fav.address + "<em></a>"
+        })
+    }
+
+    let stringTourStopsFav = JSON.stringify(tourStopsFav);
+
+    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs, stringTourStopsFav: stringTourStopsFav, lat: lat, long: long, zoom: zoom });
 });
 
 function getIntersection(a, b) {
