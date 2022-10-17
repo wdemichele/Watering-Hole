@@ -99,7 +99,7 @@ hbs.handlebars.registerHelper('ifCond', function(v1, operator, v2, options) {
 
 app.set('view engine', 'hbs');
 
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3000);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

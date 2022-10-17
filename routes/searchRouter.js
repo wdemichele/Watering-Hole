@@ -333,6 +333,10 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
     let lat = -37.8136;
     let long = 144.9631;
     let zoom = 14
+
+    if (req.body.radius != null) {
+        zoom = req.body.radius;
+    }
     if (req.body.area_name != null) {
         let input = req.body.area_name;
 
@@ -350,7 +354,6 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
             .then(function(response) {
                 lat = response.data.candidates[0].geometry.location.lat;
                 long = response.data.candidates[0].geometry.location.lng;
-                zoom = 15.5;
             })
             .catch(function(error) {
                 console.log(error);

@@ -1017,67 +1017,76 @@ table {
     background-color: white;
 }
 
-.two {
-    margin-left: 200px;
-}
+
 /* new change 10.11 */
-.sets_choose,.price_choose{
+
+.sets_choose,
+.price_choose {
     color: #000;
     margin-top: 2px;
     width: 230px;
-    margin-left: 200px;
     display: none;
 }
 
-<<<<<<< HEAD
-.sets_choose .sets_box,.price_choose .price_box{
-    background-color: #b15144;
-     border-bottom: 2px solid white;
-     border-radius: 0px;
-}
-
-/* open now and noly */
-.only_choosed,.open_choosed{
-    display: none;
-}
-/* search-page  sss*/
-/* new change 10.11 */
-.sets_choose,.price_choose{
-    color: #000;
-    margin-top: 2px;
-    width: 230px;
-    margin-left: 200px;
-    display: none;
-}
-
-.sets_choose .sets_box,.price_choose .price_box{
-    background-color: #b15144;
-     border-bottom: 2px solid white;
-     border-radius: 0px;
-}
-
-/* open now and noly */
-.only_choosed,.open_choosed{
-    display: none;
-}
-/* search-page  sss*/
-=======
 .sets_choose .sets_box,
 .price_choose .price_box {
-    background-color: #b15144;
+    background-color: #fff;
     border-bottom: 2px solid white;
     border-radius: 0px;
 }
 
->>>>>>> b129139e9c10e9dfb33a6db669619d2484e8d78b
+
+/* open now and noly */
+
+.only_choosed,
+.open_choosed {
+    display: none;
+}
+
+
+/* search-page  sss*/
+
+
+/* new change 10.11 */
+
+.sets_choose,
+.price_choose {
+    color: #000;
+    margin-top: 2px;
+    width: 230px;
+    display: none;
+}
+
+.sets_choose .sets_box,
+.price_choose .price_box {
+    background-color: #fff;
+    border-bottom: 2px solid white;
+    border-radius: 0px;
+}
+
+
+/* open now and noly */
+
+.only_choosed,
+.open_choosed {
+    display: none;
+}
+
+
+/* search-page  sss*/
+
+.sets_choose .sets_box,
+.price_choose .price_box {
+    background-color: #fff;
+    border-bottom: 2px solid white;
+    border-radius: 0px;
+}
+
 .search_box {
     display: flex;
     width: 100%;
-}
-
-.search_left {
-    width: 70%;
-    height: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .search_left h1 {
@@ -1085,10 +1094,10 @@ table {
 }
 
 .search_left {
-    margin-left: 50px;
     width: 70%;
     padding-top: 40px;
     text-align: center;
+    border-radius: 25px;
 }
 
 .search_search {
@@ -1151,10 +1160,6 @@ table {
     margin-bottom: 20px;
 }
 
-.search_set {
-    margin-right: 200px;
-}
-
 .search_left .search_set_price {
     background-color: rgb(53, 83, 113);
 }
@@ -1164,22 +1169,19 @@ table {
 }
 
 .search_left .search_open {
-    margin: 0 410px 20px;
+    margin: 20px;
 }
 
 .search_left .search_favourites {
-    margin: 0 410px 20px;
+    margin: 20px;
 }
 
 .search_left .search_search_tags {
-    margin-left: 365px;
     width: 600px;
     border-radius: 20px;
     padding: 10px;
     background-color: #0e897d;
     margin-top: 20px;
-    text-align: left;
-    padding-left: 30px;
     color: whitesmoke;
 }
 
@@ -1198,7 +1200,7 @@ table {
     height: 40px;
     width: 130px;
     margin-top: 30px;
-    margin-right: 13px;
+    margin: 5px;
     font-size: 20px;
     color: #000;
     line-height: 40px;
@@ -1231,7 +1233,6 @@ table {
 }
 
 .search_search_tags .white_box .two {
-    margin-left: 330px;
     background-color: rgb(76, 137, 159);
 }
 
@@ -1250,55 +1251,6 @@ table {
     text-align: center;
     font-weight: 700;
     color: whitesmoke;
-}
-
-.searchs_button {
-    margin-left: 800px;
-}
-
-.search_right {
-    margin-right: 20px;
-    width: 30%;
-    margin-top: 80px;
-    background-color: rgb(234, 213, 191);
-}
-
-.search_right .h1 {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-    font-size: 45px;
-    font-weight: 700;
-}
-
-.message_box {
-    display: flex;
-    margin: 0 auto 17px auto;
-    width: 450px;
-}
-
-.message_box .message_image img {
-    width: 120px;
-    height: 120px;
-}
-
-.message_box .message_text {
-    margin-top: 10px;
-    width: 300px;
-    margin-left: 20px;
-}
-
-.message_text .message_name {
-    font-size: 20px;
-}
-
-.message_text .message_time {
-    font-size: 14px;
-    font-size: 400;
-}
-
-.message_text .message_i {
-    font-size: 8px;
 }
 
 .recommended-container {
@@ -1423,7 +1375,7 @@ input[type=text]:focus {
 }
 
 .tagged {
-    background-color: #0E897D;
+    background-color: #355371;
     color: #fafafa;
 }
 
