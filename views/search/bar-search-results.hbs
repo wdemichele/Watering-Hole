@@ -18,7 +18,11 @@
                 <h3>{{bar.formatted_address}}</h3> 
                 <a href="{{bar.website}}"><h3>{{bar.website}}</h3></a>
                 <h3>Price Level: {{bar.price_level}} Google Review: {{bar.rating}}</h3>
-                <h3>Open Now: {{bar.opening_hours.open_now}}</h3></a>
+                {{#if bar.opening_hours.open_now}}
+                    <h3>Open Now</h3></a>
+                {{else}}
+                    <h3>Closed</h3></a>
+                {{/if}}
                 {{!-- <iframe name="votar" style="display:none;"></iframe> --}}
             </div>              
         </div>
