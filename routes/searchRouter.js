@@ -1,6 +1,7 @@
 const { response } = require('express');
 const express = require('express');
 const router = express.Router();
+const reformat = require("../functions/query-reformat");
 const bodyParser = require("body-parser");
 const axios = require('axios');
 const User = require('../models/userSchema');
@@ -30,8 +31,8 @@ router.get('/bar-search', isLoggedIn, async(req, res) => {
 
 router.post('/bar-search', isLoggedIn, async(req, res) => {
 
-    let input = req.body.bar_name;
-    input = input.replace(/ /gi, "%20")
+    let input = reformat(req.body.bar_name);
+    //input = input.replace(/ /gi, "%20")
 
     let config = {
         method: 'get',
@@ -73,9 +74,9 @@ router.post('/more-bars', isLoggedIn, async(req, res) => {
 
 router.post('/area-search', isLoggedIn, async(req, res) => {
 
-    let input = req.body.area_name;
+    let input = reformat(req.body.area_name);
 
-    input = input.replace(/ /gi, "%20")
+    //input = input.replace(/ /gi, "%20")
 
     let config = {
         method: 'get',
