@@ -1,23 +1,27 @@
-<img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">>
-    
-    <textarea style="display: none;" id ="tourstops">{{stringTourStopsFav}}</textarea>
-    <input type="hidden" id="lat" value="{{lat}}">
-    <input type="hidden" id="long" value="{{long}}">
-    <input type="hidden" id="zoom" value="{{zoom}}">
-        <div id="map"></div>
+<img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">
 
-<h1>Favourites Search Results</h1>
-<div class="databox primary">
-    <div class="scroll">
-    {{#each favourites}}
-        <div class="databox tertiary">
-            <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2>
-            <h3>{{this.address}}</h3></a>
+<div class="flex-containerx center" style="width:90%;margin-top:5rem;">    
+    <div class="databoxx secondary" style="flex:2;padding:1rem;">
+        <h1>Your Favourites</h1>
+        <div class="databox primary">
+            <div class="scroll">
+                {{#each favourites}}
+                    <div class="databox tertiary">
+                        <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2>
+                        <h3>{{this.address}}</h3></a>
+                    </div>
+                {{/each}}
+            </div>
         </div>
-    {{/each}}
+    </div>
+    <div class="databoxx secondary" style="flex:3;padding:1rem;">
+        <textarea style="display: none;" id ="tourstops">{{stringTourStopsFav}}</textarea>
+        <input type="hidden" id="lat" value="{{lat}}">
+        <input type="hidden" id="long" value="{{long}}">
+        <input type="hidden" id="zoom" value="{{zoom}}">
+        <div class="center" style="width:90%;margin-top:10%;" id="map"></div>
     </div>
 </div>
-
     <!-- 
      The `defer` attribute causes the callback to execute after the full HTML
      document has been parsed. For non-blocking uses, avoiding race conditions,
