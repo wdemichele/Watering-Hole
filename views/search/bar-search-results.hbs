@@ -10,9 +10,9 @@
         <div style="padding: 20px; flex: 1 0 30%; margin:10px" class="card databox tertiary">
             <a href="/search/bar{{bar.place_id}}">
             {{#if bar.photos.0.photo_reference}}
-            <img style="width: 600px; height:auto; maxwidth:600px; maxheight=400px;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+            <img style="width: 100%; height:400px; maxwidth:600px; maxheight:400px;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
             {{else}}
-            <img style="width: 600px; height: auto" src="/assets/wateringhole.png">
+            <img style="width: 100%; height: 400px" src="/assets/wateringhole.png">
             {{/if}}
             <div class="container">
                 <h2><b>{{bar.name}}</b></h2>
