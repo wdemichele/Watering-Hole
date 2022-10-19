@@ -7,15 +7,23 @@
         </div>
         <div style="display: flex;">
             <fieldset style="width:48%;flex:2;border-radius:25px;padding:0 10% 0 10%;background-color:#0E897D;border:none;">
-                <legend style="font-size:20px;">Bar Settings</legend>
+                <legend style="font-size:20px; margin:10px;">Bar Settings</legend>
+                <label for="price_range">Price</label>
                 <select name="price_range" id="price_range" placeholder="$-$$$">
                     <option name="1" value="1">$</option>
                     <option name="2" value="2">$$</option>
                     <option name="3" value="3">$$$</option>
                     <option name="4" value="4">$$$$</option>
-                </select><br>
-                <label for="below">Include below prices</label><br>
-                <input name="below" style="float: left; width: auto" type="checkbox">
+                </select><br><br>
+                <label for="radius">Radius</label>
+                <select name="radius" id="radius" placeholder="1000m">
+                    <option name="1" value="17">500m</option>
+                    <option name="2" value="16">1000m</option>
+                    <option name="3" value="14.5">2500m</option>
+                    <option name="4" value="13.5">5000m</option>
+                </select><br><br>
+                {{!-- <label for="below">Include below prices</label><br>
+                <input name="below" style="float: left; width: auto" type="checkbox"> --}}
             </fieldset>
 
             <fieldset style="width:48%;flex:3;border-radius:25px;padding:1rem;background-color:#0E897D;border:none;">
