@@ -97,6 +97,8 @@
     <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
     <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
     <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}">
+    <input type="hidden" id="bar_location" name="bar_lat" value="{{place_data.geometry.location.lat}}">
+    <input type="hidden" id="bar_location" name="bar_long" value="{{place_data.geometry.location.lng}}">
     {{> bar-tags}}
   </form>
   <form action="bar-visit{{place_data.place_id}}" method="post">
@@ -106,6 +108,8 @@
     <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
     <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours}}">
     <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry}}">
+    <input type="hidden" id="bar_location" name="bar_lat" value="{{place_data.geometry.location.lat}}">
+    <input type="hidden" id="bar_location" name="bar_long" value="{{place_data.geometry.location.lng}}">
     <button class="tertiary right" type="submit" id="visited_button" name="visited_button">Visited</button>
   </form>
   </div>
@@ -118,6 +122,8 @@
     <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
     <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{place_data.price_level}}">
     <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
+    <input type="hidden" id="bar_location" name="bar_lat" value="{{place_data.geometry.location.lat}}">
+    <input type="hidden" id="bar_location" name="bar_long" value="{{place_data.geometry.location.lng}}">
     {{!-- <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
     <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}"> --}}
 

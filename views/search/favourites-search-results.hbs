@@ -50,9 +50,13 @@ function initMap() {
     let jsonTourStopsFav = JSON.parse(document.getElementById("tourstops").value);
 
     for (let location of jsonTourStopsFav) {
-        location.position.lat = parseFloat(location.position.lat);
-        location.position.lng = parseFloat(location.position.lng);
+        loc = location
+        loc.position.lat = parseFloat(location.position.lat);
+        loc.position.lng = parseFloat(location.position.lng);
     }
+
+    console.log(jsonTourStopsFav)
+
     const tourStops = jsonTourStopsFav
     // Create an info window to share between markers.
     const infoWindow = new google.maps.InfoWindow();
