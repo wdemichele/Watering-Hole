@@ -1,25 +1,25 @@
-<div class="center" style="width: 90%;">
-<div class="w3-bar w3-black">
-    <button class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'query')">Query Search</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'area')">Area Search</button>
-  </div>
-<div id="query" class="w3-container w3-border city secondary">
-    <form action="/search/bar-search" method="post">
-        <h2>Query Search</h2>
-        <label for="bar_name">Enter your Bar Search text </label><br>
-        <input id="bar_name" name="bar_name" placeholder="e.g. Cocktail bar in Melbourne"><br>
-        <button class="primary right" type="submit">Search</button><br><br><br><br>
-    </form>
-</div>
-<div id="area" class="w3-container w3-border city secondary" style="display:none">
-    <form action="/search/area-search" method="post">
-        <h2>Area Search</h2>
-        <label for="area_name">Enter the area to search </label><br>
-        <input id="area_name" name="area_name" placeholder="e.g. Fitzroy Victoria">
-        <input id="area_radius" name="area_radius" value="2000" type="hidden"><br>
-        <button class="primary right" type="submit">Search</button><br><br><br><br>
-    </form>
-</div>
+<div class="center" style="width: 60%;margin-top:3rem;">
+    <div class="w3-bar w3-black" style="border-radius:25px;">
+        <button style="border-radius:25px;" class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'query')">Query Search</button>
+        <button style="border-radius:25px;" class="w3-bar-item w3-button tablink" onclick="openCity(event,'area')">Area Search</button>
+    </div>
+    <div id="query" class="w3-container w3-border city tertiary" style="border-radius:25px; padding:2rem;">
+        <form action="/search/bar-search" method="post">
+            <h2 style="margin-top: 2rem;margin-bottom: 2rem;font-size:40px">Query Search</h2>
+            <label style="margin-left:15%;font-size:20px" for="bar_name">Enter your Bar Search text </label><br>
+            <input class="center" style="width:70%;font-size:22px" id="bar_name" name="bar_name" placeholder="e.g. Cocktail bar in Melbourne"><br>
+            <button style="margin-right:15%;font-size:20px" class="secondary right" type="submit">Search</button><br><br><br><br>
+        </form>
+    </div>
+    <div id="area" class="w3-container w3-border city tertiary" style="display:none;border-radius:25px;padding:2rem;">
+        <form action="/search/area-search" method="post">
+            <h2 style="margin-top: 2rem;margin-bottom: 2rem;font-size:40px">Area Search</h2>
+            <label style="margin-left:15%;font-size:20px" for="area_name">Enter the area to search </label><br>
+            <input class="center" style="width:70%;font-size:22px" id="area_name" name="area_name" placeholder="e.g. Fitzroy Victoria">
+            <input class="center" style="width:70%;font-size:22px" id="area_radius" name="area_radius" value="2000" type="hidden"><br>
+            <button style="margin-right:15%;font-size:20px" class="secondary right" type="submit">Search</button><br><br><br><br>
+        </form>
+    </div>
 </div>
 <script>
     function isQuery(bool){
