@@ -6,7 +6,7 @@
         <iframe class="center" width="1200" height="900" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{query}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw"></iframe>
     </div>
     <div class="databox primary flex-container">
-    {{#each places as |bar|}}
+        {{#each places as |bar|}}
         <div style="padding: 20px; flex: 1 0 30%; margin:10px" class="card databox tertiary">
             <a href="/search/bar{{bar.place_id}}">
             {{#if bar.photos.0.photo_reference}}
@@ -21,10 +21,12 @@
                 <h3>Price Level: {{bar.price_level}} Google Review: {{bar.rating}}</h3>
                 <h3>Open Now: {{bar.opening_hours.open_now}}</h3></a>
                 {{!-- <iframe name="votar" style="display:none;"></iframe> --}}
-            </div>              
-        </div>
-    {{/each}}
+            
+
+        </div>              
     </div>
+    {{/each}}
+</div>
     {{#if page_token}}
     <form action="/search/more-bars" method="post">
         <input type="hidden" name="page_token" value="{{page_token}}">

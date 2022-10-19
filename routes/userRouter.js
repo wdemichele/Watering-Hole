@@ -20,7 +20,7 @@ const isLoggedIn = (req, res, next) => {
 
 router.get('/create', async(req, res) => {
 
-    res.render('user/create-user.hbs', { layout: 'user-layout', title: 'Create User' });
+    res.render('user/create-user.hbs', { layout: 'guest-layout', title: 'Create User' });
 });
 
 router.post('/create', async(req, res) => {
