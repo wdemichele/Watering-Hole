@@ -1,258 +1,42 @@
-<div class="tertiary" style="border-radius:25px;width:60%;padding:0 8% 0 8%; margin-left:auto; margin-right:auto; margin-top:3rem;">
-    <div class="search_left">
-        <form action="favourites-search" method="post">
-        <div style="display:flex;">
-            <h1 style="flex:1;">Pick Me A Favourite</h1>
+<div class="databox tertiary" style="border-radius:25px;width:60%;padding:0 8% 0 8%;padding-bottom:3rem;">
+    <h1 style="margin-top: 3rem;">My Favourites</h1>
+    <form action="favourites-search" method="post">
+        <div class="center" style="width:90%;padding:2% 0 3% 0;">
+            <label style="font-size:20px" for="area_name">Search an Area</label><br>
+            <input id="area_name" name="area_name"><br>
         </div>
+        <div style="display: flex;">
+            <fieldset style="width:48%;flex:2;border-radius:25px;padding:0 10% 0 10%;background-color:#0E897D;border:none;">
+                <legend style="font-size:20px;">Bar Settings</legend>
+                <select name="price_range" id="price_range" placeholder="$-$$$">
+                    <option name="1" value="1">$</option>
+                    <option name="2" value="2">$$</option>
+                    <option name="3" value="3">$$$</option>
+                    <option name="4" value="4">$$$$</option>
+                </select><br>
+                <label for="below">Include below prices</label><br>
+                <input name="below" style="float: left; width: auto" type="checkbox">
+            </fieldset>
 
-        <input id="area_name" name="area_name" placeholder="Area Name" style="color: black;" style="height: 40px;" />
-
-        <div class="search_sets">
-            <div class="search_set">
-                <div class="text_set">
-                    <select name="radius" id="radius" class="sets_choose">
-                        <option class="sets_box" value="17">500m</option>
-                        <option class="sets_box" value="16">1000m</option>
-                        <option class="sets_box" value="14.5" selected>2500m</option>
-                        <option class="sets_box" value="13.5">5000m</option>
-                    </select>
-                </div>
-                <div>
-                    <img src="\assets\xiashuangjiantou.png" class="set_down">
-                </div>
-            </div>
-            <div class="search_set_price">
-                <div class="text_set">
-                    <select class="price_choose">
-                        <option class="price_box">$</option>
-                        <option class="price_box">$$</option>
-                        <option class="price_box">$$$</option>
-                        <option class="price_box">$$$$</option>
-                    </select>
-
-                </div>
-
-                <div>
-                    <img src="\assets\xiashuangjiantou.png" class="price_down">
-                </div>
-            </div>
-
-        </div>
-
-        <div class="search_open">
-            <div class="text_set">
-                &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp Open Now
-            </div>
-            <div>
-                <img src="\assets\choose.jpg" class="open_choose">
-                <img src="\assets\xuanzekuanghou.png" class="open_choosed">
-            </div>
-
-
-        </div>
-        <div class="search_favourites">
-            <div class="text_set">
-                &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp Include Bucketlist
-            </div>
-            <div>
-                <img src="\assets\choose.jpg" class="only_choose" />
-                <img src="\assets\xuanzekuanghou.png" class="only_choosed">
-            </div>
-
-
-        </div>
-        <div class="search_search_tags">
-            <div class="search_tags">Search Tags</div>
-            {{#each user.tags}}
-                <div name="chip" style="font-weight: bolder; margin: 5px; min-width: 120px" class="chip" onclick="checked(this)">
+            <fieldset style="width:48%;flex:3;border-radius:25px;padding:1rem;background-color:#0E897D;border:none;">
+                <legend style="font-size:20px">Search Tags</legend>
+                {{#each user.tags}}
+                <div name="chip" class="chip" onclick="checked(this)">
                     {{this}}
                     <input style="display: none;" type="checkbox" id="{{this}}" name="{{this}}" value="{{this}}">
                 </div>
                 {{/each}}
-
+            </fieldset>
         </div>
         <div style="margin-top: 2rem;">
-            <button class="secondary" type="reset">Cancel</button>
-            <button class="primary right" type="submit">Search</button><br><br>
+            <button style="font-size:20px" class="secondary" type="reset">Cancel</button>
+            <button style="font-size:20px" class="primary right" type="submit">Search</button><br><br>
         </div>
-        </form>
-
-    </div>
+        
+    </form>
 </div>
 
-
-<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-    $(function() {
-        var $sets_choose = $('.sets_choose')
-        var $price_choose = $('.price_choose')
-        var open_choose = false;
-        var only_choose = false;
-        var set_raduis = '';
-        var set_price = '';
-        var list = [{
-            name: "Rooftop"
-        }, {
-            name: "Techno"
-        }, {
-            name: "Open Late"
-        }]
-        var tag = []
-
-        // sets click
-        $(".set_down").click(function() {
-                $sets_choose.toggle()
-
-            })
-            //set choose box click
-
-        $('.sets_box').click(function(event) {
-            var target = $(event.target);
-            console.log(target.html())
-            $('.set_radius_text').text(target.text())
-
-            $sets_choose.hide()
-
-        });
-        // choose box click
-        $('.price_box').click(function(event) {
-            var target = $(event.target);
-            console.log(target.html())
-            $('.set_price_text').text(target.text())
-            $price_choose.hide()
-
-            set_price = target.text()
-
-        });
-        // price click
-        $(".price_down").click(function() {
-                $price_choose.toggle()
-
-            })
-            //open now choose 
-        $('.open_choose').click(function() {
-            open_choose = true;
-
-            $('.open_choose').hide();
-            $('.open_choosed').show();
-        })
-        $('.open_choosed').click(function() {
-                open_choose = false;
-                $('.open_choosed').hide();
-                $('.open_choose').show();
-            })
-            //only choose
-        $('.only_choose').click(function() {
-            only_choose = true;
-            $('.only_choose').hide();
-            $('.only_choosed').show();
-        })
-        $('.only_choosed').click(function() {
-                only_choose = false;
-                $('.only_choosed').hide();
-                $('.only_choose').show();
-            })
-            //tag for 
-
-
-        let knifeItemStr = list.map((item, index) => {
-            return `
-        
-            <div class="tag_name">${item.name}</div>
-      
-    `
-        }).join(" ")
-        document.querySelector('.tag_box').innerHTML = knifeItemStr
-
-        //add tag+ click
-        $('.two').click(function() {
-            var name = prompt("please input tags name");
-            var name_tag = {
-                name: name
-            }
-            list.push(name_tag)
-            console.log(list)
-            let knifeItemStr = list.map((item, index) => {
-                return `
-        
-            <div class="tag_name">${item.name}</div>
-      
-    `
-            }).join(" ")
-            document.querySelector('.tag_box').innerHTML = knifeItemStr
-
-        })
-
-        //eidt tags click
-        $('.one').click(function() {
-            if (name != null) {
-                var name = prompt("please input delete tags name")
-            }
-
-            var pos = $.inArray(name, list);
-            list.splice(pos, 1);
-
-            let knifeItemStr = list.map((item, index) => {
-                return `
-        
-            <div class="tag_name">${item.name}</div>
-      
-    `
-            }).join(" ")
-            document.querySelector('.tag_box').innerHTML = knifeItemStr
-
-        });
-
-        ///tag click change color 
-        $(".tag_box").on("click", ".tag_name", function() {
-            console.log($(this).css("background-color"))
-
-
-            if ($(this).css("background-color") == "rgb(245, 245, 245)") {
-                $(this).css({
-                    "background-color": "rgb(145, 145, 245)"
-                })
-                tag.push($(this).html())
-            } else {
-                $(this).css({
-                    "background-color": "rgb(245, 245, 245)"
-                })
-                var pos = $.inArray(name, tag);
-                tag.splice(pos, 1);
-            }
-            console.log(tag)
-        });
-
-
-
-        $(".searchs_button").click(function() {
-            var txt = $(".search_input").val();
-            var serach_meassage = [{
-                text: txt
-            }, {
-                tag: tag
-            }, {
-                set_raduis: set_raduis
-            }, {
-                set_price: set_price
-            }, {
-                open_choose: open_choose
-            }, {
-                only_choose: only_choose
-            }]
-
-            console.log(serach_meassage)
-            if ($.trim(txt) != "") {
-                location.reload();
-                $.post("", {
-                    'serach_meassage': serach_meassage
-                }, function(data) {
-
-                    alert(data);
-                });
-            }
-        });
-    })
     function checked(element) {
         element.classList.toggle("tagged");
         var checkbox = element.querySelector("input");
