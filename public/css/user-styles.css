@@ -382,7 +382,6 @@ table {
 }
 
 .login {
-    background-color: #EAD5BF;
     padding-top: 0.5%;
     padding-bottom: 0.5%;
     padding-left: 2%;
@@ -394,17 +393,16 @@ table {
 }
 
 .login-text-field {
-    color: black;
     text-align: center;
     margin: 7% 10% 10% 10%;
     font-size: 30px;
     font-weight: 300;
 }
 
-.login-title {
-    color: black;
+
+/* .login-title {
     font-weight: 400;
-}
+} */
 
 .input-field {
     width: 100%;
