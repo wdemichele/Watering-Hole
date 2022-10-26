@@ -6,16 +6,16 @@
 <div>
       <div class="databoxx primary">
     <img style="width: 200px; height: auto;" src="\assets\nav\abstract-user-flat-4.svg">
-    <h1>{{user.name}}</h1>
-    <h2>@{{user.username}}</h2>
+    <h2>{{user.name}}</h2>
+    <h3>@{{user.username}}</h3>
     <div class="flex-container">
         <div>
-            <h1>Friends</h1>
-            <a href="/user/uid{{user.username}}/friends"><h1>{{array_length user.friends}}</h1></a>
+            <h2>Friends</h2>
+            <a href="/user/uid{{user.username}}/friends"><h2>{{array_length user.friends}}</h2></a>
         </div>
         <div>
-            <h1>Bars</h1>
-            <a href="/user/uid{{user.username}}/favourites"><h1>{{array_length user.bars}}</h1></a>
+            <h2>Bars</h2>
+            <a href="/user/uid{{user.username}}/favourites"><h2>{{array_length user.bars}}</h2></a>
         </div>
     </div>
 

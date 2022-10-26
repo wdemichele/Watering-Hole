@@ -107,6 +107,28 @@ router.get('/uid:id/favourites', isLoggedIn, async(req, res) => {
     res.render('user/user-favourites.hbs', { layout: 'user-layout', title: 'User Favourites', user: user, favourites: favs, bucketlist: buck });
 });
 
+router.get("/uid:id/pic", isLoggedIn, async(req, res) => {
+    let username = req.params.id;
+    let user = await User.findOne({ username: username }).lean().exec();
+
+    let total = 4;
+    let row_size = 7;
+
+    let num_pics = [];
+    let col = [];
+    for (let i = 0; i < total; i++) {
+        col.push(i)
+        if (i % row_size == row_size - 1 || i == total - 1) {
+            num_pics.push(col);
+            col = []
+        }
+    }
+    console.log(num_pics)
+
+    res.render('user/user-pic.hbs', { layout: 'user-layout', title: 'My Tags', user: user, num_pics: num_pics });
+})
+
+
 router.get('/uid:id/tags:tag', isLoggedIn, async(req, res) => {
 
     let username = req.params.id;

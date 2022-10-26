@@ -1697,3 +1697,23 @@ hr {
     visibility: visible;
     opacity: 1;
 }
+
+.avatar {
+    height: auto;
+    width: 100%;
+}
+
+.avatar-column {
+    float: left;
+    width: 14.285%;
+    padding: 5px;
+}
+
+
+/* Clearfix (clear floats) */
+
+.avatar-row::after {
+    content: "";
+    clear: both;
+    display: table;
+}

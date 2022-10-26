@@ -1,0 +1,24 @@
+<h1>Select a Profile Pic</h1>
+<form action="user/pic" method="post">
+    <input type="hidden" name="pic_index" value="0">
+    {{#each num_pics as |row|}}
+    <div class="avatar-row">
+        {{#each row}}
+        <div class="avatar-column">
+            <img class="avatar" src="/assets/avatars/avatar{{this}}.svg">
+        </div>
+        {{/each}}
+    </div>
+    {{/each}}
+    </div>
+</form>
+
+
+
+<script>
+    function selected(index){
+
+
+        document.theForm.submit();
+    }
+</script>
