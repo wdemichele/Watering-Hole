@@ -4,7 +4,6 @@
             <div class="scroll">
                 {{#each activity as |friend|}}
                     {{#each (limit (reverseArray friend.activity) 20)}}
-                    
                         <div class="databox tertiary">
                             <h2><a href="/user/uid{{friend.username}}">{{friend.name}}</a> {{this.type}} <a href="/search/bar{{this.id}}">{{this.name}}</h2>
                             <p>{{this.address}}</p></a>

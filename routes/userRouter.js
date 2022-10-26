@@ -80,8 +80,12 @@ router.get('/uid:id', isLoggedIn, async(req, res) => {
 router.get('/uid:id/friends', isLoggedIn, async(req, res) => {
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
+    console.log(user.friends)
 
-    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Friends', user: user });
+    friends = await User.find({ username: { $in: user.friends } }, { "username": 1, "name": 1, "pic": 1 }).lean().exec()
+    console.log(friends)
+
+    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Friends', user: user, friends: friends });
 });
 
 router.get('/uid:id/favourites', isLoggedIn, async(req, res) => {
