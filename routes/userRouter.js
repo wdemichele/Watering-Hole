@@ -128,6 +128,16 @@ router.get("/uid:id/pic", isLoggedIn, async(req, res) => {
     res.render('user/user-pic.hbs', { layout: 'user-layout', title: 'My Tags', user: user, num_pics: num_pics });
 })
 
+router.post("/uid:id/pic", isLoggedIn, async(req, res) => {
+    let username = req.params.id;
+    let index = req.body.pic_index;
+    if (index >= 0) {
+        let user = await User.findOneAndUpdate({ username: username }, { pic: index.toString() }).lean().exec();
+    }
+
+    res.redirect("/settings");
+})
+
 
 router.get('/uid:id/tags:tag', isLoggedIn, async(req, res) => {
 
