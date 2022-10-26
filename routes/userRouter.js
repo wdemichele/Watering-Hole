@@ -111,7 +111,7 @@ router.get("/uid:id/pic", isLoggedIn, async(req, res) => {
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    let total = 56;
+    let total = 65;
     let row_size = 7;
 
     let num_pics = [];
