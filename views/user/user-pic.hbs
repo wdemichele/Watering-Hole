@@ -1,24 +1,37 @@
-<h1>Select a Profile Pic</h1>
+
+<div class="databox primary">
+    <h1>Select a Profile Pic</h1>
 <form action="user/pic" method="post">
-    <input type="hidden" name="pic_index" value="0">
+    <input type="hidden" id="pic_index" name="pic_index" value="-1">
     {{#each num_pics as |row|}}
     <div class="avatar-row">
         {{#each row}}
         <div class="avatar-column">
-            <img class="avatar" src="/assets/avatars/avatar{{this}}.svg">
+            <img class="avatar" onclick="selected(this)" name="{{this}}" id="{{this}}" src="/assets/avatars/avatar{{this}}.svg">
         </div>
         {{/each}}
     </div>
     {{/each}}
     </div>
 </form>
-
+</div>
 
 
 <script>
     function selected(index){
+        old = document.getElementById("pic_index")
+        console.log(index)
+        if (old.value == index) {
+            index.style.opacity = 0.7
+            old.value = -1
+        }
+        else {
+            if (old.value != -1){
+                document.getElementById(old.value).style.opacity = 0.7
+            }
+            index.style.opacity = 1
+            old.value = index.id
+        }
 
-
-        document.theForm.submit();
     }
 </script>
