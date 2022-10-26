@@ -140,10 +140,6 @@ nav a:hover {
     flex: 1 0 250px;
     margin: 1rem;
     padding: 10px 10px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    border-color: #333;
-    border-style: solid;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
@@ -207,35 +203,63 @@ input:focus {
 .primary {
     background-color: #0E897D;
     color: #fafafa;
+    border: 1px solid #000;
+    border-radius: 5px;
+    border-color: #333;
+    border-style: solid;
 }
 
 .secondary {
     background-color: #355371;
     color: #fafafa;
+    border: 1px solid #000;
+    border-radius: 5px;
+    border-color: #333;
+    border-style: solid;
 }
 
 .tertiary {
     background-color: #4C899F;
     color: white;
+    border: 1px solid #000;
+    border-radius: 5px;
+    border-color: #333;
+    border-style: solid;
 }
 
 .quaternary {
     background-color: var(--color-quat);
     color: black;
+    border: 1px solid #000;
+    border-radius: 5px;
+    border-color: #333;
+    border-style: solid;
 }
 
 .accent {
     background-color: #EAD5BF;
+    border: 1px solid #000;
+    border-radius: 5px;
+    border-color: #333;
+    border-style: solid;
 }
 
 .white {
     background-color: #fafafa;
     color: #000000;
+    border: 1px solid #000;
+    border-radius: 5px;
+    border-color: #333;
+    border-style: solid;
 }
 
 .black {
     background-color: #000000;
     color: #fafafa;
+    border: 1px solid #000;
+    border-radius: 5px;
+    border-color: #333;
+    border-style: solid;
 }
 
 .left {
@@ -635,10 +659,6 @@ nav a:hover {
     flex: 1 0 250px;
     margin: 1rem;
     padding: 10px 10px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    border-color: #333;
-    border-style: solid;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
@@ -1653,4 +1673,27 @@ hr {
 .dark-mode {
     background-color: black;
     color: white;
+}
+
+.img__wrap {
+    position: relative;
+}
+
+.img__description {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(29, 32, 34, 0.72);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+}
+
+.img__wrap:hover .img__description {
+    visibility: visible;
+    opacity: 1;
 }

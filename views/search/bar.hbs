@@ -46,6 +46,27 @@
   <h3>{{place_data.types}}</h3>
   <h3>Open Now: {{place_data.opening_hours.open_now}}</h3>
   </div>
+    <form action="bar-favourite{{place_data.place_id}}" method="post">
+    <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
+    <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
+    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{place_data.price_level}}">
+    <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
+    <input type="hidden" id="bar_location" name="bar_lat" value="{{place_data.geometry.location.lat}}">
+    <input type="hidden" id="bar_location" name="bar_long" value="{{place_data.geometry.location.lng}}">
+    {{!-- <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
+    <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}"> --}}
+
+    {{#if bucketlisted}}
+    <button class="primary" type="submit" id="bucketlist_remove" name="bucketlist_remove">Remove From Bucketlist</button>
+    {{else}}
+    <button class="primary" type="submit" id="bucketlist_button" name="bucketlist_button">Add To Bucketlist</button>
+    {{/if}}
+    {{#if favourited}}
+    <button class="secondary right" type="submit" id="favourite_remove" name="favourite_remove">Remove From Favourites</button>
+    {{else}}
+    <button class="secondary right" type="submit" id="favourite_button" name="favourite_button">Add To Favourites</button>
+    {{/if}}
+  </form>
   </div>
   
    
@@ -117,30 +138,6 @@
   
   </div>
   </div>
-  <form action="bar-favourite{{place_data.place_id}}" method="post">
-    <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
-    <input type="hidden" id="bar_address" name="bar_address" value="{{place_data.formatted_address}}">
-    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{place_data.price_level}}">
-    <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
-    <input type="hidden" id="bar_location" name="bar_lat" value="{{place_data.geometry.location.lat}}">
-    <input type="hidden" id="bar_location" name="bar_long" value="{{place_data.geometry.location.lng}}">
-    {{!-- <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
-    <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}"> --}}
-
-    {{#if bucketlisted}}
-    <button class="tertiary" type="submit" id="bucketlist_remove" name="bucketlist_remove">Remove From Bucketlist</button>
-    {{else}}
-    <button class="tertiary" type="submit" id="bucketlist_button" name="bucketlist_button">Add To Bucketlist</button>
-    {{/if}}
-    {{#if favourited}}
-    <button class="primary right" type="submit" id="favourite_remove" name="favourite_remove">Remove From Favourites</button>
-    {{else}}
-    <button class="primary right" type="submit" id="favourite_button" name="favourite_button">Add To Favourites</button>
-    {{/if}}
-  </form>
-
-
-
 
 <script>
     var slideIndex = 1;
