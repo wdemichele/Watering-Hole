@@ -29,11 +29,16 @@ router.get('/home', isLoggedIn, async(req, res) => {
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    let activity = user.activity;
-
-    let most_visited = [];
     let recently_visited = [];
-    let popular_with_friends = [];
+    for (let i = user.activity.length - 1; i >= 0; i--) {
+        if (recently_visited.length < 4 && user.activity[i].type == "visited") {
+            recently_visited.push(user.activity[i].id);
+        }
+        if (recently_visited.length >= 4) {
+            break;
+        }
+    }
+    recently_visited = await Bar.find({ id: { $in: recently_visited } }).lean().exec();
 
     let recently_favourited = [];
     let recently_bucketlisted = [];
@@ -44,6 +49,9 @@ router.get('/home', isLoggedIn, async(req, res) => {
         if (recently_bucketlisted.length < 4 && user.bars[i].bucketlist) {
             recently_bucketlisted.push(user.bars[i].id);
         }
+        if (recently_favourited.length >= 4 && recently_bucketlisted.length >= 4) {
+            break;
+        }
     }
 
     recently_favourited = await Bar.find({ id: { $in: recently_favourited } }).lean().exec();
@@ -51,11 +59,26 @@ router.get('/home', isLoggedIn, async(req, res) => {
 
     let friend_activity = await User.find({ username: { $in: user.friends } }, { username: 1, name: 1, pic: 1, activity: { $slice: -1 } }).lean().exec();
 
+    let popular_with_friends = [];
+    for (let friend of friend_activity) {
+        if (friend.activity[0] && friend.activity[0].id && !popular_with_friends.includes(friend.activity[0].id)) {
+
+            popular_with_friends.push(friend.activity[0].id);
+        }
+        if (popular_with_friends.length >= 4) {
+            break;
+        }
+    }
+    console.log(popular_with_friends)
+    popular_with_friends = await Bar.find({ id: { $in: popular_with_friends } }).lean().exec();
+    console.log(popular_with_friends)
+        // console.log(popular_with_friends)
+
+
     res.render('home.hbs', {
         layout: 'user-layout',
         title: 'My Watering Hole',
         user: user,
-        most_visited: most_visited,
         recently_visited: recently_visited,
         popular_with_friends: popular_with_friends,
         recently_favourited: recently_favourited,

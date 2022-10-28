@@ -4,9 +4,9 @@
         <div style="width: 70%;" class="flex-column">
             <div class="databox primary">
                 <div class="databox">
-                    <h3 style="margin: 5px" class="left">Most Visited:</h3><br><br>
-                    {{#if most_visited}}
-                        {{#each most_visited}}
+                    <h3 style="margin: 5px" class="left">Recently Visited:</h3><br><br>
+                    {{#if recently_visited}}
+                        {{#each recently_visited}}
                         <div class="home-column recommended-container">
                             
                             <img class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}"{{else}}src="assets/wateringhole.png"{{/if}}>
@@ -24,7 +24,7 @@
                     <h3 class="left">Popular with Friends:</h3><br><br>
                     {{#if popular_with_friends}}
                         {{#each popular_with_friends}}
-                        <div class="home-column recommended-container">
+                                                <div class="home-column recommended-container">
                             
                             <img class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}"{{else}}src="assets/wateringhole.png"{{/if}}>
                             <div class="middle">
