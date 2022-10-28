@@ -165,6 +165,7 @@ router.post('/bar:id/tags', isLoggedIn, async(req, res) => {
             address: req.body.bar_address,
             price_level: req.body.bar_price_level,
             rating: req.body.bar_rating,
+            pic: req.body.bar_pic,
             // hours: req.body.bar_hours,
             location: {
                 "lat": req.body.bar_lat,
@@ -205,6 +206,7 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
             address: req.body.bar_address,
             price_level: req.body.bar_price_level,
             rating: req.body.bar_rating,
+            pic: req.body.bar_pic,
             // hours: req.body.bar_hours,
             location: {
                 "lat": req.body.bar_lat,

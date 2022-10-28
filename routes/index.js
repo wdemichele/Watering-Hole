@@ -29,7 +29,39 @@ router.get('/home', isLoggedIn, async(req, res) => {
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('home.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+    let activity = user.activity;
+
+    let most_visited = [];
+    let recently_visited = [];
+    let popular_with_friends = [];
+
+    let recently_favourited = [];
+    let recently_bucketlisted = [];
+    for (let i = user.bars.length - 1; i >= 0; i--) {
+        if (recently_favourited.length < 4 && user.bars[i].favourite) {
+            recently_favourited.push(user.bars[i].id);
+        }
+        if (recently_bucketlisted.length < 4 && user.bars[i].bucketlist) {
+            recently_bucketlisted.push(user.bars[i].id);
+        }
+    }
+
+    recently_favourited = await Bar.find({ id: { $in: recently_favourited } }).lean().exec();
+    recently_bucketlisted = await Bar.find({ id: { $in: recently_bucketlisted } }).lean().exec();
+
+    let friend_activity = await User.find({ username: { $in: user.friends } }, { username: 1, name: 1, pic: 1, activity: { $slice: -1 } }).lean().exec();
+
+    res.render('home.hbs', {
+        layout: 'user-layout',
+        title: 'My Watering Hole',
+        user: user,
+        most_visited: most_visited,
+        recently_visited: recently_visited,
+        popular_with_friends: popular_with_friends,
+        recently_favourited: recently_favourited,
+        recently_bucketlisted: recently_bucketlisted,
+        friend_activity: friend_activity
+    });
 });
 
 router.get('/social', isLoggedIn, async(req, res) => {

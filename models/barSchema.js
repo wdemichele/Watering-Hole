@@ -20,7 +20,8 @@ let barSchema = new schema({
     price_level: { type: Number },
     rating: { type: Number },
     hours: [open_hours],
-    location: location
+    location: location,
+    pic: { type: String }
 })
 
 module.exports = mongoose.model('bar', barSchema, 'bar');
