@@ -1,8 +1,9 @@
 <div class="databox secondary">
     <h1>Welcome {{user.displayName}}{{user.name}}</h1>
     <div class="flex-container">
-        <div style="width: 70%;" class="flex-column">
+        <div style="width: 66%;" class="flex-column">
             <div class="databox primary">
+                <h2>Bar Recommendations</h2>
                 <div class="databox">
                     <h3 style="margin: 5px" class="left">Recently Visited:</h3><br><br>
                     {{#if recently_visited}}
@@ -21,10 +22,10 @@
                 </div>
 
                 <div class="databox">
-                    <h3 class="left">Popular with Friends:</h3><br><br>
+                    <h3 style="margin: 5px" class="left">Popular with Friends:</h3><br><br>
                     {{#if popular_with_friends}}
                         {{#each popular_with_friends}}
-                                                <div class="home-column recommended-container">
+                            <div class="home-column recommended-container">
                             
                             <img class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}"{{else}}src="assets/wateringhole.png"{{/if}}>
                             <div class="middle">
@@ -74,6 +75,7 @@
             </div>
         </div>
         <div class="databox primary">
+            <div class="scroll">
             <h2>Friend Activity</h2>
             {{#if friend_activity}}
             {{#each friend_activity}}
@@ -89,6 +91,8 @@
             {{else}}
             <h2>Add more friends to see friend activity.</h2>
             {{/if}}
+            </div>
         </div>
+
     </div>
 </div>
