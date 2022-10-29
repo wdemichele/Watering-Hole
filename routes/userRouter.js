@@ -61,8 +61,18 @@ router.get('/', isLoggedIn, async(req, res) => {
 
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
+    let recently_visited = [];
+    for (let i = user.activity.length - 1; i >= 0; i--) {
+        if (recently_visited.length < 4 && user.activity[i].type == "visited") {
+            recently_visited.push(user.activity[i].id);
+        }
+        if (recently_visited.length >= 4) {
+            break;
+        }
+    }
+    recently_visited = await Bar.find({ id: { $in: recently_visited } }).lean().exec();
 
-    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: true });
+    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: true, recently_visited: recently_visited });
 
 });
 
@@ -74,7 +84,18 @@ router.get('/uid:id', isLoggedIn, async(req, res) => {
     }
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: mine });
+    let recently_visited = [];
+    for (let i = user.activity.length - 1; i >= 0; i--) {
+        if (recently_visited.length < 4 && user.activity[i].type == "visited") {
+            recently_visited.push(user.activity[i].id);
+        }
+        if (recently_visited.length >= 4) {
+            break;
+        }
+    }
+    recently_visited = await Bar.find({ id: { $in: recently_visited } }).lean().exec();
+
+    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: mine, recently_visited: recently_visited });
 });
 
 router.get('/uid:id/friends', isLoggedIn, async(req, res) => {

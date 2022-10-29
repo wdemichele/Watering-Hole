@@ -24,12 +24,13 @@
     <div class="databoxx primary">
     <h2>Recently Visited:</h2>
     <div class="flex-container databox secondary">
-        {{#each user.activity as |activity|}}
-            {{#ifCond activity.type "==" "visited"}}
-                <div class="databox tertiary">
-                    <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2></a>
-                </div>
-            {{/ifCond}}
+        {{#each recently_visited }}
+        <div class="home-column recommended-container">        
+            <img style="width: 200px; height: auto;" class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}"{{else}}src="assets/wateringhole.png"{{/if}}>
+            <div class="middle">
+                <a href="/search/bar{{this.id}}"><div style="inline-size: 80px; overflow-wrap: break-word;" class="recommended-text">{{this.name}}</div></a>
+            </div>
+        </div>
         {{/each}}
     </div>
 </div>
