@@ -118,7 +118,7 @@ router.get('/settings', isLoggedIn, async(req, res) => {
 
 router.get('/', (req, res) => {
 
-    res.render('guest/login.hbs', { layout: 'guest-layout', title: 'User Login', flash: req.flash('error') });
+    res.render('guest/login.hbs', { layout: 'guest-layout', title: 'Watering Hole', flash: req.flash('error') });
 });
 
 router.get('/map', async(req, res) => {

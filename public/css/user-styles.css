@@ -666,6 +666,9 @@ nav a:hover {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-wrap: break-word;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .flex-container {
@@ -1752,4 +1755,24 @@ hr {
     content: "";
     clear: both;
     display: table;
+}
+
+.socials {
+    display: flex;
+    padding: 20px;
+    font-size: 30px;
+    width: 75px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    padding: 5px;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    opacity: 1;
+}
+
+.socials:hover {
+    opacity: 0.8;
 }
