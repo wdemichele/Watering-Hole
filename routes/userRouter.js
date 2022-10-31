@@ -136,7 +136,7 @@ router.get("/uid:id/pic", isLoggedIn, async(req, res) => {
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    let total = 86;
+    let total = 91;
     let row_size = 7;
 
     let num_pics = [];
@@ -148,7 +148,6 @@ router.get("/uid:id/pic", isLoggedIn, async(req, res) => {
             col = []
         }
     }
-    console.log(num_pics)
 
     res.render('user/user-pic.hbs', { layout: 'user-layout', title: 'My Tags', user: user, num_pics: num_pics });
 })

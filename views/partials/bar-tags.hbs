@@ -1,13 +1,14 @@
 <div class="databox primary" style="border-radius:25px;">
     <h2>Add My Tags</h2>
 
-    {{#each user.tags}}
-        <div name="chip" class="chip" onclick="checked(this)">
-            {{this}}
-            <input style="display: none;" type="checkbox" id="{{this}}" name="{{this}}" value="{{this}}">
+    {{#each user.tags as |tag|}}
+        <div name="chip" class="chip {{#if (contains ../tags tag)}}tagged{{/if}}" onclick="checked(this)">
+            {{tag}}
+            <input style="display: none;" type="checkbox" id="{{tag}}" name="{{tag}}" value="{{tag}}" {{#if (contains ../tags tag)}}checked{{/if}}>
+            
         </div>
     {{/each}}
-
+    <input type="hidden" values="{{tags}}">
     <br><br>
     
     <button class="tertiary right bar-btn" type="submit" id="tags_button" name="tags_button">Set Tags</button>

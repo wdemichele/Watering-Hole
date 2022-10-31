@@ -24,8 +24,11 @@ const isLoggedIn = (req, res, next) => {
 }
 
 router.get('/bar-search', isLoggedIn, async(req, res) => {
-
-    res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search' });
+    let username = req.user.username;
+    let user = await User.findOne({
+        username: username
+    }).lean().exec();
+    res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search', user: user });
 });
 
 router.post('/bar-search', isLoggedIn, async(req, res) => {
@@ -116,9 +119,9 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
     }).lean().exec();
 
     let bar_id = req.params.id;
-    favourited = false
-    bucketlisted = false
-    tags = []
+    let favourited = false
+    let bucketlisted = false
+    let tags = []
 
     for (let bar of user.bars) {
         if (bar.id == bar_id) {

@@ -42,7 +42,13 @@
   <h2>{{place_data.formatted_address}}</h2>
   <h2>{{place_data.formatted_phone_number}}</h2>
   <a href="{{place_data.website}}"><h3>{{place_data.website}}</h3></a>
-  <h3>{{#if place_data.price_level}}Price Level: {{place_data.price_level}}{{/if}} {{#if place_data.rating}}Google Review: {{place_data.rating}}{{/if}}</h3>
+  <h3 style="text-align: left;">{{#if place_data.price_level}}Price Level: {{#times place_data.price_level}}
+    $
+{{/times}}{{/if}} {{#if place_data.rating}}<span style="float:right;">Google Review: {{place_data.rating}}{{#times place_data.rating}}
+    <span class="fa fa-star checked"></span>
+{{/times}}{{#negtimes 5 place_data.rating}}
+    <span class="fa fa-star"></span>
+{{/negtimes}}{{/if}}</span></h3>
   </div>
     <form action="bar-favourite{{place_data.place_id}}" method="post">
     <input type="hidden" id="bar_name" name="bar_name" value="{{place_data.name}}">
