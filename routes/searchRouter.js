@@ -378,7 +378,9 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
     if (user.bars) {
         if (!tags.length) {
             for (let bar of user.bars) {
-                favourites.push(bar.id);
+                if (req.body.bucketlist || bar.favourite) {
+                    favourites.push(bar.id);
+                }
             }
         } else {
             for (let bar of user.bars) {
@@ -386,7 +388,9 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
                     return tags.indexOf(element) !== -1;
                 });
                 if (contains) {
-                    favourites.push(bar.id)
+                    if (req.body.bucketlist || bar.favourite) {
+                        favourites.push(bar.id);
+                    }
                 }
             }
         }
