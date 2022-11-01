@@ -228,7 +228,7 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
         });
     } else if (typeof req.body.favourite_remove !== 'undefined') {
         fav = false
-        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "favourited" } });
+            // let updatedUser = await User.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "favourited" } });
     }
 
     let buck = undefined;
@@ -246,7 +246,7 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
         });
     } else if (typeof req.body.bucketlist_remove !== 'undefined') {
         buck = false
-        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "bucketlisted" } });
+            // let updatedUser = await User.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "bucketlisted" } });
     }
 
     let user = await User.findOne({ username: username });

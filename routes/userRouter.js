@@ -235,7 +235,7 @@ router.post('/search-friend', isLoggedIn, async(req, res) => {
     let friend = await User.findOne({ username: username }).lean().exec();
     let user;
     if (friend) {
-        res.redirect('user/uid' + username)
+        res.redirect('/user/uid' + username)
     } else {
         response = "User not found!"
         res.redirect('/social')
