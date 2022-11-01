@@ -22,7 +22,27 @@
     <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(5)"></span>
   </div>
 
-  
+  <div id="myModal-review" class="modal-review">
+    <!-- Modal content -->
+    <div class="modal-content-review">
+      <span class="close-review">&times;</span>
+      {{#each place_data.reviews}}
+      <div class="databox tertiary">
+        <h2>{{this.author_name}} </h2>
+        <img src="{{this.profile_photo_url}}">
+        <h4 style="float: left;">{{this.rating}}{{#times this.rating}}
+    <span class="fa fa-star checked"></span>
+{{/times}}{{#negtimes 5 this.rating}}
+    <span class="fa fa-star"></span>
+{{/negtimes}}</h4>
+        <h4 style="float: right;"><em>about {{this.relative_time_description}}</em></h4>
+        <div style="clear: both;"></div>
+        <p style="word-wrap: break-word; width: fit-content; block-size: fit-content;">{{this.text}}</p>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+
   <div id="modal01" class="w3-modal" onclick="this.style.display='none'">
   <span class="w3-button w3-hover-red w3-xlarge w3-display-topright">&times;</span>
   <div class="w3-modal-content w3-animate-zoom">
@@ -44,7 +64,7 @@
   <a href="{{place_data.website}}"><h3>{{place_data.website}}</h3></a>
   <h3 style="text-align: left;">{{#if place_data.price_level}}Price Level: {{#times place_data.price_level}}
     $
-{{/times}}{{/if}} {{#if place_data.rating}}<span style="float:right;">Google Review: {{place_data.rating}}{{#times place_data.rating}}
+{{/times}}{{/if}} {{#if place_data.rating}}<span style="float:right;"><button id="myBtn-review" type="button">{{place_data.user_ratings_total}} Reviews</button><br> {{place_data.rating}}{{#times place_data.rating}}
     <span class="fa fa-star checked"></span>
 {{/times}}{{#negtimes 5 place_data.rating}}
     <span class="fa fa-star"></span>
@@ -148,6 +168,28 @@
   </div>
 
 <script>
+      // Get the modal
+    var modal_review = document.getElementById("myModal-review");
+    // Get the button that opens the modal
+    var btn_review = document.getElementById("myBtn-review");
+    // Get the <span> element that closes the modal
+    var span_review = document.getElementsByClassName("close-review")[0];
+    // When the user clicks the button, open the modal 
+    btn_review.onclick = function() {
+      modal_review.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the modal
+    span_review.onclick = function() {
+      modal_review.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal_review) {
+        modal_review.style.display = "none";
+      }
+    }
+
+
     var slideIndex = 1;
     showDivs(slideIndex);
 

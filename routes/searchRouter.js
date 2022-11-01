@@ -150,7 +150,8 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
             // console.log(response.data.result.opening_hours.periods)
             // console.log(response.data.result.geometry.location)
             // console.log(response.data.result.geometry)
-            // console.log(response.data.result.reviews)
+            console.log(response.data.result.reviews)
+            console.log(response.data.result.reviews[0])
             res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, user: user, tags: tags });
         })
         .catch(function(error) {
