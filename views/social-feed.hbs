@@ -1,0 +1,50 @@
+<div class="flex-container">
+    <div style="width: 75%;">
+        <div class="databox primary">
+            <div class="scroll">
+                {{#each activity as |friend|}}
+                    {{#each (limit (reverseArray friend.activity) 20)}}
+                        <div class="friend-container">
+                            <a href="/user/uid{{friend.username}}"><img src="/assets/avatars/avatar{{friend.pic}}.svg" alt="Avatar" style="width:120px">
+                            <h2>{{friend.name}}</a> {{this.type}} <a href="/search/bar{{this.id}}">{{this.name}}</h2>
+                            <p>{{this.address}}</p></a>
+                            <p>{{this.time}}</p>
+                            </a>
+                        </div>
+                    {{/each}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+
+    <div class="databox primary">
+            <img style="width: 150px; height: auto;" src="\assets\avatars\avatar{{user.pic}}.svg">
+            <h1>{{user.name}}</h1>
+
+            <h2>Search User:</h2>
+            <div style="text-align: center">
+                <h3 style=" color: red; font-weight: 400;">{{response}}</h3>
+            </div>
+            <form action="/user/search-friend" method="post">
+                <input name="friend">
+                <button class="secondary center" type="submit">Search</button>
+            </form>
+            <br><br><br>
+            <h2>Friend Requests</h2>
+            {{#unless friend_request}}
+                <h3>No pending Friend Requests. Check back later.</h3>
+            {{/unless}}
+            {{#each friend_requests}}
+            <div class="friend-container">
+                <a href="/user/uid{{this.username}}"><img src="/assets/avatars/avatar{{this.pic}}.svg" alt="Avatar" style="width:120px">
+                <h2>{{this.name}}</h2></a>
+                <div style="width:200px">
+                <button class="primary">Accept</button>
+                <button class="tertiary right">Decline</button>
+                </div>
+                </a>
+            </div>
+            {{/each}}
+
+        </div>
+

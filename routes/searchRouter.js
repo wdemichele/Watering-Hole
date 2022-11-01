@@ -80,7 +80,6 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
 
     input = input.replace(/ /gi, "%20");
     input = input.replace(/,/g, '');
-    // console.log(input)
 
     let config = {
         method: 'get',
@@ -90,8 +89,6 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            console.log(response.data)
-            console.log(response.data.candidates[0])
             config = {
                 method: 'get',
                 url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + response.data.candidates[0].geometry.location.lat + '%2C' + response.data.candidates[0].geometry.location.lng + '&radius=' + req.body.area_radius + '&type=bar&fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
@@ -99,7 +96,6 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
             };
             axios(config)
                 .then(function(response) {
-                    // console.log(response.data.results)
                     res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name, query: "bars%20near" + input, page_token: response.data.next_page_token });
 
                 })
@@ -145,11 +141,6 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            // console.log(response.data.result)
-            // console.log(response.data.result.opening_hours)
-            // console.log(response.data.result.opening_hours.periods)
-            // console.log(response.data.result.geometry.location)
-            // console.log(response.data.result.geometry)
             console.log(response.data.result.reviews)
             console.log(response.data.result.reviews[0])
             res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, user: user, tags: tags });
@@ -348,7 +339,6 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
 
         input = input.replace(/ /gi, "%20");
         input = input.replace(/,/g, '');
-        console.log(input)
 
         let config = {
             method: 'get',

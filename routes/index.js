@@ -69,11 +69,7 @@ router.get('/home', isLoggedIn, async(req, res) => {
             break;
         }
     }
-    console.log(popular_with_friends)
     popular_with_friends = await Bar.find({ id: { $in: popular_with_friends } }).lean().exec();
-    console.log(popular_with_friends)
-        // console.log(popular_with_friends)
-
 
     res.render('home.hbs', {
         layout: 'user-layout',
@@ -91,9 +87,9 @@ router.get('/social', isLoggedIn, async(req, res) => {
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    let activity = await User.find({ username: user.friends }, { activity: 1, name: 1, username: 1, '_id': false }).lean().exec();
+    let activity = await User.find({ username: user.friends }, { activity: 1, pic: 1, name: 1, username: 1, '_id': false }).lean().exec();
 
-    res.render('friend-activity.hbs', { layout: 'user-layout', title: 'Friend Activity', user: user, activity: activity });
+    res.render('social-feed.hbs', { layout: 'user-layout', title: 'Friend Activity', user: user, activity: activity });
 });
 
 router.get('/about-us', (req, res) => {
@@ -152,9 +148,7 @@ router.get('/map', async(req, res) => {
         })
     }
 
-    console.log(tourStopsFav)
     let stringTourStopsFav = JSON.stringify(tourStopsFav);
-    console.log(stringTourStopsFav)
     res.render('map.hbs', { layout: 'guest-layout', title: 'Map', stringTourStopsFav: stringTourStopsFav });
 });
 
@@ -193,7 +187,7 @@ router.get('/logout', (req, res, next) => {
             }
         });
     } else {
-        var err = new Error('You are not logged in!');
+        let err = new Error('You are not logged in!');
         err.status = 403;
         next(err);
     }

@@ -1,67 +1,111 @@
-{{#unless mine}}
-<img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">
-{{/unless}}
-  <div class="databoxx white">
-    <div class="databoxx whitex flex-containerx">
-<div>
-      <div class="databoxx primary">
-    <img style="width: 200px; height: auto;" src="\assets\avatars\avatar{{user.pic}}.svg">
-    <h2>{{user.name}}</h2>
-    <h3>@{{user.username}}</h3>
+<div class="databox secondary">
+    {{#unless mine}}
+    <img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()"> {{/unless}}
     <div class="flex-container">
-        <div>
-            <h2>Friends</h2>
-            <a href="/user/uid{{user.username}}/friends"><h2>{{array_length user.friends}}</h2></a>
-        </div>
-        <div>
-            <h2>Bars</h2>
-            <a href="/user/uid{{user.username}}/favourites"><h2>{{array_length user.bars}}</h2></a>
+        <div style="width: 30%;" class="flex-column">
+            <div class="databox primary">
+            <img style="width: 300px; height: auto;" src="\assets\avatars\avatar{{user.pic}}.svg">
+            <br>
+            <h2>{{user.name}}</h2>
+            <h3>@{{user.username}}</h3>
+            <br><br>
+            <div class="flex-container">
+                <div>
+                    <h2>Friends</h2>
+                    <a href="/user/uid{{user.username}}/friends">
+                        <h2>{{array_length user.friends}}</h2>
+                    </a>
+                </div>
+                <div>
+                    <h2>Bars</h2>
+                    <a href="/user/uid{{user.username}}/favourites">
+                        <h2>{{array_length user.bars}}</h2>
+                    </a>
+                </div>
+            </div>
+            {{#unless mine}} {{#if friend}}
+            <button onclick="document.getElementById('id01').style.display='block'">Remove Friend</button>
+            <form action="/user/remove-friend/uid{{user.username}}" method="post">
+
+                <div id="id01" class="modal-friend">
+                    <span title="Close Modal">×</span>
+                    <div class="modal-content-friend">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="close right">X</button><br>
+                        <div class="container-friend">
+                            <h1>Remove Friend</h1>
+                            <p>Are you sure you want to remove {{user.name}} as a friend?</p>
+
+                            <div class="clearfix">
+                                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                                <button onclick="document.getElementById('id01').style.display='none'" class="deletebtn right">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+            
+            {{else}}
+            <form action="/user/add-friend/uid{{user.username}}" method="post">
+                <button>Add Friend</button>
+            </form>
+            {{/if}} {{/unless}}
+            
         </div>
     </div>
+            <div class="databox primary">
+                <h2>Recently Visited:</h2>
+                <div class="flex-container databox">
+                    {{#each recently_visited }}
+                    <div class="home-column recommended-container">
+                        <img style="width: 100%; height: 250px; border-radius: 5%;" class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}" {{else}}src="assets/wateringhole.png" {{/if}}>
+                        <div class="middle">
+                            <a href="/search/bar{{this.id}}">
+                                <div style="inline-size: 80px; overflow-wrap: break-word;" class="recommended-text">{{this.name}}</div>
+                            </a>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <h2>Search Tags</h2>
 
-</div>
-<div>
-    <div class="databoxx primary">
-    <h2>Recently Visited:</h2>
-    <div class="flex-container databox secondary">
-        {{#each recently_visited }}
-        <div class="home-column recommended-container">        
-            <img style="width: 200px; height: auto;" class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}"{{else}}src="assets/wateringhole.png"{{/if}}>
-            <div class="middle">
-                <a href="/search/bar{{this.id}}"><div style="inline-size: 80px; overflow-wrap: break-word;" class="recommended-text">{{this.name}}</div></a>
+                <div class="databox tertiary">
+                    <div id="user" name="user" class="flex-container">
+
+                        <div class="search_search_tags">
+                            <div class="tag_box">
+                                {{#each user.tags as |tag|}}
+                                <a href="/user/uid{{../user.username}}/tags{{tag}}">
+                                    <div>{{tag}}</div>
+                                </a>
+                                {{/each}}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {{#if mine}}
+                <div id="addTag" class="databox tertiary">
+                    <form action="/tags" method="post">
+                        <h3>Add Search Tag</h3>
+                        <input id="tag_name" name="tag_name">
+                        <button class="primary right" type="submit">Add Tag</button>
+                        <br><br>
+                    </form>
+                </div>
+                {{/if}}
+                
             </div>
         </div>
-        {{/each}}
     </div>
 </div>
-</div>
-</div>
-<div class="databox primary">
-    <h3>Search Tags</h3>
-    
-    <div class="databox tertiary">
-    <div id="user" name="user" class="flex-container">
+<script>
+    var modal = document.getElementById('id01');
 
-    <div class="search_search_tags">
-        <div class="tag_box">
-            {{#each user.tags as |tag|}}
-                <a href="/user/uid{{../user.username}}/tags{{tag}}"><div>{{tag}}</div></a>
-            {{/each}}
-        </div>
-    
-    </div>
-    </div>
-    </div>
-    {{#if mine}}
-    <div id="addTag" class="databox tertiary">
-        <form action="/tags" method="post">
-            <h3>Add Search Tag</h3>
-            <input id="tag_name" name="tag_name">
-            <button class="primary right" type="submit">Add Tag</button>
-            <br><br>
-        </form>
-    </div>
-    {{/if}}
-</div>
-</div>
-</div>
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>

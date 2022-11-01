@@ -95,16 +95,20 @@ router.get('/uid:id', isLoggedIn, async(req, res) => {
     }
     recently_visited = await Bar.find({ id: { $in: recently_visited } }).lean().exec();
 
-    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: mine, recently_visited: recently_visited });
+    let personal = await User.findOne({ username: req.user.username }, { friends: 1 }).lean().exec();
+    let friend = false
+    if (personal.friends.includes(username)) {
+        friend = true
+    }
+
+    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: mine, recently_visited: recently_visited, friend: friend });
 });
 
 router.get('/uid:id/friends', isLoggedIn, async(req, res) => {
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
-    console.log(user.friends)
 
-    friends = await User.find({ username: { $in: user.friends } }, { "username": 1, "name": 1, "pic": 1 }).lean().exec()
-    console.log(friends)
+    let friends = await User.find({ username: { $in: user.friends } }, { "username": 1, "name": 1, "pic": 1 }).lean().exec()
 
     res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Friends', user: user, friends: friends });
 });
@@ -198,7 +202,30 @@ router.get('/add-friends', isLoggedIn, async(req, res) => {
 
 });
 
-router.post('/add-friend', isLoggedIn, async(req, res) => {
+router.post('/remove-friend/uid:id', isLoggedIn, async(req, res) => {
+    let remove = await User.findOneAndUpdate({ username: req.user.username }, { $pull: { 'friends': req.params.id } });
+
+    res.redirect('/user/uid' + req.params.id);
+})
+
+router.post('/add-friend/uid:id', isLoggedIn, async(req, res) => {
+
+    let username = req.params.id;
+    if (!username) {
+        username = "-1";
+    }
+    let friend = await User.findOne({ username: username }).lean().exec();
+    let user;
+    if (friend) {
+        let username = req.user.username;
+        user = await User.findOneAndUpdate({ username: username }, {
+            $push: { friends: req.params.id }
+        }).lean().exec();
+    }
+    res.redirect('/user/uid' + username);
+});
+
+router.post('/search-friend', isLoggedIn, async(req, res) => {
     let response;
 
     let username = req.body.friend;
@@ -208,17 +235,11 @@ router.post('/add-friend', isLoggedIn, async(req, res) => {
     let friend = await User.findOne({ username: username }).lean().exec();
     let user;
     if (friend) {
-        let username = req.user.username;
-        user = await User.findOneAndUpdate({ username: username }, {
-            $push: { friends: req.body.friend }
-        }).lean().exec();
-        response = "User Added to Friend List"
+        res.redirect('user/uid' + username)
     } else {
         response = "User not found!"
+        res.redirect('/social')
     }
-
-    res.render('user/add-friends.hbs', { layout: 'user-layout', title: 'User Results', response: response, user: user });
-
 });
 
 
