@@ -34,6 +34,9 @@ router.get('/bar-search', isLoggedIn, async(req, res) => {
 router.post('/bar-search', isLoggedIn, async(req, res) => {
 
     let input = req.body.bar_name;
+    if (!input.includes("bar") || !input.includes("club")) {
+        input += " bar";
+    }
     input = input.replace(/ /gi, "%20")
 
     let config = {
@@ -329,7 +332,7 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
     // default area is Melbourne
     let lat = -37.8136;
     let long = 144.9631;
-    let zoom = 14
+    let zoom = 13
 
     if (req.body.radius != null) {
         zoom = req.body.radius;
@@ -402,7 +405,7 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
 
     let stringTourStopsFav = JSON.stringify(tourStopsFav);
 
-    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs, stringTourStopsFav: stringTourStopsFav, lat: lat, long: long, zoom: zoom });
+    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs, stringTourStopsFav: stringTourStopsFav, lat: lat, long: long, zoom: zoom, user: user });
 });
 
 function getIntersection(a, b) {

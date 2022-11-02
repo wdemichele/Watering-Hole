@@ -1,7 +1,8 @@
 <div class="flex-container">
-    <div style="width: 75%;">
-        <div class="databox primary">
+    <div style="width: 70%;">
+        <div class="databox secondary">
             <div class="scroll">
+                <h2>Friend Activity</h2>
                 {{#each activity as |friend|}}
                     {{#each (limit (reverseArray friend.activity) 20)}}
                         <div class="friend-container">
@@ -25,9 +26,9 @@
             <div style="text-align: center">
                 <h3 style=" color: red; font-weight: 400;">{{response}}</h3>
             </div>
-            <form action="/user/search-friend" method="post">
-                <input name="friend">
-                <button class="secondary center" type="submit">Search</button>
+            <form class="search" action="/user/search-friend" method="post">
+                <input type="text" placeholder="Search.." name="friend">
+                <button style="border-radius: 0;" type="submit"><i class="fa fa-search"></i></button>
             </form>
             <br><br><br>
             <h2>Friend Requests</h2>

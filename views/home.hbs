@@ -1,99 +1,91 @@
-<div class="databox secondary">
-    <h1>Welcome {{user.displayName}}{{user.name}}</h1>
+    {{!-- <h1>Welcome {{user.displayName}}{{user.name}}</h1> --}}
     <div class="flex-container">
-        <div style="width: 66%;" class="flex-column">
-            <div class="databox primary">
+        <div style="width: 70%;" >
+            <div class="databox secondary">
                 <h2>Bar Recommendations</h2>
                 <div class="databox">
-                    <h3 style="margin: 5px" class="left">Recently Visited:</h3><br><br>
-                    {{#if recently_visited}}
-                        {{#each recently_visited}}
-                        <div class="home-column recommended-container">
-                            
-                            <img class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}"{{else}}src="assets/wateringhole.png"{{/if}}>
-                            <div class="middle">
-                                <a href="/search/bar{{this.id}}"><div class="recommended-text">{{this.name}}</div></a>
-                            </div>
+                    <h3 style="margin: 5px" class="left">Recently Visited:</h3><br><br> {{#if recently_visited}} {{#each recently_visited}}
+                    <div class="home-column recommended-container">
+
+                        <img class="recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}" {{else}}src="assets/wateringhole.png" {{/if}}>
+                        <div class="middle">
+                            <a href="/search/bar{{this.id}}">
+                                <div class="recommended-text">{{this.name}}</div>
+                            </a>
                         </div>
-                        {{/each}}
-                    {{else}}
+                    </div>
+                    {{/each}} {{else}}
                     <h2>Visit more places to see recommendations.</h2>
                     {{/if}}
                 </div>
 
                 <div class="databox">
-                    <h3 style="margin: 5px" class="left">Popular with Friends:</h3><br><br>
-                    {{#if popular_with_friends}}
-                        {{#each popular_with_friends}}
-                            <div class="home-column recommended-container">
-                            
-                            <img class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}"{{else}}src="assets/wateringhole.png"{{/if}}>
-                            <div class="middle">
-                                <a href="/search/bar{{this.id}}"><div class="recommended-text">{{this.name}}</div></a>
-                            </div>
+                    <h3 style="margin: 5px" class="left">Popular with Friends:</h3><br><br> {{#if popular_with_friends}} {{#each popular_with_friends}}
+                    <div class="home-column recommended-container">
+
+                        <img class="recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}" {{else}}src="assets/wateringhole.png" {{/if}}>
+                        <div class="middle">
+                            <a href="/search/bar{{this.id}}">
+                                <div class="recommended-text">{{this.name}}</div>
+                            </a>
                         </div>
-                        {{/each}}
-                    {{else}}
+                    </div>
+                    {{/each}} {{else}}
                     <h2>Add more friends to see recommendations.</h2>
                     {{/if}}
-                    
+
                 </div>
 
                 <div class="databox">
-                    <h3 style="margin: 5px" class="left">Recently Favourited:</h3><br><br>
-                    {{#if recently_favourited}}
-                        {{#each recently_favourited}}
-                        <div class="home-column recommended-container">
-                            
-                            <img class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}"{{else}}src="assets/wateringhole.png"{{/if}}>
-                            <div class="middle">
-                                <a href="/search/bar{{this.id}}"><div class="recommended-text">{{this.name}}</div></a>
-                            </div>
+                    <h3 style="margin: 5px" class="left">Recently Favourited:</h3><br><br> {{#if recently_favourited}} {{#each recently_favourited}}
+                    <div class="home-column recommended-container">
+
+                        <img class="recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}" {{else}}src="assets/wateringhole.png" {{/if}}>
+                        <div class="middle">
+                            <a href="/search/bar{{this.id}}">
+                                <div class="recommended-text">{{this.name}}</div>
+                            </a>
                         </div>
-                        {{/each}}
-                    {{else}}
+                    </div>
+                    {{/each}} {{else}}
                     <h2>Add more bars to your favourites to see recommendations.</h2>
                     {{/if}}
                 </div>
 
                 <div class="databox">
-                    <h3 style="margin: 5px" class="left">Recently Bucketlisted:</h3><br><br>
-                    {{#if recently_bucketlisted}}
-                        {{#each recently_bucketlisted}}
-                        <div class="home-column recommended-container">
-                            
-                            <img class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}"{{else}}src="assets/wateringhole.png"{{/if}}>
-                            <div class="middle">
-                                <a href="/search/bar{{this.id}}"><div class="recommended-text">{{this.name}}</div></a>
-                            </div>
+                    <h3 style="margin: 5px" class="left">Recently Bucketlisted:</h3><br><br> {{#if recently_bucketlisted}} {{#each recently_bucketlisted}}
+                    <div class="home-column recommended-container">
+
+                        <img class="recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}" {{else}}src="assets/wateringhole.png" {{/if}}>
+                        <div class="middle">
+                            <a href="/search/bar{{this.id}}">
+                                <div class="recommended-text">{{this.name}}</div>
+                            </a>
                         </div>
-                        {{/each}}
-                    {{else}}
+                    </div>
+                    {{/each}} {{else}}
                     <h2>Add more bars to your bucketlist to see recommendations.</h2>
                     {{/if}}
                 </div>
-                <input type="hidden">
             </div>
         </div>
         <div class="databox primary">
             <div class="scroll">
-            <h2>Friend Activity</h2>
-            {{#if friend_activity}}
-            {{#each friend_activity}}
-            <div class="friend-container">
-                <img src="/assets/avatars/avatar{{this.pic}}.svg" alt="Avatar" style="width:120px">
-                <a href="/user/uid{{this.username}}"><h2>{{this.name}}</h2></a>
-                <a href="/search/bar{{this.activity.0.id}}">
-                <p style="margin: 0;"><u>{{this.activity.0.type}} {{this.activity.0.name}}</u></p>
-                <p style="margin: 0;"><em>{{this.activity.0.address}}</em></p></a>
-                {{this.activity.0.time}}
-            </div>
-            {{/each}}
-            {{else}}
-            <h2>Add more friends to see friend activity.</h2>
-            {{/if}}
+                <h2>Friend Activity</h2>
+                {{#if friend_activity}} {{#each friend_activity}}
+                <div class="friend-container">
+                    <img src="/assets/avatars/avatar{{this.pic}}.svg" alt="Avatar" style="width:120px">
+                    <a href="/user/uid{{this.username}}">
+                        <h2>{{this.name}}</h2>
+                    </a>
+                    <a href="/search/bar{{this.activity.0.id}}">
+                        <p style="margin: 0;"><u>{{this.activity.0.type}} {{this.activity.0.name}}</u></p>
+                        <p style="margin: 0;"><em>{{this.activity.0.address}}</em></p>
+                    </a>
+                    {{this.activity.0.time}}
+                </div>
+                {{/each}} {{else}}
+                <h2>Add more friends to see friend activity.</h2>
+                {{/if}}
             </div>
         </div>
-
-    </div>
-</div>

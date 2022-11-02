@@ -1,4 +1,4 @@
-<div class="databox secondary">
+<div class="databox">
     {{#unless mine}}
     <img style="position: relative; top: 40px; left: 5px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()"> 
     {{/unless}}
@@ -75,9 +75,9 @@
                     </div>
                     {{/each}}
                 </div>
-                <h2>Search Tags</h2>
+                <h2>Search Tags:</h2>
 
-                <div class="databox tertiary">
+                <div class="databox secondary">
                     <div id="user" name="user" class="flex-container">
 
                         <div class="search_search_tags">
@@ -93,16 +93,16 @@
                     </div>
                 </div>
                 {{#if mine}}
-                <div id="addTag" class="databox tertiary">
-                    <form action="/tags" method="post">
+                <div id="addTag" class="databox secondary">
+                    <form class="search" action="/tags" method="post">
                         <h3>Add Search Tag</h3>
-                        <input id="tag_name" name="tag_name">
+                        <input type="text" id="tag_name" name="tag_name">
                         <button class="primary right" type="submit">Add Tag</button>
                         <br><br>
                     </form>
                 </div>
                 {{else}}
-                <br><br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br>
                 {{/if}}
                 
             </div>

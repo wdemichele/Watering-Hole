@@ -1,4 +1,9 @@
-<div class="databox tertiary" style="border-radius:25px;width:60%;padding:0 8% 0 8%;padding-bottom:3rem;">
+
+<div class="w3-bar w3-black" style="height:44px; width:60%; margin-left:auto; margin-right:auto;">
+    {{!-- <button style="border-radius: 0;" class="w3-bar-item w3-button tablink" onclick="openCity(event,'area')">Area Search</button> --}}
+</div>
+<div class="databox tertiary bottom-radius" style="width:60%;padding:0 8% 0 8%;padding-bottom:3rem;height:576px;margin-top:0;">
+
     <h1 style="margin-top: 3rem;">My Favourites</h1>
     <form action="favourites-search" method="post">
         <div class="center" style="width:90%;padding:2% 0 3% 0;">
@@ -16,7 +21,7 @@
                     <option name="4" value="4">$$$$</option>
                 </select><br><br>
                 <label for="radius">Radius</label>
-                <input type="range" min="1" max="20" value="5000">
+                {{!-- <input type="range" min="1" max="20" value="5000"> --}}
                 <select name="radius" id="radius" placeholder="1000m">
                     <option name="1" value="17">500m</option>
                     <option name="2" value="16">1000m</option>
