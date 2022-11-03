@@ -49,7 +49,7 @@ router.post('/bar-search', isLoggedIn, async(req, res) => {
     axios(config)
         .then(function(response) {
             // console.log(response.data)
-            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token });
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: input, page_token: response.data.next_page_token });
 
         })
         .catch(function(error) {
@@ -81,8 +81,13 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
 
     let input = req.body.area_name;
 
+
     input = input.replace(/ /gi, "%20");
     input = input.replace(/,/g, '');
+
+    if (input.length === 0) {
+        input = "near%20me";
+    }
 
     let config = {
         method: 'get',

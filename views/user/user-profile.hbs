@@ -76,7 +76,7 @@
                     {{/each}}
                 </div>
                 <h2>Search Tags:</h2>
-
+                {{#if user.tags}}
                 <div class="databox secondary">
                     <div id="user" name="user" class="flex-container">
 
@@ -92,6 +92,11 @@
                         </div>
                     </div>
                 </div>
+                {{else}}
+                    <br><br>
+                    <h3>User hasn't created any search tags.</h3>
+                    <br><br>
+                {{/if}}
                 {{#if mine}}
                 <div id="addTag" class="databox secondary">
                     <form class="search" action="/tags" method="post">
