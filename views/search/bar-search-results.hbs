@@ -23,7 +23,15 @@
                 <h3>Open Now</h3></a>
                 {{else}}
                 <h3>Closed</h3></a>
-                {{/if}}        
+                {{/if}} 
+                <div>
+                    <button {{#if bucketlisted}}style="display:none;" {{/if}} class=" bucket-btn"><i class="fa-sharp fa-solid fa-bucket"></i></button> 
+                    <button {{#unless bucketlisted}}style="display:none;"{{/unless}} class="bucket-pressed"><i class="fa-sharp fa-solid fa-bucket"></i></button> 
+                </div>
+                <div>
+                    <button {{#if favourited}}style="display:none;" {{/if}}  id="btn1" class=" fav-btn"><i class="far fa-heart"></i></button> 
+                    <button {{#unless favourited}}style="display:none;"{{/unless}} id="btn1" class="fav-btn"><i class="fas fa-heart"></i></button>   
+                </div>   
         </div>
                    
     </div>

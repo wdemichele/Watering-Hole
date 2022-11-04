@@ -2239,3 +2239,50 @@ form.search::after {
 .filter-green {
     filter: invert(54%) sepia(62%) saturate(7387%) hue-rotate(154deg) brightness(87%) contrast(89%);
 }
+
+.fav-btn {
+    position: absolute;
+    border-radius: 50%;
+    border-style: none;
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+    color: rgb(159, 145, 145);
+    text-align: center;
+    padding: 10px;
+    right: 5%; 
+    bottom: 5%;
+
+}
+
+.fav-btn i .bucket-btn i{
+    cursor: pointer;
+}
+
+.bucket-btn {
+    position: absolute;
+    border-radius: 50%;
+    border-style: none;
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+    color: rgb(159, 145, 145);
+    text-align: center;
+    padding: 10px;
+    left: 5%; 
+    bottom: 5%;
+}
+
+.bucket-pressed {
+    position: absolute;
+    border-radius: 50%;
+    border-style: none;
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    left: 5%; 
+    bottom: 5%;
+}
