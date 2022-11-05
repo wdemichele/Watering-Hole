@@ -9,6 +9,7 @@
                     <div class="databox tertiary">
                         <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2>
                         <h3>{{this.address}}</h3></a>
+                        {{!-- <h5 style="cursor: pointer;" onclick="center({{this.location.lat}}, {{this.location.long}})"><em>Center on map</em></h5> --}}
                     </div>
                 {{/each}}
             </div>
@@ -84,4 +85,10 @@ function initMap() {
     }
 
     window.initMap = initMap;
+    console.log(map)
+    function center(lat, lng){
+        var latLng = {"lat": lat, "lng": lng}; // returns LatLng object
+        console.log(map)
+        map.setCenter(new google.maps.LatLng(lat, lng));
+    }
 </script>

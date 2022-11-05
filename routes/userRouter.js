@@ -61,8 +61,18 @@ router.get('/', isLoggedIn, async(req, res) => {
 
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
+    let recently_visited = [];
+    for (let i = user.activity.length - 1; i >= 0; i--) {
+        if (recently_visited.length < 4 && user.activity[i].type == "visited") {
+            recently_visited.push(user.activity[i].id);
+        }
+        if (recently_visited.length >= 4) {
+            break;
+        }
+    }
+    recently_visited = await Bar.find({ id: { $in: recently_visited } }).lean().exec();
 
-    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: true });
+    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: true, recently_visited: recently_visited });
 
 });
 
@@ -74,14 +84,33 @@ router.get('/uid:id', isLoggedIn, async(req, res) => {
     }
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: mine });
+    let recently_visited = [];
+    for (let i = user.activity.length - 1; i >= 0; i--) {
+        if (recently_visited.length < 4 && user.activity[i].type == "visited") {
+            recently_visited.push(user.activity[i].id);
+        }
+        if (recently_visited.length >= 4) {
+            break;
+        }
+    }
+    recently_visited = await Bar.find({ id: { $in: recently_visited } }).lean().exec();
+
+    let personal = await User.findOne({ username: req.user.username }, { friends: 1 }).lean().exec();
+    let friend = false
+    if (personal.friends.includes(username)) {
+        friend = true
+    }
+
+    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: mine, recently_visited: recently_visited, friend: friend });
 });
 
 router.get('/uid:id/friends', isLoggedIn, async(req, res) => {
     let username = req.params.id;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Friends', user: user });
+    let friends = await User.find({ username: { $in: user.friends } }, { "username": 1, "name": 1, "pic": 1 }).lean().exec()
+
+    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Friends', user: user, friends: friends });
 });
 
 router.get('/uid:id/favourites', isLoggedIn, async(req, res) => {
@@ -106,6 +135,37 @@ router.get('/uid:id/favourites', isLoggedIn, async(req, res) => {
 
     res.render('user/user-favourites.hbs', { layout: 'user-layout', title: 'User Favourites', user: user, favourites: favs, bucketlist: buck });
 });
+
+router.get("/uid:id/pic", isLoggedIn, async(req, res) => {
+    let username = req.params.id;
+    let user = await User.findOne({ username: username }).lean().exec();
+
+    let total = 91;
+    let row_size = 7;
+
+    let num_pics = [];
+    let col = [];
+    for (let i = 0; i < total; i++) {
+        col.push(i)
+        if (i % row_size == row_size - 1 || i == total - 1) {
+            num_pics.push(col);
+            col = []
+        }
+    }
+
+    res.render('user/user-pic.hbs', { layout: 'user-layout', title: 'My Tags', user: user, num_pics: num_pics });
+})
+
+router.post("/uid:id/pic", isLoggedIn, async(req, res) => {
+    let username = req.params.id;
+    let index = req.body.pic_index;
+    if (index >= 0) {
+        let user = await User.findOneAndUpdate({ username: username }, { pic: index.toString() }).lean().exec();
+    }
+
+    res.redirect("/settings");
+})
+
 
 router.get('/uid:id/tags:tag', isLoggedIn, async(req, res) => {
 
@@ -142,7 +202,30 @@ router.get('/add-friends', isLoggedIn, async(req, res) => {
 
 });
 
-router.post('/add-friend', isLoggedIn, async(req, res) => {
+router.post('/remove-friend/uid:id', isLoggedIn, async(req, res) => {
+    let remove = await User.findOneAndUpdate({ username: req.user.username }, { $pull: { 'friends': req.params.id } });
+
+    res.redirect('/user/uid' + req.params.id);
+})
+
+router.post('/add-friend/uid:id', isLoggedIn, async(req, res) => {
+
+    let username = req.params.id;
+    if (!username) {
+        username = "-1";
+    }
+    let friend = await User.findOne({ username: username }).lean().exec();
+    let user;
+    if (friend) {
+        let username = req.user.username;
+        user = await User.findOneAndUpdate({ username: username }, {
+            $push: { friends: req.params.id }
+        }).lean().exec();
+    }
+    res.redirect('/user/uid' + username);
+});
+
+router.post('/search-friend', isLoggedIn, async(req, res) => {
     let response;
 
     let username = req.body.friend;
@@ -152,17 +235,11 @@ router.post('/add-friend', isLoggedIn, async(req, res) => {
     let friend = await User.findOne({ username: username }).lean().exec();
     let user;
     if (friend) {
-        let username = req.user.username;
-        user = await User.findOneAndUpdate({ username: username }, {
-            $push: { friends: req.body.friend }
-        }).lean().exec();
-        response = "User Added to Friend List"
+        res.redirect('/user/uid' + username)
     } else {
         response = "User not found!"
+        res.redirect('/social')
     }
-
-    res.render('user/add-friends.hbs', { layout: 'user-layout', title: 'User Results', response: response, user: user });
-
 });
 
 

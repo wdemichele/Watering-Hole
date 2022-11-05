@@ -24,13 +24,19 @@ const isLoggedIn = (req, res, next) => {
 }
 
 router.get('/bar-search', isLoggedIn, async(req, res) => {
-
-    res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search' });
+    let username = req.user.username;
+    let user = await User.findOne({
+        username: username
+    }).lean().exec();
+    res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search', user: user });
 });
 
 router.post('/bar-search', isLoggedIn, async(req, res) => {
 
     let input = req.body.bar_name;
+    if (!input.includes("bar") || !input.includes("club")) {
+        input += " bar";
+    }
     input = input.replace(/ /gi, "%20")
 
     let config = {
@@ -43,7 +49,7 @@ router.post('/bar-search', isLoggedIn, async(req, res) => {
     axios(config)
         .then(function(response) {
             // console.log(response.data)
-            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token });
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: input, page_token: response.data.next_page_token });
 
         })
         .catch(function(error) {
@@ -75,9 +81,13 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
 
     let input = req.body.area_name;
 
+
     input = input.replace(/ /gi, "%20");
     input = input.replace(/,/g, '');
-    // console.log(input)
+
+    if (input.length === 0) {
+        input = "near%20me";
+    }
 
     let config = {
         method: 'get',
@@ -87,8 +97,6 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            console.log(response.data)
-            console.log(response.data.candidates[0])
             config = {
                 method: 'get',
                 url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + response.data.candidates[0].geometry.location.lat + '%2C' + response.data.candidates[0].geometry.location.lng + '&radius=' + req.body.area_radius + '&type=bar&fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
@@ -96,7 +104,6 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
             };
             axios(config)
                 .then(function(response) {
-                    // console.log(response.data.results)
                     res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name, query: "bars%20near" + input, page_token: response.data.next_page_token });
 
                 })
@@ -116,9 +123,9 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
     }).lean().exec();
 
     let bar_id = req.params.id;
-    favourited = false
-    bucketlisted = false
-    tags = []
+    let favourited = false
+    let bucketlisted = false
+    let tags = []
 
     for (let bar of user.bars) {
         if (bar.id == bar_id) {
@@ -142,12 +149,8 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            // console.log(response.data.result)
-            // console.log(response.data.result.opening_hours)
-            // console.log(response.data.result.opening_hours.periods)
-            // console.log(response.data.result.geometry.location)
-            // console.log(response.data.result.geometry)
-            // console.log(response.data.result.reviews)
+            console.log(response.data.result.reviews)
+            console.log(response.data.result.reviews[0])
             res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, user: user, tags: tags });
         })
         .catch(function(error) {
@@ -165,6 +168,7 @@ router.post('/bar:id/tags', isLoggedIn, async(req, res) => {
             address: req.body.bar_address,
             price_level: req.body.bar_price_level,
             rating: req.body.bar_rating,
+            pic: req.body.bar_pic,
             // hours: req.body.bar_hours,
             location: {
                 "lat": req.body.bar_lat,
@@ -205,6 +209,7 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
             address: req.body.bar_address,
             price_level: req.body.bar_price_level,
             rating: req.body.bar_rating,
+            pic: req.body.bar_pic,
             // hours: req.body.bar_hours,
             location: {
                 "lat": req.body.bar_lat,
@@ -231,7 +236,7 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
         });
     } else if (typeof req.body.favourite_remove !== 'undefined') {
         fav = false
-        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "favourited" } });
+            // let updatedUser = await User.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "favourited" } });
     }
 
     let buck = undefined;
@@ -249,7 +254,7 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
         });
     } else if (typeof req.body.bucketlist_remove !== 'undefined') {
         buck = false
-        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "bucketlisted" } });
+            // let updatedUser = await User.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "bucketlisted" } });
     }
 
     let user = await User.findOne({ username: username });
@@ -332,7 +337,7 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
     // default area is Melbourne
     let lat = -37.8136;
     let long = 144.9631;
-    let zoom = 14
+    let zoom = 13
 
     if (req.body.radius != null) {
         zoom = req.body.radius;
@@ -342,7 +347,6 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
 
         input = input.replace(/ /gi, "%20");
         input = input.replace(/,/g, '');
-        console.log(input)
 
         let config = {
             method: 'get',
@@ -372,7 +376,9 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
     if (user.bars) {
         if (!tags.length) {
             for (let bar of user.bars) {
-                favourites.push(bar.id);
+                if (req.body.bucketlist || bar.favourite) {
+                    favourites.push(bar.id);
+                }
             }
         } else {
             for (let bar of user.bars) {
@@ -380,7 +386,9 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
                     return tags.indexOf(element) !== -1;
                 });
                 if (contains) {
-                    favourites.push(bar.id)
+                    if (req.body.bucketlist || bar.favourite) {
+                        favourites.push(bar.id);
+                    }
                 }
             }
         }
@@ -402,7 +410,7 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
 
     let stringTourStopsFav = JSON.stringify(tourStopsFav);
 
-    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs, stringTourStopsFav: stringTourStopsFav, lat: lat, long: long, zoom: zoom });
+    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs, stringTourStopsFav: stringTourStopsFav, lat: lat, long: long, zoom: zoom, user: user });
 });
 
 function getIntersection(a, b) {

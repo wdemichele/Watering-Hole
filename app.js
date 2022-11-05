@@ -68,6 +68,22 @@ hbs.handlebars.registerHelper("contains", function(array, value) {
     return false;
 });
 
+hbs.handlebars.registerHelper('times', function(n, block) {
+    let accum = '';
+
+    for (let i = 0; i < Math.round(n); ++i)
+        accum += block.fn(i);
+    return accum;
+});
+
+hbs.handlebars.registerHelper('negtimes', function(total, n, block) {
+    let accum = '';
+    let iters = Math.round(total - n)
+    for (let i = 0; i < Math.round(iters); ++i)
+        accum += block.fn(i);
+    return accum;
+});
+
 // Comparison handled by handlebars
 hbs.handlebars.registerHelper('ifCond', function(v1, operator, v2, options) {
 
@@ -139,11 +155,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-    done(null, user);
+    return done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
-    done(null, user);
+    return done(null, user);
 });
 
 let strategy = new LocalStrategy((username, password, cb) => {

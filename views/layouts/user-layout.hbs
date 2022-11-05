@@ -79,7 +79,7 @@
 </style>
 </head>
 <body>
-    <header>
+    <header style="position: fixed; top: 0; width: 100%; z-index: 1; border: 2px solid #000;">
         <nav>
             
             <ul class="nav-links">
@@ -93,7 +93,7 @@
         <div class="nav-links right">
             <ul>
                 <div class="dropdown">
-                    <img style="height: 50px; width: 50px;" onclick="myFunction()" src="\assets\nav\abstract-user-flat-4.svg" alt="nav-icon" class=" nav-icon dropbtn">
+                    <img style="height: 50px; width: 50px;" onclick="myFunction()" src="\assets\avatars\avatar{{user.pic}}.svg" alt="nav-icon" class=" nav-icon dropbtn">
                     <div class="dropdown-content" id="myDropdown">
                         <li><a href="/user">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
@@ -105,7 +105,9 @@
             </ul>
         </div>       
     </header>
+<div style="margin-top: 100px; padding-top: 40px;">
     {{{body}}}
+</div>
 <script>
     /* When the user clicks on the button, 
     toggle between hiding and showing the dropdown content */
