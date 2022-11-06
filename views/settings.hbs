@@ -5,7 +5,7 @@
 <div style="padding-left:2rem;padding-right:2rem;">
     <div style="margin-bottom:2rem;margin-top:2rem">
 <form action="user/update{{user.username}}" method="post">
-<div style="float:left;padding-left:0.5rem;padding-right:0.5rem;position:relative;width:37.5%;text-align:center;margin-top:1rem;">
+<div class="pp-body">
     
     <img class="profile-pic" src="\assets\avatars\avatar{{user.pic}}.svg">
 
@@ -16,7 +16,7 @@
 
 </div>
 
-<div style="width: 62.5%;float:left;padding-left:0.5rem;padding-right:0.5rem;position:relative">
+<div class="settings-container-small">
     <div style="margin-bottom:1rem">
     <label for="Name">Name</label>
     <input style="border-radius:20px;" title="Name" name="name" value="{{user.name}}" id="name" />
