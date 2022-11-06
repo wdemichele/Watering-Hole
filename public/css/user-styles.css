@@ -2276,6 +2276,10 @@ form.search::after {
     width: 170px;
 }
 
+.w-hole-logo {
+    width: 40%;
+}
+
 /* Responsive layout - makes a one column layout instead of a two-column layout */
 
 @media screen and (max-width: 800px) {
@@ -2290,7 +2294,7 @@ form.search::after {
 
 @media only screen and (max-width: 1280px) {
     .login {
-        width: 90%;
+        width: 60%;
     }
     .settings-body {
         width: 70%;
@@ -2305,14 +2309,19 @@ form.search::after {
 
 @media only screen and (max-width: 992px) {
     .login {
-        width: 90%;
+        width: 70%;
+    }
+    .w-hole-logo{
+        width: 60%;
     }
     .settings-body {
         width: 90%;
     }
     p {
-        font-weight: 150;
-        font-size: 15px;
+        font-size: 20px;
+    }
+    h1 {
+        font-size: 40px;
     }
     input {
         font-size: 15px;
@@ -2331,6 +2340,9 @@ form.search::after {
 @media only screen and (max-width: 768px) {
     .login {
         width: 90%;
+    }
+    .w-hole-logo{
+        width: 80%;
     }
     .settings-body {
         width: 100%;
@@ -2352,6 +2364,9 @@ form.search::after {
 @media only screen and (max-width: 576px) {
     .login {
         width: 90%;
+    }
+    .w-hole-logo{
+        width: 80%;
     }
     .settings-main{
         width: 100%;
