@@ -36,7 +36,7 @@ router.post('/bar-search', isLoggedIn, async(req, res) => {
 
     let input = reformat(req.body.bar_name);
     //input = input.replace(/ /gi, "%20")
-    let input = req.body.bar_name;
+    //let input = req.body.bar_name;
     if (!input.includes("bar") || !input.includes("club")) {
         input += " bar";
     }
