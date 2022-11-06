@@ -1,25 +1,29 @@
-<main>
-    <div class="body-text primary">
-        <a><img onclick= "history.back()" src="/assets/backbutton.svg" alt="back-button" class="backbutton-icon left"></a>
+<body style="background-image: url('../assets/city-lights.jpg');  background-color: #ffffff; background-size: cover;">
+<img style="width: 40%;" src="/assets/wateringholeword.png" class="center">
+<div class="login secondary">
+        <a><img style="cursor: pointer; position: absolute" onclick= "history.back()" src="/assets/backbutton.svg" alt="back-button" class="backbutton-icon left filter-white"></a>
         <h1>Create Account</h1>
         <section>
-            <form action='create' method="post">
-                <fieldset>                    
-                        <div class="column">
-                            <label for="name">Full Name:</label>
-                            <input type="formtext" name="name" id="name" placeholder="John Doe">                                                        
+            <form action='create' method="post">                  
+                <div class="column" style="padding-bottom:5%;">
+                    <br>
+                    <label for="name">Full Name:</label>
+                    <input type="formtext" name="name" id="name" placeholder="John Doe">                                                        
 
-                            <label for="username">Username:</label>
-                            <input type="formtext" name="username" id="username" placeholder="username">
+                    <label for="username">Username:</label>
+                    <input type="formtext" name="username" id="username" placeholder="username">
 
-                            <label for="password">Password:</label>
-                            <input type="password" name="password" id="password" placeholder="********">
-                                                   
-                        </div>
-                    <button class="tertiary left" type="reset" id="cancel">Cancel</button>
-                    <button class="secondary right" type="submit" id="submit">Register New User</button> <!-- submit button -->
-                </fieldset>
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" id="password" placeholder="********">
+                                            
+                </div>
+                <br><br>
+                <div class="flex-container" style="padding-bottom: 5%;">
+                    <button style="flex:1;margin-left:5%;" class="tertiary left" type="reset" id="cancel">Cancel</button>
+                    <button style="flex:1;margin-right:5%;" class="primary right" type="submit" id="submit">Register New User</button> <!-- submit button --> 
+                </div>
+                
             </form>
         </section>
     </div>
-</main>
+

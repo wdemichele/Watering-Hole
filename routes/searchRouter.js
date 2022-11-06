@@ -25,14 +25,22 @@ const isLoggedIn = (req, res, next) => {
 }
 
 router.get('/bar-search', isLoggedIn, async(req, res) => {
-
-    res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search' });
+    let username = req.user.username;
+    let user = await User.findOne({
+        username: username
+    }).lean().exec();
+    res.render('search/bar-search.hbs', { layout: 'user-layout', title: 'Bar Search', user: user });
 });
 
 router.post('/bar-search', isLoggedIn, async(req, res) => {
 
     let input = reformat(req.body.bar_name);
     //input = input.replace(/ /gi, "%20")
+    let input = req.body.bar_name;
+    if (!input.includes("bar") || !input.includes("club")) {
+        input += " bar";
+    }
+    input = input.replace(/ /gi, "%20")
 
     let config = {
         method: 'get',
@@ -43,8 +51,8 @@ router.post('/bar-search', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            console.log(response.data)
-            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token });
+            // console.log(response.data)
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: input, page_token: response.data.next_page_token });
 
         })
         .catch(function(error) {
@@ -77,6 +85,13 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
     let input = reformat(req.body.area_name);
 
     //input = input.replace(/ /gi, "%20")
+
+    input = input.replace(/ /gi, "%20");
+    input = input.replace(/,/g, '');
+
+    if (input.length === 0) {
+        input = "near%20me";
+    }
 
     let config = {
         method: 'get',
@@ -112,20 +127,41 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
     }).lean().exec();
 
     let bar_id = req.params.id;
+    let favourited = false
+    let bucketlisted = false
+    let tags = []
+
+    for (let bar of user.bars) {
+        if (bar.id == bar_id) {
+            if (bar.favourite) {
+                favourited = bar.favourite;
+            }
+            if (bar.bucketlist) {
+                bucketlisted = bar.bucketlist;
+            }
+            if (bar.tags) {
+                tags = bar.tags;
+            }
+        }
+    }
 
     let config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cplace_id%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cuser_ratings_total%2Cplace_id%2Cformatted_phone_number%2Cadr_address%2Creviews%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
         headers: {}
     };
 
     axios(config)
         .then(function(response) {
-            // console.log(response.data)
-            // console.log(response.data.result.opening_hours)
-            // console.log(response.data.result.opening_hours.periods)
-            // console.log(response.data.result.geometry.location)
-            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: false, favourited: false, user: user });
+            console.log(response.data.result.opening_hours)
+            console.log(response.data.result.opening_hours.weekday_text)
+            console.log(response.data.result.opening_hours.weekday_text[0])
+            let hours = response.data.result.opening_hours.weekday_text;
+            const regex = /(\w+day: )/gm;
+            for (let day in hours) {
+                hours[day] = hours[day].replace(regex, '');
+            }
+            res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, user: user, tags: tags });
         })
         .catch(function(error) {
             console.log(error);
@@ -140,10 +176,14 @@ router.post('/bar:id/tags', isLoggedIn, async(req, res) => {
             name: req.body.bar_name,
             id: req.params.bar_id,
             address: req.body.bar_address,
-            price_level: req.body.bar_price,
-            rating: req.body.bar_rating
-                // hours: req.body.bar_hours,
-                // location: req.body.bar_location
+            price_level: req.body.bar_price_level,
+            rating: req.body.bar_rating,
+            pic: req.body.bar_pic,
+            // hours: req.body.bar_hours,
+            location: {
+                "lat": req.body.bar_lat,
+                "long": req.body.bar_long
+            }
         })
         let newBarSaved = await newBar.save();
     }
@@ -177,10 +217,14 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
             name: req.body.bar_name,
             id: req.params.bar_id,
             address: req.body.bar_address,
-            price_level: req.body.bar_price,
-            rating: req.body.bar_rating
-                // hours: req.body.bar_hours,
-                // location: req.body.bar_location
+            price_level: req.body.bar_price_level,
+            rating: req.body.bar_rating,
+            pic: req.body.bar_pic,
+            // hours: req.body.bar_hours,
+            location: {
+                "lat": req.body.bar_lat,
+                "long": req.body.bar_long
+            }
         })
         let newBarSaved = await newBar.save();
     }
@@ -202,7 +246,7 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
         });
     } else if (typeof req.body.favourite_remove !== 'undefined') {
         fav = false
-        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "favourited" } });
+            // let updatedUser = await User.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "favourited" } });
     }
 
     let buck = undefined;
@@ -220,12 +264,11 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
         });
     } else if (typeof req.body.bucketlist_remove !== 'undefined') {
         buck = false
-        let updatedUser = await user.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "bucketlisted" } });
+            // let updatedUser = await User.findOneAndUpdate({ username: username }, { $pull: { "activity.id": req.params.bar_id, type: "bucketlisted" } });
     }
 
-    console.log(username);
     let user = await User.findOne({ username: username });
-    console.log(user);
+
     let barEntry = undefined;
     let index = 0;
     if (user.bars) {
@@ -301,6 +344,35 @@ router.get('/favourites-search', isLoggedIn, async(req, res) => {
 router.post('/favourites-search', isLoggedIn, async(req, res) => {
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
+    // default area is Melbourne
+    let lat = -37.8136;
+    let long = 144.9631;
+    let zoom = 13
+
+    if (req.body.radius != null) {
+        zoom = req.body.radius;
+    }
+    if (req.body.area_name != null) {
+        let input = req.body.area_name;
+
+        input = input.replace(/ /gi, "%20");
+        input = input.replace(/,/g, '');
+
+        let config = {
+            method: 'get',
+            url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + input + '&inputtype=textquery&fields=geometry&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+            headers: {}
+        };
+
+        await axios(config)
+            .then(function(response) {
+                lat = response.data.candidates[0].geometry.location.lat;
+                long = response.data.candidates[0].geometry.location.lng;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
 
     let tags = []
     let favourites = []
@@ -311,26 +383,44 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
             }
         }
     }
-    console.log(tags)
     if (user.bars) {
         if (!tags.length) {
-            favourites = user.bars
+            for (let bar of user.bars) {
+                if (req.body.bucketlist || bar.favourite) {
+                    favourites.push(bar.id);
+                }
+            }
         } else {
             for (let bar of user.bars) {
                 let contains = bar.tags.some(element => {
                     return tags.indexOf(element) !== -1;
                 });
                 if (contains) {
-                    favourites.push(bar.id)
+                    if (req.body.bucketlist || bar.favourite) {
+                        favourites.push(bar.id);
+                    }
                 }
             }
         }
     }
 
     let favs = await Bar.find({ id: { $in: favourites } }).lean().exec();
-    console.log(favs)
 
-    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs });
+    let tourStopsFav = [];
+
+    for (let fav of favs) {
+        tourStopsFav.push({
+            "position": {
+                "lat": fav.location.lat,
+                "lng": fav.location.long
+            },
+            "title": "<a href='/search/bar" + fav.id + "' style='color:black;'><h3>" + fav.name + "</h3>" + "<em>" + fav.address + "<em></a>"
+        })
+    }
+
+    let stringTourStopsFav = JSON.stringify(tourStopsFav);
+
+    res.render('search/favourites-search-results.hbs', { layout: 'user-layout', title: "Bar Details", favourites: favs, stringTourStopsFav: stringTourStopsFav, lat: lat, long: long, zoom: zoom, user: user });
 });
 
 function getIntersection(a, b) {

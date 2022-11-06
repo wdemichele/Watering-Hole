@@ -8,7 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500&display=swap" rel="stylesheet">
 <link href="/css/user-styles.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{{!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw&libraries=places"></script> --}}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
   <style>
     .facebook {
@@ -24,11 +25,8 @@
 <meta name="description" content={{{title}}}>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="/"><h2>Login</h2></a>
-            <a href="/manual"><h2>User Manual</h2></a>
-            <a href="/about-us"><h2>About Us</h2></a>   
+    <header style="background-color: transparent;">
+        <nav style="background-color: transparent;">
         </nav>
         <a href="/contact" class="contact-btn"><button>Contact</button></a>
     </header>

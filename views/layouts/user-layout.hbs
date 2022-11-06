@@ -9,7 +9,9 @@
 <link rel="icon" type="image/x-icon" href="/assets/wateringhole.png">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
 <link href="/css/user-styles.css" rel="stylesheet" type="text/css">
-
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw&libraries=places"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="application/javascript">var tourStopsHBS = {{tourStopsFav}};</script>
 
 <meta name="description" content={{{title}}}>
 <style>
@@ -77,7 +79,7 @@
 </style>
 </head>
 <body>
-    <header>
+    <header style="position: fixed; top: 0; width: 100%; z-index: 1; border: 2px solid #000;">
         <nav>
             
             <ul class="nav-links">
@@ -91,7 +93,7 @@
         <div class="nav-links right">
             <ul>
                 <div class="dropdown">
-                    <img style="height: 50px; width: 50px;" onclick="myFunction()" src="\assets\nav\abstract-user-flat-4.svg" alt="nav-icon" class=" nav-icon dropbtn">
+                    <img style="height: 50px; width: 50px;" onclick="myFunction()" src="\assets\avatars\avatar{{user.pic}}.svg" alt="nav-icon" class=" nav-icon dropbtn">
                     <div class="dropdown-content" id="myDropdown">
                         <li><a href="/user">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
@@ -103,7 +105,9 @@
             </ul>
         </div>       
     </header>
+<div style="margin-top: 100px; padding-top: 40px;">
     {{{body}}}
+</div>
 <script>
     /* When the user clicks on the button, 
     toggle between hiding and showing the dropdown content */

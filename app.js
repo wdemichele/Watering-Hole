@@ -36,7 +36,6 @@ app.engine('hbs', exphbs.engine({
 const hbs = exphbs.create({});
 
 hbs.handlebars.registerHelper('reverseArray', function(array) {
-    console.log(array)
     if (!Array.isArray(array)) { return };
     return array.reverse();
 });
@@ -57,8 +56,6 @@ hbs.handlebars.registerHelper('limit', function(array, limit) {
 });
 
 hbs.handlebars.registerHelper("contains", function(array, value) {
-    console.log(array)
-    console.log(value)
     if (!Array.isArray(array)) {
         return false;
     }
@@ -69,6 +66,22 @@ hbs.handlebars.registerHelper("contains", function(array, value) {
         }
     }
     return false;
+});
+
+hbs.handlebars.registerHelper('times', function(n, block) {
+    let accum = '';
+
+    for (let i = 0; i < Math.round(n); ++i)
+        accum += block.fn(i);
+    return accum;
+});
+
+hbs.handlebars.registerHelper('negtimes', function(total, n, block) {
+    let accum = '';
+    let iters = Math.round(total - n)
+    for (let i = 0; i < Math.round(iters); ++i)
+        accum += block.fn(i);
+    return accum;
 });
 
 // Comparison handled by handlebars
@@ -142,11 +155,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-    done(null, user);
+    return done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
-    done(null, user);
+    return done(null, user);
 });
 
 let strategy = new LocalStrategy((username, password, cb) => {
@@ -154,14 +167,15 @@ let strategy = new LocalStrategy((username, password, cb) => {
     User.findOne({ username: username }, {}, {}, (err, user) => {
         if (err) { return cb(null, false) }
         if (!user) { return cb(null, false, { message: 'Incorrect login credentials.' }) }
-        // const hash = user.password;
-        console.log(user.password);
-        console.log(password);
-        if (user.password == password) {
-            return cb(null, user);
-        } else {
-            return cb(null, false, { message: 'Incorrect login credentials.' })
-        }
+        const hash = user.password;
+
+        bcrypt.compare(password, hash, function(err, response) {
+            if (response === true) {
+                return cb(null, user);
+            } else {
+                return cb(null, false, { message: 'Incorrect login credentials.' })
+            }
+        });
     });
 })
 

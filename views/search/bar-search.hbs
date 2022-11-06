@@ -1,26 +1,32 @@
-<div class="center" style="width: 90%;">
-<div class="w3-bar w3-black">
-    <button class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'query')">Query Search</button>
-    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'area')">Area Search</button>
-  </div>
-<div id="query" class="w3-container w3-border city secondary">
-    <form action="/search/bar-search" method="post">
-        <h2>Query Search</h2>
-        <label for="bar_name">Enter your Bar Search text </label><br>
-        <input id="bar_name" name="bar_name" placeholder="e.g. Cocktail bar in Melbourne"><br>
-        <button class="primary right" type="submit">Search</button><br><br><br><br>
-    </form>
-</div>
-<div id="area" class="w3-container w3-border city secondary" style="display:none">
-    <form action="/search/area-search" method="post">
-        <h2>Area Search</h2>
-        <label for="area_name">Enter the area to search </label><br>
-        <input id="area_name" name="area_name" placeholder="e.g. Fitzroy Victoria"><br>
-        <label for="area_radius">Enter the radius of the search (metres)</label><br>
-        <input id="area_radius" name="area_radius" placeholder="e.g 2000"><br>
-        <button class="primary right" type="submit">Search</button><br><br><br><br>
-    </form>
-</div>
+<div class="center" style="width: 80%; ">
+    <div class="w3-bar w3-black" style="margin:0;padding:0;">
+        <button style="border-radius: 0;" class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'query')">Query Search</button>
+        <button style="border-radius: 0;" class="w3-bar-item w3-button tablink" onclick="openCity(event,'area')">Area Search</button>
+    </div>
+    <div id="query" class="w3-container w3-border city tertiary bottom-radius" style="padding:2rem; height:576px; margin-top:0;">
+        <form action="/search/bar-search" method="post">
+            <h2 style="margin-top: 2rem;margin-bottom: 2rem;font-size:40px">Query Search<span class="tooltip"><img style="width: 20px; height: auto; background-colour: white;" src="/assets/tooltip.svg">
+            <p><span class="tooltiptext">Search based on complex searches</span></p>
+            </span>
+            </h2>
+            <label style="margin-left:15%;font-size:20px" for="bar_name">Enter your bar search text.</label><br>
+            <input class="center" style="width:70%;font-size:22px" id="bar_name" name="bar_name" placeholder="e.g. Cocktail bar in Melbourne"><br>
+            <button style="margin-left:15%;font-size:20px" class="secondary" type="reset">Cancel</button>
+            <button style="margin-right:15%;font-size:20px" class="primary right" type="submit">Search</button><br><br><br><br>
+        </form>
+    </div>
+    <div id="area" class="w3-container w3-border city tertiary bottom-radius" style="display:none;padding:2rem; height:576px;">
+        <form action="/search/area-search" method="post">
+            <h2 style="margin-top: 2rem;margin-bottom: 2rem;font-size:40px">Area Search<span class="tooltip"><img style="width: 20px; height: auto; background-colour: white;" src="/assets/tooltip.svg">
+            <p><span class="tooltiptext">Search for bars in an area</span></p>
+            </span></h2>
+            <label style="margin-left:15%;font-size:20px" for="area_name">Enter the area to search.</label><br>
+            <input class="center" style="width:70%;font-size:22px" id="area_name" name="area_name" placeholder="e.g. Fitzroy Victoria">
+            <input class="center" style="width:70%;font-size:22px" id="area_radius" name="area_radius" value="2000" type="hidden"><br>
+            <button style="margin-left:15%;font-size:20px" class="secondary" type="reset">Cancel</button>
+            <button style="margin-right:15%;font-size:20px" class="primary right" type="submit">Search</button><br><br><br><br>
+        </form>
+    </div>
 </div>
 <script>
     function isQuery(bool){
@@ -66,5 +72,19 @@
         }
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " w3-teal";
-        }
+    }
+    function initialize() {
+        var input = document.getElementById('area_name');
+        new google.maps.places.Autocomplete(input);
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<body>
+
+  
+
+</body>
+<script>
+    
 </script>
