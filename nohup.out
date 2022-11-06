@@ -1,0 +1,24 @@
+
+> comp30022-it-project@1.0.0 start
+> node app.js
+
+App is listening on port 3000
+Connected to DB
+
+> comp30022-it-project@1.0.0 start
+> node app.js
+
+App is listening on port 3000
+Connected to DB
+node:internal/modules/cjs/loader:959
+  throw err;
+  ^
+
+Error: Cannot find module '/Users/wangyige/Documents/GitHub/COMP30022-IT-Project/tests/login.js'
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:956:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:804:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12)
+    at node:internal/main/run_main_module:17:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
