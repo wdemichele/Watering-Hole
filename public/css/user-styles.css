@@ -1472,9 +1472,6 @@ input[type=text]:focus {
 
 .contact-us-button {
     border-radius: 25px;
-    background-color: var(--color-tertiary);
-    color: white;
-    margin: 0 20% 0 20%;
 }
 
 .contact-page-container {
