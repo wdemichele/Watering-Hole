@@ -5,6 +5,7 @@
     <div class="databox primary">
         <iframe class="center" width="1200" height="900" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{query}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw"></iframe>
     </div>
+
     <div class="flex-container">
         {{#each places as |bar|}}
         <div style="flex: 1 0 30%; margin:10px; position: relative; text-align: center; color: white;" class="card databox img__wrap">
@@ -25,13 +26,25 @@
                 <h3>Closed</h3></a>
                 {{/if}} 
                 <div>
-                    <button {{#if bucketlisted}}style="display:none;" {{/if}} class=" bucket-btn"><i class="fa-sharp fa-solid fa-bucket"></i></button> 
-                    <button {{#unless bucketlisted}}style="display:none;"{{/unless}} class="bucket-pressed"><i class="fa-sharp fa-solid fa-bucket"></i></button> 
-                </div>
-                <div>
-                    <button {{#if favourited}}style="display:none;" {{/if}}  id="btn1" class=" fav-btn"><i class="far fa-heart"></i></button> 
-                    <button {{#unless favourited}}style="display:none;"{{/unless}} id="btn1" class="fav-btn"><i class="fas fa-heart"></i></button>   
-                </div>   
+    <form action="bar-favourite{{bar.place_id}}" method="post" target="hiddenFrame">
+    <input type="hidden" id="bar_name" name="bar_name" value="{{bar.name}}">
+    <input type="hidden" id="bar_address" name="bar_address" value="{{bar.formatted_address}}">
+    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{bar.price_level}}">
+    <input type="hidden" id="bar_rating" name="bar_rating" value="{{bar.rating}}">
+    <input type="hidden" id="bar_location" name="bar_lat" value="{{bar.geometry.location.lat}}">
+    <input type="hidden" id="bar_location" name="bar_long" value="{{bar.geometry.location.lng}}">
+    <input type="hidden" id="search_results" name="search_results" value="true">
+    <input type="hidden" id="bar_pic" name="bar_pic" value="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{bar.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+    {{!-- {{#if (contains ../tags tag)}}tagged{{/if}} --}}
+    <button {{#unless (contains ../bucketlist bar.place_id)}}style="display:none;"{{/unless}}  onclick="snackbar('snackbar-unbucketlisted'); swap_display('bucketlist_button', 'bucketlist_remove')" class="primary bucket-pressed" type="submit" id="bucketlist_remove" name="bucketlist_remove"><i class="fa-sharp fa-solid fa-bucket"></i></button>
+    <button {{#if (contains ../bucketlist bar.place_id)}}style="display:none;"{{/if}} onclick="snackbar('snackbar-bucketlisted'); swap_display('bucketlist_remove', 'bucketlist_button')" class="bucket-btn" type="submit" id="bucketlist_button" name="bucketlist_button"><i class="fa-sharp fa-solid fa-bucket"></i></button>
+    </div>
+    <div>
+    <button {{#unless (contains ../favourites bar.place_id)}}style="display:none;"{{/unless}} onclick="snackbar('snackbar-unfavourited'); swap_display('favourite_button', 'favourite_remove')" class="secondary right fav-btn" type="submit" id="favourite_remove" name="favourite_remove"><i class="fas fa-heart"></i></button>
+    <button {{#if (contains ../favourites bar.place_id)}}style="display:none;"{{/if}} onclick="snackbar('snackbar-favourited'); swap_display('favourite_remove', 'favourite_button')" class="right fav-btn" type="submit" id="favourite_button" name="favourite_button"><i class="fas fa-heart"></i></button>
+    </div>
+    </form>
+
         </div>
                    
     </div>
@@ -46,3 +59,24 @@
     </form>
     {{/if}}
 </div>
+  <div id="snackbar-bucketlisted">Added bucketlist for bar..</div>
+  <div id="snackbar-unbucketlisted">Removed bucketlist for bar..</div>
+  <div id="snackbar-favourited">Added favourite for bar..</div>
+  <div id="snackbar-unfavourited">Removed favourite for bar..</div>
+      <iframe name="hiddenFrame" class="hide"></iframe>
+
+<script>
+    function snackbar(name) {
+      console.log(name)
+      var x = document.getElementById(name);
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    function swap_display(view, hide){
+      var x = document.getElementById(view);
+      var y = document.getElementById(hide);
+      x.style.display = "inline-block";
+      y.style.display = "none";
+    } 
+</script>
