@@ -1,5 +1,5 @@
 <div class="databox primary">
-<div style="float:none;margin-left:auto;margin-right:auto;width:50%;">
+<div class="settings-body">
 <h1>Settings</h1>
 <section>
 <div style="padding-left:2rem;padding-right:2rem;">
@@ -7,10 +7,10 @@
 <form action="user/update{{user.username}}" method="post">
 <div style="float:left;padding-left:0.5rem;padding-right:0.5rem;position:relative;width:37.5%;text-align:center;margin-top:1rem;">
     
-    <img style="width: 170px;" src="\assets\avatars\avatar{{user.pic}}.svg">
+    <img class="profile-pic" src="\assets\avatars\avatar{{user.pic}}.svg">
 
     <p style="padding:1rem;">
-        <a href="user/uid{{user.username}}/pic"><button type="button" style="width: 50%; border-radius:20px;" >
+        <a href="user/uid{{user.username}}/pic"><button type="button" class="settings-select-btn">
         Select</button></a>        
     </p>
 
@@ -53,7 +53,7 @@
         </div>
 
         <div>
-            <button class="secondary" style="float:right;padding:1rem 2rem 1rem 2rem;border-radius:20px;">
+            <button class="secondary settings-save-btn">
                Save </button>
         </div>
 

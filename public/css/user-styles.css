@@ -154,36 +154,6 @@ nav a:hover {
     flex-wrap: wrap;
 }
 
-
-/* Responsive layout - makes a one column layout instead of a two-column layout */
-
-@media screen and (max-width: 800px) {
-    .flex-container {
-        flex-direction: column;
-    }
-    .login {
-        width: 90%;
-    }
-}
-
-
-/* Mobile Phone Width */
-
-@media only screen and (max-width: 576px) {
-    .login {
-        width: 90%;
-    }
-}
-
-
-/* Tablet Width */
-
-@media only screen and (max-width: 768px) {
-    .login {
-        width: 90%;
-    }
-}
-
 input {
     width: 100%;
     padding: 10px 10px;
@@ -2283,3 +2253,116 @@ form.search::after {
     left: 5%; 
     bottom: 5%;
 }
+
+.settings-body {
+    float:none;
+    margin-left:auto;
+    margin-right:auto;
+    width: 60%;
+}
+
+.settings-select-btn {
+    width: 50%; 
+    border-radius:20px;
+}
+
+.settings-save-btn {
+    float:right;
+    padding:1rem 2rem 1rem 2rem;
+    border-radius:20px;
+}
+
+.profile-pic {
+    width: 170px;
+}
+
+/* Responsive layout - makes a one column layout instead of a two-column layout */
+
+@media screen and (max-width: 800px) {
+    .flex-container {
+        flex-direction: column;
+    }
+
+
+}
+
+/* Desktop screens*/
+
+@media only screen and (max-width: 1280px) {
+    .login {
+        width: 90%;
+    }
+    .settings-body {
+        width: 70%;
+    }
+    .settings-select-btn {
+        width: 60%;
+    }
+    
+}
+
+/*laptop screens */
+
+@media only screen and (max-width: 992px) {
+    .login {
+        width: 90%;
+    }
+    .settings-body {
+        width: 90%;
+    }
+    p {
+        font-weight: 150;
+        font-size: 15px;
+    }
+    input {
+        font-size: 15px;
+    }
+    label {
+        font-size: 15px;
+    }
+    .settings-select-btn {
+        width: 70%;
+    }
+    
+}
+
+/* Tablet Width */
+
+@media only screen and (max-width: 768px) {
+    .login {
+        width: 90%;
+    }
+    .settings-body {
+        width: 100%;
+    }
+    .settings-select-btn {
+        width: 80%;
+    }
+    .settings-save-btn {
+        width: 30%;
+    }
+    .profile-pic {
+        width: 150px;
+    }
+    
+}
+
+/* Mobile Phone Width */
+
+@media only screen and (max-width: 576px) {
+    .login {
+        width: 90%;
+    }
+    .settings-main{
+        width: 100%;
+    }
+    .settings-select-btn {
+        width: 80%;
+    }
+}
+
+
+
+
+
+
