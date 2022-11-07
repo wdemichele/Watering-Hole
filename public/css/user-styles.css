@@ -2350,8 +2350,8 @@ form.search::after {
     .settings-select-btn {
         width: 70%;
     }
-    .forgot-pass {
-        font-size: 20px;
+    .forgot-pass p {
+        font-size: 15px;
     }
     
 }
