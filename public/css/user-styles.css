@@ -2394,6 +2394,11 @@ form.search::after {
     padding:2% 0 3% 0;
 }
 
+.about-body {
+    width: 60%; 
+    opacity: 0.9
+}
+
 /* Responsive layout - makes a one column layout instead of a two-column layout 
 
 @media screen and (max-width: 800px) {
@@ -2577,8 +2582,11 @@ form.search::after {
     .fav-container {
         flex-direction: column;
     }
+    .about-body {
+        width: 80%; 
+    }
     
-    
+
 }
 
 /* Tablet Width */
@@ -2666,7 +2674,9 @@ form.search::after {
     .fav-search-btn {
         width: 200px;
     }
-    
+    .about-body {
+        width: 90%; 
+    }
 }
 
 /* Mobile Phone Width */
