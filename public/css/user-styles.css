@@ -1038,15 +1038,14 @@ table {
 .price_choose {
     color: #000;
     margin-top: 2px;
-    width: 230px;
-    display: none;
+    width: 500px;
+  
+   
 }
 
 .sets_choose .sets_box,
 .price_choose .price_box {
-    background-color: #fff;
-    border-bottom: 2px solid white;
-    border-radius: 0px;
+  width: 500px;
 }
 
 
@@ -1071,12 +1070,8 @@ table {
     display: none;
 }
 
-.sets_choose .sets_box,
-.price_choose .price_box {
-    background-color: #fff;
-    border-bottom: 2px solid white;
-    border-radius: 0px;
-}
+
+
 
 
 /* open now and noly */
@@ -1089,48 +1084,40 @@ table {
 
 /* search-page  sss*/
 
-.sets_choose .sets_box,
-.price_choose .price_box {
-    background-color: #fff;
-    border-bottom: 2px solid white;
-    border-radius: 0px;
-}
 
 .search_box {
     display: flex;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+  
 }
 
-.search_left h1 {
-    margin-bottom: 50px;
-}
+
 
 .search_left {
-    width: 70%;
+    width: 100%;
     padding-top: 40px;
     text-align: center;
     border-radius: 25px;
 }
 
 .search_search {
-    width: 1200px;
+   
     height: 60px;
     border-radius: 25px;
     background-color: rgb(76, 137, 159);
     line-height: 60px;
     color: white;
     font-size: 30px;
-    margin-top: 20px;
     font-weight: 700;
     display: flex;
+ 
 }
 
 .search_left .search_set,
 .search_set_price,
 .search_open,
 .search_favourites {
+    margin: 0 auto;
     width: 500px;
     height: 60px;
     border-radius: 25px;
@@ -1143,11 +1130,7 @@ table {
     display: flex;
 }
 
-.search_search img {
-    width: 50px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
+
 
 .search_search .searchs_box {
     width: 1075px;
@@ -1166,16 +1149,22 @@ table {
 .search_set_price .text_set,
 .search_open .text_set,
 .search_favourites .text_set {
+
     width: 430px;
 }
 
+
+
 .search_sets {
+   
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+ 
 }
 
 .search_left .search_set_price {
     background-color: rgb(53, 83, 113);
+ 
 }
 
 .search_left .search_set {
@@ -1183,14 +1172,13 @@ table {
 }
 
 .search_left .search_open {
-    margin: 20px;
+    margin: 0 auto;
 }
 
-.search_left .search_favourites {
-    margin: 20px;
-}
+
 
 .search_left .search_search_tags {
+    margin: 0 auto;
     width: 600px;
     border-radius: 20px;
     padding: 10px;
@@ -1251,18 +1239,16 @@ table {
     background-color: rgb(76, 137, 159);
 }
 
-.button_box {
-    display: flex;
-}
 
-.button_box div {
+
+.button_box {
     width: 200px;
     height: 60px;
     border-radius: 20px;
     line-height: 60px;
-    font-size: 26px;
+    font-size: 30px;
     background-color: #0e897d;
-    margin-top: 30px;
+  
     text-align: center;
     font-weight: 700;
     color: whitesmoke;
