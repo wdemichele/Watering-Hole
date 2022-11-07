@@ -2298,6 +2298,33 @@ form.search::after {
     position:relative
 }
 
+.query-btn-left {
+    margin-left:15%;
+    font-size:20px;
+    width:210px;
+}
+
+.query-btn-right {
+    margin-right:15%;
+    font-size:20px;
+    width:210px;
+}
+
+.query-body {
+    width: 80%;
+}
+
+.query-label {
+    margin-left:15%;
+    font-size:20px
+}
+
+.query-text {
+    width:70%;
+    font-size:22px
+}
+
+
 /* Responsive layout - makes a one column layout instead of a two-column layout */
 
 @media screen and (max-width: 800px) {
@@ -2353,6 +2380,26 @@ form.search::after {
     .forgot-pass p {
         font-size: 15px;
     }
+    .query-body {
+        width: 90%;
+    }
+    .query-label {
+        margin-left:10%;
+        font-size:18px
+    }
+    .query-text {
+        width:80%;
+        font-size:20px
+    }
+    .query-btn-left {
+        margin-left:10%;
+        font-size:18px;
+    }
+    .query-btn-right {
+        margin-right:10%;
+        font-size:18px;
+    }
+    
     
 }
 
@@ -2377,6 +2424,28 @@ form.search::after {
     .profile-pic {
         width: 150px;
     }
+    .query-body {
+        width: 100%;
+    }
+    .query-label {
+        margin-left:5%;
+        font-size:15px
+    }
+    .query-text {
+        width:90%;
+        font-size:18px
+    }
+    .query-btn-left {
+        margin-left:5%;
+        font-size:15px;
+        width:180px;
+    }
+    .query-btn-right {
+        margin-right:5%;
+        font-size:15px;
+        width:180px;
+    }
+    
     
 }
 
@@ -2412,6 +2481,25 @@ form.search::after {
     .profile-pic {
         width: 170px;
     }
+    .query-label {
+        margin-left:0%;
+        font-size:11px
+    }
+    .query-text {
+        width:100%;
+        font-size:14px
+    }
+    .query-btn-left {
+        margin-left:0%;
+        font-size:11px;
+        width:120px;
+    }
+    .query-btn-right {
+        margin-right:0%;
+        font-size:11px;
+        width:120px;
+    }
+    
 }
 
 
