@@ -1,4 +1,4 @@
-<img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">>
+<img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">
 <div class="databox secondary">
     <h1>Bar Search Results</h1>
     <h3>Text Search: <b><em>"{{search}}"</em></b></h3>
@@ -8,22 +8,21 @@
 
     <div class="flex-container">
         {{#each places as |bar|}}
-        <div style="flex: 1 0 30%; margin:10px; position: relative; text-align: center; color: white;" class="card databox img__wrap">
+        <div style="" class="card databox img__wrap bar-card">
             <a style="text-decoration: none;" href="/search/bar{{bar.place_id}}">
             {{#if bar.photos.0.photo_reference}}
-            <img class="img__img" style="width: 100%; height:400px; maxwidth:600px; maxheight:400px;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+            <img class="img__img bar-results-image" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
             {{else}}
-            <img class="img__img" style="width: 100%; height: 400px" src="/assets/wateringhole.png">
+            <img class="img__img bar-results-image-default" src="/assets/wateringhole.png">
             {{/if}}
             <div class="container img__description">
-                <br><br><br>
-                <h2><b>{{bar.name}}</b></h2>
-                <h3>{{bar.formatted_address}}</h3> 
-                {{#if bar.price_level}}Price Level: {{bar.price_level}}{{/if}} {{#if bar.rating}}Google Review: {{bar.rating}}{{/if}}
+                <h2 class="bar-name"><b>{{bar.name}}</b></h2>
+                <h3 class="bar-info">{{bar.formatted_address}}</h3> 
+                <h3 class="bar-info">{{#if bar.price_level}}Price Level: {{bar.price_level}}{{/if}} {{#if bar.rating}}Google Review: {{bar.rating}}{{/if}}</h3>
                 {{#if bar.opening_hours.open_now}}
-                <h3>Open Now</h3></a>
+                <h3 class="bar-info">Open Now</h3></a>
                 {{else}}
-                <h3>Closed</h3></a>
+                <h3 class="bar-info">Closed</h3></a>
                 {{/if}} 
                 <div>
     <form action="bar-favourite{{bar.place_id}}" method="post" target="hiddenFrame">
