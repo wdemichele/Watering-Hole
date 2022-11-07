@@ -1,17 +1,17 @@
 
-<div class="w3-bar w3-black" style="height:44px; width:80%; margin-left:auto; margin-right:auto;">
+<div class="w3-bar w3-black favourites-bar" style="">
     {{!-- <button style="border-radius: 0;" class="w3-bar-item w3-button tablink" onclick="openCity(event,'area')">Area Search</button> --}}
 </div>
-<div class="databox tertiary bottom-radius" style="width:80%;padding:0 8% 0 8%;padding-bottom:3rem;height:576px;margin-top:0;">
+<div class="databox tertiary bottom-radius fav-search-body" style="">
 
     <h1 style="margin-top: 3rem;">My Favourites</h1>
     <form action="favourites-search" method="post">
-        <div class="center" style="width:90%;padding:2% 0 3% 0;">
+        <div class="center fav-search-box" style="">
             <label style="font-size:20px" for="area_name">Search an Area</label><br>
             <input id="area_name" name="area_name"><br>
         </div>
-        <div style="display: flex;">
-            <fieldset style="width:48%;flex:2;border-radius:25px;padding:0 10% 0 10%;background-color:#0E897D;border:none;">
+        <div class="fav-container" style="">
+            <fieldset class="fav-bar-settings" style="">
                 <legend style="font-size:20px; margin:10px;">Bar Settings</legend>
                 <label for="price_range">Price</label>
                 <select name="price_range" id="price_range" placeholder="$-$$$">
@@ -36,7 +36,7 @@
                 <br><br>
             </fieldset>
 
-            <fieldset style="width:48%;flex:3;border-radius:25px;padding:1rem;background-color:#0E897D;border:none;">
+            <fieldset class="fav-search-tags" style="">
                 <legend style="font-size:20px">Search Tags</legend>
                 {{#each user.tags}}
                 <div name="chip" class="chip" onclick="checked(this)">
@@ -47,8 +47,8 @@
             </fieldset>
         </div>
         <div style="margin-top: 2rem;">
-            <button style="font-size:20px" class="secondary" type="reset">Cancel</button>
-            <button style="font-size:20px" class="primary right" type="submit">Search</button><br><br>
+            <button style="font-size:20px" class="secondary fav-search-btn" type="reset">Cancel</button>
+            <button style="font-size:20px" class="primary right fav-search-btn" type="submit">Search</button><br><br>
         </div>
         
     </form>

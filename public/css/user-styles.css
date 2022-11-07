@@ -2352,6 +2352,48 @@ form.search::after {
     color: white;
 }
 
+.favourites-bar {
+    height:44px; 
+    width:80%; 
+    margin-left:auto; 
+    margin-right:auto;
+}
+
+.fav-search-body {
+    width:80%;
+    padding:0 8% 0 8%;
+    padding-bottom:3rem;
+    height:576px;
+    margin-top:0;
+}
+
+.fav-bar-settings {
+    width:48%;
+    flex:2;
+    border-radius:25px;
+    padding:0 10% 0 10%;
+    background-color:#0E897D;
+    border:none;
+}
+
+.fav-search-tags {
+    width:48%;
+    flex:3;
+    border-radius:25px;
+    padding:1rem;
+    background-color:#0E897D;
+    border:none;
+}
+
+.fav-container {
+    display: flex;
+}
+
+.fav-search-box {
+    width:90%;
+    padding:2% 0 3% 0;
+}
+
 /* Responsive layout - makes a one column layout instead of a two-column layout 
 
 @media screen and (max-width: 800px) {
@@ -2515,6 +2557,26 @@ form.search::after {
     .bar-info {
         font-size: 11px;
     }
+    .favourites-bar {
+        width:90%; 
+    }
+    .fav-search-body {
+        width:90%;
+        height: 750px; 
+    }
+    .fav-bar-settings {
+        width:90%;
+        margin: auto;
+        margin-bottom: 2rem;
+    }
+    .fav-search-tags {
+        width:90%;
+        margin:auto;
+        margin-bottom: 1rem;
+    }
+    .fav-container {
+        flex-direction: column;
+    }
     
     
 }
@@ -2592,9 +2654,18 @@ form.search::after {
     .bar-card {
         width: 50%;
     }
-    
-    
-    
+    .fav-bar-settings {
+        width:100%;
+    }
+    .fav-search-tags {
+        width:100%;
+    }
+    .fav-search-box {
+        width: 100%;
+    }
+    .fav-search-btn {
+        width: 200px;
+    }
     
 }
 
@@ -2672,7 +2743,15 @@ form.search::after {
     .bar-results-image {
         height:200px; 
     }
-    
+    .favourites-bar {
+        width:95%; 
+    }
+    .fav-search-body {
+        width:95%; 
+    }
+    .fav-search-btn {
+        width: 130px;
+    }
 }
 
 
