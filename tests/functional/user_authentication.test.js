@@ -47,7 +47,6 @@ describe("valid user authentication", () => {
         var currentUrl = page.url();
         await page.type("#username", username);
         await page.type("#password", '1234');
-        //page.waitForFrame(5000);
         console.log('expected url: http://localhost:3000/ \n current url: '+ currentUrl);
         expect(currentUrl).toBe("http://localhost:3000/");
         await page.screenshot({path : path + 'invalid user password.png'});
@@ -78,27 +77,4 @@ describe("valid user authentication", () => {
     
     
 })
-/*
-(async () => {
-   
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto('https://joel.tools/merch/');
-    await page.screenshot({path : './demo.png'});
-    const price = await page.$eval('.price', div => div.textContent);
-    console.log(price);
-    await browser.close();
-
-    
-    const url = 'https://demo-navy-one.vercel.app/';
-    describe('Example', () => {
-        beforeEach(async () => {
-            await page.goto(url);
-        });
-        it('should have the correct title', async () => {
-            await expect(page.title()).resolve.toBe('Example Website');
-        });
-    });
-})();
-*/
 
