@@ -1649,10 +1649,11 @@ hr {
     color: white;
 }
 
-.dark-mode {
+.darkmode {
     background-color: black;
     color: white;
 }
+
 
 .img__wrap {
     position: relative;

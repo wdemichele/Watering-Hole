@@ -28,6 +28,8 @@
             {{#unless mine}} 
             {{#if friend}}
             <button class="center" onclick="document.getElementById('id01').style.display='block'">Remove Friend</button>
+
+
             <form action="/user/remove-friend/uid{{user.username}}" method="post">
 
                 <div id="id01" class="modal-friend">
@@ -106,6 +108,7 @@
                         <br><br>
                     </form>
                 </div>
+                
                 {{else}}
                 <br><br><br><br><br><br><br><br><br><br><br><br><br>
                 {{/if}}
@@ -114,6 +117,10 @@
         </div>
     </div>
 </div>
+
+<button id ="dark-mode-toggle" class="primary right" type="button">Dark Mode</button>
+
+
 <script>
     var modal = document.getElementById('id01');
 
@@ -124,3 +131,6 @@
         }
     }
 </script>
+
+<script src="darkmode.js">
+    </script>
