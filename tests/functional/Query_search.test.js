@@ -1,3 +1,4 @@
+//Test the functionality of the Query search
 const puppeteer = require('puppeteer');
 jest.setTimeout(30000);
 
@@ -6,6 +7,11 @@ const password = "password";
 const url = 'http://localhost:3000';
 const browserPath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const path = './tests/functional/test output images/Query Search Authentication/';
+/*
+  NOTE:    path can be changed to your browser location
+  Unix:    remove path and it will automatically use Chromium
+  Windows: Use the location of your Chrome/Chromium browser
+*/
 
 describe("validate Query search Results", () => {
     test('validate the results shown', async () => {

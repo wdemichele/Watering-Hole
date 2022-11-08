@@ -1,38 +1,18 @@
-//jest.useFakeTimers();
+//Test the functionality of the User authentication
 const puppeteer = require('puppeteer');
 jest.setTimeout(30000);
 
 const username = "esethi";
 const password = "password"; 
-/*
-describe("validate user authentication", () => {
-    test('validate', async () => {
-        const browser = await puppeteer.launch( { 
-            defaultViewport: {width: 1450, height: 1362},
-            headless: false,
-            executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe' });
-        const page = await browser.newPage();
-        await page.goto('http://localhost:3000');
-        await page.type("#username", username);
-        await page.type("#password", password);
-        await page.click('body > div > div > form > div:nth-child(6) > button.primary.login-btn');
-        //await page.goto('http://localhost:3000/search/bar-search')
-        //await page.type("#bar_name", 'bars melbourne cbd');
-        //await page.click('#query > form > button');
-        //await page.waitForNavigation();
-        await page.waitForTimeout(2000);
-        await page.screenshot({path : './demo.png'});
-        const price = "$50"; //await page.$eval('.price', div => div.textContent);
-        console.log(price);
-        expect(price).toBe("$50");
-        await browser.close();
-
-    })
-})
-*/
 const url = 'http://localhost:3000';
 const browserPath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
 const path = './tests/functional/test output images/User Authentication/';
+/*
+  NOTE:    path can be changed to your browser location
+  Unix:    remove path and it will automatically use Chromium
+  Windows: Use the location of your Chrome/Chromium browser
+*/
+
 describe("valid user authentication", () => {
     
     test('valid user credentials', async () => {
