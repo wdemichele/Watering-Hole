@@ -30,6 +30,7 @@ describe("validate Query search Results", () => {
         const element = await page.$("#bucketlist_remove");
         const text = await page.evaluate(element => element.textContent, element);
         console.log(text + ' => Remove From Bucketlist');
+        await page.waitForTimeout(1000);
         await page.screenshot({path : path + 'Bucketlist_0001.png', fullPage: true});
         await page.click('#bucketlist_remove');
         expect(text).toBe('Remove From Bucketlist');
@@ -54,6 +55,7 @@ describe("validate Query search Results", () => {
         const element = await page.$("#bucketlist_button");
         const text = await page.evaluate(element => element.textContent, element);
         console.log(text + ' => Add To Bucketlist');
+        await page.waitForTimeout(1000);
         await page.screenshot({path : path + 'Bucketlist_0002.png', fullPage: true});
         expect(text).toBe('Add To Bucketlist');
         await browser.close();
@@ -86,6 +88,7 @@ describe("validate Query search Results", () => {
         const element = await page.$("#bucketlist_remove");
         const text = await page.evaluate(element => element.textContent, element);
         console.log(text + ' => Remove From Bucketlist');
+        await page.waitForTimeout(1000);
         await page.screenshot({path : path + 'Bucketlist_0003.png', fullPage: true});
         await page.click('#bucketlist_remove');
         expect(text).toBe('Remove From Bucketlist');
@@ -119,6 +122,7 @@ describe("validate Query search Results", () => {
         const element = await page.$("#bucketlist_button");
         const text = await page.evaluate(element => element.textContent, element);
         console.log(text + ' => Add To Bucketlist');
+        await page.waitForTimeout(1000);
         await page.screenshot({path : path + 'Bucketlist_0004.png', fullPage: true});
         expect(text).toBe('Add To Bucketlist');
         await browser.close();
