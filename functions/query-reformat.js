@@ -7,4 +7,5 @@ function remove_extra_characters(query) {
     query = query.replace(/ /gi, "%20");
     return query;
 }
+
 module.exports = remove_extra_characters;
