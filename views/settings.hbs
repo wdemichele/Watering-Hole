@@ -10,8 +10,7 @@
     <img class="profile-pic" src="\assets\avatars\avatar{{user.pic}}.svg">
 
     <p style="padding:1rem;">
-        <a href="user/uid{{user.username}}/pic"><button type="button" class="settings-select-btn">
-        Select</button></a>        
+        <a href="user/uid{{user.username}}/pic"><button type="button" class="settings-select-btn">Select</button></a>        
     </p>
 
 </div>
@@ -32,29 +31,28 @@
     <input style="border-radius:20px;" title="Bio" name="bio" value="{{user.bio}}" id="bio" />
     </div>
 </div>
+        <div>
+            <button class="secondary settings-save-btn">
+               Save </button>
+        </div>
+</form>
 
-<div style="float:left;padding-left:0.5rem;padding-right:0.5rem;width:100%">
+<form action="user/password-reset" method="post">
 
-    <div style="margin-bottom:1rem">
-        <label for="user_password">New password</label>
-        <input style="border-radius:20px;" placeholder="New password" title="New password" type="password" id="user_password" />
-    </div>
-
-    <div style="margin-bottom:1rem">
-        <label for="user_password_confirmation">Re-enter password</label>
-        <input style="border-radius:20px;" autocomplete="off" id="user_password_confirmation" placeholder="Re-enter password" type="password" />
-    </div>
+    <div style="float:left;padding-left:0.5rem;padding-right:0.5rem;width:100%">
 
     <div style="margin-bottom:1rem">
         <hr style="background-color: black;">
         
-        <div style="width:100%;padding-bottom:1rem">
-        <input style="border-radius:20px;" placeholder="Enter your current password to save changes" title="Current Password" type="password" id="user_current_password" />
+
+        <div style="margin-bottom:1rem">
+        <label for="user_password">New Password</label>
+        <input style="border-radius:20px;" name="newPassword" placeholder="New password" title="New password" type="password" id="user_password">
         </div>
 
         <div>
             <button class="secondary settings-save-btn">
-               Save </button>
+               Save Password </button>
         </div>
 
     </div>

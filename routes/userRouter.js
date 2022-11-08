@@ -34,7 +34,7 @@ router.post('/create', async(req, res) => {
 
         let newUserSaved = await newUser.save();
 
-        res.render('guest/login.hbs', { layout: 'user-layout', title: 'User Login', flash: ["Account created, please login."] });
+        res.render('guest/login.hbs', { layout: 'guest-layout', title: 'User Login', flash: ["Account created, please login."] });
     });
 });
 
@@ -277,6 +277,17 @@ router.post('/search-friend', isLoggedIn, async(req, res) => {
         response = "User not found!"
         res.redirect('/social')
     }
+});
+
+router.post('/password-reset', isLoggedIn, async(req, res) => {
+
+
+    bcrypt.hash(req.body.newPassword, saltRounds, async(err, hash) => {
+        let updatedUser = await User.findOneAndUpdate({ username: req.user.username }, { password: hash }).lean().exec();
+        res.redirect('/settings');
+    });
+
+
 });
 
 
