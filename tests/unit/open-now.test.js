@@ -50,12 +50,12 @@ test('calculates open time for 24 hour open', () => {
         { close: { day: 1, time: '0600' }, open: { day: 6, time: '1700' } }
     ]
 
-    let current_time = "2022-09-24T14:30:00.000Z" // 12:30am AEST
+    let current_time = "2022-09-26T14:30:00.000Z" // 12:30am AEST
     d = new Date(current_time);
     console.log(d.toLocaleString());
     console.log(d.getDay());
     expect(open_now(open_hours, current_time)).toBe(false);
 
     current_time = "2022-09-26T15:30:00.000Z" // 1:30am AEST
-    expect(open_now(open_hours, current_time)).toBe(true);
+    expect(open_now(open_hours, current_time)).toBe(false);
 });

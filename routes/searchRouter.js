@@ -1,6 +1,7 @@
 const { response } = require('express');
 const express = require('express');
 const router = express.Router();
+const reformat = require("../functions/query-reformat");
 const bodyParser = require("body-parser");
 const axios = require('axios');
 const User = require('../models/userSchema');
@@ -9,6 +10,7 @@ const { Db } = require('mongodb');
 const { default: mongoose } = require('mongoose');
 const mongodb = require('mongodb');
 const passport = require('passport');
+const remove_extra_characters = require('../functions/query-reformat');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
@@ -33,7 +35,7 @@ router.get('/bar-search', isLoggedIn, async(req, res) => {
 
 router.post('/bar-search', isLoggedIn, async(req, res) => {
 
-    let input = req.body.bar_name;
+    let input = reformat(req.body.bar_name);
     if (!input.includes("bar") || !input.includes("club")) {
         input += " bar";
     }
@@ -79,11 +81,7 @@ router.post('/more-bars', isLoggedIn, async(req, res) => {
 
 router.post('/area-search', isLoggedIn, async(req, res) => {
 
-    let input = req.body.area_name;
-
-
-    input = input.replace(/ /gi, "%20");
-    input = input.replace(/,/g, '');
+    let input = reformat(req.body.area_name);
 
     if (input.length === 0) {
         input = "near%20me";
@@ -349,10 +347,7 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
         zoom = req.body.radius;
     }
     if (req.body.area_name != null) {
-        let input = req.body.area_name;
-
-        input = input.replace(/ /gi, "%20");
-        input = input.replace(/,/g, '');
+        let input = remove_extra_characters(req.body.area_name);
 
         let config = {
             method: 'get',
