@@ -1,17 +1,11 @@
 const reformat = require("../../functions/query-reformat")
 const axios = require('axios').default;
-const request = require('supertest')
+//const request = require('supertest')
 const req = require('express/lib/request');
 const res = require('express/lib/response');
 const { text } = require('body-parser');
 axios.get('/user?ID=12345')
 jest.mock("axios");
-
-function remove_extra_characters(query) {
-    query = query.replace(/ /gi, "%20");
-    query = query.replace(/,/g, '');
-    return query;
-}
 
 describe('Sanity test', () => {
     test('1 should equal 1', () => {

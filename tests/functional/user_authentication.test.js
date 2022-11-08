@@ -32,13 +32,13 @@ describe("validate user authentication", () => {
 */
 const url = 'http://localhost:3000';
 const browserPath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const path = './tests/functional/test output images/';
+const path = './tests/functional/test output images/User Authentication/';
 describe("valid user authentication", () => {
     
     test('valid user credentials', async () => {
         
         const browser = await puppeteer.launch( { 
-            defaultViewport: {width: 1450, height: 1362},
+            defaultViewport: {width: 1450, height: 928},
             headless: false,
             executablePath: browserPath });
         const page = await browser.newPage();
@@ -49,7 +49,7 @@ describe("valid user authentication", () => {
         var currentUrl = page.url();
         console.log('expected url: http://localhost:3000/home \n current url: '+ currentUrl);
         expect(currentUrl).toBe("http://localhost:3000/home");
-        await page.screenshot({path : path + 'valid credentials.png'});
+        await page.screenshot({path : path + 'valid credentials.png', fullPage: true});
         await browser.close();
 
     })
@@ -65,6 +65,8 @@ describe("valid user authentication", () => {
         await page.type("#password", '1234');
         await page.click('body > div > div > form > div:nth-child(6) > button.primary.login-btn');
         var currentUrl = page.url();
+        await page.type("#username", username);
+        await page.type("#password", '1234');
         //page.waitForFrame(5000);
         console.log('expected url: http://localhost:3000/ \n current url: '+ currentUrl);
         expect(currentUrl).toBe("http://localhost:3000/");
@@ -85,6 +87,8 @@ describe("valid user authentication", () => {
         await page.type("#password", password);
         await page.click('body > div > div > form > div:nth-child(6) > button.primary.login-btn');
         var currentUrl = page.url();
+        await page.type("#username", 'invalid');
+        await page.type("#password", password);
         console.log('expected url: http://localhost:3000/ \n current url: '+ currentUrl);
         expect(currentUrl).toBe("http://localhost:3000/");
         await page.screenshot({path : path + 'invalid user id.png'});
