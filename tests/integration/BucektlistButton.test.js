@@ -1,12 +1,12 @@
-//Test the functionality of the Query search
+//Test the Bucketlist button
 const puppeteer = require('puppeteer');
-jest.setTimeout(40000);
+jest.setTimeout(30000);
 
 const username = "esethi";
 const password = "password"; 
 const url = 'http://localhost:3000';
 const browserPath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const path = './tests/integration/Test Output Images/Favourites Test Outputs/';
+const path = './tests/integration/Test Output Images/Bucketlist Tests outputs/';
 /*
   NOTE:    path can be changed to your browser location
   Unix:    remove path and it will automatically use Chromium
@@ -15,7 +15,7 @@ const path = './tests/integration/Test Output Images/Favourites Test Outputs/';
 
 describe("validate Query search Results", () => {
     
-    test('Add a speficic bar to Favourites', async () => {
+    test('Add a speficic bar to bucketlist', async () => {
         const browser = await puppeteer.launch( { 
             defaultViewport: {width: 1450, height: 1362, deviceScaleFactor:0.5},
             headless: false,
@@ -26,21 +26,18 @@ describe("validate Query search Results", () => {
         await page.type("#password", password);
         await page.click('body > div > div > form > div:nth-child(6) > button.primary.login-btn');
         await page.goto(url + '/search/barChIJFd7ppDpo1moREpq8zhmlC4Y');
-        await page.click('#favourite_button');
-        const element = await page.$("#favourite_remove");
+        await page.click('#bucketlist_button');
+        const element = await page.$("#bucketlist_remove");
         const text = await page.evaluate(element => element.textContent, element);
-        console.log(text + ' => Remove From Favourites');
-        await page.waitForTimeout(1500);
-        await page.goto(url + '/home');
-        await page.waitForTimeout(1500);
-        await page.screenshot({path : path + 'Favourites_0001.png', fullPage: true});
-        //await page.click('#favourite_remove');
-        expect(text).toBe('Remove From Favourites');
+        console.log(text + ' => Remove From Bucketlist');
+        await page.screenshot({path : path + 'Bucketlist_0001.png', fullPage: true});
+        await page.click('#bucketlist_remove');
+        expect(text).toBe('Remove From Bucketlist');
         await browser.close();
 
     })
     
-    test('Remove a speficic bar from Favourites', async () => {
+    test('Remove a speficic bar from bucketlist', async () => {
         const browser = await puppeteer.launch( { 
             defaultViewport: {width: 1450, height: 1362, deviceScaleFactor:0.5},
             headless: false,
@@ -51,23 +48,20 @@ describe("validate Query search Results", () => {
         await page.type("#password", password);
         await page.click('body > div > div > form > div:nth-child(6) > button.primary.login-btn');
         await page.goto(url + '/search/barChIJFd7ppDpo1moREpq8zhmlC4Y');
-        //await page.click('#favourite_button');
+        await page.click('#bucketlist_button');
         //remove it after adding it
-        await page.click('#favourite_remove');
-        const element = await page.$("#favourite_button");
+        await page.click('#bucketlist_remove');
+        const element = await page.$("#bucketlist_button");
         const text = await page.evaluate(element => element.textContent, element);
-        console.log(text + ' => Add To Favourites');
-        await page.waitForTimeout(1500);
-        await page.goto(url + '/home');
-        await page.waitForTimeout(1500);
-        await page.screenshot({path : path + 'Favourites_0002.png', fullPage: true});
-        expect(text).toBe('Add To Favourites');
+        console.log(text + ' => Add To Bucketlist');
+        await page.screenshot({path : path + 'Bucketlist_0002.png', fullPage: true});
+        expect(text).toBe('Add To Bucketlist');
         await browser.close();
 
     })
     
     
-    test('Add the first bar to Favourites after using query search', async () => {
+    test('Add the first bar to bucketlist after using query search', async () => {
         const browser = await puppeteer.launch( { 
             defaultViewport: {width: 1450, height: 1362, deviceScaleFactor:0.5},
             headless: false,
@@ -78,7 +72,7 @@ describe("validate Query search Results", () => {
         await page.type("#password", password);
         await page.click('body > div > div > form > div:nth-child(6) > button.primary.login-btn');
         await page.goto(url + '/search/bar-search');
-        await page.type('#bar_name', 'bars Fitzroy');
+        await page.type('#bar_name', 'bars melbourne cbd');
         await page.click('#query > form > button.primary.right', {
             waitUntil: "domcontentloaded",
           })
@@ -88,21 +82,18 @@ describe("validate Query search Results", () => {
         //Note: uncomment this line to check if Href is being fetched correctly
         //console.log(Href);
         await page.goto(url + Href);
-        await page.click('#favourite_button');
-        const element = await page.$("#favourite_remove");
+        await page.click('#bucketlist_button');
+        const element = await page.$("#bucketlist_remove");
         const text = await page.evaluate(element => element.textContent, element);
-        console.log(text + ' => Remove From Favourites');
-        await page.waitForTimeout(1500);
-        await page.goto(url + '/home');
-        await page.waitForTimeout(1500);
-        await page.screenshot({path : path + 'Favourites_0003.png', fullPage: true});
-        //await page.click('#favourite_remove');
-        expect(text).toBe('Remove From Favourites');
+        console.log(text + ' => Remove From Bucketlist');
+        await page.screenshot({path : path + 'Bucketlist_0003.png', fullPage: true});
+        await page.click('#bucketlist_remove');
+        expect(text).toBe('Remove From Bucketlist');
         await browser.close();
     })
 
     
-    test('Remove the bar from Favoutries added in the last test after using query search', async () => {
+    test('Remove the first bar from bucketlist after using query search after adding it', async () => {
         const browser = await puppeteer.launch( { 
             defaultViewport: {width: 1450, height: 1362, deviceScaleFactor:0.5},
             headless: false,
@@ -113,7 +104,7 @@ describe("validate Query search Results", () => {
         await page.type("#password", password);
         await page.click('body > div > div > form > div:nth-child(6) > button.primary.login-btn');
         await page.goto(url + '/search/bar-search');
-        await page.type('#bar_name', 'bars Fitzroy');
+        await page.type('#bar_name', 'bars melbourne cbd');
         await page.click('#query > form > button.primary.right', {
             waitUntil: "domcontentloaded",
           })
@@ -122,20 +113,15 @@ describe("validate Query search Results", () => {
         const Href = await page.evaluate(anchor => anchor.getAttribute('href'), handle);
         console.log(Href);
         await page.goto(url + Href);
-
-        //await page.click('#bucketlist_button');
+        await page.click('#bucketlist_button');
         //remove it after adding it
-        await page.click('#favourite_remove');
-        const element = await page.$("#favourite_button");
+        await page.click('#bucketlist_remove');
+        const element = await page.$("#bucketlist_button");
         const text = await page.evaluate(element => element.textContent, element);
         console.log(text + ' => Add To Bucketlist');
-        await page.waitForTimeout(1500);
-        await page.goto(url + '/home');
-        await page.waitForTimeout(1500);
-        await page.screenshot({path : path + 'Favourites_0004.png', fullPage: true});
-        expect(text).toBe('Add To Favourites');
+        await page.screenshot({path : path + 'Bucketlist_0004.png', fullPage: true});
+        expect(text).toBe('Add To Bucketlist');
         await browser.close();
     })
-    
     
 })
