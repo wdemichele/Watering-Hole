@@ -95,7 +95,7 @@
         <div class="nav-links right">
             <ul>
                 <div class="dropdown">
-                    <img style="height: 50px; width: 50px;" onclick="myFunction()" src="\assets\avatars\avatar{{user.pic}}.svg" alt="nav-icon" class=" nav-icon dropbtn">
+                    <img style="height: 50px; width: 50px;" onclick="myFunction()" src="\assets\avatars\avatar{{#if pic}}{{pic}}{{else}}{{user.pic}}{{/if}}.svg" alt="nav-icon" class=" nav-icon dropbtn">
                     <div class="dropdown-content" id="myDropdown">
                         <li><a href="/user">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
