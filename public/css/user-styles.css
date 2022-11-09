@@ -2585,6 +2585,13 @@ form.search::after {
     .about-body {
         width: 80%; 
     }
+    .nav-links li {
+        padding: 0px;
+    }
+    .nav-icon {
+        height: 35px;
+        width: 35px;
+    }
     
 
 }
