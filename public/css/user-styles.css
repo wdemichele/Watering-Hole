@@ -2223,11 +2223,20 @@ form.search::after {
 .filter-green {
     filter: invert(54%) sepia(62%) saturate(7387%) hue-rotate(154deg) brightness(87%) contrast(89%);
 }
-
+/*collapsible dropdown menu*/
+.wrapper{
+    display: flex;
+    padding-top:50px;
+    justify-content:center;
+}
 .collapsible {
     max-width: 450px;
     overflow: hidden;
     font-weight: 500;
+}
+
+.collapsible input{
+    display: none;
 }
 
 .collapsible label{
@@ -2239,8 +2248,10 @@ form.search::after {
     display: block;
     margin-bottom: 10px;
     cursor: pointer;
-    padding: 15px 0;
+    padding: 15px;
     border-radius: 4px;
+    z-index: 1;
+    font-size:20px;
 }
 
 .collapsible label:after{
@@ -2250,16 +2261,27 @@ form.search::after {
    top:20px;
    width:18px;
    height:18px;
+   transition: all 0.3s ease;
+}
+
+.collapsible input:checked + label:after {
+    transform: rotate(90deg);
 }
 
 .collapsible-text{
+    
     max-height: 1px;
     overflow: hidden;
     border-radius: 4px;
     line-height: 1.4;
+    position: relative;
+    top: -100%;
+    opacity: 0.5;
+    transition: all 0.3s ease;
 }
 
 .collapsible-text h2{
+  font-size: 20px;
   margin-bottom: 10px;
   padding: 15px 15px 0;
   color: #1c1c6b;
@@ -2268,9 +2290,10 @@ form.search::after {
 .collapsible-text p{
     padding-left: 15px;
     padding-right: 15px;
+    color: #1c1c6b;
 }
 
-.collapsible .collapsible-text{
+.collapsible input:checked ~ .collapsible-text{
     max-height: 300px;
     
     padding-bottom: 25px;
