@@ -2223,3 +2223,57 @@ form.search::after {
 .filter-green {
     filter: invert(54%) sepia(62%) saturate(7387%) hue-rotate(154deg) brightness(87%) contrast(89%);
 }
+
+.collapsible {
+    max-width: 450px;
+    overflow: hidden;
+    font-weight: 500;
+}
+
+.collapsible label{
+    position: relative;
+    font-weight: 600;
+    background: #fff;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.1),0 4px 11px 0 rgba(0,0,0,.08);
+    color: #1c1c6b;
+    display: block;
+    margin-bottom: 10px;
+    cursor: pointer;
+    padding: 15px 0;
+    border-radius: 4px;
+}
+
+.collapsible label:after{
+   content:"";
+   position: absolute;
+   right:15px;
+   top:20px;
+   width:18px;
+   height:18px;
+}
+
+.collapsible-text{
+    max-height: 1px;
+    overflow: hidden;
+    border-radius: 4px;
+    line-height: 1.4;
+}
+
+.collapsible-text h2{
+  margin-bottom: 10px;
+  padding: 15px 15px 0;
+  color: #1c1c6b;
+}
+
+.collapsible-text p{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.collapsible .collapsible-text{
+    max-height: 300px;
+    
+    padding-bottom: 25px;
+    background: #fff;
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.1),0 4px 11px 0 rgba(0,0,0,.08);
+}
