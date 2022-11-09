@@ -14,7 +14,6 @@ jobs:
       - run: npm install
       - run: npm install puppeteer
       - run: npm install puppeteer-core
-      - run: npm start
       - run: npm test
 
       - name: Tests ✅
