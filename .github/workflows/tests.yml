@@ -15,7 +15,9 @@ jobs:
       - run: npm install puppeteer
       - run: npm install puppeteer-core
       - run: npm start
-      - run: npm test
+      - run: npm run test -- -t encoding
+      - run: npm run test -- -t open
+      - run: npm run test -- -t distance
 
       - name: Tests ✅
         if: ${{ success() }}
