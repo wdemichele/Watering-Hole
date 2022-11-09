@@ -2,8 +2,8 @@
 <div class="databox primary">
     <h1>Select a Profile Pic</h1>
 <form action="/user/uid{{user.username}}/pic" method="post">
-    <a href="/settings"><button type="button" class="tertiary">Cancel</button></a>
-    <button type="submit" class="secondary right">Submit</button>
+    <a href="/settings"><button type="button" class="tertiary pic-button">Cancel</button></a>
+    <button type="submit" class="secondary right pic-button">Submit</button>
     <input type="hidden" id="pic_index" name="pic_index" value="-1">
     {{#each num_pics as |row|}}
     <div class="avatar-row">
@@ -15,11 +15,11 @@
     </div>
     {{/each}}
     <br><br>
-    <a href="/settings"><button type="button" class="tertiary">Cancel</button></a>
-    <button type="submit" class="secondary right">Submit</button>
+    <a href="/settings"><button type="button" class="tertiary pic-button">Cancel</button></a>
+    <button type="submit" class="secondary right pic-button">Submit</button>
 </form>
 </div>
-<button onclick="topFunction()" id="scrollBtn" title="Go to top">Top</button>
+<button class="pic-button" onclick="topFunction()" id="scrollBtn" title="Go to top">Top</button>
 
 
 <script>
