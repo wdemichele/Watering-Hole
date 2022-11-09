@@ -84,7 +84,7 @@
     <header style="position: fixed; top: 0; width: 100%; z-index: 1; border: 2px solid #000;">
         <nav>
             
-            <ul class="nav-links">
+            <ul class="nav-links big-nav">
                 <li><a href="/home"><img src="/assets/nav/home.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
                 <li><a href="/search/bar-search"><img src="/assets/nav/map-marker.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
                 <li><a href="/social"><img src="/assets/nav/users.svg" alt="nav-icon" class="nav-icon filter-white"></a></li>
@@ -95,8 +95,14 @@
         <div class="nav-links right">
             <ul>
                 <div class="dropdown">
-                    <img class="nav-icon-pp" onclick="myFunction()" src="\assets\avatars\avatar{{#if pic}}{{pic}}{{else}}{{user.pic}}{{/if}}.svg" alt="nav-icon" class=" nav-icon dropbtn">
+                    <img onclick="myFunction()" src="\assets\avatars\avatar{{#if pic}}{{pic}}{{else}}{{user.pic}}{{/if}}.svg" alt="nav-icon" class="size-small nav-icon dropbtn">
                     <div class="dropdown-content" id="myDropdown">
+                        <div class="small-nav">
+                          <li><a href="/home">Home</a></li>
+                          <li><a href="/search/bar-search">Bar Search</a></li>
+                          <li><a href="/social">Friends</a></li>
+                          <li><a href="/search/favourites-search">Fav Search</a></li>
+                        </div>
                         <li><a href="/user">Profile</a></li>
                         <li><a href="/settings">Settings</a></li>
                         <li><a href="/">Logout</a></li>

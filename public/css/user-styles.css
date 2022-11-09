@@ -2404,6 +2404,10 @@ form.search::after {
     height:50px;
 }
 
+.small-nav {
+    display: none;
+}
+
 /* Responsive layout - makes a one column layout instead of a two-column layout 
 
 @media screen and (max-width: 800px) {
@@ -2601,6 +2605,10 @@ form.search::after {
         width: 35px;
         height:35px;
     }
+    .size-small {
+        width: 50px;
+        height:50px;
+    }
     
 
 }
@@ -2695,6 +2703,17 @@ form.search::after {
     }
     .pic-button {
         width: 150px;
+    }
+    .small-nav {
+        display: block;
+    }
+    .big-nav {
+        display: none;
+    }
+    .right {
+        margin-right: auto;
+        margin-left: 0;
+        
     }
 }
 
