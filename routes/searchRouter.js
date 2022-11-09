@@ -455,7 +455,7 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
                 "lat": fav.location.lat,
                 "lng": fav.location.long
             },
-            "title": "<a href='/search/bar" + fav.id + "' style='color:black;'><h3>" + fav.name + "</h3>" + "<em>" + fav.address + "<em></a>"
+            "title": "<a href='/search/bar" + fav.id + "' style='color:black;'><h3>" + fav.name + "</h3>" + "<em>" + fav.address + "<em><br><br><img class='recommended-bar' src='" + fav.pic + "'></a>"
         })
     }
 
