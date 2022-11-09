@@ -6,7 +6,7 @@ const username = "esethi";
 const password = "password"; 
 const url = 'http://localhost:3000';
 const browserPath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const path = './tests/functional/test output images/Area Search Authentication/';
+//const path = './tests/functional/test output images/Area Search Authentication/';
 /*
   NOTE:    path can be changed to your browser location
   Unix:    remove path and it will automatically use Chromium
@@ -31,7 +31,7 @@ describe("validate Area search Results", () => {
             waitUntil: "domcontentloaded",
           })
         await page.waitForTimeout(2000);
-        await page.screenshot({path : path + 'Area_search0001.png', fullPage: true});
+        //await page.screenshot({path : path + 'Area_search0001.png', fullPage: true});
         expect(true).toBe(true);
         await browser.close();
 
@@ -54,7 +54,7 @@ describe("validate Area search Results", () => {
             waitUntil: "domcontentloaded",
           })
         await page.waitForTimeout(2000);
-        await page.screenshot({path : path + 'Area_search0002.png', fullPage: true});
+        //await page.screenshot({path : path + 'Area_search0002.png', fullPage: true});
         expect(true).toBe(true);
         await browser.close();
 
@@ -77,7 +77,7 @@ describe("validate Area search Results", () => {
             waitUntil: "domcontentloaded",
           })
         await page.waitForTimeout(2000);
-        await page.screenshot({path : path + 'Area_search0003.png', fullPage: true});
+        //await page.screenshot({path : path + 'Area_search0003.png', fullPage: true});
         expect(true).toBe(true);
         await browser.close();
     })
@@ -99,7 +99,7 @@ describe("validate Area search Results", () => {
             waitUntil: "domcontentloaded",
           })
         await page.waitForTimeout(2000);
-        await page.screenshot({path : path + 'Area_search0004.png', fullPage: true});
+        //await page.screenshot({path : path + 'Area_search0004.png', fullPage: true});
         expect(true).toBe(true);
         await browser.close();
     })

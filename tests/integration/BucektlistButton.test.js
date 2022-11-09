@@ -6,7 +6,7 @@ const username = "esethi";
 const password = "password"; 
 const url = 'http://localhost:3000';
 const browserPath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const path = './tests/integration/Test Output Images/Bucketlist Tests outputs/';
+//const path = './tests/integration/Test Output Images/Bucketlist Tests outputs/';
 /*
   NOTE:    path can be changed to your browser location
   Unix:    remove path and it will automatically use Chromium
@@ -31,7 +31,7 @@ describe("validate Query search Results", () => {
         const text = await page.evaluate(element => element.textContent, element);
         console.log(text + ' => Remove From Bucketlist');
         await page.waitForTimeout(1000);
-        await page.screenshot({path : path + 'Bucketlist_0001.png', fullPage: true});
+        //await page.screenshot({path : path + 'Bucketlist_0001.png', fullPage: true});
         await page.click('#bucketlist_remove');
         expect(text).toBe('Remove From Bucketlist');
         await browser.close();
@@ -56,7 +56,7 @@ describe("validate Query search Results", () => {
         const text = await page.evaluate(element => element.textContent, element);
         console.log(text + ' => Add To Bucketlist');
         await page.waitForTimeout(1000);
-        await page.screenshot({path : path + 'Bucketlist_0002.png', fullPage: true});
+        //await page.screenshot({path : path + 'Bucketlist_0002.png', fullPage: true});
         expect(text).toBe('Add To Bucketlist');
         await browser.close();
 
@@ -89,7 +89,7 @@ describe("validate Query search Results", () => {
         const text = await page.evaluate(element => element.textContent, element);
         console.log(text + ' => Remove From Bucketlist');
         await page.waitForTimeout(1000);
-        await page.screenshot({path : path + 'Bucketlist_0003.png', fullPage: true});
+        //await page.screenshot({path : path + 'Bucketlist_0003.png', fullPage: true});
         await page.click('#bucketlist_remove');
         expect(text).toBe('Remove From Bucketlist');
         await browser.close();
@@ -123,7 +123,7 @@ describe("validate Query search Results", () => {
         const text = await page.evaluate(element => element.textContent, element);
         console.log(text + ' => Add To Bucketlist');
         await page.waitForTimeout(1000);
-        await page.screenshot({path : path + 'Bucketlist_0004.png', fullPage: true});
+        //await page.screenshot({path : path + 'Bucketlist_0004.png', fullPage: true});
         expect(text).toBe('Add To Bucketlist');
         await browser.close();
     })

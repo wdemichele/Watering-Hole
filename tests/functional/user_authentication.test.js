@@ -6,7 +6,7 @@ const username = "esethi";
 const password = "password"; 
 const url = 'http://localhost:3000';
 const browserPath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const path = './tests/functional/test output images/User Authentication/';
+//nconst path = './tests/functional/test output images/User Authentication/';
 /*
   NOTE:    path can be changed to your browser location
   Unix:    remove path and it will automatically use Chromium
@@ -29,7 +29,7 @@ describe("valid user authentication", () => {
         var currentUrl = page.url();
         console.log('expected url: http://localhost:3000/home \n current url: '+ currentUrl);
         expect(currentUrl).toBe("http://localhost:3000/home");
-        await page.screenshot({path : path + 'valid credentials.png', fullPage: true});
+        //await page.screenshot({path : path + 'valid credentials.png', fullPage: true});
         await browser.close();
 
     })
@@ -49,7 +49,7 @@ describe("valid user authentication", () => {
         await page.type("#password", '1234');
         console.log('expected url: http://localhost:3000/ \n current url: '+ currentUrl);
         expect(currentUrl).toBe("http://localhost:3000/");
-        await page.screenshot({path : path + 'invalid user password.png'});
+        //await page.screenshot({path : path + 'invalid user password.png'});
         await browser.close();
 
     })
@@ -70,7 +70,7 @@ describe("valid user authentication", () => {
         await page.type("#password", password);
         console.log('expected url: http://localhost:3000/ \n current url: '+ currentUrl);
         expect(currentUrl).toBe("http://localhost:3000/");
-        await page.screenshot({path : path + 'invalid user id.png'});
+        //await page.screenshot({path : path + 'invalid user id.png'});
         await browser.close();
 
     })

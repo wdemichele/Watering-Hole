@@ -6,7 +6,7 @@ const username = "esethi";
 const password = "password"; 
 const url = 'http://localhost:3000';
 const browserPath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const path = './tests/functional/test output images/Query Search Authentication/';
+//const path = './tests/functional/test output images/Query Search Authentication/';
 /*
   NOTE:    path can be changed to your browser location
   Unix:    remove path and it will automatically use Chromium
@@ -30,7 +30,7 @@ describe("validate Query search Results", () => {
             waitUntil: "domcontentloaded",
           })
         await page.waitForTimeout(2000);
-        await page.screenshot({path : path + 'Query_search0001.png', fullPage: true});
+        //await page.screenshot({path : path + 'Query_search0001.png', fullPage: true});
         expect(true).toBe(true);
         await browser.close();
 
@@ -52,7 +52,7 @@ describe("validate Query search Results", () => {
             waitUntil: "domcontentloaded",
           })
         await page.waitForTimeout(2000);
-        await page.screenshot({path : path + 'Query_search0002.png', fullPage: true});
+        //await page.screenshot({path : path + 'Query_search0002.png', fullPage: true});
         expect(true).toBe(true);
         await browser.close();
 
@@ -74,7 +74,7 @@ describe("validate Query search Results", () => {
             waitUntil: "domcontentloaded",
           })
         await page.waitForTimeout(2000);
-        await page.screenshot({path : path + 'Query_search0003.png', fullPage: true});
+        //await page.screenshot({path : path + 'Query_search0003.png', fullPage: true});
         expect(true).toBe(true);
         await browser.close();
     })
@@ -90,7 +90,7 @@ describe("validate Query search Results", () => {
         await page.type("#password", password);
         await page.click('body > div > div > form > div:nth-child(6) > button.primary.login-btn');
         await page.goto(url + '/search/bar-search');
-        await page.type('#bar_name', 'Madrid Spain jazz bars');
+        //await page.type('#bar_name', 'Madrid Spain jazz bars');
         await page.click('#query > form > button.primary.right', {
             waitUntil: "domcontentloaded",
           })

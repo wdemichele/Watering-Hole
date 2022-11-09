@@ -6,7 +6,7 @@ const username = "esethi";
 const password = "password"; 
 const url = 'http://localhost:3000';
 const browserPath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
-const path = './tests/integration/Test Output Images/Favourites Test Outputs/';
+//const path = './tests/integration/Test Output Images/Favourites Test Outputs/';
 /*
   NOTE:    path can be changed to your browser location
   Unix:    remove path and it will automatically use Chromium
@@ -33,7 +33,7 @@ describe("validate Query search Results", () => {
         await page.waitForTimeout(1500);
         await page.goto(url + '/home');
         await page.waitForTimeout(1500);
-        await page.screenshot({path : path + 'Favourites_0001.png', fullPage: true});
+       // await page.screenshot({path : path + 'Favourites_0001.png', fullPage: true});
         //await page.click('#favourite_remove');
         expect(text).toBe('Remove From Favourites');
         await browser.close();
@@ -60,7 +60,7 @@ describe("validate Query search Results", () => {
         await page.waitForTimeout(1500);
         await page.goto(url + '/home');
         await page.waitForTimeout(1500);
-        await page.screenshot({path : path + 'Favourites_0002.png', fullPage: true});
+        //await page.screenshot({path : path + 'Favourites_0002.png', fullPage: true});
         expect(text).toBe('Add To Favourites');
         await browser.close();
 
@@ -95,7 +95,7 @@ describe("validate Query search Results", () => {
         await page.waitForTimeout(1500);
         await page.goto(url + '/home');
         await page.waitForTimeout(1500);
-        await page.screenshot({path : path + 'Favourites_0003.png', fullPage: true});
+        //await page.screenshot({path : path + 'Favourites_0003.png', fullPage: true});
         //await page.click('#favourite_remove');
         expect(text).toBe('Remove From Favourites');
         await browser.close();
@@ -132,7 +132,7 @@ describe("validate Query search Results", () => {
         await page.waitForTimeout(1600);
         await page.goto(url + '/home');
         await page.waitForTimeout(1500);
-        await page.screenshot({path : path + 'Favourites_0004.png', fullPage: true});
+        //await page.screenshot({path : path + 'Favourites_0004.png', fullPage: true});
         expect(text).toBe('Add To Favourites');
         await browser.close();
     })
