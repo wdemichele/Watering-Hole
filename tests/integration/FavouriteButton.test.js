@@ -129,7 +129,7 @@ describe("validate Query search Results", () => {
         const element = await page.$("#favourite_button");
         const text = await page.evaluate(element => element.textContent, element);
         console.log(text + ' => Add To Bucketlist');
-        await page.waitForTimeout(1500);
+        await page.waitForTimeout(1600);
         await page.goto(url + '/home');
         await page.waitForTimeout(1500);
         await page.screenshot({path : path + 'Favourites_0004.png', fullPage: true});
@@ -139,4 +139,3 @@ describe("validate Query search Results", () => {
     
     
 })
-//test
