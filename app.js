@@ -19,7 +19,7 @@ const cookieParser = require('cookie-parser'); // for showing login error messag
 const session = require('express-session');
 
 require('dotenv/config');
-require('fs').promises
+const fs = require('fs').promises
 
 const DB_URI = "mongodb+srv://the-leftovers:OEIiTEbBpuJCluKH@personal-items-register.ll54ewt.mongodb.net/bar-collection?retryWrites=true&w=majority";
 
