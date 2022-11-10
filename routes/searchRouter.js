@@ -147,14 +147,6 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            console.log(response.data.result.opening_hours)
-            console.log(response.data.result.opening_hours.weekday_text)
-            console.log(response.data.result.opening_hours.weekday_text[0])
-            let hours = response.data.result.opening_hours.weekday_text;
-            const regex = /(\w+day: )/gm;
-            for (let day in hours) {
-                hours[day] = hours[day].replace(regex, '');
-            }
             res.render('search/bar.hbs', { layout: 'user-layout', title: "Bar Details", place_data: response.data.result, bucketlisted: bucketlisted, favourited: favourited, user: user, tags: tags });
         })
         .catch(function(error) {

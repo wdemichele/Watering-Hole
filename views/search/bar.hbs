@@ -105,6 +105,7 @@
 
     <iframe class="centerx" width="1200" height="500" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{place_data.formatted_address}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8"></iframe>
   <br>
+  {{#if place_data.opening_hours.weekday_text.[0]}}
   <table>
     <tr>
       <th>Monday</th>
@@ -124,7 +125,7 @@
       <td>{{place_data.opening_hours.weekday_text.[5]}}</td>
       <td>{{place_data.opening_hours.weekday_text.[6]}}</td>
     </tr>
-  </table><br><br>
+  </table>{{/if}}<br><br>
    </div>
   <iframe name="hiddenFrame" class="hide"></iframe>
   <form action="bar{{place_data.place_id}}/tags" method="post" target="hiddenFrame">
