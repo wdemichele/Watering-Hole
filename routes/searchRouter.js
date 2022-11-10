@@ -43,8 +43,8 @@ router.post('/bar-search', isLoggedIn, async(req, res) => {
 
     let config = {
         method: 'get',
-        // url: 'https://maps.googleapis.com/maps/api/place/textSearch/json?query=' + input + '&fields=formatted_address%2Cplace_id%2Cname%2Crating%2Copening_hours%2Cgeometry%2cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
-        url: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + input + '&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+        // url: 'https://maps.googleapis.com/maps/api/place/textSearch/json?query=' + input + '&fields=formatted_address%2Cplace_id%2Cname%2Crating%2Copening_hours%2Cgeometry%2cphotos&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8',
+        url: 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=' + input + '&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8',
         headers: {}
     };
 
@@ -65,7 +65,7 @@ router.post('/more-bars', isLoggedIn, async(req, res) => {
 
     let config = {
         method: 'get',
-        url: "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=" + page_token + "&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw",
+        url: "https://maps.googleapis.com/maps/api/place/textsearch/json?pagetoken=" + page_token + "&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8",
         headers: {}
     };
 
@@ -89,7 +89,7 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
 
     let config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + input + '&inputtype=textquery&fields=geometry&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+        url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + input + '&inputtype=textquery&fields=geometry&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8',
         headers: {}
     };
 
@@ -97,7 +97,7 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
         .then(function(response) {
             config = {
                 method: 'get',
-                url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + response.data.candidates[0].geometry.location.lat + '%2C' + response.data.candidates[0].geometry.location.lng + '&radius=' + req.body.area_radius + '&type=bar&fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+                url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=' + response.data.candidates[0].geometry.location.lat + '%2C' + response.data.candidates[0].geometry.location.lng + '&radius=' + req.body.area_radius + '&type=bar&fields=name%2Crating%2Cformatted_phone_number%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8',
                 headers: {}
             };
             axios(config)
@@ -141,7 +141,7 @@ router.get('/bar:id', isLoggedIn, async(req, res) => {
 
     let config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cuser_ratings_total%2Cplace_id%2Cformatted_phone_number%2Cadr_address%2Creviews%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + bar_id + '&fields=name%2Crating%2Cuser_ratings_total%2Cplace_id%2Cformatted_phone_number%2Cadr_address%2Creviews%2Cformatted_address%2Copening_hours%2Cprice_level%2Ctypes%2Cwebsite%2Cgeometry%2Cphotos&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8',
         headers: {}
     };
 
@@ -351,7 +351,7 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
 
         let config = {
             method: 'get',
-            url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + input + '&inputtype=textquery&fields=geometry&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw',
+            url: 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=' + input + '&inputtype=textquery&fields=geometry&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8',
             headers: {}
         };
 
