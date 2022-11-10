@@ -1,12 +1,12 @@
 <img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">
 
-<div class="flex-containerx center" style="width:90%;margin-top:5rem;">    
+<div class="flex-containerx center flex-container-small" style="width:100%;margin-top:5rem;">    
     <div class="databoxx secondary" style="flex:2;padding:1rem;">
         <h1>Your Favourites</h1>
         <div class="databox primary">
             <div class="scroll">
                 {{#each favourites}}
-                    <div class="databox tertiary">
+                    <div class="databox tertiary fav-res">
                         <a href="/search/bar{{this.id}}"><h2>{{this.name}}</h2>
                         <h3>{{this.address}}</h3></a>
                         {{!-- <h5 style="cursor: pointer;" onclick="center({{this.location.lat}}, {{this.location.long}})"><em>Center on map</em></h5> --}}
@@ -15,12 +15,12 @@
             </div>
         </div>
     </div>
-    <div class="databoxx secondary" style="flex:3;padding:1rem;">
+    <div class="databoxx secondary map-area-small" style="">
         <textarea style="display: none;" id ="tourstops">{{stringTourStopsFav}}</textarea>
         <input type="hidden" id="lat" value="{{lat}}">
         <input type="hidden" id="long" value="{{long}}">
         <input type="hidden" id="zoom" value="{{zoom}}">
-        <div class="center" style="width:90%;margin-top:10%;" id="map"></div>
+        <div class="center map-small" style="width:97%;margin-top:6%;height: 1300px;" id="map"></div>
     </div>
 </div>
     <!-- 

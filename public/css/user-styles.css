@@ -2408,6 +2408,18 @@ form.search::after {
     display: none;
 }
 
+.fav-res h2 {
+    font-size: 25px;
+}
+.fav-res h3 {
+    font-size: 20px;
+}
+.map-area-small {
+    flex:3;
+    padding:1rem;
+}
+
+
 /* Responsive layout - makes a one column layout instead of a two-column layout 
 
 @media screen and (max-width: 800px) {
@@ -2465,6 +2477,13 @@ form.search::after {
         font-size: 20px;
     }
     .bar-info {
+        font-size: 15px;
+    }
+    .fav-res h2 {
+        font-size: 20px;
+    }
+
+    .fav-res h3 {
         font-size: 15px;
     }
     
@@ -2609,7 +2628,20 @@ form.search::after {
         width: 50px;
         height:50px;
     }
-    
+    .flex-container-small {
+        flex-direction: column;
+    }
+    .fav-res h2 {
+        font-size: 25px;
+    }
+    .fav-res h3 {
+        font-size: 20px;
+    }
+    .map-area-small {
+        width:100%;
+        margin-left:auto;
+        margin-right:auto;
+    }
 
 }
 
