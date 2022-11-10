@@ -2660,6 +2660,13 @@ form.search::after {
     font-size: 20px;
 }
 
+.demo-vid {
+    margin:auto;
+    margin-bottom: 1rem;
+    display: block;
+    width: 900px;
+    height: 500px;
+}
 
 /* Responsive layout - makes a one column layout instead of a two-column layout 
 
@@ -2741,6 +2748,10 @@ form.search::after {
     }
     .friend-container p {
         font-size: 15px;
+    }
+    .demo-vid {
+        width: 700px;
+        height: 400px;
     }
 }
 
@@ -2960,6 +2971,10 @@ form.search::after {
     .friend-container p {
         font-size: 15px;
     }
+    .demo-vid {
+        width: 550px;
+        height: 350px;
+    }
 }
 
 
@@ -3092,6 +3107,10 @@ form.search::after {
         margin-right: auto;
         margin-left: 0;
     }
+    .demo-vid {
+        width: 420px;
+        height: 260px;
+    }
 }
 
 
@@ -3211,5 +3230,9 @@ form.search::after {
     }
     .fav-search-btn {
         width: 130px;
+    }
+    .demo-vid {
+        width: 300px;
+        height: 200px;
     }
 }
