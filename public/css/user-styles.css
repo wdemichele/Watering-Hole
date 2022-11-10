@@ -2753,6 +2753,15 @@ form.search::after {
         width: 700px;
         height: 400px;
     }
+    .bar-body-1 {
+        width:100%;
+    }
+    .bar-body-2 {
+        width:100%;
+    }
+    .flex-containerx {
+        flex-direction: column;
+    }
 }
 
 
