@@ -1,4 +1,4 @@
-        html,
+html,
 body {
     font-family: 'Montserrat', sans-serif;
     height: 100%;
@@ -6,7 +6,7 @@ body {
     padding: 0;
 }
 
-:root {
+ :root {
     --color-primary: #0E897D;
     --color-secondary: #355371;
     --color-tertiary: #4C899F;
@@ -2373,194 +2373,350 @@ form.search::after {
     padding: 1rem;
     background-color: #0E897D;
     border: none;
-    .fav-btn {
-        position: absolute;
-        border-radius: 50%;
-        border-style: none;
-        width: 60px;
-        height: 60px;
-        font-size: 25px;
-        color: rgb(159, 145, 145);
-        text-align: center;
-        padding: 10px;
-        right: 5%;
-        bottom: 5%;
+}
+
+.fav-btn {
+    position: absolute;
+    border-radius: 50%;
+    border-style: none;
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+    color: rgb(159, 145, 145);
+    text-align: center;
+    padding: 10px;
+    right: 5%;
+    bottom: 5%;
+}
+
+.fav-btn i .bucket-btn i {
+    cursor: pointer;
+}
+
+.bucket-btn {
+    position: absolute;
+    border-radius: 50%;
+    border-style: none;
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+    color: rgb(159, 145, 145);
+    text-align: center;
+    padding: 10px;
+    left: 5%;
+    bottom: 5%;
+}
+
+.bucket-pressed {
+    position: absolute;
+    border-radius: 50%;
+    border-style: none;
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    left: 5%;
+    bottom: 5%;
+}
+
+.settings-body {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+}
+
+.settings-select-btn {
+    width: 50%;
+    border-radius: 20px;
+}
+
+.settings-save-btn {
+    float: right;
+    padding: 1rem 2rem 1rem 2rem;
+    border-radius: 20px;
+}
+
+.profile-pic {
+    width: 170px;
+}
+
+.w-hole-logo {
+    width: 40%;
+}
+
+.pp-body {
+    float: left;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    position: relative;
+    width: 37.5%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.settings-container-small {
+    width: 62.5%;
+    float: left;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    position: relative
+}
+
+.query-btn-left {
+    margin-left: 15%;
+    font-size: 20px;
+    width: 210px;
+}
+
+.query-btn-right {
+    margin-right: 15%;
+    font-size: 20px;
+    width: 210px;
+}
+
+.query-body {
+    width: 80%;
+}
+
+.query-label {
+    margin-left: 15%;
+    font-size: 20px
+}
+
+.query-text {
+    width: 70%;
+    font-size: 22px
+}
+
+.profile-card-1 {
+    width: 35%;
+}
+
+.pp-image {
+    width: 200px;
+    height: auto;
+    margin-top: 1rem;
+}
+
+.rv-img {
+    width: 100%;
+    height: 220px;
+    border-radius: 5%;
+}
+
+.bar-results-image {
+    width: 100%;
+    height: 400px;
+    max-width: 600px;
+    max-height: 400px;
+}
+
+.bar-results-image-default {
+    width: 100%;
+    height: 400px;
+}
+
+.bar-card {
+    flex: 1 0 30%;
+    margin: 10px;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.favourites-bar {
+    height: 44px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fav-search-body {
+    width: 80%;
+    padding: 0 8% 0 8%;
+    padding-bottom: 3rem;
+    height: 576px;
+    margin-top: 0;
+}
+
+.fav-bar-settings {
+    width: 48%;
+    flex: 2;
+    border-radius: 25px;
+    padding: 0 10% 0 10%;
+    background-color: #0E897D;
+    border: none;
+}
+
+.fav-search-tags {
+    width: 48%;
+    flex: 3;
+    border-radius: 25px;
+    padding: 1rem;
+    background-color: #0E897D;
+    border: none;
+}
+
+.fav-container {
+    display: flex;
+}
+
+.fav-search-box {
+    width: 90%;
+    padding: 2% 0 3% 0;
+}
+
+.about-body {
+    width: 60%;
+    width: 90%;
+    padding: 2% 0 3% 0;
+}
+
+.about-body {
+    width: 60%;
+    opacity: 0.9
+}
+
+.nav-icon-pp {
+    width: 50px;
+    height: 50px;
+    height: 50px;
+}
+
+.small-nav {
+    display: none;
+}
+
+.fav-res h2 {
+    font-size: 25px;
+}
+
+.fav-res h3 {
+    font-size: 20px;
+}
+
+.bar-name {
+    margin-top: 0px;
+    font-size: 20px;
+}
+
+.bar-info {
+    font-size: 15px;
+}
+
+.fav-res h2 {
+    font-size: 20px;
+}
+
+.fav-res h3 {
+    font-size: 15px;
+}
+
+.main-body-1 {
+    width: 100%;
+}
+
+.main-body-2 {
+    margin: 3%
+}
+
+.friend-avatar {
+    width: 100px;
+}
+
+.friend-container h2 {
+    font-size: 20px;
+}
+
+.friend-container p {
+    font-size: 15px;
+}
+
+.fav-res h3 {
+    font-size: 20px;
+}
+
+.map-area-small {
+    flex: 3;
+    padding: 1rem;
+}
+
+.main-body-1 {
+    width: 70%;
+}
+
+.main-body-2 {
+    margin-right: 1%;
+}
+
+.friend-avatar {
+    width: 120px;
+}
+
+.friend-container h2 {
+    font-size: 25px;
+}
+
+.friend-container p {
+    font-size: 20px;
+}
+
+
+/* Responsive layout - makes a one column layout instead of a two-column layout 
+
+@media screen and (max-width: 800px) {
+    .flex-container {
+        flex-direction: column;
     }
-    .fav-btn i .bucket-btn i {
-        cursor: pointer;
-    }
-    .bucket-btn {
-        position: absolute;
-        border-radius: 50%;
-        border-style: none;
-        width: 60px;
-        height: 60px;
-        font-size: 25px;
-        color: rgb(159, 145, 145);
-        text-align: center;
-        padding: 10px;
-        left: 5%;
-        bottom: 5%;
-    }
-    .bucket-pressed {
-        position: absolute;
-        border-radius: 50%;
-        border-style: none;
-        width: 60px;
-        height: 60px;
-        font-size: 25px;
-        color: black;
-        text-align: center;
-        padding: 10px;
-        left: 5%;
-        bottom: 5%;
+
+
+}
+*/
+
+
+/* Desktop screens*/
+
+@media only screen and (max-width: 1280px) {
+    .login {
+        width: 60%;
     }
     .settings-body {
-        float: none;
-        margin-left: auto;
-        margin-right: auto;
-        width: 60%;
+        width: 70%;
     }
     .settings-select-btn {
-        width: 50%;
-        border-radius: 20px;
+        width: 60%;
     }
-    .settings-save-btn {
-        float: right;
-        padding: 1rem 2rem 1rem 2rem;
-        border-radius: 20px;
-    }
-    .profile-pic {
-        width: 170px;
-    }
-    .w-hole-logo {
-        width: 40%;
-    }
-    .pp-body {
-        float: left;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        position: relative;
-        width: 37.5%;
-        text-align: center;
-        margin-top: 1rem;
-    }
-    .settings-container-small {
-        width: 62.5%;
-        float: left;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        position: relative
-    }
-    .query-btn-left {
-        margin-left: 15%;
-        font-size: 20px;
-        width: 210px;
-    }
-    .query-btn-right {
-        margin-right: 15%;
-        font-size: 20px;
-        width: 210px;
-    }
-    .query-body {
-        width: 80%;
-    }
-    .query-label {
-        margin-left: 15%;
-        font-size: 20px
-    }
-    .query-text {
-        width: 70%;
-        font-size: 22px
-    }
-    .profile-card-1 {
-        width: 35%;
-    }
-    .pp-image {
-        width: 200px;
-        height: auto;
-        margin-top: 1rem;
-    }
-    .rv-img {
-        width: 100%;
-        height: 220px;
-        border-radius: 5%;
+    .search_search_tags .tag_box div {
+        height: 40px;
+        width: 100px;
+        font-size: 15px;
     }
     .bar-results-image {
-        width: 100%;
-        height: 400px;
-        max-width: 600px;
-        max-height: 400px;
+        height: 300px;
     }
-    .bar-results-image-default {
-        width: 100%;
-        height: 400px;
+    .fav-btn {
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        padding: 7px;
     }
-    .bar-card {
-        flex: 1 0 30%;
-        margin: 10px;
-        position: relative;
-        text-align: center;
-        color: white;
+    .bucket-btn {
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        padding: 7px;
     }
-    .favourites-bar {
-        height: 44px;
-        width: 80%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .fav-search-body {
-        width: 80%;
-        padding: 0 8% 0 8%;
-        padding-bottom: 3rem;
-        height: 576px;
-        margin-top: 0;
-    }
-    .fav-bar-settings {
-        width: 48%;
-        flex: 2;
-        border-radius: 25px;
-        padding: 0 10% 0 10%;
-        background-color: #0E897D;
-        border: none;
-    }
-    .fav-search-tags {
-        width: 48%;
-        flex: 3;
-        border-radius: 25px;
-        padding: 1rem;
-        background-color: #0E897D;
-        border: none;
-    }
-    .fav-container {
-        display: flex;
-    }
-    .fav-search-box {
-        width: 90%;
-        padding: 2% 0 3% 0;
-    }
-    .about-body {
-        width: 60%;
-        width: 90%;
-        padding: 2% 0 3% 0;
-    }
-    .about-body {
-        width: 60%;
-        opacity: 0.9
-    }
-    .nav-icon-pp {
-        width: 50px;
-        height: 50px;
-        height: 50px;
-    }
-    .small-nav {
-        display: none;
-    }
-    .fav-res h2 {
-        font-size: 25px;
-    }
-    .fav-res h3 {
-        font-size: 20px;
+    .bucket-pressed {
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        padding: 7px;
     }
     .bar-name {
         margin-top: 0px;
@@ -2590,601 +2746,474 @@ form.search::after {
     .friend-container p {
         font-size: 15px;
     }
+}
+
+
+/*laptop screens */
+
+@media only screen and (max-width: 992px) {
+    .login {
+        width: 70%;
+    }
+    .w-hole-logo {
+        width: 60%;
+    }
+    .settings-body {
+        width: 90%;
+    }
+    p {
+        font-size: 20px;
+    }
+    h1 {
+        font-size: 40px;
+    }
+    input {
+        font-size: 15px;
+    }
+    label {
+        font-size: 15px;
+    }
+    .settings-select-btn {
+        width: 70%;
+    }
+    .forgot-pass p {
+        font-size: 15px;
+    }
+    .query-body {
+        width: 90%;
+    }
+    .query-label {
+        margin-left: 10%;
+        font-size: 18px
+    }
+    .query-text {
+        width: 80%;
+        font-size: 20px
+    }
+    .query-btn-left {
+        margin-left: 10%;
+        font-size: 18px;
+    }
+    .query-btn-right {
+        margin-right: 10%;
+        font-size: 18px;
+        margin-left: 10%;
+        font-size: 18px
+    }
+    .query-text {
+        width: 80%;
+        font-size: 20px
+    }
+    .query-btn-left {
+        margin-left: 10%;
+        font-size: 18px;
+    }
+    .query-btn-right {
+        margin-right: 10%;
+        font-size: 18px;
+    }
+    .profile-card-1 {
+        width: 100%;
+        height: 620px;
+    }
+    .flex-small {
+        display: flex;
+    }
+    .username-small {
+        flex: 1;
+        margin: 10%;
+        margin-top: 15%;
+    }
+    .pp-image {
+        flex: 1;
+        margin: 10%;
+        margin-left: 15%;
+    }
+    .bar-results-image {
+        height: 200px;
+        flex: 1;
+        margin: 10%;
+        margin-top: 15%;
+    }
+    .pp-image {
+        flex: 1;
+        margin: 10%;
+        margin-left: 15%;
+    }
+    .bar-results-image {
+        height: 200px;
+    }
+    .fav-btn {
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        padding: 7px;
+    }
+    .bucket-btn {
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        padding: 7px;
+    }
+    .bucket-pressed {
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        padding: 7px;
+    }
+    .img__description {
+        padding-top: 1rem;
+    }
+    .bar-name {
+        margin-top: 0px;
+        font-size: 15px;
+    }
+    .bar-info {
+        font-size: 11px;
+    }
+    .favourites-bar {
+        width: 90%;
+    }
+    .fav-search-body {
+        width: 90%;
+        height: 750px;
+    }
+    .fav-bar-settings {
+        width: 90%;
+        width: 90%;
+    }
+    .fav-search-body {
+        width: 90%;
+        height: 750px;
+    }
+    .fav-bar-settings {
+        width: 90%;
+        margin: auto;
+        margin-bottom: 2rem;
+    }
+    .fav-search-tags {
+        width: 90%;
+        margin: auto;
+        width: 90%;
+        margin: auto;
+        margin-bottom: 1rem;
+    }
+    .fav-container {
+        flex-direction: column;
+    }
+    .about-body {
+        width: 80%;
+        width: 80%;
+    }
+    .nav-links li {
+        padding: 0px;
+    }
+    .nav-icon {
+        height: 35px;
+        width: 35px;
+    }
+    .nav-icon-pp {
+        width: 35px;
+        height: 35px;
+    }
+    .size-small {
+        width: 50px;
+        height: 50px;
+        height: 35px;
+    }
+    .size-small {
+        width: 50px;
+        height: 50px;
+    }
+    .flex-container-small {
+        flex-direction: column;
+    }
+    .fav-res h2 {
+        font-size: 25px;
+    }
     .fav-res h3 {
         font-size: 20px;
     }
     .map-area-small {
-        flex: 3;
-        padding: 1rem;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
     .main-body-1 {
-        width: 70%;
+        width: 100%;
     }
     .main-body-2 {
-        margin-right: 1%;
+        margin: 3%
     }
     .friend-avatar {
-        width: 120px;
+        width: 100px;
+        margin: 3%
+    }
+    .friend-avatar {
+        width: 100px;
     }
     .friend-container h2 {
-        font-size: 25px;
-    }
-    .friend-container p {
         font-size: 20px;
     }
-    /* Responsive layout - makes a one column layout instead of a two-column layout 
+    .friend-container p {
+        font-size: 15px;
+    }
+}
 
-@media screen and (max-width: 800px) {
-    .flex-container {
+
+/* Tablet Width */
+
+@media only screen and (max-width: 768px) {
+    .login {
+        width: 90%;
+    }
+    .w-hole-logo {
+        width: 80%;
+    }
+    .settings-body {
+        width: 100%;
+    }
+    .settings-select-btn {
+        width: 80%;
+    }
+    .settings-save-btn {
+        width: 35%;
+    }
+    .profile-pic {
+        width: 150px;
+    }
+    .query-body {
+        width: 100%;
+    }
+    .query-label {
+        margin-left: 5%;
+        font-size: 15px
+    }
+    .query-text {
+        width: 90%;
+        font-size: 18px
+    }
+    .query-btn-left {
+        margin-left: 5%;
+        font-size: 15px;
+        width: 180px;
+    }
+    .query-btn-right {
+        margin-right: 5%;
+        font-size: 15px;
+        width: 180px;
+    }
+    .username-small {
+        flex: 1;
+        margin: 10%;
+        margin-top: 15%;
+        margin-left: 5%;
+        font-size: 15px
+    }
+    .query-text {
+        width: 90%;
+        font-size: 18px
+    }
+    .query-btn-left {
+        margin-left: 5%;
+        font-size: 15px;
+        width: 180px;
+    }
+    .query-btn-right {
+        margin-right: 5%;
+        font-size: 15px;
+        width: 180px;
+    }
+    .username-small {
+        flex: 1;
+        margin: 10%;
+        margin-top: 15%;
+    }
+    .pp-image {
+        margin: 15%;
+    }
+    .rv-img {
+        height: 150px;
+        height: 150px;
+    }
+    .profile-card-1 {
+        height: 500px;
+    }
+    .at-small {
+        width: 100px;
+        width: 100px;
+    }
+    .search_search_tags .tag_box div {
+        height: 35px;
+        width: 70px;
+        font-size: 11px;
+    }
+    .databox {
+        flex-wrap: wrap;
+    }
+    .home-column {
+        width: 50%;
+    }
+    .bar-card {
+        width: 50%;
+    }
+    .fav-bar-settings {
+        width: 100%;
+    }
+    .fav-search-tags {
+        width: 100%;
+        width: 100%;
+    }
+    .fav-search-tags {
+        width: 100%;
+    }
+    .fav-search-box {
+        width: 100%;
+    }
+    .fav-search-btn {
+        width: 200px;
+    }
+    .about-body {
+        width: 90%;
+        width: 90%;
+    }
+    .pic-button {
+        width: 150px;
+    }
+    .small-nav {
+        display: block;
+    }
+    .big-nav {
+        display: none;
+    }
+    .right {
+        margin-right: auto;
+        margin-left: 0;
+    }
+}
+
+
+/* Mobile Phone Width */
+
+@media only screen and (max-width: 576px) {
+    .login {
+        width: 90%;
+    }
+    .w-hole-logo {
+        width: 80%;
+    }
+    .w-hole-logo {
+        width: 80%;
+    }
+    .settings-main {
+        width: 100%;
+    }
+    .settings-select-btn {
+        width: 80%;
+    }
+    .settings-save-btn {
+        width: 50%;
+    }
+    .settings-container-small {
+        width: 100%;
+        float: none;
+        margin-top: 1rem;
+    }
+    .pp-body {
+        float: none;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        margin-top: 1rem;
+    }
+    .pp-body {
+        float: none;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .profile-pic {
+        width: 170px;
+    }
+    .query-label {
+        margin-left: 0%;
+        font-size: 11px
+    }
+    .query-text {
+        width: 100%;
+        font-size: 14px
+    }
+    .query-btn-left {
+        margin-left: 0%;
+        font-size: 11px;
+        width: 120px;
+    }
+    .query-btn-right {
+        margin-right: 0%;
+        font-size: 11px;
+        width: 120px;
+        margin-left: 0%;
+        font-size: 11px
+    }
+    .query-text {
+        width: 100%;
+        font-size: 14px
+    }
+    .query-btn-left {
+        margin-left: 0%;
+        font-size: 11px;
+        width: 120px;
+    }
+    .query-btn-right {
+        margin-right: 0%;
+        font-size: 11px;
+        width: 120px;
+    }
+    .flex-small {
         flex-direction: column;
     }
-
-
+    .username-small {
+        margin: auto;
+    }
+    .pp-image {
+        margin: auto;
+    }
+    .profile-card-1 {
+        height: 700px;
+    }
+    .databox {
+        flex-wrap: wrap;
+    }
+    .home-column {
+        width: 50%;
+    }
+    .img__description {
+        padding-top: none;
+    }
+    .bar-results-image {
+        height: 200px;
+    }
+    .favourites-bar {
+        width: 95%;
+    }
+    .fav-search-body {
+        width: 95%;
+        height: 200px;
+    }
+    .favourites-bar {
+        width: 95%;
+    }
+    .fav-search-body {
+        width: 95%;
+    }
+    .fav-search-btn {
+        width: 130px;
+    }
 }
-*/
-    /* Desktop screens*/
-    @media only screen and (max-width: 1280px) {
-        .login {
-            width: 60%;
-        }
-        .settings-body {
-            width: 70%;
-        }
-        .settings-select-btn {
-            width: 60%;
-        }
-        .search_search_tags .tag_box div {
-            height: 40px;
-            width: 100px;
-            font-size: 15px;
-        }
-        .bar-results-image {
-            height: 300px;
-        }
-        .fav-btn {
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 18px;
-            padding: 7px;
-        }
-        .bucket-btn {
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 18px;
-            padding: 7px;
-        }
-        .bucket-pressed {
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 18px;
-            padding: 7px;
-        }
-        .bar-name {
-            margin-top: 0px;
-            font-size: 20px;
-        }
-        .bar-info {
-            font-size: 15px;
-        }
-        .fav-res h2 {
-            font-size: 20px;
-        }
-        .fav-res h3 {
-            font-size: 15px;
-        }
-        .main-body-1 {
-            width: 100%;
-        }
-        .main-body-2 {
-            margin: 3%
-        }
-        .friend-avatar {
-            width: 100px;
-        }
-        .friend-container h2 {
-            font-size: 20px;
-        }
-        .friend-container p {
-            font-size: 15px;
-        }
-    }
-    /*laptop screens */
-    @media only screen and (max-width: 992px) {
-        .login {
-            width: 70%;
-        }
-        <<<<<<< HEAD .w-hole-logo {
-            =======.w-hole-logo {
-                >>>>>>>user-interface width: 60%;
-            }
-            .settings-body {
-                width: 90%;
-            }
-            p {
-                font-size: 20px;
-            }
-            h1 {
-                font-size: 40px;
-            }
-            input {
-                font-size: 15px;
-            }
-            label {
-                font-size: 15px;
-            }
-            .settings-select-btn {
-                width: 70%;
-            }
-            .forgot-pass p {
-                font-size: 15px;
-            }
-            .query-body {
-                width: 90%;
-            }
-            .query-label {
-                <<<<<<< HEAD margin-left: 10%;
-                font-size: 18px
-            }
-            .query-text {
-                width: 80%;
-                font-size: 20px
-            }
-            .query-btn-left {
-                margin-left: 10%;
-                font-size: 18px;
-            }
-            .query-btn-right {
-                margin-right: 10%;
-                font-size: 18px;
-                =======margin-left: 10%;
-                font-size: 18px
-            }
-            .query-text {
-                width: 80%;
-                font-size: 20px
-            }
-            .query-btn-left {
-                margin-left: 10%;
-                font-size: 18px;
-            }
-            .query-btn-right {
-                margin-right: 10%;
-                font-size: 18px;
-                >>>>>>>user-interface
-            }
-            .profile-card-1 {
-                width: 100%;
-                height: 620px;
-            }
-            .flex-small {
-                display: flex;
-            }
-            .username-small {
-                <<<<<<< HEAD flex: 1;
-                margin: 10%;
-                margin-top: 15%;
-            }
-            .pp-image {
-                flex: 1;
-                margin: 10%;
-                margin-left: 15%;
-            }
-            .bar-results-image {
-                height: 200px;
-                =======flex: 1;
-                margin: 10%;
-                margin-top: 15%;
-            }
-            .pp-image {
-                flex: 1;
-                margin: 10%;
-                margin-left: 15%;
-            }
-            .bar-results-image {
-                height: 200px;
-                >>>>>>>user-interface
-            }
-            .fav-btn {
-                border-radius: 50%;
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-                padding: 7px;
-            }
-            .bucket-btn {
-                border-radius: 50%;
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-                padding: 7px;
-            }
-            .bucket-pressed {
-                border-radius: 50%;
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-                padding: 7px;
-            }
-            .img__description {
-                padding-top: 1rem;
-            }
-            .bar-name {
-                margin-top: 0px;
-                font-size: 15px;
-            }
-            .bar-info {
-                font-size: 11px;
-            }
-            .favourites-bar {
-                <<<<<<< HEAD width: 90%;
-            }
-            .fav-search-body {
-                width: 90%;
-                height: 750px;
-            }
-            .fav-bar-settings {
-                width: 90%;
-                =======width: 90%;
-            }
-            .fav-search-body {
-                width: 90%;
-                height: 750px;
-            }
-            .fav-bar-settings {
-                width: 90%;
-                >>>>>>>user-interface margin: auto;
-                margin-bottom: 2rem;
-            }
-            .fav-search-tags {
-                <<<<<<< HEAD width: 90%;
-                margin: auto;
-                =======width: 90%;
-                margin: auto;
-                >>>>>>>user-interface margin-bottom: 1rem;
-            }
-            .fav-container {
-                flex-direction: column;
-            }
-            .about-body {
-                <<<<<<< HEAD width: 80%;
-                =======width: 80%;
-                >>>>>>>user-interface
-            }
-            .nav-links li {
-                padding: 0px;
-            }
-            .nav-icon {
-                height: 35px;
-                width: 35px;
-            }
-            .nav-icon-pp {
-                width: 35px;
-                <<<<<<< HEAD height: 35px;
-            }
-            .size-small {
-                width: 50px;
-                height: 50px;
-                =======height: 35px;
-            }
-            .size-small {
-                width: 50px;
-                height: 50px;
-                >>>>>>>user-interface
-            }
-            .flex-container-small {
-                flex-direction: column;
-            }
-            .fav-res h2 {
-                font-size: 25px;
-            }
-            .fav-res h3 {
-                font-size: 20px;
-            }
-            .map-area-small {
-                <<<<<<< HEAD width: 100%;
-                margin-left: auto;
-                margin-right: auto;
-                =======width: 100%;
-                margin-left: auto;
-                margin-right: auto;
-                >>>>>>>user-interface
-            }
-            .main-body-1 {
-                width: 100%;
-            }
-            .main-body-2 {
-                <<<<<<< HEAD margin: 3%
-            }
-            .friend-avatar {
-                width: 100px;
-                =======margin: 3%
-            }
-            .friend-avatar {
-                width: 100px;
-                >>>>>>>user-interface
-            }
-            .friend-container h2 {
-                font-size: 20px;
-            }
-            .friend-container p {
-                font-size: 15px;
-            }
-            <<<<<<< HEAD
-        }
-        =======
-    }
-    >>>>>>>user-interface
-    /* Tablet Width */
-    @media only screen and (max-width: 768px) {
-        .login {
-            width: 90%;
-        }
-        <<<<<<< HEAD .w-hole-logo {
-            =======.w-hole-logo {
-                >>>>>>>user-interface width: 80%;
-            }
-            .settings-body {
-                width: 100%;
-            }
-            .settings-select-btn {
-                width: 80%;
-            }
-            .settings-save-btn {
-                width: 35%;
-            }
-            .profile-pic {
-                width: 150px;
-            }
-            .query-body {
-                width: 100%;
-            }
-            .query-label {
-                <<<<<<< HEAD margin-left: 5%;
-                font-size: 15px
-            }
-            .query-text {
-                width: 90%;
-                font-size: 18px
-            }
-            .query-btn-left {
-                margin-left: 5%;
-                font-size: 15px;
-                width: 180px;
-            }
-            .query-btn-right {
-                margin-right: 5%;
-                font-size: 15px;
-                width: 180px;
-            }
-            .username-small {
-                flex: 1;
-                margin: 10%;
-                margin-top: 15%;
-                =======margin-left: 5%;
-                font-size: 15px
-            }
-            .query-text {
-                width: 90%;
-                font-size: 18px
-            }
-            .query-btn-left {
-                margin-left: 5%;
-                font-size: 15px;
-                width: 180px;
-            }
-            .query-btn-right {
-                margin-right: 5%;
-                font-size: 15px;
-                width: 180px;
-            }
-            .username-small {
-                flex: 1;
-                margin: 10%;
-                margin-top: 15%;
-                >>>>>>>user-interface
-            }
-            .pp-image {
-                margin: 15%;
-            }
-            .rv-img {
-                <<<<<<< HEAD height: 150px;
-                =======height: 150px;
-                >>>>>>>user-interface
-            }
-            .profile-card-1 {
-                height: 500px;
-            }
-            .at-small {
-                <<<<<<< HEAD width: 100px;
-                =======width: 100px;
-                >>>>>>>user-interface
-            }
-            .search_search_tags .tag_box div {
-                height: 35px;
-                width: 70px;
-                font-size: 11px;
-            }
-            .databox {
-                flex-wrap: wrap;
-            }
-            <<<<<<< HEAD .home-column {
-                width: 50%;
-                =======.home-column {
-                    width: 50%;
-                    >>>>>>>user-interface
-                }
-                .bar-card {
-                    width: 50%;
-                }
-                .fav-bar-settings {
-                    <<<<<<< HEAD width: 100%;
-                }
-                .fav-search-tags {
-                    width: 100%;
-                    =======width: 100%;
-                }
-                .fav-search-tags {
-                    width: 100%;
-                    >>>>>>>user-interface
-                }
-                .fav-search-box {
-                    width: 100%;
-                }
-                .fav-search-btn {
-                    width: 200px;
-                }
-                .about-body {
-                    <<<<<<< HEAD width: 90%;
-                    =======width: 90%;
-                    >>>>>>>user-interface
-                }
-                .pic-button {
-                    width: 150px;
-                }
-                .small-nav {
-                    display: block;
-                }
-                .big-nav {
-                    display: none;
-                }
-                .right {
-                    margin-right: auto;
-                    margin-left: 0;
-                    <<<<<<< HEAD
-                }
-            }
-            =======
-        }
-    }
-    >>>>>>>user-interface
-    /* Mobile Phone Width */
-    @media only screen and (max-width: 576px) {
-        .login {
-            width: 90%;
-        }
-        <<<<<<< HEAD .w-hole-logo {
-            width: 80%;
-        }
-        .settings-main {
-            =======.w-hole-logo {
-                width: 80%;
-            }
-            .settings-main {
-                >>>>>>>user-interface width: 100%;
-            }
-            .settings-select-btn {
-                width: 80%;
-            }
-            .settings-save-btn {
-                width: 50%;
-            }
-            .settings-container-small {
-                width: 100%;
-                <<<<<<< HEAD float: none;
-                margin-top: 1rem;
-            }
-            .pp-body {
-                float: none;
-                width: 80%;
-                margin-left: auto;
-                margin-right: auto;
-                =======float: none;
-                margin-top: 1rem;
-            }
-            .pp-body {
-                float: none;
-                width: 80%;
-                margin-left: auto;
-                margin-right: auto;
-                >>>>>>>user-interface
-            }
-            .profile-pic {
-                width: 170px;
-            }
-            .query-label {
-                <<<<<<< HEAD margin-left: 0%;
-                font-size: 11px
-            }
-            .query-text {
-                width: 100%;
-                font-size: 14px
-            }
-            .query-btn-left {
-                margin-left: 0%;
-                font-size: 11px;
-                width: 120px;
-            }
-            .query-btn-right {
-                margin-right: 0%;
-                font-size: 11px;
-                width: 120px;
-                =======margin-left: 0%;
-                font-size: 11px
-            }
-            .query-text {
-                width: 100%;
-                font-size: 14px
-            }
-            .query-btn-left {
-                margin-left: 0%;
-                font-size: 11px;
-                width: 120px;
-            }
-            .query-btn-right {
-                margin-right: 0%;
-                font-size: 11px;
-                width: 120px;
-                >>>>>>>user-interface
-            }
-            .flex-small {
-                flex-direction: column;
-            }
-            .username-small {
-                margin: auto;
-            }
-            .pp-image {
-                margin: auto;
-            }
-            .profile-card-1 {
-                height: 700px;
-            }
-            .databox {
-                flex-wrap: wrap;
-            }
-            <<<<<<< HEAD .home-column {
-                width: 50%;
-                =======.home-column {
-                    width: 50%;
-                    >>>>>>>user-interface
-                }
-                .img__description {
-                    padding-top: none;
-                }
-                .bar-results-image {
-                    <<<<<<< HEAD height: 200px;
-                }
-                .favourites-bar {
-                    width: 95%;
-                }
-                .fav-search-body {
-                    width: 95%;
-                    =======height: 200px;
-                }
-                .favourites-bar {
-                    width: 95%;
-                }
-                .fav-search-body {
-                    width: 95%;
-                    >>>>>>>user-interface
-                }
-                .fav-search-btn {
-                    width: 130px;
-                }
-                <<<<<<< HEAD
-            }
-            =======
-        }
-        >>>>>>>user-interface
