@@ -3,14 +3,19 @@
     <img style="position: relative; top: 40px; left: 5px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()"> 
     {{/unless}}
     <div class="flex-container">
-        <div style="width: 30%;" class="flex-column">
+        <div class="flex-column profile-card-1">
             <div class="databox primary">
-            <img style="width: 300px; height: auto;" src="\assets\avatars\avatar{{user.pic}}.svg">
+            <div class="flex-small">
+                <img class="pp-image" src="\assets\avatars\avatar{{user.pic}}.svg">
+                <br>
+                <div class="username-small">
+                    <h2>{{user.name}}</h2>
+                    <h3>@{{user.username}}</h3>
+                    <h3>{{user.bio}}</h3>
+                </div>
+            </div>
             <br>
-            <h2>{{user.name}}</h2>
-            <h3>@{{user.username}}</h3>
-            <br><br>
-            <div class="flex-container">
+            <div class="flex-container flex-small">
                 <div>
                     <h2>Friends</h2>
                     <a href="/user/uid{{user.username}}/friends">
@@ -24,7 +29,7 @@
                     </a>
                 </div>
             </div>
-            <h3>{{user.bio}}</h3>
+            
             {{#unless mine}} 
             {{#if friend}}
             <button class="center" onclick="document.getElementById('id01').style.display='block'">Remove Friend</button>
@@ -68,7 +73,7 @@
                     {{/unless}}
                     {{#each recently_visited }}
                     <div class="home-column recommended-container">
-                        <img style="width: 100%; height: 250px; border-radius: 5%;" class="avatar recommended-bar" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}" {{else}}src="assets/wateringhole.png" {{/if}}>
+                        <img style="" class="avatar recommended-bar rv-img" onclick="selected(this)" {{#if this.pic}}src="{{this.pic}}" {{else}}src="assets/wateringhole.png" {{/if}}>
                         <div class="middle">
                             <a href="/search/bar{{this.id}}">
                                 <div style="inline-size: 80px; overflow-wrap: break-word;" class="recommended-text">{{this.name}}</div>
@@ -104,7 +109,7 @@
                     <form class="search" action="/tags" method="post">
                         <h3>Add Search Tag</h3>
                         <input type="text" id="tag_name" name="tag_name">
-                        <button class="primary right" type="submit">Add Tag</button>
+                        <button class="primary right at-small" type="submit">Add Tag</button>
                         <br><br>
                     </form>
                 </div>

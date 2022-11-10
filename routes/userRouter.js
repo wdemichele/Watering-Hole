@@ -34,7 +34,7 @@ router.post('/create', async(req, res) => {
 
         let newUserSaved = await newUser.save();
 
-        res.render('guest/login.hbs', { layout: 'user-layout', title: 'User Login', flash: ["Account created, please login."] });
+        res.render('guest/login.hbs', { layout: 'guest-layout', title: 'User Login', flash: ["Account created, please login."] });
     });
 });
 
@@ -79,10 +79,18 @@ router.get('/', isLoggedIn, async(req, res) => {
 router.get('/uid:id', isLoggedIn, async(req, res) => {
     let mine = false;
     let username = req.params.id;
+    let user = await User.findOne({ username: username }).lean().exec();
+
+    let me = user.pic
+
     if (username == req.user.username) {
         mine = true
+    } else {
+        me = await User.findOne({ username: req.user.username }, { pic: 1 }).lean().exec();
+        me = me.pic
     }
-    let user = await User.findOne({ username: username }).lean().exec();
+
+
 
     let recently_visited = [];
     for (let i = user.activity.length - 1; i >= 0; i--) {
@@ -101,7 +109,7 @@ router.get('/uid:id', isLoggedIn, async(req, res) => {
         friend = true
     }
 
-    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: mine, recently_visited: recently_visited, friend: friend });
+    res.render('user/user-profile.hbs', { layout: 'user-layout', title: 'User Results', user: user, mine: mine, recently_visited: recently_visited, friend: friend, pic: me });
 });
 
 router.get('/uid:id/friends', isLoggedIn, async(req, res) => {
@@ -110,7 +118,12 @@ router.get('/uid:id/friends', isLoggedIn, async(req, res) => {
 
     let friends = await User.find({ username: { $in: user.friends } }, { "username": 1, "name": 1, "pic": 1 }).lean().exec()
 
-    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Friends', user: user, friends: friends });
+    let me = user.pic
+    if (username != req.user.username) {
+        me = await User.findOne({ username: req.user.username }, { pic: 1 }).lean().exec();
+        me = me.pic
+    }
+    res.render('user/user-friends.hbs', { layout: 'user-layout', title: 'User Friends', user: user, friends: friends, pic: me });
 });
 
 router.get('/uid:id/favourites', isLoggedIn, async(req, res) => {
@@ -133,7 +146,13 @@ router.get('/uid:id/favourites', isLoggedIn, async(req, res) => {
     let favs = await Bar.find({ id: { $in: favourites } }).lean().exec();
     let buck = await Bar.find({ id: { $in: bucketlist } }).lean().exec();
 
-    res.render('user/user-favourites.hbs', { layout: 'user-layout', title: 'User Favourites', user: user, favourites: favs, bucketlist: buck });
+    let me = user.pic
+    if (username != req.user.username) {
+        me = await User.findOne({ username: req.user.username }, { pic: 1 }).lean().exec();
+        me = me.pic
+    }
+
+    res.render('user/user-favourites.hbs', { layout: 'user-layout', title: 'User Favourites', user: user, favourites: favs, bucketlist: buck, pic: me });
 });
 
 router.get("/uid:id/pic", isLoggedIn, async(req, res) => {
@@ -153,7 +172,13 @@ router.get("/uid:id/pic", isLoggedIn, async(req, res) => {
         }
     }
 
-    res.render('user/user-pic.hbs', { layout: 'user-layout', title: 'My Tags', user: user, num_pics: num_pics });
+    let me = user.pic
+    if (username != req.user.username) {
+        me = await User.findOne({ username: req.user.username }, { pic: 1 }).lean().exec();
+        me = me.pic
+    }
+
+    res.render('user/user-pic.hbs', { layout: 'user-layout', title: 'My Tags', user: user, num_pics: num_pics, pic: me });
 })
 
 router.post("/uid:id/pic", isLoggedIn, async(req, res) => {
@@ -190,7 +215,13 @@ router.get('/uid:id/tags:tag', isLoggedIn, async(req, res) => {
         tags[tag] = await Bar.find({ id: { $in: tags[tag] } }).lean().exec();
     }
 
-    res.render('user/user-tag.hbs', { layout: 'user-layout', title: 'My Tags', user: user, selected: req.params.tag, tags: tags });
+    let me = user.pic
+    if (username != req.user.username) {
+        me = await User.findOne({ username: req.user.username }, { pic: 1 }).lean().exec();
+        me = me.pic
+    }
+
+    res.render('user/user-tag.hbs', { layout: 'user-layout', title: 'My Tags', user: user, selected: req.params.tag, tags: tags, pic: me });
 });
 
 router.get('/add-friends', isLoggedIn, async(req, res) => {
@@ -198,7 +229,13 @@ router.get('/add-friends', isLoggedIn, async(req, res) => {
     let username = req.user.username;
     let user = await User.findOne({ username: username }).lean().exec();
 
-    res.render('user/add-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user });
+    let me = user.pic
+    if (username != req.user.username) {
+        me = await User.findOne({ username: req.user.username }, { pic: 1 }).lean().exec();
+        me = me.pic
+    }
+
+    res.render('user/add-friends.hbs', { layout: 'user-layout', title: 'User Results', user: user, pic: me });
 
 });
 
@@ -240,6 +277,17 @@ router.post('/search-friend', isLoggedIn, async(req, res) => {
         response = "User not found!"
         res.redirect('/social')
     }
+});
+
+router.post('/password-reset', isLoggedIn, async(req, res) => {
+
+
+    bcrypt.hash(req.body.newPassword, saltRounds, async(err, hash) => {
+        let updatedUser = await User.findOneAndUpdate({ username: req.user.username }, { password: hash }).lean().exec();
+        res.redirect('/settings');
+    });
+
+
 });
 
 

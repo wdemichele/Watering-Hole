@@ -8,8 +8,8 @@
         {{#each friends}}
             <div style="width: 60%; margin-left: auto; margin-right: auto; background-color:#0E897D; color:white;" class="friend-container primary">
                 <a href="/user/uid{{this.username}}">
-                <img src="/assets/avatars/avatar{{this.pic}}.svg" alt="Avatar" style="width:120px">
-                <h2>{{this.name}}</h2>
+                <img src="/assets/avatars/avatar{{this.pic}}.svg" alt="Avatar" style="width:120px; display:inline-block;">
+                <h2>{{this.bar}}</h2>
                 <h3>@{{this.username}}</h3></a>
             </div>
         {{/each}}

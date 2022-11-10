@@ -10,6 +10,7 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
 const res = require('express/lib/response');
+const { events } = require('../models/userSchema');
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use('/search', searchRouter);
@@ -89,7 +90,29 @@ router.get('/social', isLoggedIn, async(req, res) => {
 
     let activity = await User.find({ username: user.friends }, { activity: 1, pic: 1, name: 1, username: 1, '_id': false }).lean().exec();
 
-    res.render('social-feed.hbs', { layout: 'user-layout', title: 'Friend Activity', user: user, activity: activity });
+    let events = []
+    for (let user of activity) {
+        for (let event of user.activity) {
+            events.push({
+                "time": event.time,
+                "username": user.username,
+                "name": user.name,
+                "pic": user.pic,
+                "id": event.id,
+                "type": event.type,
+                "bar": event.name,
+                "address": event.address
+            })
+        }
+    }
+
+    events.sort(function(a, b) {
+        let c = new Date(a[0]);
+        let d = new Date(b[0]);
+        return c - d;
+    });
+
+    res.render('social-feed.hbs', { layout: 'user-layout', title: 'Friend Activity', user: user, activity: events });
 });
 
 router.get('/about-us', (req, res) => {

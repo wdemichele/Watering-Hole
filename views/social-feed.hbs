@@ -1,27 +1,25 @@
 <div class="flex-container">
-    <div style="width: 70%;">
+    <div class="main-body-1" style="">
         <div class="databox secondary">
             <div class="scroll">
                 <h2>Friend Activity</h2>
                 {{#unless activity}}
                 <h2>Add your friends to see their recent activity.</h2>
                 {{/unless}}
-                {{#each activity as |friend|}}
-                    {{#each (limit (reverseArray friend.activity) 20)}}
-                        <div class="friend-container">
-                            <a href="/user/uid{{friend.username}}"><img src="/assets/avatars/avatar{{friend.pic}}.svg" alt="Avatar" style="width:120px">
-                            <h2>{{friend.name}}</a> {{this.type}} <a href="/search/bar{{this.id}}">{{this.name}}</h2>
-                            <p>{{this.address}}</p></a>
-                            <p>{{this.time}}</p>
-                            </a>
-                        </div>
-                    {{/each}}
+                {{#each (limit (reverseArray activity) 50) as |event|}}
+                    <div class="friend-container">
+                        <a href="/user/uid{{event.username}}"><img src="/assets/avatars/avatar{{event.pic}}.svg" alt="Avatar" class="friend-avatar" style="">
+                        <h2>{{event.name}}</a> {{event.type}} <a href="/search/bar{{event.id}}">{{event.bar}}</h2>
+                        <p>{{event.address}}</p></a>
+                        <p>{{event.time}}</p>
+                        </a>
+                    </div>
                 {{/each}}
             </div>
         </div>
     </div>
 
-    <div class="databox primary">
+    <div class="databox primary main-body-2">
             <img style="width: 150px; height: auto;" src="\assets\avatars\avatar{{user.pic}}.svg">
             <h1>{{user.name}}</h1>
 

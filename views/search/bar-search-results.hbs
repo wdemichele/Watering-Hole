@@ -1,29 +1,49 @@
-<img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">>
+<img style="position: relative; top: 40px; left: 80px; cursor: pointer" class="left" src="/assets/backbutton.svg" onclick="history.back()">
 <div class="databox secondary">
     <h1>Bar Search Results</h1>
     <h3>Text Search: <b><em>"{{search}}"</em></b></h3>
     <div class="databox primary">
-        <iframe class="center" width="1200" height="900" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{query}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8"></iframe>
+        <iframe class="center" style="border:0; width:100%; height:800px;" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{query}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8"></iframe>
     </div>
+
     <div class="flex-container">
         {{#each places as |bar|}}
-        <div style="flex: 1 0 30%; margin:10px; position: relative; text-align: center; color: white;" class="card databox img__wrap">
+        <div style="" class="card databox img__wrap bar-card">
             <a style="text-decoration: none;" href="/search/bar{{bar.place_id}}">
             {{#if bar.photos.0.photo_reference}}
-            <img class="img__img" style="width: 100%; height:400px; maxwidth:600px; maxheight:400px;" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
+            <img class="img__img bar-results-image" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
             {{else}}
-            <img class="img__img" style="width: 100%; height: 400px" src="/assets/wateringhole.png">
+            <img class="img__img bar-results-image-default" src="/assets/wateringhole.png">
             {{/if}}
             <div class="container img__description">
-                <br><br><br>
-                <h2><b>{{bar.name}}</b></h2>
-                <h3>{{bar.formatted_address}}</h3> 
-                {{#if bar.price_level}}Price Level: {{bar.price_level}}{{/if}} {{#if bar.rating}}Google Review: {{bar.rating}}{{/if}}
+                <h2 class="bar-name"><b>{{bar.name}}</b></h2>
+                <h3 class="bar-info">{{bar.formatted_address}}</h3> 
+                <h3 class="bar-info">{{#if bar.price_level}}Price Level: {{bar.price_level}}{{/if}} {{#if bar.rating}}Google Review: {{bar.rating}}{{/if}}</h3>
                 {{#if bar.opening_hours.open_now}}
-                <h3>Open Now</h3></a>
+                <h3 class="bar-info">Open Now</h3></a>
                 {{else}}
-                <h3>Closed</h3></a>
-                {{/if}}        
+                <h3 class="bar-info">Closed</h3></a>
+                {{/if}} 
+                <div>
+    <form action="bar-favourite{{bar.place_id}}" method="post" target="hiddenFrame">
+    <input type="hidden" id="bar_name" name="bar_name" value="{{bar.name}}">
+    <input type="hidden" id="bar_address" name="bar_address" value="{{bar.formatted_address}}">
+    <input type="hidden" id="bar_price_level" name="bar_price_level" value="{{bar.price_level}}">
+    <input type="hidden" id="bar_rating" name="bar_rating" value="{{bar.rating}}">
+    <input type="hidden" id="bar_location" name="bar_lat" value="{{bar.geometry.location.lat}}">
+    <input type="hidden" id="bar_location" name="bar_long" value="{{bar.geometry.location.lng}}">
+    <input type="hidden" id="search_results" name="search_results" value="true">
+    <input type="hidden" id="bar_pic" name="bar_pic" value="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{bar.photos.0.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
+    {{!-- {{#if (contains ../tags tag)}}tagged{{/if}} --}}
+    <button {{#unless (contains ../bucketlist bar.place_id)}}style="display:none;"{{/unless}}  onclick="snackbar('snackbar-unbucketlisted'); swap_display('bucketlist_button{{@index}}', 'bucketlist_remove{{@index}}')" class="primary bucket-pressed" type="submit" id="bucketlist_remove{{@index}}" name="bucketlist_remove"><i class="fa-sharp fa-solid fa-bucket"></i></button>
+    <button {{#if (contains ../bucketlist bar.place_id)}}style="display:none;"{{/if}} onclick="snackbar('snackbar-bucketlisted'); swap_display('bucketlist_remove{{@index}}', 'bucketlist_button{{@index}}')" class="bucket-btn" type="submit" id="bucketlist_button{{@index}}" name="bucketlist_button"><i class="fa-sharp fa-solid fa-bucket"></i></button>
+    </div>
+    <div>
+    <button {{#unless (contains ../favourites bar.place_id)}}style="display:none;"{{/unless}} onclick="snackbar('snackbar-unfavourited'); swap_display('favourite_button{{@index}}', 'favourite_remove{{@index}}')" class="secondary right fav-btn" type="submit" id="favourite_remove{{@index}}" name="favourite_remove"><i class="fas fa-heart"></i></button>
+    <button {{#if (contains ../favourites bar.place_id)}}style="display:none;"{{/if}} onclick="snackbar('snackbar-favourited'); swap_display('favourite_remove{{@index}}', 'favourite_button{{@index}}')" class="right fav-btn" type="submit" id="favourite_button{{@index}}" name="favourite_button"><i class="fas fa-heart"></i></button>
+    </div>
+    </form>
+
         </div>
                    
     </div>
@@ -38,3 +58,24 @@
     </form>
     {{/if}}
 </div>
+  <div id="snackbar-bucketlisted">Added bucketlist for bar..</div>
+  <div id="snackbar-unbucketlisted">Removed bucketlist for bar..</div>
+  <div id="snackbar-favourited">Added favourite for bar..</div>
+  <div id="snackbar-unfavourited">Removed favourite for bar..</div>
+      <iframe name="hiddenFrame" class="hide"></iframe>
+
+<script>
+    function snackbar(name) {
+      console.log(name)
+      var x = document.getElementById(name);
+      x.className = "show";
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    function swap_display(view, hide){
+      var x = document.getElementById(view);
+      var y = document.getElementById(hide);
+      x.style.display = "inline-block";
+      y.style.display = "none";
+    } 
+</script>

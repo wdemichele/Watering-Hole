@@ -34,6 +34,20 @@ router.get('/bar-search', isLoggedIn, async(req, res) => {
 });
 
 router.post('/bar-search', isLoggedIn, async(req, res) => {
+    let username = req.user.username;
+    let user = await User.findOne({
+        username: username
+    }).lean().exec();
+    let bucketlist = [];
+    let favourites = [];
+    for (let bar of user.bars) {
+        if (bar.bucketlist) {
+            bucketlist.push(bar.id);
+        }
+        if (bar.favourite) {
+            favourites.push(bar.id);
+        }
+    }
 
     let input = reformat(req.body.bar_name);
     if (!input.includes("bar") || !input.includes("club")) {
@@ -51,7 +65,7 @@ router.post('/bar-search', isLoggedIn, async(req, res) => {
     axios(config)
         .then(function(response) {
             // console.log(response.data)
-            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: input, page_token: response.data.next_page_token });
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: input, page_token: response.data.next_page_token, user: user, favourites: favourites, bucketlist: bucketlist });
 
         })
         .catch(function(error) {
@@ -60,6 +74,21 @@ router.post('/bar-search', isLoggedIn, async(req, res) => {
 });
 
 router.post('/more-bars', isLoggedIn, async(req, res) => {
+
+    let username = req.user.username;
+    let user = await User.findOne({
+        username: username
+    }).lean().exec();
+    let bucketlist = [];
+    let favourites = [];
+    for (let bar of user.bars) {
+        if (bar.bucketlist) {
+            bucketlist.push(bar.id);
+        }
+        if (bar.favourite) {
+            favourites.push(bar.id);
+        }
+    }
 
     let page_token = req.body.page_token;
 
@@ -71,7 +100,7 @@ router.post('/more-bars', isLoggedIn, async(req, res) => {
 
     axios(config)
         .then(function(response) {
-            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token });
+            res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.bar_name, query: req.body.bar_name, page_token: response.data.next_page_token, user: user, favourites: favourites, bucketlist: bucketlist });
 
         })
         .catch(function(error) {
@@ -81,7 +110,26 @@ router.post('/more-bars', isLoggedIn, async(req, res) => {
 
 router.post('/area-search', isLoggedIn, async(req, res) => {
 
-    let input = reformat(req.body.area_name);
+    let username = req.user.username;
+    let user = await User.findOne({
+        username: username
+    }).lean().exec();
+
+    let input = req.body.area_name;
+    let bucketlist = [];
+    let favourites = [];
+    for (let bar of user.bars) {
+        if (bar.bucketlist) {
+            bucketlist.push(bar.id);
+        }
+        if (bar.favourite) {
+            favourites.push(bar.id);
+        }
+    }
+
+
+    input = input.replace(/ /gi, "%20");
+    input = input.replace(/,/g, '');
 
     if (input.length === 0) {
         input = "near%20me";
@@ -102,7 +150,7 @@ router.post('/area-search', isLoggedIn, async(req, res) => {
             };
             axios(config)
                 .then(function(response) {
-                    res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name, query: "bars%20near" + input, page_token: response.data.next_page_token });
+                    res.render('search/bar-search-results.hbs', { layout: 'user-layout', title: 'Bar Search Results', places: response.data.results, search: req.body.area_name, query: "bars%20near" + input, page_token: response.data.next_page_token, user: user, bucketlist: bucketlist, favourites: favourites });
 
                 })
                 .catch(function(error) {
@@ -298,6 +346,7 @@ router.post('/bar-favourite:bar_id', isLoggedIn, async(req, res) => {
 
     res.redirect('bar' + req.params.bar_id);
 
+
 })
 
 router.post('/bar-visit:bar_id', isLoggedIn, async(req, res) => {
@@ -397,7 +446,7 @@ router.post('/favourites-search', isLoggedIn, async(req, res) => {
                 "lat": fav.location.lat,
                 "lng": fav.location.long
             },
-            "title": "<a href='/search/bar" + fav.id + "' style='color:black;'><h3>" + fav.name + "</h3>" + "<em>" + fav.address + "<em></a>"
+            "title": "<a href='/search/bar" + fav.id + "' style='color:black;'><h3>" + fav.name + "</h3>" + "<em>" + fav.address + "<em><br><br><img class='recommended-bar' src='" + fav.pic + "'></a>"
         })
     }
 
