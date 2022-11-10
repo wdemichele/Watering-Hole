@@ -3,7 +3,7 @@
     <h1>Bar Search Results</h1>
     <h3>Text Search: <b><em>"{{search}}"</em></b></h3>
     <div class="databox primary">
-        <iframe class="center" style="border:0; width:100%; height:800px;" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{query}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw"></iframe>
+        <iframe class="center" style="border:0; width:100%; height:800px;" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{query}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8"></iframe>
     </div>
 
     <div class="flex-container">
@@ -11,7 +11,7 @@
         <div style="" class="card databox img__wrap bar-card">
             <a style="text-decoration: none;" href="/search/bar{{bar.place_id}}">
             {{#if bar.photos.0.photo_reference}}
-            <img class="img__img bar-results-image" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+            <img class="img__img bar-results-image" src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=400&photo_reference={{this.photos.0.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
             {{else}}
             <img class="img__img bar-results-image-default" src="/assets/wateringhole.png">
             {{/if}}
@@ -33,7 +33,7 @@
     <input type="hidden" id="bar_location" name="bar_lat" value="{{bar.geometry.location.lat}}">
     <input type="hidden" id="bar_location" name="bar_long" value="{{bar.geometry.location.lng}}">
     <input type="hidden" id="search_results" name="search_results" value="true">
-    <input type="hidden" id="bar_pic" name="bar_pic" value="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{bar.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+    <input type="hidden" id="bar_pic" name="bar_pic" value="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{bar.photos.0.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
     {{!-- {{#if (contains ../tags tag)}}tagged{{/if}} --}}
     <button {{#unless (contains ../bucketlist bar.place_id)}}style="display:none;"{{/unless}}  onclick="snackbar('snackbar-unbucketlisted'); swap_display('bucketlist_button{{@index}}', 'bucketlist_remove{{@index}}')" class="primary bucket-pressed" type="submit" id="bucketlist_remove{{@index}}" name="bucketlist_remove"><i class="fa-sharp fa-solid fa-bucket"></i></button>
     <button {{#if (contains ../bucketlist bar.place_id)}}style="display:none;"{{/if}} onclick="snackbar('snackbar-bucketlisted'); swap_display('bucketlist_remove{{@index}}', 'bucketlist_button{{@index}}')" class="bucket-btn" type="submit" id="bucketlist_button{{@index}}" name="bucketlist_button"><i class="fa-sharp fa-solid fa-bucket"></i></button>

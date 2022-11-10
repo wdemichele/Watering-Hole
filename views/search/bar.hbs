@@ -9,11 +9,11 @@
 
 <div class="w3-content w3-display-container" style="max-width:800px">
   <div class="w3-display-topmiddle">  <h1 id="bar_name" name="bar_name">{{place_data.name}}</h1></div>
-  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.1.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.2.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.3.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
-  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.4.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.1.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.2.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.3.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
+  <img class="mySlides center w3-hover-opacity" onclick="onClick(this)" src="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.4.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
   <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
     <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
     <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
@@ -79,7 +79,7 @@
     <input type="hidden" id="bar_rating" name="bar_rating" value="{{place_data.rating}}">
     <input type="hidden" id="bar_location" name="bar_lat" value="{{place_data.geometry.location.lat}}">
     <input type="hidden" id="bar_location" name="bar_long" value="{{place_data.geometry.location.lng}}">
-    <input type="hidden" id="bar_pic" name="bar_pic" value="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+    <input type="hidden" id="bar_pic" name="bar_pic" value="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
     {{!-- <input type="hidden" id="bar_hours" name="bar_hours" value="{{place_data.opening_hours.periods}}">
     <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}"> --}}
 
@@ -96,7 +96,7 @@
 
    <div class="databoxx secondary">
 
-    <iframe class="centerx" width="1200" height="500" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{place_data.formatted_address}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw"></iframe>
+    <iframe class="centerx" width="1200" height="500" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/search?q={{place_data.formatted_address}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8"></iframe>
   <br>
   <table>
     <tr>
@@ -129,7 +129,7 @@
     <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry.location}}">
     <input type="hidden" id="bar_location" name="bar_lat" value="{{place_data.geometry.location.lat}}">
     <input type="hidden" id="bar_location" name="bar_long" value="{{place_data.geometry.location.lng}}">
-    <input type="hidden" id="bar_pic" name="bar_pic" value="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+    <input type="hidden" id="bar_pic" name="bar_pic" value="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
 
     {{> bar-tags}}
   </form>
@@ -142,7 +142,7 @@
     <input type="hidden" id="bar_location" name="bar_location" value="{{place_data.geometry}}">
     <input type="hidden" id="bar_location" name="bar_lat" value="{{place_data.geometry.location.lat}}">
     <input type="hidden" id="bar_location" name="bar_long" value="{{place_data.geometry.location.lng}}">
-    <input type="hidden" id="bar_pic" name="bar_pic" value="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyA8P18svM3ddTHDUV21aw8JGCcfwN0UGjw">
+    <input type="hidden" id="bar_pic" name="bar_pic" value="https://maps.googleapis.com/maps/api/place/photo?maxheight=400&photo_reference={{place_data.photos.0.photo_reference}}&key=AIzaSyCGItXlt-TnU46DiR6Wk3RD_TDUONosqD8">
     <button onclick="snackbar('snackbar-visit')" class="tertiary right" type="submit" id="visited_button" name="visited_button">Visited</button>
   </form>
   </div>
