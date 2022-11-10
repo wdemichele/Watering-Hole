@@ -1,11 +1,11 @@
 <div class="flex-container">
-    <div style="width: 70%;">
+    <div class="main-body-1" style="">
         <div class="databox secondary">
             <div class="scroll">
                 <h2>Friend Activity</h2>
                 {{#each (limit (reverseArray activity) 50) as |event|}}
                     <div class="friend-container">
-                        <a href="/user/uid{{event.username}}"><img src="/assets/avatars/avatar{{event.pic}}.svg" alt="Avatar" style="width:120px">
+                        <a href="/user/uid{{event.username}}"><img src="/assets/avatars/avatar{{event.pic}}.svg" alt="Avatar" class="friend-avatar" style="">
                         <h2>{{event.name}}</a> {{event.type}} <a href="/search/bar{{event.id}}">{{event.bar}}</h2>
                         <p>{{event.address}}</p></a>
                         <p>{{event.time}}</p>
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="databox primary">
+    <div class="databox primary main-body-2">
             <img style="width: 150px; height: auto;" src="\assets\avatars\avatar{{user.pic}}.svg">
             <h1>{{user.name}}</h1>
 
