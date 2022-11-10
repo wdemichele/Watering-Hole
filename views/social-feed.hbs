@@ -3,6 +3,9 @@
         <div class="databox secondary">
             <div class="scroll">
                 <h2>Friend Activity</h2>
+                {{#unless activity}}
+                <h2>Add your friends to see their recent activity.</h2>
+                {{/unless}}
                 {{#each activity as |friend|}}
                     {{#each (limit (reverseArray friend.activity) 20)}}
                         <div class="friend-container">

@@ -2318,13 +2318,13 @@ form.search::after {
     cursor: pointer;
 }
 
-label::before {
+.accordion label::before {
     content: '+';
     font-size: 24px;
     font-weight: 600;
 }
 
-input[type="radio"] {
+.accordion input[type="radio"] {
     display: none;
 }
 
@@ -2354,4 +2354,489 @@ input[type="radio"] {
 .user-question {
     font-size: x-large;
     font-weight: bolder;
+}
+
+.fav-btn {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    padding: 7px;
+}
+
+.bucket-btn {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    padding: 7px;
+}
+
+.bucket-pressed {
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    padding: 7px;
+}
+
+.favourites-bar {
+    height: 44px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fav-search-body {
+    width: 80%;
+    padding: 0 8% 0 8%;
+    padding-bottom: 3rem;
+    height: 576px;
+    margin-top: 0;
+}
+
+.fav-bar-settings {
+    width: 48%;
+    flex: 2;
+    border-radius: 25px;
+    padding: 0 10% 0 10%;
+    background-color: #0E897D;
+    border: none;
+}
+
+.fav-search-tags {
+    width: 48%;
+    flex: 3;
+    border-radius: 25px;
+    padding: 1rem;
+    background-color: #0E897D;
+    border: none;
+}
+
+.fav-container {
+    display: flex;
+}
+
+.fav-search-box {
+    width: 90%;
+    padding: 2% 0 3% 0;
+}
+
+.about-body {
+    width: 60%;
+    opacity: 0.9
+}
+
+.nav-icon-pp {
+    width: 50px;
+    height: 50px;
+}
+
+.small-nav {
+    display: none;
+}
+
+.fav-res h2 {
+    font-size: 25px;
+}
+
+.fav-res h3 {
+    font-size: 20px;
+}
+
+.bar-name {
+    margin-top: 0px;
+    font-size: 20px;
+}
+
+.bar-info {
+    font-size: 15px;
+}
+
+.fav-res h2 {
+    font-size: 20px;
+}
+
+.fav-res h3 {
+    font-size: 15px;
+}
+
+.main-body-1 {
+    width: 100%;
+}
+
+.main-body-2 {
+    margin: 3%
+}
+
+.friend-avatar {
+    width: 100px;
+}
+
+.friend-container h2 {
+    font-size: 20px;
+}
+
+.friend-container p {
+    font-size: 15px;
+}
+
+
+/*laptop screens */
+
+@media only screen and (max-width: 992px) {
+    .login {
+        width: 70%;
+    }
+    .w-hole-logo {
+        width: 60%;
+    }
+    .settings-body {
+        width: 90%;
+    }
+    p {
+        font-size: 20px;
+    }
+    h1 {
+        font-size: 40px;
+    }
+    input {
+        font-size: 15px;
+    }
+    label {
+        font-size: 15px;
+    }
+    .settings-select-btn {
+        width: 70%;
+    }
+    .forgot-pass p {
+        font-size: 15px;
+    }
+    .query-body {
+        width: 90%;
+    }
+    .query-label {
+        margin-left: 10%;
+        font-size: 18px
+    }
+    .query-text {
+        width: 80%;
+        font-size: 20px
+    }
+    .query-btn-left {
+        margin-left: 10%;
+        font-size: 18px;
+    }
+    .query-btn-right {
+        margin-right: 10%;
+        font-size: 18px;
+    }
+    .profile-card-1 {
+        width: 100%;
+        height: 620px;
+    }
+    .flex-small {
+        display: flex;
+    }
+    .username-small {
+        flex: 1;
+        margin: 10%;
+        margin-top: 15%;
+    }
+    .pp-image {
+        flex: 1;
+        margin: 10%;
+        margin-left: 15%;
+    }
+    .bar-results-image {
+        height: 200px;
+    }
+    .fav-btn {
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        padding: 7px;
+    }
+    .bucket-btn {
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        padding: 7px;
+    }
+    .bucket-pressed {
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+        padding: 7px;
+    }
+    .img__description {
+        padding-top: 1rem;
+    }
+    .bar-name {
+        margin-top: 0px;
+        font-size: 15px;
+    }
+    .bar-info {
+        font-size: 11px;
+    }
+    .favourites-bar {
+        width: 90%;
+    }
+    .fav-search-body {
+        width: 90%;
+        height: 750px;
+    }
+    .fav-bar-settings {
+        width: 90%;
+        margin: auto;
+        margin-bottom: 2rem;
+    }
+    .fav-search-tags {
+        width: 90%;
+        margin: auto;
+        margin-bottom: 1rem;
+    }
+    .fav-container {
+        flex-direction: column;
+    }
+    .about-body {
+        width: 80%;
+    }
+    .nav-links li {
+        padding: 0px;
+    }
+    .nav-icon {
+        height: 35px;
+        width: 35px;
+    }
+    .nav-icon-pp {
+        width: 35px;
+        height: 35px;
+    }
+    .size-small {
+        width: 50px;
+        height: 50px;
+    }
+    .flex-container-small {
+        flex-direction: column;
+    }
+    .fav-res h2 {
+        font-size: 25px;
+    }
+    .fav-res h3 {
+        font-size: 20px;
+    }
+    .map-area-small {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .main-body-1 {
+        width: 100%;
+    }
+    .main-body-2 {
+        margin: 3%
+    }
+    .friend-avatar {
+        width: 100px;
+    }
+    .friend-container h2 {
+        font-size: 20px;
+    }
+    .friend-container p {
+        font-size: 15px;
+    }
+}
+
+
+/* Tablet Width */
+
+@media only screen and (max-width: 768px) {
+    .login {
+        width: 90%;
+    }
+    .w-hole-logo {
+        width: 80%;
+    }
+    .settings-body {
+        width: 100%;
+    }
+    .settings-select-btn {
+        width: 80%;
+    }
+    .settings-save-btn {
+        width: 35%;
+    }
+    .profile-pic {
+        width: 150px;
+    }
+    .query-body {
+        width: 100%;
+    }
+    .query-label {
+        margin-left: 5%;
+        font-size: 15px
+    }
+    .query-text {
+        width: 90%;
+        font-size: 18px
+    }
+    .query-btn-left {
+        margin-left: 5%;
+        font-size: 15px;
+        width: 180px;
+    }
+    .query-btn-right {
+        margin-right: 5%;
+        font-size: 15px;
+        width: 180px;
+    }
+    .username-small {
+        flex: 1;
+        margin: 10%;
+        margin-top: 15%;
+    }
+    .pp-image {
+        margin: 15%;
+    }
+    .rv-img {
+        height: 150px;
+    }
+    .profile-card-1 {
+        height: 500px;
+    }
+    .at-small {
+        width: 100px;
+    }
+    .search_search_tags .tag_box div {
+        height: 35px;
+        width: 70px;
+        font-size: 11px;
+    }
+    .databox {
+        flex-wrap: wrap;
+    }
+    .home-column {
+        width: 50%;
+    }
+    .bar-card {
+        width: 50%;
+    }
+    .fav-bar-settings {
+        width: 100%;
+    }
+    .fav-search-tags {
+        width: 100%;
+    }
+    .fav-search-box {
+        width: 100%;
+    }
+    .fav-search-btn {
+        width: 200px;
+    }
+    .about-body {
+        width: 90%;
+    }
+    .pic-button {
+        width: 150px;
+    }
+    .small-nav {
+        display: block;
+    }
+    .big-nav {
+        display: none;
+    }
+    .right {
+        margin-right: auto;
+        margin-left: 0;
+    }
+}
+
+
+/* Mobile Phone Width */
+
+@media only screen and (max-width: 576px) {
+    .login {
+        width: 90%;
+    }
+    .w-hole-logo {
+        width: 80%;
+    }
+    .settings-main {
+        width: 100%;
+    }
+    .settings-select-btn {
+        width: 80%;
+    }
+    .settings-save-btn {
+        width: 50%;
+    }
+    .settings-container-small {
+        width: 100%;
+        float: none;
+        margin-top: 1rem;
+    }
+    .pp-body {
+        float: none;
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .profile-pic {
+        width: 170px;
+    }
+    .query-label {
+        margin-left: 0%;
+        font-size: 11px
+    }
+    .query-text {
+        width: 100%;
+        font-size: 14px
+    }
+    .query-btn-left {
+        margin-left: 0%;
+        font-size: 11px;
+        width: 120px;
+    }
+    .query-btn-right {
+        margin-right: 0%;
+        font-size: 11px;
+        width: 120px;
+    }
+    .flex-small {
+        flex-direction: column;
+    }
+    .username-small {
+        margin: auto;
+    }
+    .pp-image {
+        margin: auto;
+    }
+    .profile-card-1 {
+        height: 700px;
+    }
+    .databox {
+        flex-wrap: wrap;
+    }
+    .home-column {
+        width: 50%;
+    }
+    .img__description {
+        padding-top: none;
+    }
+    .bar-results-image {
+        height: 200px;
+    }
+    .favourites-bar {
+        width: 95%;
+    }
+    .fav-search-body {
+        width: 95%;
+    }
+    .fav-search-btn {
+        width: 130px;
+    }
 }
