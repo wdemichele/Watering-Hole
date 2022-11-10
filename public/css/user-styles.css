@@ -1039,13 +1039,11 @@ table {
     color: #000;
     margin-top: 2px;
     width: 500px;
-  
-   
 }
 
 .sets_choose .sets_box,
 .price_choose .price_box {
-  width: 500px;
+    width: 500px;
 }
 
 
@@ -1071,9 +1069,6 @@ table {
 }
 
 
-
-
-
 /* open now and noly */
 
 .only_choosed,
@@ -1084,14 +1079,10 @@ table {
 
 /* search-page  sss*/
 
-
 .search_box {
     display: flex;
     width: 100%;
-  
 }
-
-
 
 .search_left {
     width: 100%;
@@ -1101,7 +1092,6 @@ table {
 }
 
 .search_search {
-   
     height: 60px;
     border-radius: 25px;
     background-color: rgb(76, 137, 159);
@@ -1110,7 +1100,6 @@ table {
     font-size: 30px;
     font-weight: 700;
     display: flex;
- 
 }
 
 .search_left .search_set,
@@ -1130,8 +1119,6 @@ table {
     display: flex;
 }
 
-
-
 .search_search .searchs_box {
     width: 1075px;
 }
@@ -1149,22 +1136,16 @@ table {
 .search_set_price .text_set,
 .search_open .text_set,
 .search_favourites .text_set {
-
     width: 430px;
 }
 
-
-
 .search_sets {
-   
     display: flex;
     margin-bottom: 10px;
- 
 }
 
 .search_left .search_set_price {
     background-color: rgb(53, 83, 113);
- 
 }
 
 .search_left .search_set {
@@ -1174,8 +1155,6 @@ table {
 .search_left .search_open {
     margin: 0 auto;
 }
-
-
 
 .search_left .search_search_tags {
     margin: 0 auto;
@@ -1239,8 +1218,6 @@ table {
     background-color: rgb(76, 137, 159);
 }
 
-
-
 .button_box {
     width: 200px;
     height: 60px;
@@ -1248,7 +1225,6 @@ table {
     line-height: 60px;
     font-size: 30px;
     background-color: #0e897d;
-  
     text-align: center;
     font-weight: 700;
     color: whitesmoke;
@@ -1653,7 +1629,6 @@ hr {
     background-color: black;
     color: white;
 }
-
 
 .img__wrap {
     position: relative;
@@ -2230,11 +2205,11 @@ form.search::after {
     font-weight: 500;
 }
 
-.collapsible label{
+.collapsible label {
     position: relative;
     font-weight: 600;
     background: #fff;
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.1),0 4px 11px 0 rgba(0,0,0,.08);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
     color: #1c1c6b;
     display: block;
     margin-bottom: 10px;
@@ -2243,37 +2218,72 @@ form.search::after {
     border-radius: 4px;
 }
 
-.collapsible label:after{
-   content:"";
-   position: absolute;
-   right:15px;
-   top:20px;
-   width:18px;
-   height:18px;
+.collapsible label:after {
+    content: "";
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    width: 18px;
+    height: 18px;
 }
 
-.collapsible-text{
+.collapsible-text {
     max-height: 1px;
     overflow: hidden;
     border-radius: 4px;
     line-height: 1.4;
 }
 
-.collapsible-text h2{
-  margin-bottom: 10px;
-  padding: 15px 15px 0;
-  color: #1c1c6b;
+.collapsible-text h2 {
+    margin-bottom: 10px;
+    padding: 15px 15px 0;
+    color: #1c1c6b;
 }
 
-.collapsible-text p{
+.collapsible-text p {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.collapsible .collapsible-text{
+.collapsible .collapsible-text {
     max-height: 300px;
-    
     padding-bottom: 25px;
     background: #fff;
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.1),0 4px 11px 0 rgba(0,0,0,.08);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, .1), 0 4px 11px 0 rgba(0, 0, 0, .08);
+}
+
+.btn-fb:hover {
+    opacity: 1;
+    box-sizing: border-box;
+}
+
+
+/* add appropriate colors to fb, twitter and google buttons */
+
+.fb {
+    background-color: #3B5998;
+    color: white;
+    box-sizing: border-box;
+    width: 50%;
+    margin: auto;
+    margin-top: 6px;
+    position: relative;
+    border-radius: 5px;
+    padding: 20px 50px;
+    text-align: left;
+}
+
+.btn-fb {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 5px 0;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none;
+    /* remove underline from anchors */
+    box-sizing: border-box;
 }
