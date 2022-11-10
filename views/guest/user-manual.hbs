@@ -3,26 +3,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   </body>
 <div style="width:95%; opacity: 0.9;" class="databox primary">
-  <h2>User Manual</h2>
+  <h2>User Manual QnA</h2>
    <div class="flex-container">
         <div style="width: 100%;" class="flex-row">
 
-            <div class="databox secondary">
-               <h2>Q: How do I add friends?</h2>
-              </div>
-
-              <div class="wrapper">
-                <div class ="collapsible">
-                  <input type="checkbox" id="collapsible-head">
-                  <label for="collapsible-head">Collapsible</label>
-                  <div class="collapsible-text">
-                    <h2>Collapsible Heading</h2>
-                    <p>
-                      abcdefg
-                    </p>
+              <ul class="accordion">
+                <li>
+                  <input type="radio" name="accordion" id="first" checked>
+                  <label for="first">How do I add friends?</label>
+                  <div class="content">
+                  <p>Go to "Friend Activity" tab from the navigation bar and search your friend by their username!</p>
                   </div>
-                </div>
-              </div>
+                </li>
+
+                <li>
+                  <input type="radio" name="accordion" id="second">
+                  <label for="second">How do I find bars?</label>
+                  <div class="content">
+                  <p>Second icon on the navigation bar will lead you to the bar searching page. "query seach" is a name-based search, "area search" is a location-based search.</p>
+                  </div>
+                </li>
+
+                <li>
+                  <input type="radio" name="accordion" id="third">
+                  <label for="third">What if I don't know where to go?</label>
+                  <div class="content">
+                  <p>If you are feeling uncertain, try "pick me a favourite"!</p>
+                  </div>
+                </li>
+
+                <li>
+                  <input type="radio" name="accordion" id="forth">
+                  <label for="forth">How do I save bars for a later date?</label>
+                  <div class="content">
+                  <p>Add custom tags to bars or save it to your bucketlist to give your old time favorite another shot on a future date.</p>
+                  </div>
+                </li>
+
+              </ul>
+
+              
              
             </div>
           </div>
