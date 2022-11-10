@@ -2290,15 +2290,18 @@ form.search::after {
 }
 
 .accordion {
-    margin: 60px auto;
-    width: 600px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .accordion li {
     list-style: none;
-    width: 100%;
+    width: 90%;
     margin: 20px;
     padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
     border-radius: 8px;
     background: rgb(53, 83, 113);
     box-shadow: 6px 6px 10px -1px rgba(0, 0, 0, 0.15), -6px -6px 10px -1px rgba(255, 255, 255, 0.7);
@@ -2309,13 +2312,14 @@ form.search::after {
     align-items: center;
     padding: 10px;
     font-size: 18px;
+    margin-left: auto;
+    margin-right: auto;
     font-weight: 500;
     cursor: pointer;
 }
 
 label::before {
     content: '+';
-    margin-right: 10px;
     font-size: 24px;
     font-weight: 600;
 }
@@ -2334,10 +2338,20 @@ input[type="radio"] {
 }
 
 .accordion input[type="radio"]:checked+label+.content {
-    max-height: 400px;
-    padding: 10px 10px 20px;
+    max-height: 1200px;
+    padding: 10px 10px;
 }
 
 .accordion input[type="radio"]:checked+label::before {
     content: '-';
+}
+
+.accordion-img {
+    width: 90%;
+    height: auto;
+}
+
+.user-question {
+    font-size: x-large;
+    font-weight: bolder;
 }

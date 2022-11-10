@@ -1,52 +1,50 @@
 <body style="background-image: url('assets/bar-blurred.jpg');  background-color: #cccccc; background-size: cover; color: white; padding: 20px">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</body>
 <div style="width:95%; opacity: 0.9;" class="databox primary">
-  <h2>User Manual QnA</h2>
-   <div class="flex-container">
-        <div style="width: 100%;" class="flex-row">
+    <h1>User Manual</h1>
+        <div class="accordion databox">
+            <li>
+                <input type="radio" name="accordion" id="first" checked>
+                <label for="first">How do I add friends?</label>
+                <div class="content">
+                    <p>Go to "Friend Activity" tab from the navigation bar and search your friend by their username!</p>
+                </div>
+            </li>
+            <li>
+                <input type="radio" name="accordion" id="second">
+                <label for="second">How do I find bars?</label>
+                <div class="content">
+                    <h2>Bar Search</h2>
+                    <p>Users can use the <em>Bar Search</em> to find their favourite bars from anywhere in the World! Choose between <b>Query Search</b> or <b>Area Search</b> to find and save your favourite bars.</p>
+                    <h3>Query Search</h3>
+                    <p><b>Query Search</b> allows you to perform a name-based search. Ensure to provide a <u>Type of Bar</u> and a <u>Location</u> when searching. Query Search uses Google Maps APIs to provide you with complex search options.<br> E.g "<em>Cocktail Bars in Melbourne</em>"
+                        will show all cocktail bars within Melbourne CBD.</p>
+                    <h3>Area Search</h3>
+                    <p><b>Area Search</b> enables you to search for bars within a given area.<br> E.g. "<em>Fitzroy, Victoria</em>" will show you all bars within Fitzroy.</p>
+                    <img class="accordion-img" src="assets/user-manual/bar-search.png">
+                </div>
+            </li>
 
-              <ul class="accordion">
-                <li>
-                  <input type="radio" name="accordion" id="first" checked>
-                  <label for="first">How do I add friends?</label>
-                  <div class="content">
-                  <p>Go to "Friend Activity" tab from the navigation bar and search your friend by their username!</p>
-                  </div>
-                </li>
+            <li>
+                <input type="radio" name="accordion" id="third">
+                <label for="third">What if I don't know where to go?</label>
+                <div class="content">
+                    <p>If you are feeling uncertain, try "pick me a favourite"!</p>
+                </div>
+            </li>
 
-                <li>
-                  <input type="radio" name="accordion" id="second">
-                  <label for="second">How do I find bars?</label>
-                  <div class="content">
-                  <p>Second icon on the navigation bar will lead you to the bar searching page. "query seach" is a name-based search, "area search" is a location-based search.</p>
-                  </div>
-                </li>
+            <li>
+                <input type="radio" name="accordion" id="forth">
+                <label for="forth">How do I save bars for a later date?</label>
+                <div class="content">
+                    <p>Add custom tags to bars or save it to your bucketlist to give your old time favorite another shot on a future date.</p>
+                </div>
+            </li>
 
-                <li>
-                  <input type="radio" name="accordion" id="third">
-                  <label for="third">What if I don't know where to go?</label>
-                  <div class="content">
-                  <p>If you are feeling uncertain, try "pick me a favourite"!</p>
-                  </div>
-                </li>
-
-                <li>
-                  <input type="radio" name="accordion" id="forth">
-                  <label for="forth">How do I save bars for a later date?</label>
-                  <div class="content">
-                  <p>Add custom tags to bars or save it to your bucketlist to give your old time favorite another shot on a future date.</p>
-                  </div>
-                </li>
-
-              </ul>
-
-              
-             
-            </div>
-          </div>
-  <a href="/"><button class="secondary" style="margin: 0 auto; display: block; opacity: 1;">Back to Login</button></a>
+        </ul>
 </div>
+<a href="/"><button class="secondary" style="margin: 0 auto; display: block; opacity: 1;">Back to Login</button></a>
 <script src="darkmode.js">
-    </script>
+</script>
